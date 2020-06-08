@@ -4,7 +4,7 @@
 * Description : Main in C, Ansi-style	
 * Author:   XUPT  		 
 * Version:  v.1 	 
-* Date: 	2015Äê4ÔÂ22ÈÕ	
+* Date: 	2015å¹´4æœˆ22æ—¥	
 */
 
 #include <stdio.h>
@@ -13,7 +13,7 @@
 #include <io.h>
 #include "./View/Main_Menu.h"
 
-//ÏµÍ³ÔËĞĞÈë¿Úº¯Êımain 
+//ç³»ç»Ÿè¿è¡Œå…¥å£å‡½æ•°main 
 int main(void) {
 	setvbuf(stdout, NULL, _IONBF, 0);
 	Main_Menu();
