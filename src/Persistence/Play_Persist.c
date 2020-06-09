@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../Common/common.h"
+#include "../Common/List.h"
 
 
 /* 获取剧目 */
@@ -25,4 +26,20 @@ int Play_Perst_FetchAll(play_list_t list) {
     end->next = NULL;
     fclose(Play);
     return recCount;
+}
+
+
+/* 存储新剧目 */
+int Play_Perst_Insert(play_t *data) {
+    int rtn = 0;
+    FILE *play;
+    play = fopen("../Play.dat", "ab");
+    if(play == NULL) {
+        printf("error!文件打开失败了\n");
+        fclose(play);
+        return rtn;
+    }
+    rtn = fwrite(data, sizeof(play_node_t), 1, play);
+    fclose(play);
+    return rtn;
 }

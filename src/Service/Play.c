@@ -19,3 +19,7 @@ play_list_t Play_Srv_FetchByID(play_list_t list, int id) {
 int Play_Srv_FetchAll(play_list_t list) {
     return Play_Perst_FetchAll(list);
 }
+
+int Play_Srv_Add(play_t *data) {
+    return Play_Perst_Insert(data);
+}
