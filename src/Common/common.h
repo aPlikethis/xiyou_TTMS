@@ -58,6 +58,13 @@ typedef struct {
 
 }play_t;
 
+/* 剧目链表节点定义 */
+typedef struct play_node {
+	play_t date;             //实体数据
+	struct play_node *next;  //后继指针
+	struct play_node *prev;  //前驱指针
+}play_node_t, *play_list_t;
+
 //8号修改结束
 
 //直接读取键盘输入值
