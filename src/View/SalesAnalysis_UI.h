@@ -6,4 +6,7 @@
 #include "../Service/Play.h"
 #include "../Service/Account.h"
 #include "../Common/list.h"
+
+void SalesAanalysis_UI_MgtEntry();
+
 #endif
