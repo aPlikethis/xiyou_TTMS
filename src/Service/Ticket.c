@@ -1,26 +1,13 @@
-#include "../Common/List.h"
-#include "../Persistence/EntityKey_Persist.h"
-
-#include "Ticket.h"
-#include "Seat.h"
-#include "Sale.h"
-
-#include "../Persistence/Ticket_Persist.h"
-#include "../Persistence/Play_Persist.h"
-
-#include <stdio.h>
-
-
-
-
-
-int Schedule_Srv_FetchByID(int id,schedule_t*buf )
-{
-    return Schedule_Perst_SelectByID(id, buf);
-}
+//标识符：TTMS_SCU_Ticket_Srv_GenBatch
+//功能：生成演出票
 void Ticket_Srv_GenBatch(int schedule_id)
 {}
+//标识符：TTMS_SCU_Ticket_Sry_DeleteBatch
+//功能：根据演出计划ID删除演出票
 void Ticket_Srv_DeleteBatch(int schedule_id)
 {}
-int Ticket_Srv_StatRevSchID(int schedule_id,int *soldCount)
+
+//标识符：TTMS_SCU_Ticket_Srv_FetchByID
+//功能：根据ID获取演出票
+int Ticket_Srv_FetchByID(int id, ticket_t *buf)
 {}
