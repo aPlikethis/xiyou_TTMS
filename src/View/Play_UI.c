@@ -5,7 +5,7 @@
 #include "../Common/common.h"
 #include "../Common/List.h"
 
-/*  */
+/* 剧目管理主界面 */
 void Play_UI_MgtEntry(void) {
     int id;
     char choice;
@@ -75,4 +75,10 @@ int Play_UI_Add(void) {
             return newCount;
         }
     }
+}
+
+/* 查询剧目 */
+int Plat_UI_Query(void) {
+    int rtn = 0;
+
 }
