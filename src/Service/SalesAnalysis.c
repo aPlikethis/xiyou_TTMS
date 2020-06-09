@@ -15,7 +15,7 @@ int Salesanalysis_Srv_CompSaleVal(int usrID, ttms_date_t stDate, ttms_date_t end
 
 }
 
-//结合剧目Play.dat,统计销售数据，构建销售分析salesanalysis_list_t list链表，返回list链表长度
+//Play.dat,统计销售数据，构建销售分析salesanalysis_list_t list链表，返回list链表长度
 int Salesanalysis_Srv_StaticSale(salesanalysis_list_t list)
 {
 
