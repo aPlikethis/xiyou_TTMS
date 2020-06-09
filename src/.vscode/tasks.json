@@ -5,6 +5,12 @@
     "args": [
         "-g",
         "${file}",
+        "${fileDirname}\\View\\Main_Menu.c",
+        "${fileDirname}\\View\\Studio_UI.c",
+        "${fileDirname}\\View\\Seat_UI.c",
+        "${fileDirname}\\View\\Main_Menu.h",
+        "${fileDirname}\\View\\Studio_UI.h",
+        "${fileDirname}\\View\\Seat_UI.h",
         "-o",
         "${fileBasenameNoExtension}.exe"
     ], // 编译命令参数
