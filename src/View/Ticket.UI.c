@@ -1,10 +1,10 @@
 #include "../View/Ticket.UI.h"
 
 #include "../Common/List.h"
-#include "../Common/common.h"
 
 #include "../Service/Ticket.h"
 #include "../Service/Studio.h"
+#include "../Service/Schedule.h"
 #include "../Service/Play.h"
 
 #include <stdio.h>
@@ -22,7 +22,6 @@ void Ticket_UI_MgtEntry(int schedule_id)
 		
 
 		printf("           %-6s                 %.2d                %d/%.2d/%.2d            %.2d:%.2d:%.2d\n\n\n");
-		
 
 
 		printf("**************************************************************************************************\n");
