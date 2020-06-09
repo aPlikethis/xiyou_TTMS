@@ -10,5 +10,7 @@ play_list_t List_lnit(void);
 int Play_UI_Add(void);
 /* 删除剧目 */
 play_list_t Play_UI_Delete(play_list_t list);
+/* 查询剧目 */
+int Plat_UI_Query(void);
 
 #endif
