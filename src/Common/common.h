@@ -65,12 +65,6 @@ typedef struct play_node {
 	struct play_node *prev;  //前驱指针
 }play_node_t, *play_list_t;
 
-typedef struct {
-	int totalRecords;    /* 总数据记录数 */
-	int offset;           /* 当前页起始记录相对于第一条记录的便宜记录数 */
-	int pageSize;        /* 页面大小 */
-	void *curPos;        /* 当前页面起始记录在链表中的节点地址 */
-}Pagination_t;
 
 //8号修改结束
 
