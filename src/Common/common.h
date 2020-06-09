@@ -86,3 +86,19 @@ user_date_t DateNow();
 user_time_t TimeNow();
 
 #endif /* COMMON_H_ */
+typedef enum{
+	TICKET_AVL=0,
+	TICKET_SOLD,
+	TICKET_RESV=9
+}ticket_status_t;
+typedef struct{
+	int id;
+	int schedule_id;
+	int seat_id;
+	int price;
+	ticket_status_t status;
+}ticket_t,structticket_node;
+typedef struct ticket_node{
+	ticket_t date;
+	structticket_node *next,*prev;
+}ticket_node_t,*ticket_list_t;
