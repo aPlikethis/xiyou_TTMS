@@ -1,6 +1,7 @@
-#ifndef SALESANALYSIST_H_
-#define SALESANALYSIST_H_
+#ifndef SALESANALYSIS_PERSIST_H_
+#define SALESANALYSIS_PERSIST_H_
 
+#include "../Service/Sale.h"
 #include "../Service/SalesAnalysis.h"
 #include "../Service/Play.h"
 
