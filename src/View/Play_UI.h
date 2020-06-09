@@ -12,5 +12,9 @@ int Play_UI_Add(void);
 play_list_t Play_UI_Delete(play_list_t list);
 /* 查询剧目 */
 int Plat_UI_Query(void);
+/* 初始化剧目信息链表 */
+play_list_t List_lnit(void);
+/* 修改剧目 */
+int Play_UI_Modify(play_list_t list, int id);
 
 #endif
