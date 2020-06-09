@@ -56,7 +56,7 @@ typedef struct {
     ttms_date_t end_date;   //放映结束日期
     int price;              //建议票价
 
-} play_t;
+}play_t;
 
 //8号修改结束
 
