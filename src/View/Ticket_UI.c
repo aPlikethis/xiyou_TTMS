@@ -1,3 +1,17 @@
+#include "../View/Ticket_UI.h"
+
+#include "../Common/List.h"
+#include "../Common/common.h"
+
+#include "../Service/Ticket.h"
+#include "../Service/Play.h"
+#include "../Service/studio.h"
+#include "../Service/Schedule.h"
+
+
+
+
+
 //标识符：TTMS_SCU_Ticket_UI_MgtEnt
 //功能：显示与参数对应的演出计划信息
 void Ticket_UI_MgtEntry(int schedule_id)

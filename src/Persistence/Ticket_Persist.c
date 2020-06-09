@@ -1,3 +1,11 @@
+#include "Ticket_Persist.h"
+#include "EntityKey_Persist.h"
+#include "Play_Persist.h"
+#include "../Service/Ticket.h"
+#include <stdio.h>
+#include <assert.h>
+
+
 //标识符：TTMS_SCU_Ticket_Perst_Insert
 //功能：存储演出票
 void Ticket_Perst_Insert(int schedule_id,seat_list_t list)
@@ -9,4 +17,8 @@ void Ticket_Perst_Rem(int schedule_id)
 //标识符：TTMS_SCU_Ticket_Perst_SelByID
 //功能：根据ID在入演出票
 int Ticket_Perst_SelBYID(int id, ticket_t *buf)
+{}
+//标识符：TTMS_SCU_Schedule_Perst_SelectByID
+//功能：根据ID载入演出计划
+int Schedule_Perst_SelectByID(int id,schedule_t*buf)
 {}
