@@ -33,5 +33,6 @@ int Play_Srv_FetchAll(play_list_t list) {
         recCount++;
     }
     end->next = NULL;
+    fclose(Play);
     return recCount;
 }
