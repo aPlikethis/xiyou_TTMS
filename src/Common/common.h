@@ -65,6 +65,7 @@ typedef struct play_node {
 	struct play_node *prev;  //前驱指针
 }play_node_t, *play_list_t;
 
+
 //8号修改结束
 
 //直接读取键盘输入值
