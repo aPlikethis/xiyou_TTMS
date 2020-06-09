@@ -23,6 +23,43 @@ typedef struct {
 	int second;
 }user_time_t;
 
+//8号修改开始
+/* 剧目类型定义 */
+typedef enum {
+    PLAY_TYPE_FILM = 1,
+    PLAY_TYPE_OPEAR = 2,
+    PLAY_TYPE_CONCERT = 3,
+}play_type_t;
+
+/* 剧目分级类型定义 */
+typedef enum {
+    PLAY_TYPE_CHILD = 1,
+    PLAY_RATE_TEENAGE = 2,
+    PLAY_RATE_ADULT = 3
+}play_rating_t;
+
+/* 日期类型的定义如下 */
+typedef struct {
+    int year;
+    int month;
+    int day;
+}ttms_date_t;
+/* 剧目实体数据类型定义 */
+typedef struct {
+    int id;                 //剧目id
+    char name[31];          //剧目名称
+    play_type_t type;       //剧目类型
+    char area[9];           //剧目出品地区
+    play_rating_t rating;   //剧目等级
+    int duration;           //时长，以分钟为单位
+    ttms_date_t start_date; //开始放映日期
+    ttms_date_t end_date;   //放映结束日期
+    int price;              //建议票价
+
+}play_t;
+
+//8号修改结束
+
 //直接读取键盘输入值
 //int ScanKeyboard();
 
