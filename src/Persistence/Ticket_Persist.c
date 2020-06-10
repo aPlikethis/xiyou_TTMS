@@ -40,6 +40,21 @@ int Schedule_Perst_SelectByID(int id,schedule_t*buf)
 //功能：存储演出票
 int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 {
+    int count,rtn=0;
+    schedule_t *sch;
+    play_t *need_play;
+    FILE *pos;
+    pos = fopen("Ticket.dat","ab");
+    if(pos == NULL)
+    {
+        printf("Ticket.dat can not be open");
+        return found;
+    }
+    sch = (schedule_t *)malloc(sizeof(schedule_t));
+    need_play = (play_t *)malloc(sizeof(play_t));
+    
+    Schedule_Perst_SelectByID(schedule_id, sch);
+    Play_Perst_SelectByID(sch->play_id, need_play);
     
 }
 
