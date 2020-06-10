@@ -22,12 +22,7 @@ int Schedule_Srv_FetchByID(int id,schedule_t*buf )
 //功能：生成演出票
 int Ticket_Srv_GenBatch(int schedule_id)
 {
-    ticket_t date;
-    ticket_list_t list=NULL;
-    seat_list_t Seat_head;
-    ticket_node_t *newNode;
     
-
 }
 
 
@@ -43,5 +38,5 @@ void Ticket_Srv_DeleteBatch(int schedule_id)
 //功能：根据ID获取演出票
 int Ticket_Srv_FetchByID(int id, ticket_t *buf)
 {
-    
+
 }
