@@ -5,6 +5,10 @@
 #include "../Common/common.h"
 #include "../Common/List.h"
 
+int main(boid) {
+	Play_UI_MgtEntry();
+	return 0;
+} 
 /* 剧目管理主界面 */
 void Play_UI_MgtEntry(void) {
     int id;
@@ -15,13 +19,14 @@ void Play_UI_MgtEntry(void) {
     paging.pageSize = 10;
     Play_Srv_FetchAll(list);
     Paging_Locate_FirstPage(list, paging);
+   	play_t *buf; 
     /* 输出剧目信息及菜单项 （暂空）*/
     printf("Please input your choice:");
     scanf("%c", &choice);
     if(choice == 's' || choice == 'S') {
         printf("please input ID:");
         scanf("%d", &id);
-        Play_Srv_FetchByID(list, id);
+        Play_Srv_FetchByID(id, buf);
     }
     else if(choice == 'a' || choice == 'A') {
         Play_UI_Add();

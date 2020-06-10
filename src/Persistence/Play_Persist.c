@@ -21,13 +21,9 @@ int Play_Perst_FetchAll(play_list_t list) {
     while(feof(Play)) {
         fread(data, sizeof(play_t), 1, Play);
         play_list_t node = (play_list_t)malloc(sizeof(play_node_t));
-        node->date = *data;
-        node->next = NULL;
-        end->next = node;
-        end = end->next;
+        List_InsertAfter(end, node);
         recCount++;
     }
-    end->next = NULL;
     fclose(Play);
     return recCount;
 }
