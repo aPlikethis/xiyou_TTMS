@@ -19,5 +19,9 @@ int Play_Srv_Add(play_t *data) {
 }
 /* 修改剧目 */
 int Play_Srv_Modify(const play_t *data) {
-    return Play_Perst_Updata(data);
+    return Play_Perst_Update(data);
+}
+/* 删除剧目 */
+int Play_Srv_Modify(int id, play_list_t list) {
+    return Play_Perst_Delete(id, list);
 }
