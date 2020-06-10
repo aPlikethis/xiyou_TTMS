@@ -10,8 +10,14 @@ typedef enum{
 }sale_type_t;
 //售票信息
 typedef struct {
-    
-    }sale_t;
+    long id;                   //票流水ID
+    int user_id;		//售票员ID
+	int ticket_id;		//票ID
+    int value;			//票价
+    user_date_t date ;	//处理日期
+	user_time_t time;	//处理时间
+    sale_type_t type; //交易类型
+}sale_t;
 
 typedef struct sale_node {
 	sale_t data;

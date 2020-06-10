@@ -2,6 +2,7 @@
 #include "EntityKey_Persist.h"
 #include "Play_Persist.h"
 #include "../Service/Ticket.h"
+#include "../Service/seat.h"
 #include <stdio.h>
 #include <assert.h>
 
@@ -40,7 +41,46 @@ int Schedule_Perst_SelectByID(int id,schedule_t*buf)
 //功能：存储演出票
 int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 {
+    int count,rtn=0;
+    schedule_t *sch;
+    play_t *buf;
+    FILE *fp;
+    fp = fopen("Ticket.dat","ab+");
+
+    if(NULL == fp)
+    {
+        printf("Ticket.dat can not be open");
+        return rtn;
+    }
     
+    else
+    {
+        sch = (schedule_t *)malloc(sizeof(schedule_t));
+        buf = (play_t *)malloc(sizeof(play_t));
+    
+        Schedule_Perst_SelectByID(schedule_id, sch);
+        Play_Perst_SelectByID(sch->play_id, buf);
+        count = Seat_Perst_SelectByRoomID(list, sch->id);
+
+        while(count--)
+        {
+            buf->id =EntKey_Perst_GetNewKeys(buf->name,1);
+        }
+
+        seat_node_t *pos;
+        pos = list->next;
+        while(pos != list)
+        {   
+            ticket_t.id=buf->id;
+            ticket_t.schedule_id=sch.id;
+            ticket_t.seat_id=pos->id;
+            ticket_t.price=buf->price;
+            rtn = fwrite(fp, sizeof(ticket_t), 1, fp);
+		    pos=pos->next;
+        }
+    }
+    fclose(fp);
+    return rtn;
 }
 
 
@@ -91,4 +131,28 @@ int Ticket_Perst_Rem(int schedule_id)
 //标识符：TTMS_SCU_Ticket_Perst_SelByID
 //功能：根据ID载入演出票
 int Ticket_Perst_SelBYID(int id, ticket_t *buf)
-{}
+{
+    int found = 0;
+    FILE *fp; 
+    fp = fopen("Ticket.dat","rb");
+    if(fp == NULL)
+    {
+        printf("Ticket.dat can not be open");
+        return found;
+    }
+    else
+    {
+        while(!feof(fp))
+        {
+            fread(&date, sizeof(ticket_t),1,fp);
+            if(data.id == id)
+            {
+                * buf = data;
+                found = 1;
+                break;
+            }
+        }
+    }
+    fclose(fp);
+    return found;
+    }
