@@ -105,5 +105,4 @@ int Sale_Perst_SelectAll(sale_list_t list)
 	}
 	fclose(fp);
 	return recCount;
-    }
 }
