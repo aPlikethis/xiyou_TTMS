@@ -1,16 +1,18 @@
+#include "Account.h"
+#include "../Common/list.h"
+#include "../Persistence/Account_Persist.h"
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+account_t gl_CurUser;
+const int lenn;
 //创建管理员Admin匿名系统用户
-int Account_Srv_InitSyS()
+void Account_Srv_InitSyS()
 {
-    char ID[20],Pwd[20],xxxx[20];
-	printf("\n    ======================================================================");
-	printf("\n    ***************************InitSyS  Systerm****************************");
-	printf("\n    ======================================================================\n");
-	printf("\n                     Admin ID: ");
-	scanf("%s",ID);
-	printf("\n               Admin Passward: ");
-	scanf("%s",Pwd);
-	printf("\n               Admin xxxxxxxx: ");
-	scanf("%s",xxxx);
+	if(Account_Perst_CheckAccFile()==1){
+		return ;
+	}
 }
 //验证系统用户
 int Account_Srv_Verify(char usrName[],unsigned char pwd[])

@@ -6,8 +6,8 @@
 int SysLogin();
 void MaiAccount_UI_MgtEntry();
 int Account_UI_Find();
-//int Account_UI_Add(account_list_t list);
-int Account_UI_Mod();
-int Account_UI_Del();
+int Account_UI_Add(account_list_t list);
+int Account_UI_Modify();
+int Account_UI_Delete();
 
 //#endif /* ACCOUNTPERSIST_H_ */
