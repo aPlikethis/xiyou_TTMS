@@ -15,6 +15,6 @@ int Plat_UI_Query(void);
 /* 初始化剧目信息链表 */
 play_list_t List_lnit(void);
 /* 修改剧目 */
-int Play_UI_Modify(play_list_t list, int id);
+int Play_UI_Modify(int id);
 
 #endif
