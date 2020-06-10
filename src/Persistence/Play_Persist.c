@@ -4,6 +4,7 @@
 #include "../Common/common.h"
 #include "../Common/List.h"
 #include "EntityKey_Persist.h"
+#include "../Common/play_com.h"
 
 
 /* 获取剧目 */
@@ -22,6 +23,7 @@ int Play_Perst_FetchAll(play_list_t list) {
         fread(data, sizeof(play_t), 1, Play);
         play_list_t node = (play_list_t)malloc(sizeof(play_node_t));
         List_InsertAfter(end, node);
+        end = node;
         recCount++;
     }
     fclose(Play);
@@ -87,4 +89,31 @@ int Play_Perst_Update(const play_t *data) {
     fclose(play);
 
 	return found;
+}
+/* 删除剧目 */
+int Play_Perst_Delete(int id, play_list_t list) {
+    play_list_t node = list;
+    int rtn = 0;
+    FILE *play;
+    play = fopen("../Play.dat", "wb");
+    if(play == NULL) {
+        printf("ERROR!文件不存在");
+        fclose(play);
+        return rtn;
+    }
+    while(node->data.id != id) {
+        node = node->next;
+        if(node == NULL) {
+            fclose(play);
+            return rtn;
+        }
+    }
+    rtn = 1;
+    List_FreeNode(node);
+    while(list != NULL) {
+        fwrite(&(list->data), sizeof(play_t), 1, play);
+    }
+    
+    fclose(play);
+    return rtn;
 }
