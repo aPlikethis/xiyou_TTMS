@@ -12,7 +12,7 @@ void Ticket_Perst_Rem(int schedule_id);
 
 
 //标识符：TTMS_SCU_Ticket_Perst_SelByID
-//功能：根据ID在入演出票
+//功能：根据ID载入入演出票
 int Ticket_Perst_SelBYID(int id, ticket_t *buf);
 
 

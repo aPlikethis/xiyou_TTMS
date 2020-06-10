@@ -7,6 +7,7 @@
 #include "../Service/Play.h"
 #include "../Service/studio.h"
 #include "../Service/Schedule.h"
+#include "../Service/seat.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -83,8 +84,32 @@ void Ticket_UI_MgtEntry(int schedule_id)
 //标识符：TTMS_SCU_Ticket_UI_Qry
 //功能：查询演出票界面
 void Ticket_UI_Query(void)
-{}
+{
+        Ticket_list_t seat_head;
+        Ticket_node_t *buf;
+        list_Init(seat_head,buf);
+        Ticket_Sry_FetchAll(seat_head);
+        Ticket_UI_ShowTicket(buf->id);
+        List_Destroy(seat_head,buf);
+}
+
+
 //标识符：TTMS_SCU_Ticket_UI_ShowTicket
 //功能：显示演出票界面
 int Ticket_UI_ShowTicket(int ticket_id)
-{}
+{
+        int rtn=0;
+        ticket_t *buf;
+        rtn=Ticket_Srv_FetchByID(ticket_id, buf);
+        if (rtn)
+        {
+                printf("未找到");
+                return 0;
+        }
+        else    
+        {
+                printf("演出计划ID\n座位ID\n票价\n票状态\n",buf->schedule_id,buf->seat_id,buf->price,buf->status);
+                rtn=1;
+        }
+        return 1;
+}
