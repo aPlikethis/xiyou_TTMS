@@ -20,4 +20,6 @@ int Ticket_Perst_SelBYID(int id, ticket_t *buf);
 //功能：根据ID载入演出计划
 int Schedule_Perst_SelectByID(int id,schedule_t*buf);
 
+//查询所有票信息
+int Ticket_Perst_FetchAll(ticket_list_t list);
 #endif
