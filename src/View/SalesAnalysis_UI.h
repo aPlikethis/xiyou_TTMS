@@ -7,7 +7,11 @@
 #include "../Service/Account.h"
 #include "../Common/list.h"
 
-/*统计票房界面*/
+//统计票房界面
 void SalesAanalysis_UI_MgtEntry();
+
+
+void SalesAanalysis_UI_StatSale(int usrID, ttms_date_t stDate, ttms_date_t endDate);
+
 
 #endif
