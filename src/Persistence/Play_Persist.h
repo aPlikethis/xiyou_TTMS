@@ -1,6 +1,7 @@
 #ifndef PLAYPERSIST_H_
 #define PLAYPERSIST_H_
 #include "../Common/common.h"
+#include "../Common/play_com.h"
 
 /* 添加新剧目 */
 int Play_Perst_Insert(play_t *date);

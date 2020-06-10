@@ -1,6 +1,7 @@
 #ifndef PLAY_H_
 #define PLAY_H_
 #include "../Common/common.h"
+#include "../Common/play_com.h"
 
 
 /* 查询剧目 */
