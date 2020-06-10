@@ -5,7 +5,7 @@
 #include "../Common/common.h"
 #include "../Common/List.h"
 
-int main(boid) {
+int main(void) {
 	Play_UI_MgtEntry();
 	return 0;
 } 
@@ -14,7 +14,7 @@ void Play_UI_MgtEntry(void) {
     int id, i;
     char choice;
     play_list_t list;
-    play_node_t p, list_node_t;
+    play_node_t *p;
     List_Init(list, play_node_t);
     Pagination_t paging;
     paging.pageSize = 5;
@@ -25,15 +25,15 @@ void Play_UI_MgtEntry(void) {
     while(1) {
         printf("==========================\n");
         printf("           剧目信息       \n");
-        Paging_ViewPage_ForEach(list, paging, list_node_t, p, i) {
+        Paging_ViewPage_ForEach(list, paging, play_node_t, p, i) {
             
             printf("==========================\n");
-            printf("名字:           %s         \n", p.data.name);
-            printf("出品地区:       %s         \n", p.data.area);
-            printf("时长：          %d         \n", p.data.duration);
-            printf("开始放映日期：  %d-%d-%d   \n", p.data.start_date.year, p.data.start_date.month, p.data.start_date.day);
-            printf("结束放映时间：  %d-%d-%d    \n", p.data.end_date.year, p.data.end_date.month, p.data.end_date.day);
-            printf("建议票价:       %d         \n", p.data.price);
+            printf("名字:           %s         \n", p->data.name);
+            printf("出品地区:       %s         \n", p->data.area);
+            printf("时长：          %d         \n", p->data.duration);
+            printf("开始放映日期：  %d-%d-%d   \n", p->data.start_date.year, p->data.start_date.month, p->data.start_date.day);
+            printf("结束放映时间：  %d-%d-%d    \n", p->data.end_date.year, p->data.end_date.month, p->data.end_date.day);
+            printf("建议票价:       %d         \n", p->data.price);
             printf("===========================\n");
         }
         printf("========================================================\n");
@@ -46,7 +46,12 @@ void Play_UI_MgtEntry(void) {
         if(choice == 's' || choice == 'S') {
             printf("please input ID:");
             scanf("%d", &id);
-            Play_Srv_FetchByID(id, buf);
+            if(Play_Srv_FetchByID(id, buf)) {
+                /* Schedule_UI_MgtEn; */
+            }
+            else {
+                printf("剧目不存在\n");
+            }
         }
         else if(choice == 'a' || choice == 'A') {
             Play_UI_Add();
@@ -63,10 +68,10 @@ void Play_UI_MgtEntry(void) {
             Play_UI_Delete(list);
         }
         else if(choice == 'p' || choice == 'P') {
-            Paging_Locate_OffsetPage(list, paging, 1, list_node_t);
+            Paging_Locate_OffsetPage(list, paging, 1, play_node_t);
         }
         else if(choice == 'n' || choice == 'N') {
-            Paging_Locate_OffsetPage(list, paging, -1, list_node_t);
+            Paging_Locate_OffsetPage(list, paging, -1, play_node_t);
         }
     }
 }
