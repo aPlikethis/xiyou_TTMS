@@ -4,7 +4,7 @@
 #include "../Service/Play.h"
 #include "../Common/common.h"
 #include "../Common/List.h"
-#include "../Common/play_com.h"
+#include "../Service/Play.h"
 
 int main(void) {
 	Play_UI_MgtEntry();

@@ -1,7 +1,7 @@
 #ifndef PLAY_UI_H_
 #define PLAY_UI_H_
 #include "../Common/common.h"
-#include "../Common/play_com.h"
+#include "../Service/Play.h"
 
 /* 管理剧目界面 */
 void Play_UI_MgtEntry(void);
