@@ -13,7 +13,7 @@ void Play_UI_MgtEntry(void) {
     List_Init(list, play_node_t);
     Pagination_t paging;
     paging.pageSize = 10;
-    paging.totalRecords = listSize;
+    Play_Srv_FetchAll(list);
     Paging_Locate_FirstPage(list, paging);
     /* 输出剧目信息及菜单项 （暂空）*/
     printf("Please input your choice:");
@@ -29,7 +29,7 @@ void Play_UI_MgtEntry(void) {
     else if(choice == 'u' || choice == 'U') {
         printf("please input ID:");
         scanf("%d", &id);
-        Play_UI_Modify(list, id);
+        Play_UI_Modify(id);
         
     }
     else if(choice == 'd' || choice == 'D') {
@@ -79,6 +79,61 @@ int Play_UI_Add(void) {
 
 /* 查询剧目 */
 int Plat_UI_Query(void) {
+    int id, rtn = 0;
+    play_t data;
+    scanf("%d", &id);
+    if(Play_Srv_FetchByID(id, &data)) {
+        printf("查寻成功!\n");
+        rtn = 1;
+        return rtn;
+    }
+    else {
+        printf("查询失败了\n");
+    }
+
+}
+
+int Play_UI_Modify(int id) {
     int rtn = 0;
+    play_t data;
+    if(Play_Srv_FetchByID(id, &data)) {
+        printf("==================================================================================\n");
+        printf("                                     剧目信息                                      \n");
+        printf("==================================================================================\n");
+        printf("                                                                                  \n");
+        printf("名字     出品地区       时长        开始放映日期        结束放映日期         建议票价\n");
+        printf("%s       %s             %d          %d-%d-%d            %d-%d-%d             %d   \n");
+        printf("                                                                                  \n");
+        printf("==================================================================================\n");
+    }
+    else {
+        printf("查询错误\n");
+        return rtn;
+    }
+    printf("请输入剧目ID：");
+    scanf("%d", &data.id);
+    printf("请输入剧目名称：");
+    scanf("%s", data.name);
+    printf("请输入剧目ID：");
+    scanf("%d", &data.id);
+    printf("请输入剧目出品地区：");
+    scanf("%s", data.area);
+    printf("请输入剧目时长：");
+    scanf("%d", &data.duration);
+    printf("请输入剧目开始放映日期：");
+    scanf("%d %d %d", &data.start_date.year, &data.start_date.month, &data.start_date.day);
+    printf("请输入剧目结束放映日期：");
+    scanf("%d %d %d", &data.end_date.year, &data.end_date.month, &data.end_date.day);
+    printf("请输入建议票价：");
+    scanf("%d", &data.price);
+    if(Play_Srv_Modify(&data)) {
+        rtn = 1;
+        printf("修改成功\n");
+        return rtn;
+    }
+    else {
+        printf("修改失败\n");
+        return rtn;
+    }
 
 }

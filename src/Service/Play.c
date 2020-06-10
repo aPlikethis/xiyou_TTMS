@@ -5,14 +5,8 @@
 #include "../Common/common.h"
 
 /* 查询剧目，返回该剧目的节点指针 */
-play_list_t Play_Srv_FetchByID(play_list_t list, int id) {
-    play_list_t node = list->next;
-    while(node != NULL) {
-        if(node->date.id == id) {
-            return node;
-        }
-        node = node->next;
-    }
+int Play_Srv_FetchByID(int id, play_t *buf) {
+    return Play_Perst_SelectByID(id, buf); 
 }
 
 /* 获取全部剧目 */
@@ -22,4 +16,8 @@ int Play_Srv_FetchAll(play_list_t list) {
 
 int Play_Srv_Add(play_t *data) {
     return Play_Perst_Insert(data);
+}
+/* 修改剧目 */
+int Play_Srv_Modify(const play_t *data) {
+    return Play_Perst_Updata(data);
 }
