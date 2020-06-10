@@ -1,7 +1,7 @@
 #ifndef PLAY_H_
 #define PLAY_H_
 #include "../Common/common.h"
-#include "../Common/play_com.h"
+#include "../Service/Play.h"
 
 //8号修改开始
 /* 剧目类型定义 */

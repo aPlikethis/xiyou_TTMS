@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../Common/common.h"
-#include "../Common/play_com.h"
+#include "../Service/Play.h"
 
 /* 查询剧目，返回该剧目的节点指针 */
 int Play_Srv_FetchByID(int id, play_t *buf) {

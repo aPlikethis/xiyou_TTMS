@@ -4,7 +4,7 @@
 #include "../Common/common.h"
 #include "../Common/List.h"
 #include "EntityKey_Persist.h"
-#include "../Common/play_com.h"
+#include "../Service/Play.h"
 
 
 /* 获取剧目 */
