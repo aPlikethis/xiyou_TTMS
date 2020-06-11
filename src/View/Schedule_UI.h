@@ -12,4 +12,7 @@ int Schedule_UI_Add(void);
 int Schedule_UI_Mod(int id);
 /* 删除演出计划 */
 int Schedule_UI_Del(schedule_list_t list);
+/* 查询 */
+int Schedule_UI_Query(void);
+
 #endif

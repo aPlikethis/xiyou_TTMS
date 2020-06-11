@@ -21,6 +21,7 @@ void Schedule_UI_MgtEntry(int play_id) {
         Paging_ViewPage_ForEach(list, paging, schedule_node_t, p, i) {
             
             printf("==========================\n");
+            /*  */
             
         }
         printf("==============操作菜单===========\n");
@@ -28,6 +29,7 @@ void Schedule_UI_MgtEntry(int play_id) {
         printf("[a]添加新演出计划\n");
         printf("[m]修改演出计划\n");
         printf("[d]删除演出计划\n");
+        printf("[r]退出");
         scanf("%d", &choice);
 
     }while(choice != 'r' && choice != 'R');
@@ -48,7 +50,7 @@ int Schedule_UI_Add(void) {
         printf("=============请输入演出计划数据=================\n");
         printf("\n");
         /*  */
-        EntKey_Perst_GetNewKeys(data, 1);
+        data.id = EntKey_Perst_GetNewKeys(&data, 1);
     }
     Schedule_Srv_Add(&data);
     Ticket_UI_MgtEntry(data.id);
@@ -72,10 +74,23 @@ int Schedule_UI_Mod(int id) {
     int rtn = 0;
     schedule_t data;
     if(Schedule_Srv_SelectByID(id, &data)) {
-        print("=========演出计划信息=========\n");
-        printf("\n");
-        printf("%d",data.id);
+        printf("=========演出计划信息=========\n");
+        printf("                             \n");
+        printf("演出计划ID：                %d\n",data.id);
+        printf("剧目ID：                    %d\n",data.play_id);
+        printf("演出厅ID：                  %d\n",data.studio_id);
+        printf("放映日期：            %d-%d-%d\n",data.date.year, data.date.month, data.date.day);
+        printf("放映时间：            %d-%d-%d\n",data.time.hour, data.time.minute, data.time.second);
+        printf("座位数：                    %d\n",data.seat_count);
+        printf("==============================\n");
+        printf("请输入要修改的信息：\n");
+        printf("请输入剧目ID:");
+        scanf("%d", &data.play_id);
         /*  */
+        printf("");
+        scanf("%d", &data.studio_id);
+        printf("");
+        scanf("%d-%d-%d", &data.date.year, &data.date.month, &data.date.day);
 
         if(Schedule_Srv_Mod(&data)) {
             printf("修改成功\n");
@@ -91,4 +106,10 @@ int Schedule_UI_Mod(int id) {
         printf("没有找到\n");
         return rtn;
     }
+}
+
+int Schedule_UI_Query(void) {
+    char name[40];
+    printf("please input play name:");
+    
 }
