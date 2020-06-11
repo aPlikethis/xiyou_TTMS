@@ -44,5 +44,7 @@ typedef struct ticket_node{
     struct ticket_node *next,*prev;
 }ticket_node_t,*ticket_list_t;
 
+//查询所有票信息
+int Ticket_Srv_FetchAll(int id, ticket_t *buf);
 
 #endif

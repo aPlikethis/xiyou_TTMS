@@ -4,7 +4,7 @@
 #include "../Common/common.h"
 #include "../Common/List.h"
 #include "EntityKey_Persist.h"
-#include "../Common/play_com.h"
+#include "../Service/Play.h"
 
 
 /* 获取剧目 */
@@ -12,18 +12,18 @@ int Play_Perst_FetchAll(play_list_t list) {
     int recCount = 0;
     FILE *Play;
     play_list_t end = list;
-    Play = fopen("Play.dat", "rb");
+    Play = fopen("../Play.dat", "rb");
     if(Play == NULL) {
         printf("ERROR!文件不存在");
-        fclose(Play);
         return recCount;
     }
     play_t *data = (play_t *)malloc(sizeof(play_t));
-    while(feof(Play)) {
+    while(!feof(Play)) {
         fread(data, sizeof(play_t), 1, Play);
         play_list_t node = (play_list_t)malloc(sizeof(play_node_t));
+        node->data = *data;
         List_InsertAfter(end, node);
-        end = node;
+        end = end->next;
         recCount++;
     }
     fclose(Play);
