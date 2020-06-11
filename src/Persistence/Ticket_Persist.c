@@ -2,39 +2,11 @@
 #include "EntityKey_Persist.h"
 #include "Play_Persist.h"
 #include "../Service/Ticket.h"
-#include "../Service/seat.h"
+#include "../Service/Seat.h"
+#include "../Service/Schedule.h"
 #include <stdio.h>
 #include <assert.h>
 
-
-//标识符：TTMS_SCU_Schedule_Perst_SelectByID
-//功能：根据ID载入演出计划
-int Schedule_Perst_SelectByID(int id,schedule_t*buf)
-{
-    int found = 0;
-    FILE *fp; 
-    fp = fopen("Schedule.dat","rb");
-    if(fp == NULL)
-    {
-        printf("Schedule.dat can not be open");
-        return found;
-    }
-    else
-    {
-        while(!feof(fp))
-        {
-            fread(&date, sizeof(schedule_t),1,fp);
-            if(data.id == id)
-            {
-                * buf = data;
-                found = 1;
-                break;
-            }
-        }
-    }
-    fclose(fp);
-    return found;
-}
 
 
 //标识符：TTMS_SCU_Ticket_Perst_Insert
