@@ -2,13 +2,17 @@
 #define SCHEDULE_H_
 #include "../Service/Play.h"
 #include "../Service/Studio.h"
+#include "../Common/common.h"
 
 /* 演出计划类型定义 */
 typedef struct {
-    play_t play_data;
-    studio_t studio_data;
+    int id;                             //演出计划ID
+    int play_id;                        //上映剧目ID
+    int studio_id;                      //演出厅ID
+    ttms_date_t date;                  //放映日期
+    user_time_t time;                  //放映时间
+    int seat_count;                     //座位数
 } schedule_t;
-
 
 /* 演出计划节点定义 */
 typedef struct schedule_node {
@@ -19,4 +23,12 @@ typedef struct schedule_node {
 
 /* 查询所有有关id的演出计划信息 */
 int Schedule_Srv_FechAll(int id, schedule_list_t list);
+
+/* 添加演出计划 */
+int Schedule_Srv_Add(schedule_t *data);
+/* 修改演出计划 */
+int Schedule_Srv_Mod(int id);
+/* 删除演出计划 */
+int Schedule_Srv_Del(schedule_list_t list);
+
 #endif
