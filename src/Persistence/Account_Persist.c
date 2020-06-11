@@ -6,7 +6,7 @@
 #include "EntityKey_Persist.h"	
 #include <stdlib.h>
 #include <stdio.h>
-#include<unistd.h>
+#include <unistd.h>
 #include <assert.h>
 #include <string.h>
 
@@ -14,7 +14,6 @@ static const char ACCOUNT_DATA_FILE[] = "Account.dat";
 static const char ACCOUNT_DATA_TEMP_FILE[] = "AccountTmp.dat";
 static const char ACCOUNT_KEY_NAME[] = "Account";
 
-//判断账号文件是否存在.存在返回1，不存在返回0
 int Account_Perst_CheckAccfile()
 {
     if(access(ACCOUNT_DATA_FILE,0)==0)  //access(文件名，0)判断文件是否存在
@@ -27,7 +26,59 @@ int Account_Perst_CheckAccfile()
     }
     
 }
-//更新系统用户
+
+int Account_Perst_SelByName(char usrName[], account_t *buf)
+
+{
+    assert(NULL!=buf);
+    
+    FILE *fp;
+    fp = fopen(ACCOUNT_DATA_FILE,"rb");
+    if(NULL==fp){
+    	return 0;
+	}
+	
+	account_t data;
+	int found = 0;
+	
+	while(!feof(fp)){
+		if(fread(&data,sizeof(account_t),1,fp)){
+			if(!strcmp(usrName,data.username)){
+				*buf = data;
+				found = 1;
+				break;
+			}
+		}
+	}
+	fclose(fp);
+	
+	return found;
+}
+int Account_Perst_SelectByID(int id, account_t *buf)
+{
+    assert(buf!=NULL);
+    
+    FILE*fp;
+	fp = fopen(ACCOUNT_DATA_FILE,"rb");
+    if(fp==NULL){
+    	return 0;
+	}
+	
+	account_t data;
+	int found = 0;
+	while(!feof(fp)){
+		if(fread(&data,sizeof(account_t),1,fp)){
+			if(id==data.id){
+				*buf = data;
+				found = 1;
+				break;
+			}
+		}
+	}
+	fclose(fp);
+	return found;
+}
+
 int Account_Perst_Update(const account_t *data)
 {
     assert(date!=NULL);
@@ -58,33 +109,6 @@ int Account_Perst_Update(const account_t *data)
     return found;
 }
 
-//根据用户名载入账号,载入成功 return 1；否则 return 0
-int Account_Perst_SelByName(char usrName[], account_t *buf)
-{
-    assert(NULL!=buf);
-    
-    FILE *fp;
-    fp = fopen(ACCOUNT_DATA_FILE,"rb");
-    if(NULL==fp){
-    	return 0;
-	}
-	
-	account_t data;
-	int found = 0;
-	
-	while(!feof(fp)){
-		if(fread(&data,sizeof(account_t),1,fp)){
-			if(!strcmp(usrName,data.username)){
-				*buf = data;
-				found = 1;
-				break;
-			}
-		}
-	}
-	fclose(fp);
-	
-	return found;
-}
 int Account_Perst_Insert(account_t *data) {
     assert(NULL!=data);
 
@@ -102,11 +126,17 @@ int Account_Perst_Insert(account_t *data) {
 
 int Account_Perst_DeleteByID(int id)
 {
+	//对原始数据文件重命名
+	if(rename(ACCOUNT_DATA_FILE, ACCOUNT_DATA_TEMP_FILE)<0){
+		printf("Cannot open file %s!\n", ACCOUNT_DATA_FILE);
+		return 0;
+	}
+
     FILE *fp1,*fp2;
     fp1 = fopen(ACCOUNT_DATA_TEMP_FILE,"rb");
     if(fp1 == NULL){
     	printf("Cannot open file %s!\n",ACCOUNT_DATA_FILE);
-    	RETURN 0;
+    	return 0;
 	}
     fp2 = fopen(ACCOUNT_DATA_FILE,"wb");
     if(fp2==NULL){
@@ -128,32 +158,11 @@ int Account_Perst_DeleteByID(int id)
     
     fclose(fp2);
     fclose(fp1);
-    return found;
-}
-
-int Account_Perst_SelectByID(int id, account_t *buf)
-{
-    assert(buf!=NULL);
-    
-    FILE*fp;
-	fp = fopen(ACCOUNT_DATA_FILE,"rb");
-    if(fp==NULL){
-    	return 0;
-	}
 	
-	account_t data;
-	int found = 0;
-	while(!feof(fp)){
-		if(fread(&data,sizeof(account_t),1,fp)){
-			if(id==data.id){
-				*buf = data;
-				found = 1;
-				break;
-			}
-		}
-	}
-	fclose(fp);
-	return found;
+	//删除临时文件
+	remove(ACCOUNT_DATA_TEMP_FILE);
+
+    return found;
 }
 
 int Account_Perst_SelectAll(account_list_t list)
