@@ -2,39 +2,11 @@
 #include "EntityKey_Persist.h"
 #include "Play_Persist.h"
 #include "../Service/Ticket.h"
-#include "../Service/seat.h"
+#include "../Service/Seat.h"
+#include "../Service/Schedule.h"
 #include <stdio.h>
 #include <assert.h>
 
-
-//标识符：TTMS_SCU_Schedule_Perst_SelectByID
-//功能：根据ID载入演出计划
-int Schedule_Perst_SelectByID(int id,schedule_t*buf)
-{
-    int found = 0;
-    FILE *fp; 
-    fp = fopen("Schedule.dat","rb");
-    if(fp == NULL)
-    {
-        printf("Schedule.dat can not be open");
-        return found;
-    }
-    else
-    {
-        while(!feof(fp))
-        {
-            fread(&date, sizeof(schedule_t),1,fp);
-            if(data.id == id)
-            {
-                * buf = data;
-                found = 1;
-                break;
-            }
-        }
-    }
-    fclose(fp);
-    return found;
-}
 
 
 //标识符：TTMS_SCU_Ticket_Perst_Insert
@@ -109,7 +81,7 @@ int Ticket_Perst_Rem(int schedule_id)
             while(!feof(fp))
             {
                 fread(&buf,sizeof(ticket_t),1,fp);
-                if(buf.id == schedule_id)
+                if(buf.schedule_id == schedule_id)
                 {
                     found++;
                 }
@@ -164,15 +136,17 @@ int Ticket_Perst_FetchAll(ticket_list_t list)
     FILE *Ticket;
     ticket_list_t end = list;
     Ticket = fopen("ticket.dat", "rb");
-    if(Ticket == NULL) {
+    if(Ticket == NULL) 
+    {
         printf("ERROR!文件不存在");
-        fclose(Ticket);
         return recCount;
     }
     ticket_t *data = (ticket_t *)malloc(sizeof(ticket_t));
-    while(feof(Ticket)) {
+    while(feof(Ticket)) 
+    {
         fread(data, sizeof(ticket_t), 1, Ticket);
-        ticket_list_t node = (ticket_list_t)malloc(sizeof(ticket_node_t));
+         ticket_list_t node = (ticket_list_t)malloc(sizeof(ticket_node_t));
+        node->date =*date
         List_InsertAfter(end, node);
         end = node;
         recCount++;

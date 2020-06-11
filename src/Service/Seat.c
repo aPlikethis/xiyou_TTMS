@@ -94,8 +94,10 @@ int Seat_Srv_FetchValidByRoomID(seat_list_t list, int roomID)
 {
     int SeatCount=Seat_Perst_SelectByRoomID(list, roomID);
 	seat_node_t *p;
-	List_ForEach(list, p){
-		if(p->data.status!=SEAT_GOOD){
+	List_ForEach(list, p)
+	{
+		if(p->data.status!=SEAT_GOOD)
+		{
 			List_FreeNode(p);
 			SeatCount--;
 		}
@@ -114,17 +116,18 @@ int Seat_Srv_RoomInit(seat_list_t list, int roomID, int rowsCount,int colsCount)
        int i,j,rtn=0;
        seat_node_t *seatdata;
        for( i = 1; i <= rowsCount; i++ )
-       for( j = 1; j <= colsCount; j++ )
        {
-            seatdata = (seat_list_t)malloc((int)sizeof(seat_node_t));
-            seatdata->data.id = EntKey_Perst_GetNewKeys(SEAT_KEY_NAME,1);
-            seatdata->data.roomID = roomID;
-            seatdata->data.row = i;
-            seatdata->data.column = j;
-            seatdata->data.status = SEAT_GOOD;
-            List_AddTail(list,seatdata);
-        }
-
+		   for( j = 1; j <= colsCount; j++ )
+       		{
+       	    	seatdata = (seat_list_t)malloc((int)sizeof(seat_node_t));
+       	    	seatdata->data.id = EntKey_Perst_GetNewKeys(SEAT_KEY_NAME,1);
+            	seatdata->data.roomID = roomID;
+            	seatdata->data.row = i;
+            	seatdata->data.column = j;
+            	seatdata->data.status = SEAT_GOOD;
+            	List_AddTail(list,seatdata);
+        	}
+	   }
        rtn=Seat_Perst_InsertBatch(list);//将一个房间中的座位全部加入文件中
        return rtn;
 }
@@ -136,7 +139,7 @@ int Seat_Srv_RoomInit(seat_list_t list, int roomID, int rowsCount,int colsCount)
 */
 void Seat_Srv_SortSeatList(seat_list_t list)
 {
-       seat_node_t *p, *listLeft;
+    seat_node_t *p, *listLeft;
 	assert(list!=NULL);
 
 	if(List_IsEmpty(list))
@@ -152,7 +155,7 @@ void Seat_Srv_SortSeatList(seat_list_t list)
 	list->next = list->prev = list;
 
 	while (listLeft != NULL )
-       {
+    {
 		//取出第一个结点
 		p = listLeft;
 		listLeft = listLeft->next;
@@ -198,13 +201,14 @@ void Seat_Srv_AddToSoftedList(seat_list_t list, seat_node_t *node)
 */
 seat_node_t * Seat_Srv_FindByRowCol(seat_list_t list, int row, int column)
 {
-       assert(NULL!=list);
+    assert(NULL!=list);
 	seat_node_t *p;
-	List_ForEach(list,p)
-		if (p->data.row == row && p->data.column == column)
-			return p;
-
-       return NULL;
+	List_ForEach(list,p);
+	if (p->data.row == row && p->data.column == column)
+	{
+		return p;
+	}
+    return NULL;
 }
 
 /*
@@ -214,7 +218,7 @@ seat_node_t * Seat_Srv_FindByRowCol(seat_list_t list, int row, int column)
 */
 seat_node_t * Seat_Srv_FindByID(seat_list_t list, int rowID) 
 {
-       assert(NULL!=list);
+    assert(NULL!=list);
 	seat_node_t *p;
 
 	List_ForEach(list,p)
