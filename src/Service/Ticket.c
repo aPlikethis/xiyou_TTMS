@@ -23,10 +23,9 @@ int Schedule_Srv_FetchByID(int id,schedule_t*buf )
 int Ticket_Srv_GenBatch(int schedule_id)
 {
     int count;
-    seat_list_t seat_head;
-    seat_node_t *buf;
-    list_Inin(seat_head,buf);
-    count = Seat_Srv_FetchValidByRoomID(seat_head,schedule_id);
+    Ticket_list_t ticket_head;
+    list_Inin(ticket_head,ticket_node_t);
+    count = Seat_Srv_FetchValidByRoomID(ticket_head,schedule_id);
     if(count==0)
     (
         printf("座位信息获取失败。无法生成票");
@@ -34,7 +33,7 @@ int Ticket_Srv_GenBatch(int schedule_id)
     )
     else
     {
-        count=Ticket_Perst_Insert(schedule_id,seat_head);
+        count=Ticket_Perst_Insert(schedule_id,ticket_head);
         return=count;
     }
     

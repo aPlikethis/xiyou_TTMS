@@ -72,7 +72,7 @@ int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
             ticketdate->date.schedule_id=sch.id;
             ticketdate->date.seat_id=pos->id;
             ticketdate->date.price=buf->price;
-            ticketdate->date.status=TICKET_AVL
+            ticketdate->date.status=TICKET_AVL;
             rtn = fwrite(&（ticketdate->date）, sizeof(ticket_t), 1, fp);
 		    pos=pos->next;
         }

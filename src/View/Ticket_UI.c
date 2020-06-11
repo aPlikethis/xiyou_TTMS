@@ -86,10 +86,9 @@ void Ticket_UI_MgtEntry(int schedule_id)
 void Ticket_UI_Query(void)
 {
         Ticket_list_t seat_head;
-        Ticket_node_t *buf;
-        list_Init(seat_head,buf);
+        list_Init(seat_head,Ticket_node_t);
         Ticket_Sry_FetchAll(seat_head);
-        Ticket_UI_ShowTicket(buf->id);
+        Ticket_UI_ShowTicket(seat_head->id);
         List_Destroy(seat_head,buf);
 }
 
