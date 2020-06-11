@@ -48,13 +48,13 @@ int Schedule_Perst_Del(int id) {
     schedule_node_t *end = list;
     schedule_node_t *node;
     schedule_t data;
-    FILE schedule = fopen("../Schedule.dat", "rb+");
+    FILE *schedule = fopen("../Schedule.dat", "rb+");
     if(schedule == NULL) {
         printf("文件打开失败了\n");
         return rtn;
     }
     while(!feof(schedule)) {
-        fread(data, sizeof(schedule_t), 1, schedule);
+        fread(&data, sizeof(schedule_t), 1, schedule);
         if(data.id != id) {
             node->data = data;
             List_InsertAfter(end, node);
@@ -68,5 +68,45 @@ int Schedule_Perst_Del(int id) {
     }
     rtn = 1;
     fclose(schedule);
+    return rtn;
+}
+
+int Schedule_Perst_Update(const schedule_t *buf) {
+    int found = 0;
+    schedule_t *buf;
+    FILE *sch = fopen("../Schedule.dat", "rb+");
+    if(sch == NULL) {
+        printf("Play.dat文件打开失败\n");
+        return found;
+    }
+    while(!feof(sch)) {
+        if (fread(&buf, sizeof(schedule_t), 1, sch)) {
+			if (buf->id == buf->id) {
+				fseek(sch, -((int)sizeof(schedule_t)), SEEK_CUR);
+				fwrite(buf, sizeof(schedule_t), 1, sch);
+				found = 1;
+				break;
+			}
+		}
+    }
+    fclose(sch);
+
+	return found;
+}
+
+int Schedule_Perst_SelectByID(int id, schedule_t *data) {
+    int rtn = 0;
+    FILE *sch = fopen("../Schedule.dat", "rb");
+    if(sch == NULL) {
+        printf("文件打开失败了\n");
+        return rtn;
+    }
+    while(!feof(sch)) {
+        fread(data, sizeof(schedule_t), 1, sch);
+        if(data->id == id) {
+            rtn = 1;
+            return rtn;
+        }
+    }
     return rtn;
 }

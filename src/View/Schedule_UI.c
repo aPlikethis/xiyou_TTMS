@@ -3,6 +3,7 @@
 #include "../Service/Schedule.h"
 #include "../Persistence/EntityKey_Persist.h"
 #include "../Service/Ticket.h"
+#include "../View/Ticket_UI.h"
 
 /* 管理演出计划界面 */
 void Schedule_UI_MgtEntry(int play_id) {
@@ -13,7 +14,7 @@ void Schedule_UI_MgtEntry(int play_id) {
     char choice;
     List_Init(list, schedule_node_t);
     paging.pageSize = 5;
-    paging.totalRecords = Schedule_Srv_FechAll(play_id, list);
+    paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
     do {
         system("clear");
         printf("============演出计划===========\n");
@@ -50,7 +51,7 @@ int Schedule_UI_Add(void) {
         EntKey_Perst_GetNewKeys(data, 1);
     }
     Schedule_Srv_Add(&data);
-    Ticket_Srv_GenBatch(data.id);
+    Ticket_UI_MgtEntry(data.id);
 }
 
 /* 删除 */
@@ -69,5 +70,25 @@ int Schedule_UI_Del(int id) {
 /* mod */
 int Schedule_UI_Mod(int id) {
     int rtn = 0;
-    
+    schedule_t data;
+    if(Schedule_Srv_SelectByID(id, &data)) {
+        print("=========演出计划信息=========\n");
+        printf("\n");
+        printf("%d",data.id);
+        /*  */
+
+        if(Schedule_Srv_Mod(&data)) {
+            printf("修改成功\n");
+            rtn = 1;
+            return rtn;
+        }
+        else {
+            printf("修改失败\n");
+            return rtn;
+        }
+    }
+    else {
+        printf("没有找到\n");
+        return rtn;
+    }
 }

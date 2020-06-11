@@ -22,13 +22,15 @@ typedef struct schedule_node {
 }schedule_node_t, *schedule_list_t;
 
 /* 查询所有有关id的演出计划信息 */
-int Schedule_Srv_FechAll(int id, schedule_list_t list);
+int Schedule_Srv_SelectByPlayID(int id, schedule_list_t list);
 
 /* 添加演出计划 */
 int Schedule_Srv_Add(schedule_t *data);
 /* 修改演出计划 */
-int Schedule_Srv_Mod(int id);
+int Schedule_Srv_Mod(schedule_t *buf);
 /* 删除演出计划 */
 int Schedule_Srv_Del(int id);
+
+int Schedule_Srv_SelectByID(int id, schedule_t *data);
 
 #endif
