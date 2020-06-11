@@ -2,6 +2,7 @@
 #include "../Common/List.h"
 #include "../Service/Schedule.h"
 #include "../Persistence/EntityKey_Persist.h"
+#include "../Service/Ticket.h"
 
 /* 管理演出计划界面 */
 void Schedule_UI_MgtEntry(int play_id) {
@@ -49,4 +50,10 @@ int Schedule_UI_Add(void) {
         EntKey_Perst_GetNewKeys(data, 1);
     }
     Schedule_Srv_Add(&data);
+    Ticket_Srv_GenBatch(data.id);
+}
+
+/* 删除 */
+int Sechedule_UI_Del(int id) {
+    
 }
