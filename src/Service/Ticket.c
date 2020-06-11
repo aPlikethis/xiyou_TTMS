@@ -22,6 +22,20 @@ int Schedule_Srv_FetchByID(int id,schedule_t*buf )
 //功能：生成演出票
 int Ticket_Srv_GenBatch(int schedule_id)
 {
+    int count;
+    Ticket_list_t ticket_head;
+    list_Inin(ticket_head,ticket_node_t);
+    count = Seat_Srv_FetchValidByRoomID(ticket_head,schedule_id);
+    if(count==0)
+    (
+        printf("座位信息获取失败。无法生成票");
+        return 0;
+    )
+    else
+    {
+        count=Ticket_Perst_Insert(schedule_id,ticket_head);
+        return=count;
+    }
     
 }
 
@@ -38,5 +52,11 @@ void Ticket_Srv_DeleteBatch(int schedule_id)
 //功能：根据ID获取演出票
 int Ticket_Srv_FetchByID(int id, ticket_t *buf)
 {
+    return Ticket_Perst_SelBYID(id,buf);
+}
 
+//查询所有票信息
+int Ticket_Srv_FetchAll(int id, ticket_t *buf)
+{
+    return Ticket_Perst_FetchAll(id,buf);
 }

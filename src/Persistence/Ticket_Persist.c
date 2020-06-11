@@ -43,6 +43,7 @@ int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 {
     int count,rtn=0;
     schedule_t *sch;
+    ticket_node_t *ticketdata;
     play_t *buf;
     FILE *fp;
     fp = fopen("Ticket.dat","ab+");
@@ -61,21 +62,18 @@ int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
         Schedule_Perst_SelectByID(schedule_id, sch);
         Play_Perst_SelectByID(sch->play_id, buf);
         count = Seat_Perst_SelectByRoomID(list, sch->id);
-
-        while(count--)
-        {
-            buf->id =EntKey_Perst_GetNewKeys(buf->name,1);
-        }
-
+        
         seat_node_t *pos;
         pos = list->next;
         while(pos != list)
         {   
-            ticket_t.id=buf->id;
-            ticket_t.schedule_id=sch.id;
-            ticket_t.seat_id=pos->id;
-            ticket_t.price=buf->price;
-            rtn = fwrite(fp, sizeof(ticket_t), 1, fp);
+            ticketdata = (seat_list_t)malloc((int)sizeof(seat_node_t));
+            ticketdate->date.id =EntKey_Perst_GetNewKeys(buf->name,1);
+            ticketdate->date.schedule_id=sch.id;
+            ticketdate->date.seat_id=pos->id;
+            ticketdate->date.price=buf->price;
+            ticketdate->date.status=TICKET_AVL;
+            rtn = fwrite(&（ticketdate->date）, sizeof(ticket_t), 1, fp);
 		    pos=pos->next;
         }
     }
@@ -156,3 +154,29 @@ int Ticket_Perst_SelBYID(int id, ticket_t *buf)
     fclose(fp);
     return found;
     }
+
+}
+
+//查询所有票信息
+int Ticket_Perst_FetchAll(ticket_list_t list)
+ {
+    int recCount = 0;
+    FILE *Ticket;
+    ticket_list_t end = list;
+    Ticket = fopen("ticket.dat", "rb");
+    if(Ticket == NULL) {
+        printf("ERROR!文件不存在");
+        fclose(Ticket);
+        return recCount;
+    }
+    ticket_t *data = (ticket_t *)malloc(sizeof(ticket_t));
+    while(feof(Ticket)) {
+        fread(data, sizeof(ticket_t), 1, Ticket);
+        ticket_list_t node = (ticket_list_t)malloc(sizeof(ticket_node_t));
+        List_InsertAfter(end, node);
+        end = node;
+        recCount++;
+    }
+    fclose(Ticket);
+    return recCount;
+}
