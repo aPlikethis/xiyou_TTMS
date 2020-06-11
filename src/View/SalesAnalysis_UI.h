@@ -11,7 +11,4 @@
 void SalesAanalysis_UI_MgtEntry();
 
 
-void SalesAanalysis_UI_StatSale(int usrID, ttms_date_t stDate, ttms_date_t endDate);
-
-
 #endif
