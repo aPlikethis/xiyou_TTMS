@@ -111,5 +111,6 @@ int Schedule_UI_Mod(int id) {
 int Schedule_UI_Query(void) {
     char name[40];
     printf("please input play name:");
+    scanf("%s", name);
     
 }
