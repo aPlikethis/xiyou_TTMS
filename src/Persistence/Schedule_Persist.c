@@ -40,3 +40,33 @@ int Schedule_Perst_Add(schedule_t *data) {
     fclose(schedule);
     return rtn;
 }
+
+int Schedule_Perst_Del(int id) {
+    int rtn = 0;
+    schedule_list_t list;
+    List_Init(list, schedule_node_t);
+    schedule_node_t *end = list;
+    schedule_node_t *node;
+    schedule_t data;
+    FILE schedule = fopen("../Schedule.dat", "rb+");
+    if(schedule == NULL) {
+        printf("文件打开失败了\n");
+        return rtn;
+    }
+    while(!feof(schedule)) {
+        fread(data, sizeof(schedule_t), 1, schedule);
+        if(data.id != id) {
+            node->data = data;
+            List_InsertAfter(end, node);
+            end = end->next;
+        }   
+    }
+    list = list->next;
+    while(list != NULL) {
+        fwrite(&(list->data), sizeof(schedule_t), 1, schedule);
+        list = list->next;
+    }
+    rtn = 1;
+    fclose(schedule);
+    return rtn;
+}

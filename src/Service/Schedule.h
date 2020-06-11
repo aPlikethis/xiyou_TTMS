@@ -29,6 +29,6 @@ int Schedule_Srv_Add(schedule_t *data);
 /* 修改演出计划 */
 int Schedule_Srv_Mod(int id);
 /* 删除演出计划 */
-int Schedule_Srv_Del(schedule_list_t list);
+int Schedule_Srv_Del(int id);
 
 #endif

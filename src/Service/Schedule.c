@@ -9,3 +9,7 @@ int Schedule_Srv_FechAll(int id, schedule_list_t list) {
 int Schedule_Srv_Add(schedule_t *data) {
     return Schedule_Perst_Add(data);
 }
+
+int Schedule_Srv_Del(int id) {
+    return Schedule_Perst_Del(id);
+}

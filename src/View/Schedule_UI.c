@@ -54,6 +54,20 @@ int Schedule_UI_Add(void) {
 }
 
 /* 删除 */
-int Sechedule_UI_Del(int id) {
+int Schedule_UI_Del(int id) {
+    int rtn = 0;
+    if(Schedule_Srv_Delete(id)) {
+        printf("删除成功！\n");
+        rtn = 1;
+        return rtn;
+    }
+    else {
+        printf("删除失败！\n");
+        return rtn;
+    }
+}
+/* mod */
+int Schedule_UI_Mod(int id) {
+    int rtn = 0;
     
 }

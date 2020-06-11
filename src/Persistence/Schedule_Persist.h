@@ -9,7 +9,7 @@ int Schedule_Perst_Add(schedule_t *data);
 /* 修改演出计划 */
 int Schedule_Perst_Mod(int id);
 /* 删除演出计划 */
-int Schedule_Perst_Del(schedule_list_t list);
+int Schedule_Perst_Del(int id);
 
 
 #endif
