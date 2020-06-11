@@ -7,7 +7,7 @@
 //根据ID获取销售额统计
 int StaSales_Srv_CompSaleVal(int usrID, ttms_date_t stDate, ttms_date_t endDate)
 {
-    int amount = 0;
+    int amount = 0;//存储销售额
 	sale_list_t saleList;
 	sale_node_t *pSale;
 	List_Init(saleList,sale_node_t);
