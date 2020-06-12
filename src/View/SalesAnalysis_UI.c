@@ -20,7 +20,7 @@ void SalesAanalysis_UI_MgtEntry()
 
 	salesanalysis_list_t head;
 	salesanalysis_node_t *pos;
-	Pagination_t paging;
+	Pagination_t paging;//定义分页器
 
 	List_Init(head, salesanalysis_node_t);
 	paging.offset = 0;
@@ -30,6 +30,7 @@ void SalesAanalysis_UI_MgtEntry()
 	SalesAnalysis_Srv_SortBySale(head);   //根据票房排序
 
 	Paging_Locate_FirstPage(head, paging);
+
 	do{
 		printf("\t\t\t=========================================================================\n");
 		printf("\t\t\t%28s""票房图表\n");
@@ -55,7 +56,7 @@ void SalesAanalysis_UI_MgtEntry()
 		{
 			case 'P':
 			case 'p':
-					if (1 < Pageing_CurPage(paging))
+					if (!Pageing_CurPage(paging))
 					{
 						Paging_Locate_OffsetPage(head, paging, -1, salesanalysis_node_t);
 					}
