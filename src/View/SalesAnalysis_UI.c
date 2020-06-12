@@ -36,14 +36,13 @@ void SalesAanalysis_UI_MgtEntry()
 		printf("\t\t\t%28s""票房图表\n");
 		printf("\t\t\t-------------------------------------------------------------------------\n");
 		printf("\t\t\t剧目名\t\t区域\t\t售票数\t票房\t上映时间\t\t下映时间\n");
-
-			for (i = 0, pos = (salesanalysis_node_t *) (paging.curPos);pos != head && i < paging.pageSize; i++) {
+		Paging_ViewPage_ForEach(head, paging, salesanalysis_node_t, pos, i){
 			printf("\t\t\t%-10s\t%-10s\t%-5ld\t%-5ld\t%d-%d-%d\t%d-%d-%d\t\n",
 					pos->data.name, pos->data.area, pos->data.totaltickets,pos->data.sales,
 					pos->data.start_date.year,pos->data.start_date.month,pos->data.start_date.day,
 					pos->data.end_date.year,pos->data.end_date.month,pos->data.end_date.day);
-			pos = pos->next;
 		}
+
 		printf("\t\t\t---------- 共 %2d 项 --------------------------- 第 %2d/%2d 页 --------\n",paging.totalRecords, Pageing_CurPage(paging),Pageing_TotalPages(paging));
 		printf("\t\t\t*************************************************************************\n");
 		printf("\t\t\t[P]上一页	|	[N]下一页	|	[R]返回\n");

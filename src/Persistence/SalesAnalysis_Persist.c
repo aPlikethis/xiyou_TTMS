@@ -14,6 +14,7 @@ static const char SALE_DATA_FILE[] = "sale.dat";
 //将一条salesanalysis记录写入salesanalysis.dat文件;成功返回1，失败返回0
 int Salesanalysis_Perst_Insert(const salesanalysis_t *data)
 {
+    assert(NULL!=data);
     FILE *fp=fopen(SALESANALYSIS_DATA_FILE,"ab");
     int rtn=0;
     if(fp=NULL)
