@@ -49,7 +49,7 @@ void SalesAanalysis_UI_MgtEntry()
 		printf("\t\t\t[P]上一页	|	[N]下一页	|	[R]返回\n");
 		printf("\n\t\t\t=========================================================================\n");
 		fflush(stdin);
-		printf("\t\t\t请选择功能：");
+		printf("\t\t\tYour Choice:");
 
 		scanf("%c",&choice);
 		switch(choice)
