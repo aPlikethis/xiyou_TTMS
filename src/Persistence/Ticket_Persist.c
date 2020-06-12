@@ -13,44 +13,43 @@
 //功能：存储演出票
 int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 {
-    int count,rtn=0;
-    schedule_t *sch;
-    ticket_node_t *ticketdata;
-    play_t *buf;
-    FILE *fp;
-    fp = fopen("Ticket.dat","ab+");
+    FILE *fp = fopen("Ticket.dat","wb+");
+	
+	int rtn = 0;
+	seat_list_t temp;
+	seat_list_t pos;
+	schedule_t sch;
+	int sum = 0;
 
-    if(NULL == fp)
-    {
-        printf("Ticket.dat can not be open");
-        return rtn;
-    }
-    
-    else
-    {
-        sch = (schedule_t *)malloc(sizeof(schedule_t));
-        buf = (play_t *)malloc(sizeof(play_t));
-    
-        Schedule_Perst_SelectByID(schedule_id, sch);
-        Play_Perst_SelectByID(sch->play_id, buf);
-        count = Seat_Perst_SelectByRoomID(list, sch->id);
-        
-        seat_node_t *pos;
-        pos = list->next;
-        while(pos != list)
-        {   
-            ticketdata = (seat_list_t)malloc((int)sizeof(seat_node_t));
-            ticketdate->date.id =EntKey_Perst_GetNewKeys(buf->name,1);
-            ticketdate->date.schedule_id=sch.id;
-            ticketdate->date.seat_id=pos->id;
-            ticketdate->date.price=buf->price;
-            ticketdate->date.status=TICKET_AVL;
-            rtn = fwrite(&（ticketdate->date）, sizeof(ticket_t), 1, fp);
-		    pos=pos->next;
-        }
-    }
-    fclose(fp);
-    return rtn;
+	ticket_t data;
+
+	if(NULL == fp)
+	{
+		printf( "the file not exist!\n");
+		return 0;
+	}
+	play_t buf;
+	Schedule_Perst_SelectByID_ticket(schedule_id,&sch);
+
+	Play_Perst_SelectByID(sch.play_id,&buf);
+	
+	int key = EntKey_Perst_GetNewKeys(TICKET_KEY_NAME,1);
+	temp = list;
+	pos = list->next;
+	while(pos != temp)
+	{
+		sum++;
+		data.id = EntKey_Perst_GetNewKeys(TICKET_KEY_NAME,1);
+		data.schedule_id = schedule_id;
+		data.seat_id = pos->data.id;
+		data.price = buf.price;
+		data.status = 0;
+	    pos = pos->next;
+		rtn = fwrite(&data,sizeof(ticket_t),1,fp);
+	}
+
+	fclose(fp);
+	return rtn
 }
 
 
@@ -61,7 +60,7 @@ int Ticket_Perst_Rem(int schedule_id)
     int found = -1;
     FILE * fp, *ftp;
     ticket_t buf;
-    if (rename("Ticke.dat","TicketTmp.dat") < 0)
+    if (rename("Ticket.dat","TicketTmp.dat") < 0)
     {
         printf("改名失败！");
         return found;
@@ -135,20 +134,19 @@ int Ticket_Perst_FetchAll(ticket_list_t list)
     int recCount = 0;
     FILE *Ticket;
     ticket_list_t end = list;
-    Ticket = fopen("ticket.dat", "rb");
-    if(Ticket == NULL) 
-    {
+    Ticket = fopen("../Ticket.dat", "rb");
+    if(Ticket == NULL) {
         printf("ERROR!文件不存在");
         return recCount;
     }
     ticket_t *data = (ticket_t *)malloc(sizeof(ticket_t));
-    while(feof(Ticket)) 
+    while(!feof(Ticket)) 
     {
         fread(data, sizeof(ticket_t), 1, Ticket);
-         ticket_list_t node = (ticket_list_t)malloc(sizeof(ticket_node_t));
-        node->date =*date
+        ticket_list_t node = (ticket_list_t)malloc(sizeof(ticket_node_t));
+        node->data = *data;
         List_InsertAfter(end, node);
-        end = node;
+        end = end->next;
         recCount++;
     }
     fclose(Ticket);

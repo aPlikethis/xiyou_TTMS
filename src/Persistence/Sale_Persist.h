@@ -1,14 +1,15 @@
-#ifndef SLAEINGPERSIST_H
-#define SALEINGPERSIST_H
+#ifndef SALE_PERSIST_H_
+#define SALE_PERSIST_H_
+#include"../Service/Sale.h"
+int Sale_Perst_Insert( sale_t *data);
 
-#include "../Service/Sale.h"
-#include "../Common/common.h"
-//显示售票情况
-int Sale_Perst_lnsert(const sale_t *data);
-int Sale_Perst_DeleteByID(int saleID);
-//根据用户ID载入给定时间区间内的销售记录
-int Sale_Perst_SelectByUsrID(sale_list_t list,int usrID,ttms_date_t stDate,ttms_date_t endDate);
-//根据时间区间载入用户ID的销售记录
-int Sale_Perst_SelectByDate(sale_list_t list,ttms_date_t stDate, ttms_date_t endDate);
+
+int Ticket_Perst_Update(const ticket_t *data);
+
+int Ticket_Srv_SelBySchID(int id,ticket_list_t list);
+
+int Sale_Perst_SelByTicketID (int ticket_id, sale_t *sale);
+
+int Sale_Perst_SelByID (sale_list_t list, int usrID);
 
 #endif

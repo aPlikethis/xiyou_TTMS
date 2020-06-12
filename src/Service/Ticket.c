@@ -25,14 +25,14 @@ int Ticket_Srv_GenBatch(int schedule_id)
 {
     int count;
     seat_list_t seat_head;
-    ticket_head = (seat_list_t *)malloc(sizeof(seat_list_t));
+    seat_head = (seat_list_t *)malloc(sizeof(seat_list_t));
     list_Inin(seat_head,seat_node_t);
 
     schedule_t *need_schedule;
     need_schedule = (schedule_t *)malloc(sizeof(schedule_t));
     Schedule_Srv_FetchByID(schedule_id, need_schedule);
         
-    count = Seat_Srv_FetchValidByRoomID(ticket_head,need_schedule->studio_id);
+    count = Seat_Srv_FetchValidByRoomID(seat_head,need_schedule->studio_id);
 
     
     if(count==0)
@@ -65,7 +65,7 @@ int Ticket_Srv_FetchByID(int id, ticket_t *buf)
 }
 
 //查询所有票信息
-int Ticket_Srv_FetchAll(int id, ticket_t *buf)
+int Ticket_Srv_FetchAll( ticket_list_t list)
 {
-    return Ticket_Perst_FetchAll(id,buf);
+    return Ticket_Perst_FetchAll(list);
 }
