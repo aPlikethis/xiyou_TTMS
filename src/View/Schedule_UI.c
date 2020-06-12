@@ -112,5 +112,5 @@ int Schedule_UI_Query(void) {
     char name[40];
     printf("please input play name:");
     scanf("%s", name);
-    
+    Schedule_Srv_SelectByName(name);
 }

@@ -13,5 +13,8 @@ int Schedule_Perst_Del(int id);
 
 int Schedule_Perst_SelectByID(int id, schedule_t *data);
 
+/* 根据剧目名查询演出计划 */
+int Schedule_Perst_SelectByName(char name[]);
+
 
 #endif

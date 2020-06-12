@@ -33,4 +33,7 @@ int Schedule_Srv_Del(int id);
 
 int Schedule_Srv_SelectByID(int id, schedule_t *data);
 
+/* 根据剧目名称查询演出信息 */
+int Schedule_Srv_SelectByName(char name[]);
+
 #endif
