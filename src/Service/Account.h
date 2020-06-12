@@ -1,15 +1,16 @@
-#ifndef ACCOUNTPERSIST_H_
-#define ACCOUNTPERSIST_H_
+#ifndef ACCOUNT_H_
+#define ACCOUNT_H_
 
 #include "../Service/Account.h"
+#include <stdio.h>
 
 //定义枚举类型account_type_t，描述用户的角色
 typedef enum {
 	USR_ANOMY = 0, //USR_ANOMY  匿名用户（初始化账号，目的是创建其他账号，权限等同于系统管理员）
 	USR_CLERK = 1, //USR_CLERK  售票员（查询演出、查询演出票、售票、退票以及统计销售额）
 	USR_MANGE = 2, //USR_MANGE  剧院经理（管理剧目、安排演出、查询演出、查询巡演出票、统计销售额、统计票房）
-	USR_ADMIN = 9，//USR_ADMIN  系统管理员（管理演出厅、管理系统用户、设置作为）
-} account_type_t;
+	USR_ADMIN = 9, //USR_ADMIN  系统管理员（管理演出厅、管理系统用户、设置作为）
+}account_type_t;
 
 //定义系统用户账号数据类型，描述用户账号信息
 typedef struct {
