@@ -1,90 +1,344 @@
+#include "../View/Account_UI.h"
+#include <stdio.h>
+#include <string.h>
+#include "../Common/list.h"
+#include "../Service/Account.h"
+#include <unistd.h>
+#include <assert.h>
+#include "MaiAccount_UI.h"
+
 //系统用户登录界面
 int SysLogin()
 {
-	system("clear");
-    char ID[20];
-	char Pwd[20];
-	printf("\n    ======================================================================");
-	printf("\n    ****************************Login  Systerm****************************");
-	printf("\n    ======================================================================\n\n\n");
+	system("cls");
+	printf(
+	    "================================================================================\n"
+		"   *************  ************ *****     *****        ********      *** \n"
+		"   *************  ************ ******   ******      *******         *** \n"
+		"        ***           ***      ***  ** **  ***    *****             *** \n"
+		"        ***           ***      ***   ***   ***      ******          *** \n"
+		"        ***           ***      ***         ***        ******        *** \n"
+		"        ***           ***      ***         ***          *****           \n"
+		"        ***           ***      ***         ***       ******        *****\n"
+		"        ***           ***      ***         ***    ********         *****\n"
+		"                                                                        \n"
+		"        ##             ## ####### ##       ######    ###    ####   #### ####### \n"
+		"        ##     ###     ## ##      ##      ##       ##   ##  ## ## ## ## ##      \n"
+		"         ##   ## ##   ##  ####### ##     ##       ##     ## ##  ###  ## ####### \n"
+		"          ## ##   ## ##   ##      ##      ##       ##   ##  ##       ## ##      \n"
+		"           ###     ###    ####### #######  ######    ###    ##       ## ####### \n"
+		"================================================================================\n");
 	Account_Srv_InitSys();
-	printf("			User  ID: ");
-	scanf("%s",ID);
-	getchar();
-	printf("			Passward: ");
-	scanf("%s",Pwd);
+	int x = 3,i;
+	char ch;
+	while(x>0){
+		printf("You have %d login opportunities\n",x);
+		char usrName[20],Pwd[20];
+		printf("Please input your name:");
+		setbuf(stdin,NULL);
+		gets(usrName);
+		
+		printf("Please input your password:");
+		setbuf(stdin,NULL);
+		while((ch=getch())!='\r'){
+			if(i<20){
+				Pwd[i++]=ch;
+				putchar('*');
+			}
+			else if(i>0&&ch=='\b'){
+				--i;
+				putchar('\b');
+				putchar(' ');
+				putchar('\b');
+			}
+			Pwd[i]='\0';
+		}
+		if(Account_Srv_Verify(usrName,*Pwd)){
+			printf("\nWelcome distinguished users,please input [Enter]!\n");
+			getchar();
+			return 1;
+		}
+		else{
+			printf("login in error\n");
+			x--;
+		}
+	}
+
+	if(x==0){
+		char c;
+		printf("Do you forget your password and want to reset it?\n[Y]ES	or	[N]o: ");
+		scanf("%c",&c);
+		getchar();
+		if(c=='Y'||c=='y'){
+			MaiAccount_UI_Mgt();
+		}
+	}
+	return 0;
+}
+
+char Account_UI_Status2Char(account_type_t status)//身份判别
+{
+	if (status == 0)
+		return 'N';
+	else if (status == 1)
+		return 'X';
+	else if (status == 9)
+		return 'A';
+	else if (status == 2)
+		return 'M';
 }
 //系统用户管理界面
-int Account_UI_MgtEntry()
+void Account_UI_MgtEntry(void)
 {
-	char c;
-	printf("\n    ======================================================================");
-	printf("\n    ****************************Login  Systerm****************************");
-	printf("\n    ======================================================================\n");
-	printf("\n			1.Find User(A)\n");
-	printf("\n			2.Add User(B)\n");
-	printf("\n			3.Modify User(C)\n");
-	printf("\n			4.Delete User(D)\n");
-	printf("\n			5.Logdown(E)\n");
-	printf("\n		Please choose an action: ");
-	scanf("%c",&c);
-	//switch(c){
-	//	case 'A':---;  break;
-	//	case 'B':---;  break;
-	//	case 'C':---;  break;
-	//	case 'D':---;  break;
-	//	case 'E':---;  break;
-	//}
+	if(gl_CurUser.type!=USR_ADMIN){
+		printf("you isn't admin!please input [Enter]");
+		getchar();
+		return 0;
+	}
+	
+	int x,id;
+	char ch,usrName[20];
+	account_list_t head;
+	account_node_t *p;
+	Pagination_t paging;
+	
+	List_Init(head,account_node_t);
+	paging.offset = 0;
+	paging.pageSize = Account_PAGE_SIZE;
+	
+	paging.totalRecords = Account_Srv_FetchAll(head);
+	Paging_Locate_FirstPage(head,paging);
+	
+	do{
+		printf("\n[N]匿名用户    |    [X]售票员     |     [M]经理     |     [A]系统管理员");
+		printf("\n==============================================================================\n");
+		printf("*************************Account Management Systerm****************************");
+		printf("	%3s %18s %23s %16s\n","ID","username","password","type");	
+		printf("-------------------------------------------------------------------------------");
+		Paging_ViewPage_ForEach(head,paging,account_node_t,p,x){
+			printf("%3d %18s ",p->data.id,p->data.username);
+			printf(p->data.password);
+			printf(" %6c\n",Account_UI_Status2char(p->data.type));
+		}
+		printf("-------Total Records:%2d-------------------Page%2d/%2d----\n",
+				paging.totalRecords, Pageing_CurPage(paging),Pageing_TotalPages(paging));
+		printf("*******************************************************************************\n");
+		printf("[p]revPage | [N]extPage | [A]dd | [D]elete | [Q]uery | [M]od | [R]etuen");
+		printf("\n==============================================================================");
+		printf("Please input your Choice: ");
+		setbuf(stdin,NULL);
+		scanf("%c",&ch);
+		getchar();
+		switch(ch){
+			case 'a':
+			case 'A':system("cls");
+					 if(ACCOUNT_UI_Add(head)){
+					 	paging.totalRecords = Account_Srv_FetchAll(head);
+					 }
+					 else{
+					 	printf("This user is exist!\n");
+					 }
+					 break;
+			case 'd':
+			case 'D':system("cls");
+					 printf("Input the username:");
+					 setbuf(stdin,NULL);
+					 scanf("%s",usrName);
+					 getchar();
+					 if(Account_UI_Delete(head,usrName)){
+					 	printf("delete accept\n");
+					 	paging.totalRecords = Account_Srv_FetchAll(head);
+					 	List_Paging(head,paging,account_node_t);
+					 }
+					 else{
+					 	printf("delete error!\n");
+					 }
+					 break;
+			case 'q':
+			case 'Q': system("cls");
+					  printf("Input the username:");
+					  setbuf(stdin,NULL);
+					  scanf("%s",usrName);
+					  getchar();
+					  if(Account_UI_QueryByUsrname(head,usrName)){
+					  	paging.totalRecords = Account_Srv_FetchAll(head);
+						List_Paging(head, paging, account_node_t);
+					  }
+					  else{
+					  	printf("query error\n");
+					  }
+					  break;
+			case 'm':
+			case 'M':system("cls");
+					 printf("Input the username:");
+					 setbuf(stdin,NULL);
+					 scanf("%s",usrName);
+					 getchar();
+					 if(Account_UI_Modify(head,usrName)){
+					 	printf("mod accept\n");
+					 	paging.totalRecords = Account_Srv_FetchAll(head);
+						List_Paging(head, paging, account_node_t);
+					 }
+					 break;
+			case 'p':
+			case 'P':system("cls");
+					 if(!Pageing_IsLastPage(paging)){
+					 	Paging_Locate_OffsetPage(head,paging,1,account_node_t); 
+					 }
+					 break;
+		}
+	}while(ch!='r'&&ch!='R');
+	List_Destroy(head,account_node_t); 
 }
-//查询系统用户界面
-int Account_UI_Find()
-{
-	char ID[20];
-	printf("\n    ======================================================================");
-	printf("\n    ****************************Find  Systerm****************************");
-	printf("\n    ======================================================================\n");
-	printf("\n         Please enter the user ID to find: ");
-	scanf("%s",ID);
-}
+
 //创建系统新用户界面
-int Account_UI_Add()
+int Account_UI_Add(account_list_t list)
 {
-	char ID[20],Pwd[20];
-	printf("\n    ======================================================================");
-	printf("\n    ****************************Add  Systerm****************************");
-	printf("\n    ======================================================================\n");
-	printf("\n         Please enter the new user ID: ");
-	scanf("%s",ID);
-	printf("\n                The new user Passward: ");
-	scanf("%s",Pwd);
-}
-//修改系统用户界面
-int Account_UI_Mod()
-{
+	account_t data;
+	int newCount = 0;
 	char c;
-	printf("\n    ======================================================================");
-	printf("\n    ****************************Modify  Systerm***************************");
-	printf("\n    ======================================================================\n");
-	printf("\n                 		1.Passward(A)");
-	printf("\n                 		2.X(B)");
-	printf("\n                 		3.Y(C)");
-	printf("\n                 		4.Back(D)");
-	printf("\n		  Choose an content to modify: ");
-	scanf("%c",&c);
-	//switch(c){
-	//	case 'A':---;  break;
-	//	case 'B':---;  break;
-	//	case 'C':---;  break;
-	//	case 'D':---;  break;
-	//}
+	do
+	{
+		printf("\n==============================================================================\n");
+		printf("*****************************Account Add Systerm*******************************\n");	
+		printf("-------------------------------------------------------------------------------");
+		printf("\nplease input the new username you add:");
+		setbuf(stdin,NULL);
+		scanf("%s",data.username);
+		getchar();
+		printf("\n==============================================================================\n");
+		account_list_t temp = Account_Srv_FindByUsrName(list,data.username);
+		if(temp!=NULL){
+			printf("this user is exist\n");
+			printf("[A]dd another,[R]eturn:");
+			setbuf(stdin,NULL);
+			scanf("%c",&c);
+			getchar();
+		}
+		else{
+			printf("please input the password:");
+			setbuf(stdin,NULL);
+			char pwd[20],ch;
+			while((ch=getch())!='\r'){
+				int i;
+				if(i<20){
+					pwd[i++]=ch;
+					putchar('*');
+				}
+				else if(i>0&&ch=='\b'){
+					--i;
+					putchar('\b');
+					putchar(' ');
+					putchar('\b');
+				}
+				pwd[i]='\0';
+			}
+		}
+		printf("Please input the type:\n");
+		printf("==============================================================================\n");
+		printf("[0]匿名用户 | [1]售票员 | [2]经理 | [9]系统管理员:");
+		setbuf(stdin,NULL);
+		scanf("%d",&data.type);
+		getchar();
+		printf("Please input your phone number(only you know!!!):\n");
+		scanf("%s",data.phone);
+		getchar();
+		
+		if(Account_Srv_Add(&data)){
+			newCount ++;
+			Account_Srv_FetchAll(list);
+			printf("Add Successfully!\n"); 
+		}
+		else{
+			printf("Add Failed!\n");
+		} 
+		printf("-------------------------------------------------------------------------------");
+		printf("[A]dd more,[R]etuen:");
+		setbuf(stdin,NULL);
+		scanf("%c",&c);
+		char ch;
+		while((ch = getchar())!='\n'&&ch!=EOF);
+	
+	}while('a'==c||'A'==c);
+	return newCount;
+}
+
+//修改系统用户界面
+int Account_UI_Modify(account_list_t list,char usrName[])
+{
+	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);
+	if(temp!=NULL){
+		int m = 10;
+		do
+		{
+			char pwd[20],ch;
+			printf("please input the new password:");
+			setbuf(stdin,NULL);
+			while((ch=getch())!='\r'){
+				int i;
+				if(i<20){
+					pwd[i++]=ch;
+					putchar('*');
+				}
+				else if(i>0&&ch=='\b'){
+					--i;
+					putchar('\b');
+					putchar(' ');
+					putchar('\b');
+				}
+				pwd[i]='\0';
+			}
+			int x=1;
+			if(strcmp(pwd,temp->data.password)){
+				x = 0;
+			}
+			if(x){
+				printf("Mod error!The sama password!nplease choice:\n");
+				printf(" [0]exit  |  [1]try again\n");
+				scanf("%d",&m);
+				setbuf(stdin,NULL);
+			}
+			else{
+				for(int i = 0;i<20;i++){
+					temp->data.password[i] = pwd[i];
+				}
+				int a=Account_Srv_Modify(temp);
+				if(a==0){
+					return 0;
+				}
+				Account_Srv_FetchAll(list);
+				return 1; 
+			}
+		}while(m!=0);
+	} 
+	else{
+		printf("The user error!\n");
+		return 0;
+	}
 }
 //删除系统用户信息界面
 int Account_UI_Del()
 {
-	char ID[20];
-	printf("\n    ======================================================================");
-	printf("\n    ***************************Delete  Systerm****************************");
-	printf("\n    ======================================================================\n");
-	printf("\n           Please enter the user ID to delete: ");
-	scanf("%s",ID);
+	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);
+	if(temp!=NULL){
+		Account_Srv_DeleteByID(temp->data.id);
+		Account_Srv_FetchAll(list);
+		return 1;
+	}
+	return 0;
+}
+//查询系统用户界面
+int Account_UI_Find()
+{
+	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);
+	if(temp!=NULL){
+		printf("user ID:%d\n",temp->data.id);
+		printf("user passwore:\n");
+		printf(temp->data.password);
+		putchar('\n');
+		printf("user name:%s\n",temp->data.username);
+		printf("user type:%c\n",Account_UI_Status2Char(temp->data.type));
+		return 1;
+	}
+	return 0;
 }
