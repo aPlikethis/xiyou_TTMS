@@ -26,7 +26,6 @@ void SalesAanalysis_UI_MgtEntry()
 	paging.offset = 0;
 	paging.pageSize = SALESANALYSIS_PAGE_SIZE;
 
-	//载入数据
 	paging.totalRecords = Salesanalysis_Srv_StaticSale(head);
 	SalesAnalysis_Srv_SortBySale(head);   //根据票房排序
 
