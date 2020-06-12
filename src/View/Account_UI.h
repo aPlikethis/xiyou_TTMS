@@ -27,7 +27,6 @@ int Account_UI_Delete(account_list_t list,char usrName[]);
 
 //标识符：TTMS_SCU_Account-UI_Que
 //功能：查询系统用户界面
-int Account_UI_QueryByUsrname(account_list_t list,char usrName[]);
-int Account_UI_QueryByID(account_list_t list,int usrID);
+int Account_UI_Query(account_list_t list,char usrName[]);
 
 #endif /* ACCOUNT_UI_H_ */

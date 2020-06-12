@@ -14,17 +14,17 @@ void Account_Srv_InitSyS()
 	}
 
 	system("cls");
-	char pwd[20],pwd1[20],name[20];
+	char pwd[20],pwd1[20];
     char ch;
     int i;
     account_t data_admin;
-    printf("It is no Account.dat,please init admin!!please input[E]nter");
+    printf("It is no Account.dat,please init admin!!please input [E]nter");
 	setbuf(stdin,NULL);
     getchar();
 	printf("Please input you want init name :\n			");
 	setbuf(stdin,NULL);
 	getchar();
-	scanf("%s",name);
+	gets(data_admin.username);
     
 	while(1){
     	i=0;
@@ -81,7 +81,7 @@ void Account_Srv_InitSyS()
 	scanf("%d",&data_admin.type);
 	getchar();
 
-	printf("please input your phone number:(only you know):\n			");
+	printf("please input your phone number(only you know!!!):\n			");
 	scanf("%s",data_admin.phone);
 	getchar();
 
@@ -95,11 +95,10 @@ int Account_Srv_Verify(char usrName[],unsigned char pwd[])
     
     if(Account_Perst_SelByName(usrName,&usr)){
     	int a = 1;
-    	for(int i = 0;i<20;i++){
-    		if(pwd[i]!=usr.password[i]){
-    			a = 0;
-			}
+    	if(strcmp(pwd,usr.password)){
+			a = 0;
 		}
+	
 		if(a){
 			gl_CurUser = usr;
 			return 1;
