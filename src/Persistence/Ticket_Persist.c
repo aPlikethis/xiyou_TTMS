@@ -15,7 +15,7 @@ int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 {
     int count,rtn=0;
     schedule_t *sch;
-    ticket_node_t *ticketdata;
+    ticket_list_t ticketdata;
     play_t *buf;
     FILE *fp;
     fp = fopen("Ticket.dat","ab+");
@@ -35,13 +35,13 @@ int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
         Play_Perst_SelectByID(sch->play_id, buf);
         count = Seat_Perst_SelectByRoomID(list, sch->id);
         
-        seat_node_t *pos;
+        seat_list_t pos;
         pos = list->next;
         while(pos != list)
         {   
             ticketdata = (seat_list_t)malloc((int)sizeof(seat_node_t));
             ticketdate->date.id =EntKey_Perst_GetNewKeys(buf->name,1);
-            ticketdate->date.schedule_id=sch.id;
+            ticketdate->date.schedule_id=sch->id;
             ticketdate->date.seat_id=pos->id;
             ticketdate->date.price=buf->price;
             ticketdate->date.status=TICKET_AVL;
@@ -100,7 +100,7 @@ int Ticket_Perst_Rem(int schedule_id)
 
 //标识符：TTMS_SCU_Ticket_Perst_SelByID
 //功能：根据ID载入演出票
-int Ticket_Perst_SelBYID(int id, ticket_t *buf)
+int Sale_Perst_SelByID(int id, ticket_t *buf)
 {
     int found = 0;
     FILE *fp; 

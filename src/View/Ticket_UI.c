@@ -85,16 +85,16 @@ void Ticket_UI_MgtEntry(int schedule_id)
 //功能：查询演出票界面
 void Ticket_UI_Query(void)
 {
-        Ticket_list_t ticket_head;
-        list_Init(ticket_head,Ticket_node_t);
+        ticket_list_t ticket_head;
+        list_Init(ticket_head,ticket_node_t);
         Ticket_Sry_FetchAll(ticket_head);
-        ticket_node_t *pos;
+        ticket_list_t pos;
         pos=ticket_head->next;
         whiel(pos!=ticket_head)
         {
                 Ticket_UI_ShowTicket(ticket_head->id);
         }
-        List_Destroy(ticket_head,buf);
+        List_Destroy(ticket_head,ticket_node_t);
 }
 
 
