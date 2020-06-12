@@ -48,7 +48,7 @@ void Play_UI_MgtEntry(void) {
             printf("please input ID:");
             scanf("%d", &id);
             if(Play_Srv_FetchByID(id, buf)) {
-                /* Schedule_UI_MgtEn; */
+                /* Schedule_UI_MgtEn(); */
             }
             else {
                 printf("剧目不存在\n");
