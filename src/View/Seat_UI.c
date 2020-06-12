@@ -10,7 +10,6 @@
 
 #include "Seat_UI.h"
 #include "../Service/Seat.h"
-
 #include "../Service/Studio.h"
 #include "../Common/List.h"
 #include <stdio.h>
