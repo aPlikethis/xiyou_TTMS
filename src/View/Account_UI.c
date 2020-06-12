@@ -7,7 +7,7 @@
 #include <assert.h>
 #include "MaiAccount_UI.h"
 
-//ç³»ç»Ÿç”¨æˆ·ç™»å½•ç•Œé¢
+//ÏµÍ³ÓÃ»§µÇÂ¼½çÃæ
 int SysLogin()
 {
 	system("cls");
@@ -76,7 +76,7 @@ int SysLogin()
 	return 0;
 }
 
-char Account_UI_Status2Char(account_type_t status)//èº«ä»½åˆ¤åˆ«
+char Account_UI_Status2Char(account_type_t status)//Éí·İÅĞ±ğ
 {
 	if (status == 0)
 		return 'N';
@@ -87,7 +87,7 @@ char Account_UI_Status2Char(account_type_t status)//èº«ä»½åˆ¤åˆ«
 	else if (status == 2)
 		return 'M';
 }
-//ç³»ç»Ÿç”¨æˆ·ç®¡ç†ç•Œé¢
+//ÏµÍ³ÓÃ»§¹ÜÀí½çÃæ
 void Account_UI_MgtEntry(void)
 {
 	if(gl_CurUser.type!=USR_ADMIN){
@@ -110,7 +110,7 @@ void Account_UI_MgtEntry(void)
 	Paging_Locate_FirstPage(head,paging);
 	
 	do{
-		printf("\n[N]åŒ¿åç”¨æˆ·    |    [X]å”®ç¥¨å‘˜     |     [M]ç»ç†     |     [A]ç³»ç»Ÿç®¡ç†å‘˜");
+		printf("\n[N]ÄäÃûÓÃ»§    |    [X]ÊÛÆ±Ô±     |     [M]¾­Àí     |     [A]ÏµÍ³¹ÜÀíÔ±");
 		printf("\n==============================================================================\n");
 		printf("*************************Account Management Systerm****************************");
 		printf("	%3s %18s %23s %16s\n","ID","username","password","type");	
@@ -198,7 +198,7 @@ void Account_UI_MgtEntry(void)
 	List_Destroy(head,account_node_t); 
 }
 
-//åˆ›å»ºç³»ç»Ÿæ–°ç”¨æˆ·ç•Œé¢
+//´´½¨ÏµÍ³ĞÂÓÃ»§½çÃæ
 int Account_UI_Add(account_list_t list)
 {
 	account_t data;
@@ -243,7 +243,7 @@ int Account_UI_Add(account_list_t list)
 		}
 		printf("Please input the type:\n");
 		printf("==============================================================================\n");
-		printf("[0]åŒ¿åç”¨æˆ· | [1]å”®ç¥¨å‘˜ | [2]ç»ç† | [9]ç³»ç»Ÿç®¡ç†å‘˜:");
+		printf("[0]ÄäÃûÓÃ»§ | [1]ÊÛÆ±Ô± | [2]¾­Àí | [9]ÏµÍ³¹ÜÀíÔ±:");
 		setbuf(stdin,NULL);
 		scanf("%d",&data.type);
 		getchar();
@@ -270,7 +270,7 @@ int Account_UI_Add(account_list_t list)
 	return newCount;
 }
 
-//ä¿®æ”¹ç³»ç»Ÿç”¨æˆ·ç•Œé¢
+//ĞŞ¸ÄÏµÍ³ÓÃ»§½çÃæ
 int Account_UI_Modify(account_list_t list,char usrName[])
 {
 	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);
@@ -323,7 +323,7 @@ int Account_UI_Modify(account_list_t list,char usrName[])
 		return 0;
 	}
 }
-//åˆ é™¤ç³»ç»Ÿç”¨æˆ·ä¿¡æ¯ç•Œé¢
+//É¾³ıÏµÍ³ÓÃ»§ĞÅÏ¢½çÃæ
 int Account_UI_Delete(account_list_t list,char usrName[])
 {
 	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);
@@ -334,7 +334,7 @@ int Account_UI_Delete(account_list_t list,char usrName[])
 	}
 	return 0;
 }
-//æŸ¥è¯¢ç³»ç»Ÿç”¨æˆ·ç•Œé¢
+//²éÑ¯ÏµÍ³ÓÃ»§½çÃæ
 int Account_UI_Query(account_list_t list, char usrName[])
 {
 	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);

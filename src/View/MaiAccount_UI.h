@@ -6,7 +6,7 @@
 
 static const int MAIACCOUNT_PAGE_SIZE=6;
 
-//缁存姢涓汉璧勬枡绠＄悊鍏ュ彛鐣岄潰
+//维护个人资料管理入口界面
 void MaiAccount_UI_MgtEntry ();
 void MaiAccount_UI_Mgt ();
 #endif /* MAIACCOUNT_UI_H_ */

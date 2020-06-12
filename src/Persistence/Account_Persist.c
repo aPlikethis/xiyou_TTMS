@@ -1,9 +1,7 @@
-
-
-#include "Account_Persist.h"
 #include "../Service/Account.h"
-#include "../Common/list.h"
-#include "EntityKey_Persist.h"	
+#include "../Persistence/Account_Persist.h"
+#include "../Common/List.h"
+#include "../Persistence/EntityKey_Persist.h"	
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -27,7 +25,7 @@ int Account_Perst_CheckAccfile()
     
 }
 
-int Account_Perst_SelByName(char usrName[], account_t *buf)
+int Account_Perst_SelByName(char usrName[],account_t *buf)
 
 {
     assert(NULL!=buf);
@@ -185,7 +183,7 @@ int Account_Perst_SelectAll(account_list_t list)
 	
 	while(!feof(fp)){
 		if(fread(&data,sizeof(account_t),1,fp)){
-			pNew = (account_node_t*) malloc(sizeof(account_node_t));
+			pNew = (account_node_t *)malloc(sizeof(account_node_t));
 			if(!pNew){
 				printf("Warning, Memory OverFlow!!!\nCannot Load more Data into memory!!!\n");
 				break;
