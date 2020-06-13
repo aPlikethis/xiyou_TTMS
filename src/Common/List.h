@@ -6,10 +6,14 @@
 * Version:  v.1 	 
 * Date: 	2015Äê4ÔÂ22ÈÕ		 
 */
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7d5d6bf11de70444525ee62db4928b9194e175c1
 
 #ifndef LIST_H_
 #define LIST_H_
-
+#include "../Common/List.h"
 #include <stdlib.h>
 #include <assert.h>
 

@@ -64,8 +64,3 @@ int Ticket_Srv_FetchByID(int id, ticket_t *buf)
     return Ticket_Perst_SelBYID(id,buf);
 }
 
-//查询所有票信息
-int Ticket_Srv_FetchAll( ticket_list_t list)
-{
-    return Ticket_Perst_FetchAll(list);
-}

@@ -1,4 +1,5 @@
 #include "../View/Ticket_UI.h"
+#include "../View/Sale_UI.h"
 
 #include "../Common/List.h"
 #include "../Common/common.h"
@@ -8,6 +9,7 @@
 #include "../Service/studio.h"
 #include "../Service/Schedule.h"
 #include "../Service/seat.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -83,39 +85,11 @@ void Ticket_UI_MgtEntry(int schedule_id)
 }
 //标识符：TTMS_SCU_Ticket_UI_Qry
 //功能：查询演出票界面
-//标识符：TTMS_SCU_Ticket_UI_Qry
-//功能：查询演出票界面
 void Ticket_UI_Query(void)
 {
-        ticket_list_t ticket_head;
-        list_Init(ticket_head,ticket_node_t);
-        Ticket_Sry_FetchAll(ticket_head);
-        ticket_node_t *pos;
-        pos=ticket_head->next;
-        whiel(pos!=ticket_head)
-        {
-                Ticket_UI_ShowTicket(ticket_head->id);
-        }
-        List_Destroy(ticket_head,ticket_node_t);
+	int id;
+	printf("\n\t\t\t\t\t请输入演出计划的ID:");
+	scanf("%d",&id);
+	Sale_UI_ShowTicket(id);
 }
 
-
-//标识符：TTMS_SCU_Ticket_UI_ShowTicket
-//功能：显示演出票界面
-int Ticket_UI_ShowTicket(int ticket_id)
-{
-        int rtn=0;
-        ticket_t *buf;
-        rtn=Ticket_Srv_FetchByID(ticket_id, buf);
-        if (rtn)
-        {
-                printf("未找到");
-                return 0;
-        }
-        else    
-        {
-                printf("票ID%d\n演出计划ID%d\n座位ID%d\n票价%d\n票状态%d\n",buf->id,buf->schedule_id,buf->seat_id,buf->price,buf->status);
-                rtn=1;
-        }
-        return 1;
-}

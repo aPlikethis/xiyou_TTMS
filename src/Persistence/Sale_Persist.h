@@ -1,15 +1,28 @@
-#ifndef SALE_PERSIST_H_
-#define SALE_PERSIST_H_
-#include"../Service/Sale.h"
-int Sale_Perst_Insert( sale_t *data);
+#ifndef SLAEINGPERSIST_H
+#define SALEINGPERSIST_H
+
+#include "../Service/Sale.h"
+#include "../Common/common.h"
+
+int Sale_Perst_Insert(const sale_t *data);
+int Sale_Perst_DeleteByID(int saleID);
 
 
+//根据用户ID载入给定时间区间内的销售记录
+int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID,
+		user_date_t stDate, user_date_t endDate);
+
+//根据用户ID载入给定时间区间内的销售记录
+int Sale_Perst_SelectByDate(sale_list_t list,
+		user_date_t stDate, user_date_t endDate);
 int Ticket_Perst_Update(const ticket_t *data);
-
-int Ticket_Srv_SelBySchID(int id,ticket_list_t list);
-
+int Ticket_Srv_SelBySchID(int id, ticket_t *list);
+int Ticket_Perst_SelectAll(ticket_list_t list,int schID);
 int Sale_Perst_SelByTicketID (int ticket_id, sale_t *sale);
+/*
+int Sale_Infor_By_Time(char queryTime[][30], sale_list_t head);
 
-int Sale_Perst_SelByID (sale_list_t list, int usrID);
-
+//根据票的id获得票的基本信息 这个函数可以在ticket里面调用，但是可能你那个文件名字不一样，所以重新写了一份，你那边可以直接调用api，这个函数主要是获得票票的价格,
+int Select_Price_By_Playid(int id, ticket_t *buf);
+*/
 #endif
