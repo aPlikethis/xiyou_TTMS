@@ -65,7 +65,7 @@ int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list)
     }
     fclose(fp);
     return recCount;
-}
+} 
 
 
 //遍历读Sale.dat文件建立list 链表，返回链表list长度
