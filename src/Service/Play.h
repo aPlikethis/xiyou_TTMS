@@ -3,59 +3,59 @@
 #include "../Common/common.h"
 #include "../Service/Play.h"
 
-//8å·ä¿®æ”¹å¼€å§‹
-/* å‰§ç›®ç±»å‹å®šä¹‰ */
+//8ºÅĞŞ¸Ä¿ªÊ¼
+/* ¾çÄ¿ÀàĞÍ¶¨Òå */
 typedef enum {
     PLAY_TYPE_FILM = 1,
     PLAY_TYPE_OPEAR = 2,
     PLAY_TYPE_CONCERT = 3,
 }play_type_t;
 
-/* å‰§ç›®åˆ†çº§ç±»å‹å®šä¹‰ */
+/* ¾çÄ¿·Ö¼¶ÀàĞÍ¶¨Òå */
 typedef enum {
     PLAY_TYPE_CHILD = 1,
     PLAY_RATE_TEENAGE = 2,
     PLAY_RATE_ADULT = 3
 }play_rating_t;
 
-/* æ—¥æœŸç±»å‹çš„å®šä¹‰å¦‚ä¸‹ */
+/* ÈÕÆÚÀàĞÍµÄ¶¨ÒåÈçÏÂ */
 typedef struct {
     int year;
     int month;
     int day;
 }ttms_date_t;
-/* å‰§ç›®å®ä½“æ•°æ®ç±»å‹å®šä¹‰ */
+/* ¾çÄ¿ÊµÌåÊı¾İÀàĞÍ¶¨Òå */
 typedef struct {
-    int id;                 //å‰§ç›®id
-    char name[31];          //å‰§ç›®åç§°
-    play_type_t type;       //å‰§ç›®ç±»å‹
-    char area[9];           //å‰§ç›®å‡ºå“åœ°åŒº
-    play_rating_t rating;   //å‰§ç›®ç­‰çº§
-    int duration;           //æ—¶é•¿ï¼Œä»¥åˆ†é’Ÿä¸ºå•ä½
-    ttms_date_t start_date; //å¼€å§‹æ”¾æ˜ æ—¥æœŸ
-    ttms_date_t end_date;   //æ”¾æ˜ ç»“æŸæ—¥æœŸ
-    int price;              //å»ºè®®ç¥¨ä»·
+    int id;                 //¾çÄ¿id
+    char name[31];          //¾çÄ¿Ãû³Æ
+    play_type_t type;       //¾çÄ¿ÀàĞÍ
+    char area[9];           //¾çÄ¿³öÆ·µØÇø
+    play_rating_t rating;   //¾çÄ¿µÈ¼¶
+    int duration;           //Ê±³¤£¬ÒÔ·ÖÖÓÎªµ¥Î»
+    ttms_date_t start_date; //¿ªÊ¼·ÅÓ³ÈÕÆÚ
+    ttms_date_t end_date;   //·ÅÓ³½áÊøÈÕÆÚ
+    int price;              //½¨ÒéÆ±¼Û
 
 }play_t;
 
-/* å‰§ç›®é“¾è¡¨èŠ‚ç‚¹å®šä¹‰ */
+/* ¾çÄ¿Á´±í½Úµã¶¨Òå */
 typedef struct play_node {
-	play_t data;             //å®ä½“æ•°æ®
-	struct play_node *next;  //åç»§æŒ‡é’ˆ
-	struct play_node *prev;  //å‰é©±æŒ‡é’ˆ
+	play_t data;             //ÊµÌåÊı¾İ
+	struct play_node *next;  //ºó¼ÌÖ¸Õë
+	struct play_node *prev;  //Ç°ÇıÖ¸Õë
 }play_node_t, *play_list_t;
 
 
-//8å·ä¿®æ”¹ç»“æŸ
-/* æŸ¥è¯¢å‰§ç›® */
+//8ºÅĞŞ¸Ä½áÊø
+/* ²éÑ¯¾çÄ¿ */
 int Play_Srv_FetchByID(int id, play_t *buf);
-/* æ·»åŠ å‰§ç›® */
+/* Ìí¼Ó¾çÄ¿ */
 int Play_Srv_Add(play_t *data);
-/* è·å–å…¨éƒ¨å‰§ç›® */
+/* »ñÈ¡È«²¿¾çÄ¿ */
 int Play_Srv_FetchAll(play_list_t list);
-/* ä¿®æ”¹å‰§ç›® */
+/* ĞŞ¸Ä¾çÄ¿ */
 int Play_Srv_Modify(const play_t *data);
-/* åˆ é™¤å‰§ç›® */
+/* É¾³ı¾çÄ¿ */
 int Play_Srv_Delete(int id, play_list_t list);
 
 

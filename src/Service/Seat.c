@@ -11,6 +11,12 @@
 #include <stdlib.h>
 #include "../Common/List.h"
 #include "Seat.h"
+#include "../Persistence/EntityKey_Persist.h"
+
+static const char SEAT_DATA_FILE[] = "Seat.dat"; //文件名常量 
+static const char SEAT_DATA_TEMP_FILE[] = "SeatTmp.dat"; //临时文件名常量 
+static const char SEAT_KEY_NAME[] = "Seat"; //名常量 
+
 
 /*
 函数功能：用于添加一个新座位数据。
@@ -192,6 +198,7 @@ void Seat_Srv_AddToSoftedList(seat_list_t list, seat_node_t *node)
 		//将结点node加入到p之前
 		List_InsertBefore(p, node);
 	}
+}
 
 /*
 函数功能：根据座位的行、列号获取座位数据。
