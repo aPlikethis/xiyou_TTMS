@@ -7,7 +7,7 @@
 * Date: 	2015年4月22日		 
 */
 
-#include "Common.h"
+#include "../Common/common.h"
 
 #include<stdio.h>
 #include<fcntl.h>

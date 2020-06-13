@@ -9,6 +9,8 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 
+#include "../Common/common.h"
+
 //日期结构体 
 typedef struct {
 	int year;

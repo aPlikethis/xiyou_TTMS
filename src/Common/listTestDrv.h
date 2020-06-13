@@ -9,6 +9,8 @@
 #ifndef COMMON_LISTTESTDRV_H_
 #define COMMON_LISTTESTDRV_H_
 
+#include "../Common/listTestDrv.h"
+
 //链表结点数据定义 ，测试用 
 typedef struct TestListRec
 {

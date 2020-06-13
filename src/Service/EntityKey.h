@@ -1,6 +1,8 @@
 #ifndef ENTITYKEY_H_
 #define ENTITYKEY_H_
 
+#include "../Service/EntityKey.h"
+
 typedef struct {
 	char entyName[41];
 	long key;
