@@ -1,10 +1,10 @@
 /*
 * Copyright(C), 2007-2008, XUPT Univ.	 
 * File name: listTestDrv.c			 
-* Description : é“¾è¡¨æ“ä½œæµ‹è¯• 
+* Description : Á´±í²Ù×÷²âÊÔ 
 * Author:   XUPT  		 
 * Version:  v.1 	 
-* Date: 	2015å¹´4æœˆ22æ—¥		 
+* Date: 	2015Äê4ÔÂ22ÈÕ		 
 */
 
 #include "listTestDrv.h"
@@ -13,7 +13,7 @@
 
 #include "../Common/list.h"
 
-//é“¾è¡¨åˆå§‹åŒ–æµ‹è¯• 
+//Á´±í³õÊ¼»¯²âÊÔ 
 void ListTest_Init() {
 	TestList_t head=NULL;
 
@@ -27,7 +27,7 @@ void ListTest_Init() {
 	List_Destroy(head, TestList_Node_t);
 }
 
-//é“¾è¡¨ä¸ºç©ºæµ‹è¯• 
+//Á´±íÎª¿Õ²âÊÔ 
 void ListTest_Empty() {
 	TestList_Node_t head;
 	head.next = head.prev = &head;
@@ -38,26 +38,26 @@ void ListTest_Empty() {
 		printf("List_Empty Failed!\n");
 }
 
-//é“¾è¡¨å°¾æ’æ³•æ’å…¥ç»“ç‚¹æµ‹è¯• 
+//Á´±íÎ²²å·¨²åÈë½áµã²âÊÔ 
 void ListTest_AddTail() {
 	TestList_t head;
 	TestList_Node_t *p, *nodes;
 	int i = 0;
 	int result = 1;
 
-	/*åˆå§‹åŒ–é“¾è¡¨*/
+	/*³õÊ¼»¯Á´±í*/
 	head = (TestList_Node_t*) malloc(sizeof(TestList_Node_t));
 	head->next = head->prev = head;
 
-	/*åˆå§‹åŒ–æ•°æ®*/
+	/*³õÊ¼»¯Êı¾İ*/
 	nodes = (TestList_Node_t*) malloc(sizeof(TestList_Node_t) * 3);
-	/*ç”Ÿæˆæµ‹è¯•æ•°æ®*/
+	/*Éú³É²âÊÔÊı¾İ*/
 	for (i = 0; i < 3; i++) {
 		nodes[i].data.value = i;
 		List_AddTail(head, &nodes[i]);
 	}
 
-	/*æ ¡éªŒnexté“¾è¡¨æŒ‡é’ˆå®Œæ•´æ€§*/
+	/*Ğ£ÑénextÁ´±íÖ¸ÕëÍêÕûĞÔ*/
 	for (p = head->next, i = 0; i < 3; i++, p = p->next) {
 		if (p != &nodes[i]) {
 			result = 0;
@@ -68,7 +68,7 @@ void ListTest_AddTail() {
 	if (p != head)
 		result = 0;
 
-	/*æ ¡éªŒprevé“¾è¡¨æŒ‡é’ˆå®Œæ•´æ€§*/
+	/*Ğ£ÑéprevÁ´±íÖ¸ÕëÍêÕûĞÔ*/
 	for (p = head->prev, i = 2; i >= 0; i--, p = p->prev) {
 		if (p != &nodes[i]) {
 			result = 0;
@@ -88,7 +88,7 @@ void ListTest_AddTail() {
 
 }
 
-//é“¾è¡¨å¤´æ’æ³•æ’å…¥ç»“ç‚¹æµ‹è¯• 
+//Á´±íÍ·²å·¨²åÈë½áµã²âÊÔ 
 void ListTest_AddHead() {
 	TestList_t head;
 	TestList_Node_t *p, *nodes;
@@ -96,19 +96,19 @@ void ListTest_AddHead() {
 
 	int result = 1;
 
-	/*åˆå§‹åŒ–é“¾è¡¨*/
+	/*³õÊ¼»¯Á´±í*/
 	head = (TestList_Node_t*) malloc(sizeof(TestList_Node_t));
 	head->next = head->prev = head;
 
-	/*åˆå§‹åŒ–æ•°æ®*/
+	/*³õÊ¼»¯Êı¾İ*/
 	nodes = (TestList_Node_t*) malloc(sizeof(TestList_Node_t) * 3);
-	/*ç”Ÿæˆæµ‹è¯•æ•°æ®*/
+	/*Éú³É²âÊÔÊı¾İ*/
 	for (i = 0; i < 3; i++) {
 		nodes[i].data.value = i;
 		List_AddHead(head, &nodes[i]);
 	}
 
-	/*æ ¡éªŒnexté“¾è¡¨æŒ‡é’ˆå®Œæ•´æ€§*/
+	/*Ğ£ÑénextÁ´±íÖ¸ÕëÍêÕûĞÔ*/
 	for (p = head->next, i = 2; i >= 0; i--, p = p->next) {
 		if (p != &nodes[i]) {
 			result = 0;
@@ -118,7 +118,7 @@ void ListTest_AddHead() {
 	if (p != head)
 		result = 0;
 
-	/*æ ¡éªŒprevé“¾è¡¨æŒ‡é’ˆå®Œæ•´æ€§*/
+	/*Ğ£ÑéprevÁ´±íÖ¸ÕëÍêÕûĞÔ*/
 	for (p = head->prev, i = 0; i < 3; i++, p = p->prev) {
 		if (p != &nodes[i]) {
 			result = 0;
@@ -137,16 +137,16 @@ void ListTest_AddHead() {
 		printf("List_AddHead Failed!\n");
 }
 
-//é‡Šæ”¾é“¾è¡¨æµ‹è¯•  
+//ÊÍ·ÅÁ´±í²âÊÔ  
 void ListTest_Free() {
 	TestList_t head;
 	TestList_Node_t *node;
 
-	/*åˆå§‹åŒ–é“¾è¡¨*/
+	/*³õÊ¼»¯Á´±í*/
 	head = (TestList_Node_t*) malloc(sizeof(TestList_Node_t));
 	head->next = head->prev = head;
 
-	/*æµ‹è¯•ç©ºé“¾è¡¨çš„Free*/
+	/*²âÊÔ¿ÕÁ´±íµÄFree*/
 	List_Free(head, TestList_Node_t);
 
 	if (NULL==head || head->next != head || head->prev != head){
@@ -154,10 +154,10 @@ void ListTest_Free() {
 		return ;
 	}
 
-	/*æµ‹è¯•éç©ºé“¾è¡¨Free*/
+	/*²âÊÔ·Ç¿ÕÁ´±íFree*/
 	node = (TestList_Node_t*) malloc(sizeof(TestList_Node_t));
 	node->data.value=1;
-	/*å°†ç»“ç‚¹nodeæ’å…¥åˆ°é“¾è¡¨ä¸­*/
+	/*½«½áµãnode²åÈëµ½Á´±íÖĞ*/
 	node->next=head;
 	node->prev=head;
 	head->next=node;
@@ -172,12 +172,12 @@ void ListTest_Free() {
 	free(head);
 }
 
-//é”€æ¯é“¾è¡¨æµ‹è¯• 
+//Ïú»ÙÁ´±í²âÊÔ 
 void ListTest_Destroy() {
 	TestList_t head;
 	TestList_Node_t *node;
 
-	/*æµ‹è¯•ç©ºé“¾è¡¨çš„Free*/
+	/*²âÊÔ¿ÕÁ´±íµÄFree*/
 	head = (TestList_Node_t*) malloc(sizeof(TestList_Node_t));
 	head->next = head->prev = head;
 	List_Destroy(head, TestList_Node_t);
@@ -187,12 +187,12 @@ void ListTest_Destroy() {
 		return ;
 	}
 
-	/*æµ‹è¯•éç©ºé“¾è¡¨Free*/
+	/*²âÊÔ·Ç¿ÕÁ´±íFree*/
 	head = (TestList_Node_t*) malloc(sizeof(TestList_Node_t));
 	head->next = head->prev = head;
 	node = (TestList_Node_t*) malloc(sizeof(TestList_Node_t));
 	node->data.value=1;
-	/*å°†ç»“ç‚¹nodeæ’å…¥åˆ°é“¾è¡¨ä¸­*/
+	/*½«½áµãnode²åÈëµ½Á´±íÖĞ*/
 	node->next=head;
 	node->prev=head;
 	head->next=node;
@@ -205,9 +205,9 @@ void ListTest_Destroy() {
 		printf("List_Destroy Failed!\n");
 }
 
-//é“¾è¡¨æµ‹è¯•ç”¨ä¾‹ 
+//Á´±í²âÊÔÓÃÀı 
 void List_TestDriver_Entry() {
-	/*æµ‹è¯•åˆå§‹åŒ–*/
+	/*²âÊÔ³õÊ¼»¯*/
 	ListTest_Init();
 
 	ListTest_Empty();

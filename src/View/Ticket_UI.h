@@ -1,18 +1,18 @@
 #ifndef TICKET_UI_H_
 #define TICKET_UI_H_
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_UI_MgtEnt
-//åŠŸèƒ½ï¼šæ˜¾ç¤ºä¸å‚æ•°å¯¹åº”çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+//±êÊ¶·û£ºTTMS_SCU_Ticket_UI_MgtEnt
+//¹¦ÄÜ£ºÏÔÊ¾Óë²ÎÊı¶ÔÓ¦µÄÑİ³ö¼Æ»®ĞÅÏ¢
 void Ticket_UI_MgtEntry(int schedule_id);
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_UI_Qry
-//åŠŸèƒ½ï¼šæŸ¥è¯¢æ¼”å‡ºç¥¨ç•Œé¢
+//±êÊ¶·û£ºTTMS_SCU_Ticket_UI_Qry
+//¹¦ÄÜ£º²éÑ¯Ñİ³öÆ±½çÃæ
 void Ticket_UI_Query(void);
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_UI_ShowTicket
-//åŠŸèƒ½ï¼šæ˜¾ç¤ºæ¼”å‡ºç¥¨ç•Œé¢
+//±êÊ¶·û£ºTTMS_SCU_Ticket_UI_ShowTicket
+//¹¦ÄÜ£ºÏÔÊ¾Ñİ³öÆ±½çÃæ
 int Ticket_UI_ShowTicket(int ticket_id);
 
 #endif
