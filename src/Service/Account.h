@@ -1,67 +1,69 @@
-#ifndef ACCOUNTPERSIST_H_
-#define ACCOUNTPERSIST_H_
+#ifndef ACCOUNT_H_
+#define ACCOUNT_H_
 
 #include "../Service/Account.h"
+#include <stdio.h>
 
-//å®šä¹‰æšä¸¾ç±»å‹account_type_tï¼Œæè¿°ç”¨æˆ·çš„è§’è‰²
+//¶¨ÒåÃ¶¾ÙÀàĞÍaccount_type_t£¬ÃèÊöÓÃ»§µÄ½ÇÉ«
 typedef enum {
-	USR_ANOMY = 0, //USR_ANOMY  åŒ¿åç”¨æˆ·ï¼ˆåˆå§‹åŒ–è´¦å·ï¼Œç›®çš„æ˜¯åˆ›å»ºå…¶ä»–è´¦å·ï¼Œæƒé™ç­‰åŒäºç³»ç»Ÿç®¡ç†å‘˜ï¼‰
-	USR_CLERK = 1, //USR_CLERK  å”®ç¥¨å‘˜ï¼ˆæŸ¥è¯¢æ¼”å‡ºã€æŸ¥è¯¢æ¼”å‡ºç¥¨ã€å”®ç¥¨ã€é€€ç¥¨ä»¥åŠç»Ÿè®¡é”€å”®é¢ï¼‰
-	USR_MANGE = 2, //USR_MANGE  å‰§é™¢ç»ç†ï¼ˆç®¡ç†å‰§ç›®ã€å®‰æ’æ¼”å‡ºã€æŸ¥è¯¢æ¼”å‡ºã€æŸ¥è¯¢å·¡æ¼”å‡ºç¥¨ã€ç»Ÿè®¡é”€å”®é¢ã€ç»Ÿè®¡ç¥¨æˆ¿ï¼‰
-	USR_ADMIN = 9ï¼Œ//USR_ADMIN  ç³»ç»Ÿç®¡ç†å‘˜ï¼ˆç®¡ç†æ¼”å‡ºå…ã€ç®¡ç†ç³»ç»Ÿç”¨æˆ·ã€è®¾ç½®ä½œä¸ºï¼‰
-} account_type_t;
+	USR_ANOMY = 0, //USR_ANOMY  ÄäÃûÓÃ»§£¨³õÊ¼»¯ÕËºÅ£¬Ä¿µÄÊÇ´´½¨ÆäËûÕËºÅ£¬È¨ÏŞµÈÍ¬ÓÚÏµÍ³¹ÜÀíÔ±£©
+	USR_CLERK = 1, //USR_CLERK  ÊÛÆ±Ô±£¨²éÑ¯Ñİ³ö¡¢²éÑ¯Ñİ³öÆ±¡¢ÊÛÆ±¡¢ÍËÆ±ÒÔ¼°Í³¼ÆÏúÊÛ¶î£©
+	USR_MANGE = 2, //USR_MANGE  ¾çÔº¾­Àí£¨¹ÜÀí¾çÄ¿¡¢°²ÅÅÑİ³ö¡¢²éÑ¯Ñİ³ö¡¢²éÑ¯Ñ²Ñİ³öÆ±¡¢Í³¼ÆÏúÊÛ¶î¡¢Í³¼ÆÆ±·¿£©
+	USR_ADMIN = 9, //USR_ADMIN  ÏµÍ³¹ÜÀíÔ±£¨¹ÜÀíÑİ³öÌü¡¢¹ÜÀíÏµÍ³ÓÃ»§¡¢ÉèÖÃ×÷Îª£©
+}account_type_t;
 
-//å®šä¹‰ç³»ç»Ÿç”¨æˆ·è´¦å·æ•°æ®ç±»å‹ï¼Œæè¿°ç”¨æˆ·è´¦å·ä¿¡æ¯
+//¶¨ÒåÏµÍ³ÓÃ»§ÕËºÅÊı¾İÀàĞÍ£¬ÃèÊöÓÃ»§ÕËºÅĞÅÏ¢
 typedef struct {
-	int  id;//ç”¨æˆ·id
-	account_type_t type;//ç”¨æˆ·ç±»å‹
-	char username[20];//ç”¨æˆ·å
-	unsigned char password[20];//ç”¨æˆ·å¯†ç 
-	char phone[15];//æ‰‹æœºå·
+	int  id;//ÓÃ»§id
+	account_type_t type;//ÓÃ»§ÀàĞÍ
+	char username[20];//ÓÃ»§Ãû
+	unsigned char password[20];//ÓÃ»§ÃÜÂë
+	char phone[15];//ÊÖ»úºÅ
 } account_t;
 
-//å®šä¹‰ç³»ç»Ÿç”¨æˆ·è´¦å·åŒå‘é“¾è¡¨
+//¶¨ÒåÏµÍ³ÓÃ»§ÕËºÅË«ÏòÁ´±í
 typedef struct account_node {
-	account_t data;//å®ä½“æ•°æ®
-	struct account_node *next, *prev;//å‰å‘æŒ‡é’ˆprevï¼Œåå‘æŒ‡é’ˆnext
+	account_t data;//ÊµÌåÊı¾İ
+	struct account_node *next, *prev;//Ç°ÏòÖ¸Õëprev£¬ºóÏòÖ¸Õënext
 } account_node_t, *account_list_t;
 
 account_t gl_CurUser;
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Srv_Verify
-//åˆ›å»ºç®¡ç†å‘˜AdminåŒ¿åç³»ç»Ÿç”¨æˆ·
+//±êÊ¶·û£ºTTMS_SCU_Account_Srv_Verify
+//´´½¨¹ÜÀíÔ±AdminÄäÃûÏµÍ³ÓÃ»§
 void Account_Srv_InitSys();
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Srv_Verify
-//åŠŸèƒ½ï¼šéªŒè¯ç³»ç»Ÿç”¨æˆ·çš„ç”¨æˆ·åå’Œå¯†ç 
+//±êÊ¶·û£ºTTMS_SCU_Account_Srv_Verify
+//¹¦ÄÜ£ºÑéÖ¤ÏµÍ³ÓÃ»§µÄÓÃ»§ÃûºÍÃÜÂë
 int Account_Srv_Verify(char usrName[],unsigned char pwd[]);
 int Account_Srv_Verifyno(char usrName[]);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Srv_Verify
-//åŠŸèƒ½ï¼šæ·»åŠ æ–°ç³»ç»Ÿç”¨æˆ·
+//±êÊ¶·û£ºTTMS_SCU_Account_Srv_Verify
+//¹¦ÄÜ£ºÌí¼ÓĞÂÏµÍ³ÓÃ»§
 int Account_Srv_Add(const account_t *data);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Srv_Verify
-//åŠŸèƒ½ï¼šä¿®æ”¹ç³»ç»Ÿç”¨æˆ·
+//±êÊ¶·û£ºTTMS_SCU_Account_Srv_Verify
+//¹¦ÄÜ£ºĞŞ¸ÄÏµÍ³ÓÃ»§
 int Account_Srv_Modify(const account_t *data);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Srv_Verify
-//åŠŸèƒ½ï¼šæ ¹æ®IDåˆ é™¤ç³»ç»Ÿç”¨æˆ·
+//±êÊ¶·û£ºTTMS_SCU_Account_Srv_Verify
+//¹¦ÄÜ£º¸ù¾İIDÉ¾³ıÏµÍ³ÓÃ»§
 int Account_Srv_DeleteByID(int usrID);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Srv_Verify
-//åŠŸèƒ½ï¼šæ ¹æ®IDè·å–ç³»ç»Ÿç”¨æˆ·
+//±êÊ¶·û£ºTTMS_SCU_Account_Srv_Verify
+//¹¦ÄÜ£º¸ù¾İID»ñÈ¡ÏµÍ³ÓÃ»§
 int Account_Srv_FetchByID(int usrID, account_t *buf);
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Srv_Verify
-//åŠŸèƒ½ï¼šæ ¹æ®ç”¨æˆ·åè·å–ç³»ç»Ÿç”¨æˆ·
+//±êÊ¶·û£ºTTMS_SCU_Account_Srv_Verify
+//¹¦ÄÜ£º¸ù¾İÓÃ»§Ãû»ñÈ¡ÏµÍ³ÓÃ»§
 int Account_Srv_FetchByName(char usrName[], account_t *buf);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Srv_Verify
-//è·å–æ‰€æœ‰ç³»ç»Ÿç”¨æˆ·
+//±êÊ¶·û£ºTTMS_SCU_Account_Srv_Verify
+//»ñÈ¡ËùÓĞÏµÍ³ÓÃ»§
 int Account_Srv_FetchAll(account_list_t list);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Srv_Verify
-//æ ¹æ®ç”¨æˆ·åè·å–ç³»ç»Ÿç”¨æˆ·æŒ‡é’ˆ
-account_node_t * Account_Srv_FindByUsrName(account_list_t list,char usrName[]);
+//±êÊ¶·û£ºTTMS_SCU_Account_Srv_Verify
+//¸ù¾İÓÃ»§Ãû»ñÈ¡ÏµÍ³ÓÃ»§Ö¸Õë
+account_node_t *Account_Srv_FindByUsrName(account_list_t list,char usrName[]);
 
 #endif //ACCOUNT_H_
+_

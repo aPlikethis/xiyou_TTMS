@@ -6,6 +6,12 @@
 #include "../Service/Account.h"
 #include "../Service/SalesAnalysis.h"
 
+//外部变量gl_CurUser 用于存储登录用户信息
+extern account_t gl_CurUser;
+
+//定义分页机制中页面大小为5
+static const int SALESANALYSIS_PAGE_SIZE = 5;
+
 //统计销售额界面
 void StaSales_UI_MgtEntry ()
 {

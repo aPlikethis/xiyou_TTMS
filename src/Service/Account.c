@@ -1,12 +1,12 @@
-#include "Account.h"
+#include "../Service/Account.h"
 #include "../Common/list.h"
-#include "../Persistence/Account_Persist.h"
+//#include "../Persistence/Account_Persist.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 
-//åˆ›å»ºç®¡ç†å‘˜AdminåŒ¿åç³»ç»Ÿç”¨æˆ·
+//´´½¨¹ÜÀíÔ±AdminÄäÃûÏµÍ³ÓÃ»§
 void Account_Srv_InitSyS()
 {
 	if(Account_Perst_CheckAccFile()==1){
@@ -14,17 +14,17 @@ void Account_Srv_InitSyS()
 	}
 
 	system("cls");
-	char pwd[20],pwd1[20],name[20];
+	char pwd[20],pwd1[20];
     char ch;
     int i;
     account_t data_admin;
-    printf("It is no Account.dat,please init admin!!please input[E]nter");
+    printf("It is no Account.dat,please init admin!!please input [E]nter");
 	setbuf(stdin,NULL);
     getchar();
 	printf("Please input you want init name :\n			");
 	setbuf(stdin,NULL);
 	getchar();
-	scanf("%s",name);
+	gets(data_admin.username);
     
 	while(1){
     	i=0;
@@ -81,25 +81,24 @@ void Account_Srv_InitSyS()
 	scanf("%d",&data_admin.type);
 	getchar();
 
-	printf("please input your phone number:(only you know):\n			");
+	printf("please input your phone number(only you know!!!):\n			");
 	scanf("%s",data_admin.phone);
 	getchar();
 
 	setbuf(stdin,NULL);
 	Account_Srv_Add(&data_admin);
 }
-//éªŒè¯ç™»å½•è´¦å·æ˜¯å¦å·²å­˜åœ¨ï¼Œå­˜åœ¨ï¼Œä¿å­˜ç™»å½•ç”¨æˆ·ä¿¡æ¯åˆ°å…¨å±€å˜é‡gl_CurUserï¼Œreturn 1ï¼›å¦åˆ™return 0
+//ÑéÖ¤µÇÂ¼ÕËºÅÊÇ·ñÒÑ´æÔÚ£¬´æÔÚ£¬±£´æµÇÂ¼ÓÃ»§ĞÅÏ¢µ½È«¾Ö±äÁ¿gl_CurUser£¬return 1£»·ñÔòreturn 0
 int Account_Srv_Verify(char usrName[],unsigned char pwd[])
 {
 	account_t usr;
     
     if(Account_Perst_SelByName(usrName,&usr)){
     	int a = 1;
-    	for(int i = 0;i<20;i++){
-    		if(pwd[i]!=usr.password[i]){
-    			a = 0;
-			}
+    	if(strcmp(pwd,usr.password)){
+			a = 0;
 		}
+	
 		if(a){
 			gl_CurUser = usr;
 			return 1;
@@ -123,7 +122,7 @@ int Account_Srv_Verifyno(char usrName[])
 	return 0;
 }
 
-//æ ¹æ®ç”¨æˆ·åè·å–ç³»ç»Ÿç”¨æˆ·æŒ‡é’ˆ
+//¸ù¾İÓÃ»§Ãû»ñÈ¡ÏµÍ³ÓÃ»§Ö¸Õë
 account_node_t * Account_Srv_FindByUsrName(account_list_t list,char usrName[])
 {
 	account_list_t temp = list;
@@ -136,33 +135,33 @@ account_node_t * Account_Srv_FindByUsrName(account_list_t list,char usrName[])
 	return NULL;
 }
 
-//é€šè¿‡IDæŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
+//Í¨¹ıID²éÑ¯ÓÃ»§ĞÅÏ¢
 int Account_Srv_FetchByID(int usrID, account_t *buf)
 {
 	return Account_Perst_SelectByID(usrID, buf);	
 }
-//é€šè¿‡ç”¨æˆ·åæŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
+//Í¨¹ıÓÃ»§Ãû²éÑ¯ÓÃ»§ĞÅÏ¢
 int Account_Srv_FetchByName(char usrName[], account_t *buf)
 {
 	return Account_Perst_SelByName(usrName, buf);
 }
-//é€šè¿‡æ’å…¥å‡½æ•°Insertåˆ›å»ºæ–°ç”¨æˆ·è´¦å·
+//Í¨¹ı²åÈëº¯ÊıInsert´´½¨ĞÂÓÃ»§ÕËºÅ
 int Account_Srv_Add(const account_t *data)
 {
     return Account_Perst_Insert(data);
 }
-//é€šè¿‡æ›´æ–°å‡½æ•°Updateä¿®æ”¹ç³»ç»Ÿç”¨æˆ·
+//Í¨¹ı¸üĞÂº¯ÊıUpdateĞŞ¸ÄÏµÍ³ÓÃ»§
 int Account_Srv_Modify(const account_t *data)
 {
 	return Account_Perst_Update(data);
 }
-//æ ¹æ®IDåˆ é™¤ç”¨æˆ·ä¿¡æ¯
+//¸ù¾İIDÉ¾³ıÓÃ»§ĞÅÏ¢
 int Account_Srv_DeleteByID(int usrID)
 {
 	return Account_Perst_DeleteByID(usrID);
 }
 
-//è·å–æ‰€æœ‰ç³»ç»Ÿç”¨æˆ·
+//»ñÈ¡ËùÓĞÏµÍ³ÓÃ»§
 int Account_Srv_FetchAll(account_list_t list)
 {
     return Account_Perst_SelectAll(list);

@@ -5,7 +5,7 @@
 #include "../Service/Account.h"
 
 
-//缁存姢涓汉璧勬枡绠＄悊鍏ュ彛鐣岄潰
+//维护个人资料管理入口界面
 void MaiAccount_UI_MgtEntry ()
 {
     char ch;

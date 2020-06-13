@@ -5,29 +5,28 @@
 static const int Account_PAGE_SIZE = 5;
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Login
-//ç³»ç»Ÿç”¨æˆ·ç™»å½•ç•Œé¢
+//±êÊ¶·û£ºTTMS_SCU_Login
+//ÏµÍ³ÓÃ»§µÇÂ¼½çÃæ
 int SysLogin();
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_UI_MgtEnt  
-//åŠŸèƒ½ï¼šç³»ç»Ÿç”¨æˆ·ç®¡ç†ç•Œé¢ 
+//±êÊ¶·û£ºTTMS_SCU_Account_UI_MgtEnt  
+//¹¦ÄÜ£ºÏµÍ³ÓÃ»§¹ÜÀí½çÃæ 
 void Account_UI_MgtEntry();
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_UI_Add 
-//åŠŸèƒ½ï¼šæ·»åŠ æ–°ç³»ç»Ÿç”¨æˆ·ç•Œé¢
+//±êÊ¶·û£ºTTMS_SCU_Account_UI_Add 
+//¹¦ÄÜ£ºÌí¼ÓĞÂÏµÍ³ÓÃ»§½çÃæ
 int Account_UI_Add(account_list_t list);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_UI_Mod
-//åŠŸèƒ½ï¼šæ ¹æ®IDä¿®æ”¹ç³»ç»Ÿç”¨æˆ·ç•Œé¢
+//±êÊ¶·û£ºTTMS_SCU_Account_UI_Mod
+//¹¦ÄÜ£º¸ù¾İIDĞŞ¸ÄÏµÍ³ÓÃ»§½çÃæ
 int Account_UI_Modify(account_list_t list,char usrName[]);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_UI_Del
-//åŠŸèƒ½ï¼šåˆ é™¤ç³»ç»Ÿç”¨æˆ·ç•Œé¢ 
+//±êÊ¶·û£ºTTMS_SCU_Account_UI_Del
+//¹¦ÄÜ£ºÉ¾³ıÏµÍ³ÓÃ»§½çÃæ 
 int Account_UI_Delete(account_list_t list,char usrName[]);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account-UI_Que
-//åŠŸèƒ½ï¼šæŸ¥è¯¢ç³»ç»Ÿç”¨æˆ·ç•Œé¢
-int Account_UI_QueryByUsrname(account_list_t list,char usrName[]);
-int Account_UI_QueryByID(account_list_t list,int usrID);
+//±êÊ¶·û£ºTTMS_SCU_Account-UI_Que
+//¹¦ÄÜ£º²éÑ¯ÏµÍ³ÓÃ»§½çÃæ
+int Account_UI_Query(account_list_t list,char usrName[]);
 
 #endif /* ACCOUNT_UI_H_ */
