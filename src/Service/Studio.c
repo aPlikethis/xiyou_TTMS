@@ -8,10 +8,11 @@
 * Date: 	2015年4月22日	
 */
 
-#include "Studio.h"
-#include "../Persistence/Studio_Persist.h"
+#include "../Service/Studio.h"
+//#include "../Persistence/Studio_Persist.h"
 #include <stdlib.h>
 #include <assert.h>
+#include <stdio.h>
 
 /*
 标识符：TTMS_SCU_Studio_Srv_Add 

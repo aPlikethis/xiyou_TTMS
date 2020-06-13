@@ -3,44 +3,48 @@
 * File name: listTestDrv.h			 
 * Author:   XUPT  		 
 * Version:  v.1 	 
-* Date: 	2015дЙ4тб22ху		 
+* Date: 	2015О©╫О©╫4О©╫О©╫22О©╫О©╫		 
 */
 
 #ifndef COMMON_LISTTESTDRV_H_
 #define COMMON_LISTTESTDRV_H_
 
-//а╢╠М╫А╣ЦйЩ╬щ╤╗рЕ ё╛╡Бйтсц 
+#include "../Common/listTestDrv.h"
+
+//И⌠╬Х║╗Г╩⌠Г┌╧Ф∙╟Ф█╝Е╝ Д╧┴ О╪▄Ф╣▀Х╞∙Г■╗ 
+
+//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫щ╤О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ 
 typedef struct TestListRec
 {
     int value;
 }TestListRec_t;
 
-//а╢╠М╫А╣Ц╤╗рЕ ё╛╡Бйтсц 
+//О©╫О©╫О©╫О©╫О©╫Ц╤╗О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ 
 typedef struct TestListNode
 {
     TestListRec_t data;
     struct TestListNode *next, *prev;
 }TestList_Node_t, *TestList_t;
 
-//а╢╠Мн╙©уё╛╡Бйтсц  
+//О©╫О©╫О©╫О©╫н╙О©╫уёО©╫О©╫О©╫О©╫О©╫О©╫О©╫  
 static void ListTest_Empty();
 
-//ЁУй╪╩╞а╢╠Мё╛╡Бйтсц  
+//О©╫О©╫й╪О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫  
 static void ListTest_Init();
 
-//а╢╠Мн╡╡Е╥╗╡ЕхК╫А╣Ц,╡Бйтсц 
+//О©╫О©╫О©╫О©╫н╡О©╫Е╥╗О©╫О©╫О©╫О©╫О©╫О©╫,О©╫О©╫О©╫О©╫О©╫О©╫ 
 static void ListTest_AddTail();
 
-//а╢╠Мм╥╡Е╥╗╡ЕхК╫А╣Ц,╡Бйтсц 
+//О©╫О©╫О©╫О©╫м╥О©╫Е╥╗О©╫О©╫О©╫О©╫О©╫О©╫,О©╫О©╫О©╫О©╫О©╫О©╫ 
 static void ListTest_AddHead();
 
-//йм╥еа╢╠М,╡Бйтсц   
+//О©╫м╥О©╫О©╫О©╫О©╫О©╫,О©╫О©╫О©╫О©╫О©╫О©╫   
 static void ListTest_Free();
 
-//оЗ╩ыа╢╠Мё╛╡Бйтсц 
+//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ 
 static void ListTest_Destroy();
 
-//а╢╠М╡БйтсцюЩ 
+//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ 
 void List_TestDriver_Entry();
 
 

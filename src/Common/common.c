@@ -7,7 +7,7 @@
 * Date: 	2015Äê4ÔÂ22ÈÕ		 
 */
 
-#include "Common.h"
+#include "../Common/common.h"
 
 #include<stdio.h>
 #include<fcntl.h>

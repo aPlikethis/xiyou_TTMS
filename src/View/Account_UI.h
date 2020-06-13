@@ -1,32 +1,33 @@
 #ifndef ACCOUNT_UI_H_
 #define ACCOUNT_UI_H_
-#include"../Service/Account.h"
+#include"../View/Account_UI.h"
+#include "../Service/Account.h"
 
 static const int Account_PAGE_SIZE = 5;
 
 
-//±êÊ¶·û£ºTTMS_SCU_Login
-//ÏµÍ³ÓÃ»§µÇÂ¼½çÃæ
+//ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½TTMS_SCU_Login
+//ÏµÍ³ï¿½Ã»ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 int SysLogin();
 
-//±êÊ¶·û£ºTTMS_SCU_Account_UI_MgtEnt  
-//¹¦ÄÜ£ºÏµÍ³ÓÃ»§¹ÜÀí½çÃæ 
+//ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½TTMS_SCU_Account_UI_MgtEnt  
+//ï¿½ï¿½ï¿½Ü£ï¿½ÏµÍ³ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 void Account_UI_MgtEntry();
 
-//±êÊ¶·û£ºTTMS_SCU_Account_UI_Add 
-//¹¦ÄÜ£ºÌí¼ÓÐÂÏµÍ³ÓÃ»§½çÃæ
+//ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½TTMS_SCU_Account_UI_Add 
+//ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 int Account_UI_Add(account_list_t list);
 
-//±êÊ¶·û£ºTTMS_SCU_Account_UI_Mod
-//¹¦ÄÜ£º¸ù¾ÝIDÐÞ¸ÄÏµÍ³ÓÃ»§½çÃæ
+//ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½TTMS_SCU_Account_UI_Mod
+//ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½Þ¸ï¿½ÏµÍ³ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 int Account_UI_Modify(account_list_t list,char usrName[]);
 
-//±êÊ¶·û£ºTTMS_SCU_Account_UI_Del
-//¹¦ÄÜ£ºÉ¾³ýÏµÍ³ÓÃ»§½çÃæ 
+//ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½TTMS_SCU_Account_UI_Del
+//ï¿½ï¿½ï¿½Ü£ï¿½É¾ï¿½ï¿½ÏµÍ³ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ 
 int Account_UI_Delete(account_list_t list,char usrName[]);
 
-//±êÊ¶·û£ºTTMS_SCU_Account-UI_Que
-//¹¦ÄÜ£º²éÑ¯ÏµÍ³ÓÃ»§½çÃæ
+//ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½TTMS_SCU_Account-UI_Que
+//ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½Ñ¯ÏµÍ³ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 int Account_UI_Query(account_list_t list,char usrName[]);
 
 #endif /* ACCOUNT_UI_H_ */

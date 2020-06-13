@@ -7,9 +7,10 @@
 * Date: 	2015年4月22日	
 */
 
-#ifndef COMMON_PERSIST_H_
-#define COMMON_PERSIST_H_
+#ifndef ENTITYKEY_PERSIST_H_
+#define ENTITYKEY_PERSIST_H_
 
+#include "../Persistence/EntityKey_Persist.h"
 
 /*
 标识符：TTMS_SCU_EntKey_Perst_GetNewKeys

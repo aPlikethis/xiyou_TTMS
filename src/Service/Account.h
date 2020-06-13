@@ -66,4 +66,3 @@ int Account_Srv_FetchAll(account_list_t list);
 account_node_t *Account_Srv_FindByUsrName(account_list_t list,char usrName[]);
 
 #endif //ACCOUNT_H_
-_

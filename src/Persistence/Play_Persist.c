@@ -6,53 +6,63 @@
 #include "EntityKey_Persist.h"
 #include "../Service/Play.h"
 
+static const char PLAY_DATA_FILE[] = "Play.dat"; 
+static const char PLAY_DATA_TEMP_FILE[] = "Play.dat"; //¾çÄ¿ÁÙÊ±ÎÄ¼şÃû³£Á¿ 
+static const char PLAY_KEY_NAME[] = "Play"; //¾çÄ¿Ãû³£Á¿ 
 
-/* è·å–å‰§ç›® */
+
+/* »ñÈ¡¾çÄ¿ */
 int Play_Perst_FetchAll(play_list_t list) {
     int recCount = 0;
     FILE *Play;
     play_list_t end = list;
+    play_list_t node = (play_list_t)malloc(sizeof(play_node_t));
     Play = fopen("../Play.dat", "rb");
     if(Play == NULL) {
-        printf("ERROR!æ–‡ä»¶ä¸å­˜åœ¨");
+        printf("ERROR!dirctry failed ");
         return recCount;
     }
-    play_t *data = (play_t *)malloc(sizeof(play_t));
+    play_t data;
     while(!feof(Play)) {
-        fread(data, sizeof(play_t), 1, Play);
-        play_list_t node = (play_list_t)malloc(sizeof(play_node_t));
-        node->data = *data;
+        fread(&data, sizeof(play_t), 1, Play);
+        node->data = data;
         List_InsertAfter(end, node);
         end = end->next;
         recCount++;
     }
+    end->next = NULL;
     fclose(Play);
     return recCount;
 }
 
 
-/* å­˜å‚¨æ–°å‰§ç›® */
+/* ´æ´¢ĞÂ¾çÄ¿ */
 int Play_Perst_Insert(play_t *data) {
-    EntKey_Perst_GetNewKeys(data, 1);
+    long key = EntKey_Perst_GetNewKeys(PLAY_KEY_NAME, 1); //ÎªĞÂ¾çÄ¿·ÖÅä»ñÈ¡
+	if(key<=0) {
+		return 0;
+    }			//Ö÷¼ü·ÖÅäÊ§°Ü£¬Ö±½Ó·µ»Ø
+
+	data->id = key;
     int rtn = 0;
     FILE *play;
     play = fopen("../Play.dat", "ab");
     if(play == NULL) {
-        printf("error!æ–‡ä»¶æ‰“å¼€å¤±è´¥äº†\n");
-        fclose(play);
+        printf("error!ÎÄ¼ş´ò¿ªÊ§°ÜÁË\n");
         return rtn;
     }
-    rtn = fwrite(data, sizeof(play_node_t), 1, play);
+    fwrite(data, sizeof(play_node_t), 1, play);
+    rtn = 1;
     fclose(play);
     return rtn;
 }
 
-/* æ ¹æ®idæŸ¥è¯¢å‰§ç›®ä¿¡æ¯ */
+/* ¸ù¾İid²éÑ¯¾çÄ¿ĞÅÏ¢ */
 int Play_Perst_SelectByID(int id, play_t *buf) {
     int found = 0;
     FILE *play = fopen("../play.dat", "rb");
     if(play == NULL) {
-        printf("play.datæ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
+        printf("play.datÎÄ¼ş´ò¿ªÊ§°Ü\n");
         return found;
     }
     play_t data;
@@ -67,13 +77,13 @@ int Play_Perst_SelectByID(int id, play_t *buf) {
     }
 }
 
-/* æ›´æ–°å‰§ç›® */
+/* ¸üĞÂ¾çÄ¿ */
 int Play_Perst_Update(const play_t *data) {
     int found = 0;
     play_t *buf;
     FILE *play = fopen("../Play.dat", "rb+");
     if(play == NULL) {
-        printf("Play.datæ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
+        printf("Play.datÎÄ¼ş´ò¿ªÊ§°Ü\n");
         return found;
     }
     while(!feof(play)) {
@@ -90,14 +100,14 @@ int Play_Perst_Update(const play_t *data) {
 
 	return found;
 }
-/* åˆ é™¤å‰§ç›® */
+/* É¾³ı¾çÄ¿ */
 int Play_Perst_Delete(int id, play_list_t list) {
     play_list_t node = list;
     int rtn = 0;
     FILE *play;
     play = fopen("../Play.dat", "wb");
     if(play == NULL) {
-        printf("ERROR!æ–‡ä»¶ä¸å­˜åœ¨");
+        printf("ERROR!ÎÄ¼ş²»´æÔÚ");
         fclose(play);
         return rtn;
     }

@@ -36,7 +36,7 @@ void Main_Menu(void) {
 		case 's':
 			Studio_UI_MgtEntry();
 			break;
-/*		case 'P':
+		case 'P':
 		case 'p':
 			Play_UI_MgtEntry(0);
 			break;
@@ -59,7 +59,7 @@ void Main_Menu(void) {
 		case 'A':
 		case 'a':
 			Account_UI_MgtEntry();
-			break;*/
+			break;
 		}
 	} while ('E' != choice && 'e' != choice);
 }

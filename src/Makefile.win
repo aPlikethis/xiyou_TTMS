@@ -1,0 +1,73 @@
+# Project: TTMS
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = main.o Common/common.o Common/listTestDrv.o Persistence/Play_Persist.o Persistence/EntityKey_Persist.o Service/Play.o View/Play_UI.o Persistence/Studio_Persist.o Service/Studio.o View/Studio_UI.o View/Main_Menu.o Service/EntityKey.o TTMS.o View/Seat_UI.o Service/Seat.o Persistence/Seat_Persist.o
+LINKOBJ  = main.o Common/common.o Common/listTestDrv.o Persistence/Play_Persist.o Persistence/EntityKey_Persist.o Service/Play.o View/Play_UI.o Persistence/Studio_Persist.o Service/Studio.o View/Studio_UI.o View/Main_Menu.o Service/EntityKey.o TTMS.o View/Seat_UI.o Service/Seat.o Persistence/Seat_Persist.o
+LIBS     = -L"F:/dev/Dev-Cpp/MinGW64/lib" -L"F:/dev/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
+INCS     = -I"F:/dev/Dev-Cpp/MinGW64/include" -I"F:/dev/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"F:/dev/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"F:/dev/Dev-Cpp/MinGW64/include" -I"F:/dev/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"F:/dev/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"F:/dev/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = TTMS.exe
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+Common/common.o: Common/common.c
+	$(CC) -c Common/common.c -o Common/common.o $(CFLAGS)
+
+Common/listTestDrv.o: Common/listTestDrv.c
+	$(CC) -c Common/listTestDrv.c -o Common/listTestDrv.o $(CFLAGS)
+
+Persistence/Play_Persist.o: Persistence/Play_Persist.c
+	$(CC) -c Persistence/Play_Persist.c -o Persistence/Play_Persist.o $(CFLAGS)
+
+Persistence/EntityKey_Persist.o: Persistence/EntityKey_Persist.c
+	$(CC) -c Persistence/EntityKey_Persist.c -o Persistence/EntityKey_Persist.o $(CFLAGS)
+
+Service/Play.o: Service/Play.c
+	$(CC) -c Service/Play.c -o Service/Play.o $(CFLAGS)
+
+View/Play_UI.o: View/Play_UI.c
+	$(CC) -c View/Play_UI.c -o View/Play_UI.o $(CFLAGS)
+
+Persistence/Studio_Persist.o: Persistence/Studio_Persist.c
+	$(CC) -c Persistence/Studio_Persist.c -o Persistence/Studio_Persist.o $(CFLAGS)
+
+Service/Studio.o: Service/Studio.c
+	$(CC) -c Service/Studio.c -o Service/Studio.o $(CFLAGS)
+
+View/Studio_UI.o: View/Studio_UI.c
+	$(CC) -c View/Studio_UI.c -o View/Studio_UI.o $(CFLAGS)
+
+View/Main_Menu.o: View/Main_Menu.c
+	$(CC) -c View/Main_Menu.c -o View/Main_Menu.o $(CFLAGS)
+
+Service/EntityKey.o: Service/EntityKey.c
+	$(CC) -c Service/EntityKey.c -o Service/EntityKey.o $(CFLAGS)
+
+TTMS.o: TTMS.c
+	$(CC) -c TTMS.c -o TTMS.o $(CFLAGS)
+
+View/Seat_UI.o: View/Seat_UI.c
+	$(CC) -c View/Seat_UI.c -o View/Seat_UI.o $(CFLAGS)
+
+Service/Seat.o: Service/Seat.c
+	$(CC) -c Service/Seat.c -o Service/Seat.o $(CFLAGS)
+
+Persistence/Seat_Persist.o: Persistence/Seat_Persist.c
+	$(CC) -c Persistence/Seat_Persist.c -o Persistence/Seat_Persist.o $(CFLAGS)

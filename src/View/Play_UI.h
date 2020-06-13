@@ -3,19 +3,19 @@
 #include "../Common/common.h"
 #include "../Service/Play.h"
 
-/* ç®¡ç†å‰§ç›®ç•Œé¢ */
+/* ¹ÜÀí¾çÄ¿½çÃæ */
 void Play_UI_MgtEntry(void);
-/* åˆå§‹åŒ–å‰§ç›®ä¿¡æ¯é“¾è¡¨ */
+/* ³õÊ¼»¯¾çÄ¿ĞÅÏ¢Á´±í */
 play_list_t List_lnit(void);
-/* æ·»åŠ å‰§ç›® */
+/* Ìí¼Ó¾çÄ¿ */
 int Play_UI_Add(void);
-/* åˆ é™¤å‰§ç›® */
+/* É¾³ı¾çÄ¿ */
 int Play_UI_Delete(play_list_t list);
-/* æŸ¥è¯¢å‰§ç›® */
+/* ²éÑ¯¾çÄ¿ */
 int Plat_UI_Query(void);
-/* åˆå§‹åŒ–å‰§ç›®ä¿¡æ¯é“¾è¡¨ */
+/* ³õÊ¼»¯¾çÄ¿ĞÅÏ¢Á´±í */
 play_list_t List_lnit(void);
-/* ä¿®æ”¹å‰§ç›® */
+/* ĞŞ¸Ä¾çÄ¿ */
 int Play_UI_Modify(int id);
 
 #endif

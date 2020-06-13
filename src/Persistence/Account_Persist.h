@@ -1,7 +1,8 @@
-#ifndef ACCOUNTPERSIST_H_
-#define ACCOUNTPERSIST_H_
+#ifndef ACCOUNT_PERSIST_H_
+#define ACCOUNT_PERSIST_H_
 
 #include "../Persistence/Account_Persist.h"
+#include "../Service/Account.h"
 
 //检查文件是否能打开
 int Account_Perst_CheckAccFile();

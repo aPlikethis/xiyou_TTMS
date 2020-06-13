@@ -176,7 +176,7 @@ int Account_Perst_SelectAll(account_list_t list)
     account_t data;
     int retCount = 0;
     
-    assert(lst!=NULL);
+    assert(list!=NULL);
     List_Free(list,account_node_t);
     FILE *fp = fopen(ACCOUNT_DATA_FILE,"rb");
     if(fp==NULL){

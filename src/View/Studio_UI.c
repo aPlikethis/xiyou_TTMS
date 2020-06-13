@@ -11,7 +11,7 @@
 #include "../View/Studio_UI.h"
 
 #include "../Common/List.h"
-#include "../Service/Studio.h"
+//#include "../Service/Studio.h"
 #include "../Service/Seat.h"
 
 

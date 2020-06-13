@@ -7,11 +7,12 @@
 * Date: 	2015年4月22日		 
 */
 
-#include "listTestDrv.h"
+#include "../Common/list.h"
+#include "../Common/listTestDrv.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../Common/list.h"
+
 
 //链表初始化测试 
 void ListTest_Init() {
