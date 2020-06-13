@@ -11,6 +11,8 @@
 #ifndef STUDIO_UI_H_
 #define STUDIO_UI_H_
 
+#include "../View/Studio_UI.H"
+
 //标识符：TTMS_SCU_Studio_UI_Add 
 //功能：添加新演出厅界面
 int Studio_UI_Add(void);

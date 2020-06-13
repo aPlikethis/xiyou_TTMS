@@ -1,6 +1,6 @@
 #ifndef ACCOUNT_UI_H_
 #define ACCOUNT_UI_H_
-#include"../Service/Account.h"
+#include"../View/Account_UI.h"
 
 static const int Account_PAGE_SIZE = 5;
 

@@ -8,7 +8,7 @@
 * Date: 	2015年4月22日	
 */
 
-#include "Studio_Persist.h"
+#include "../Persistence/Studio_Persist.h"
 #include "../Service/studio.h"
 #include "EntityKey_Persist.h"	 
 #include "../common/list.h"

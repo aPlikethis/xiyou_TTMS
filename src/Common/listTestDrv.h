@@ -9,7 +9,13 @@
 #ifndef COMMON_LISTTESTDRV_H_
 #define COMMON_LISTTESTDRV_H_
 
+<<<<<<< HEAD
+#include "../Common/listTestDrv.h"
+
+//閾捐〃缁撶偣鏁版嵁瀹氫箟 锛屾祴璇曠敤 
+=======
 //链表结点数据定义 ，测试用 
+>>>>>>> 8438a436b212b5c7e5eb2c6523afd67f261d82be
 typedef struct TestListRec
 {
     int value;

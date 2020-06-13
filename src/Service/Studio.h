@@ -11,6 +11,8 @@
 #ifndef STUDIO_H_
 #define STUDIO_H_
 
+#include "../Service/Studio.h"
+
 //演出厅数据结构 
 typedef struct {
 	int id;			//放映厅ID
