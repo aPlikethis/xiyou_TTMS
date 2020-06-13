@@ -1,10 +1,14 @@
 #ifndef TICKET_UI_H_
 #define TICKET_UI_H_
 
+#include "../Service/Ticket.h"
+#include "../Service/Schedule.h"
+
+//绁ㄧ姸鎬佺被鍨嬪畾涔?
 
 //票状态类型定义
 typedef enum{
-    TICKET_AVL=0,     //代售
+    TICKET_AVL=0,     //待售
     TICKET_SOLD=1,    //已售
     TICKET_RESV=9     //预留
 }ticket_status_t;
@@ -25,6 +29,25 @@ typedef struct ticket_node{
     struct ticket_node *next,*prev;
 }ticket_node_t,*ticket_list_t;
 
+
+
+//鏍囪瘑绗︼細TTMS_SCU_Ticket_Sry_DeleteBatch
+//鍔熻兘锛氭牴鎹紨鍑鸿鍒扞D鍒犻櫎婕斿嚭绁?
+void Ticket_Srv_DeleteBatch(int schedule_id);
+
+
+//鏍囪瘑绗︼細TTMS_SCU_Ticket_Srv_FetchByID
+//鍔熻兘锛氭牴鎹甀D鑾峰彇婕斿嚭绁?
+int Ticket_Srv_FetchByID(int id, ticket_t *buf);
+
+
+//鏍囪瘑绗︼細TTMS_SCU_Schedule_Srv_FetchByID
+//鍔熻兘: 鏍规嵁ID鑾峰彇婕斿嚭璁″垝
+int Schedule_Srv_FetchByID(int id,schedule_t *buf );
+
+
+
+//鏌ヨ鎵?鏈夌エ淇℃伅
 //查询所有票信息
 int Ticket_Srv_FetchAll(ticket_list_t list);
 

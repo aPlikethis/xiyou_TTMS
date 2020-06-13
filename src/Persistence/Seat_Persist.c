@@ -106,7 +106,7 @@ int Seat_Perst_Update(const seat_t *seatdata)
 		{
 			if (buf.id == seatdata->id)
 			{
-				fseek(fp, -sizeof(seat_t), SEEK_CUR);
+				fseek(fp, -(int)sizeof(seat_t), SEEK_CUR);
 				fwrite(seatdata, sizeof(seat_t), 1, fp);
 				found = 1;
 				break;

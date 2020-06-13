@@ -133,27 +133,4 @@ int Ticket_Perst_SelByID(int id, ticket_t *buf)
 
 }
 
-//查询所有票信息
-int Ticket_Perst_FetchAll(ticket_list_t list)
- {
-    int recCount = 0;
-    FILE *Ticket;
-    ticket_list_t end = list;
-    Ticket = fopen("../Ticket.dat", "rb");
-    if(Ticket == NULL) {
-        printf("ERROR!文件不存在");
-        return recCount;
-    }
-    ticket_t *data = (ticket_t *)malloc(sizeof(ticket_t));
-    while(!feof(Ticket)) 
-    {
-        fread(data, sizeof(ticket_t), 1, Ticket);
-        ticket_list_t node = (ticket_list_t)malloc(sizeof(ticket_node_t));
-        node->data = *data;
-        List_InsertAfter(end, node);
-        end = end->next;
-        recCount++;
-    }
-    fclose(Ticket);
-    return recCount;
-}
+

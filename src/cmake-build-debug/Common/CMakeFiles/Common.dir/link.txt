@@ -1,0 +1,2 @@
+C:\MinGW\bin\ar.exe qc libCommon.a  CMakeFiles/Common.dir/common.c.obj CMakeFiles/Common.dir/listTestDrv.c.obj
+C:\MinGW\bin\ranlib.exe libCommon.a

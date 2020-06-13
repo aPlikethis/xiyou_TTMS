@@ -1,4 +1,5 @@
 #include "../Service/Account.h"
+#include "../Persistence/Account_Persist.h"
 #include "../Common/list.h"
 //#include "../Persistence/Account_Persist.h"
 #include <string.h>
@@ -6,7 +7,7 @@
 #include <stdio.h>
 
 
-//创建管理员Admin匿名系统用户
+//锟斤拷锟斤拷锟斤拷锟斤拷员Admin锟斤拷锟斤拷系统锟矫伙拷
 void Account_Srv_InitSyS()
 {
 	if(Account_Perst_CheckAccFile()==1){
@@ -88,7 +89,7 @@ void Account_Srv_InitSyS()
 	setbuf(stdin,NULL);
 	Account_Srv_Add(&data_admin);
 }
-//验证登录账号是否已存在，存在，保存登录用户信息到全局变量gl_CurUser，return 1；否则return 0
+//锟斤拷证锟斤拷录锟剿猴拷锟角凤拷锟窖达拷锟节ｏ拷锟斤拷锟节ｏ拷锟斤拷锟斤拷锟铰硷拷没锟斤拷锟较拷锟饺拷直锟斤拷锟絞l_CurUser锟斤拷return 1锟斤拷锟斤拷锟斤拷return 0
 int Account_Srv_Verify(char usrName[],unsigned char pwd[])
 {
 	account_t usr;
@@ -122,7 +123,7 @@ int Account_Srv_Verifyno(char usrName[])
 	return 0;
 }
 
-//根据用户名获取系统用户指针
+//锟斤拷锟斤拷锟矫伙拷锟斤拷锟斤拷取系统锟矫伙拷指锟斤拷
 account_node_t * Account_Srv_FindByUsrName(account_list_t list,char usrName[])
 {
 	account_list_t temp = list;
@@ -135,33 +136,33 @@ account_node_t * Account_Srv_FindByUsrName(account_list_t list,char usrName[])
 	return NULL;
 }
 
-//通过ID查询用户信息
+//通锟斤拷ID锟斤拷询锟矫伙拷锟斤拷息
 int Account_Srv_FetchByID(int usrID, account_t *buf)
 {
 	return Account_Perst_SelectByID(usrID, buf);	
 }
-//通过用户名查询用户信息
+//通锟斤拷锟矫伙拷锟斤拷锟斤拷询锟矫伙拷锟斤拷息
 int Account_Srv_FetchByName(char usrName[], account_t *buf)
 {
 	return Account_Perst_SelByName(usrName, buf);
 }
-//通过插入函数Insert创建新用户账号
+//通锟斤拷锟斤拷锟诫函锟斤拷Insert锟斤拷锟斤拷锟斤拷锟矫伙拷锟剿猴拷
 int Account_Srv_Add(const account_t *data)
 {
     return Account_Perst_Insert(data);
 }
-//通过更新函数Update修改系统用户
+//通锟斤拷锟斤拷锟铰猴拷锟斤拷Update锟睫革拷系统锟矫伙拷
 int Account_Srv_Modify(const account_t *data)
 {
 	return Account_Perst_Update(data);
 }
-//根据ID删除用户信息
+//锟斤拷锟斤拷ID删锟斤拷锟矫伙拷锟斤拷息
 int Account_Srv_DeleteByID(int usrID)
 {
 	return Account_Perst_DeleteByID(usrID);
 }
 
-//获取所有系统用户
+//锟斤拷取锟斤拷锟斤拷系统锟矫伙拷
 int Account_Srv_FetchAll(account_list_t list)
 {
     return Account_Perst_SelectAll(list);

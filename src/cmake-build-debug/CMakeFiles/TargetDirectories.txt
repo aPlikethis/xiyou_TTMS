@@ -1,0 +1,15 @@
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/CMakeFiles/ttms.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/CMakeFiles/Common.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/CMakeFiles/edit_cache.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/CMakeFiles/rebuild_cache.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/CMakeFiles/edit_cache.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/CMakeFiles/Persistence.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/CMakeFiles/rebuild_cache.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/CMakeFiles/edit_cache.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/CMakeFiles/View.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/CMakeFiles/rebuild_cache.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/CMakeFiles/Service.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/CMakeFiles/edit_cache.dir
+F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/CMakeFiles/rebuild_cache.dir

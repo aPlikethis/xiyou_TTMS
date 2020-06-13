@@ -3,15 +3,15 @@
 #include "../Common/common.h"
 #include "../Service/Play.h"
 
-/* æ·»åŠ æ–°å‰§ç›® */
+/* Ìí¼ÓĞÂ¾çÄ¿ */
 int Play_Perst_Insert(play_t *date);
-/* è·å–å‰§ç›®ä¿¡æ¯ */
+/* »ñÈ¡¾çÄ¿ĞÅÏ¢ */
 int Play_Perst_FetchAll(play_list_t list);
-/* æ ¹æ®idæŸ¥è¯¢å‰§ç›®ä¿¡æ¯ */
+/* ¸ù¾İid²éÑ¯¾çÄ¿ĞÅÏ¢ */
 int Play_Perst_SelectByID(int id, play_t *buf);
-/* æ›´æ–°å‰§ç›® */
+/* ¸üĞÂ¾çÄ¿ */
 int Play_Perst_Update(const play_t *data);
-/* åˆ é™¤å‰§ç›® */
+/* É¾³ı¾çÄ¿ */
 int Play_Perst_Delete(int id, play_list_t list);
 
 

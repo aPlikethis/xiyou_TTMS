@@ -114,5 +114,8 @@ int Schedule_Perst_SelectByID(int id, schedule_t *data) {
 int Schedule_Perst_SelectByName(char name[]) {
     int found = 0;
     FILE *play, *sch;
+
+
     
+    return found;
 }

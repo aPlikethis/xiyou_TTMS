@@ -5,12 +5,12 @@
 #include "../Common/common.h"
 #include "../Service/Play.h"
 
-/* æŸ¥è¯¢å‰§ç›®ï¼Œè¿”å›è¯¥å‰§ç›®çš„èŠ‚ç‚¹æŒ‡é’ˆ */
+/* ²éÑ¯¾çÄ¿£¬·µ»Ø¸Ã¾çÄ¿µÄ½ÚµãÖ¸Õë */
 int Play_Srv_FetchByID(int id, play_t *buf) {
     return Play_Perst_SelectByID(id, buf); 
 }
 
-/* è·å–å…¨éƒ¨å‰§ç›® */
+/* »ñÈ¡È«²¿¾çÄ¿ */
 int Play_Srv_FetchAll(play_list_t list) {
     return Play_Perst_FetchAll(list);
 }
@@ -18,11 +18,11 @@ int Play_Srv_FetchAll(play_list_t list) {
 int Play_Srv_Add(play_t *data) {
     return Play_Perst_Insert(data);
 }
-/* ä¿®æ”¹å‰§ç›® */
+/* ĞŞ¸Ä¾çÄ¿ */
 int Play_Srv_Modify(const play_t *data) {
     return Play_Perst_Update(data);
 }
-/* åˆ é™¤å‰§ç›® */
+/* É¾³ı¾çÄ¿ */
 int Play_Srv_Delete(int id, play_list_t list) {
     return Play_Perst_Delete(id, list);
 }
