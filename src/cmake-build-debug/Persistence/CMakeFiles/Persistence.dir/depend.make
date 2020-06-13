@@ -33,7 +33,10 @@ Persistence/CMakeFiles/Persistence.dir/Sale_Persist.c.obj: ../Persistence/Entity
 Persistence/CMakeFiles/Persistence.dir/Sale_Persist.c.obj: ../Persistence/Sale_Persist.c
 Persistence/CMakeFiles/Persistence.dir/Sale_Persist.c.obj: ../Persistence/Sale_Persist.h
 Persistence/CMakeFiles/Persistence.dir/Sale_Persist.c.obj: ../Service/Account.h
+Persistence/CMakeFiles/Persistence.dir/Sale_Persist.c.obj: ../Service/Play.h
 Persistence/CMakeFiles/Persistence.dir/Sale_Persist.c.obj: ../Service/Sale.h
+Persistence/CMakeFiles/Persistence.dir/Sale_Persist.c.obj: ../Service/Schedule.h
+Persistence/CMakeFiles/Persistence.dir/Sale_Persist.c.obj: ../Service/Studio.h
 Persistence/CMakeFiles/Persistence.dir/Sale_Persist.c.obj: ../Service/Ticket.h
 
 Persistence/CMakeFiles/Persistence.dir/SalesAnalysis_Persist.c.obj: ../Common/List.h
@@ -44,6 +47,8 @@ Persistence/CMakeFiles/Persistence.dir/SalesAnalysis_Persist.c.obj: ../Service/A
 Persistence/CMakeFiles/Persistence.dir/SalesAnalysis_Persist.c.obj: ../Service/Play.h
 Persistence/CMakeFiles/Persistence.dir/SalesAnalysis_Persist.c.obj: ../Service/Sale.h
 Persistence/CMakeFiles/Persistence.dir/SalesAnalysis_Persist.c.obj: ../Service/SalesAnalysis.h
+Persistence/CMakeFiles/Persistence.dir/SalesAnalysis_Persist.c.obj: ../Service/Schedule.h
+Persistence/CMakeFiles/Persistence.dir/SalesAnalysis_Persist.c.obj: ../Service/Studio.h
 Persistence/CMakeFiles/Persistence.dir/SalesAnalysis_Persist.c.obj: ../Service/Ticket.h
 
 Persistence/CMakeFiles/Persistence.dir/Schedule_Persist.c.obj: ../Common/List.h

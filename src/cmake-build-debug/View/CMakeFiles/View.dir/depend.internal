@@ -73,13 +73,14 @@ View/CMakeFiles/View.dir/StaSales_UI.c.obj
  F:/TTMS/TTMS(C+Lang)/src/Service/Play.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Sale.h
  F:/TTMS/TTMS(C+Lang)/src/Service/SalesAnalysis.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
  F:/TTMS/TTMS(C+Lang)/src/View/StaSales_UI.c
  F:/TTMS/TTMS(C+Lang)/src/View/StaSales_UI.h
 View/CMakeFiles/View.dir/Studio_UI.c.obj
  F:/TTMS/TTMS(C+Lang)/src/Common/List.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h
- F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
  F:/TTMS/TTMS(C+Lang)/src/View/Studio_UI.c
  F:/TTMS/TTMS(C+Lang)/src/View/Studio_UI.h
 View/CMakeFiles/View.dir/Ticket_UI.c.obj

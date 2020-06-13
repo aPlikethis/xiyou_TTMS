@@ -1,16 +1,14 @@
 #ifndef TICKET_UI_H_
 #define TICKET_UI_H_
 
-<<<<<<< HEAD
 #include "../Service/Ticket.h"
+#include "../Service/Schedule.h"
 
-//票状态类型定义
-=======
+//票状态类型定�?
 
 //Ʊ״̬���Ͷ���
->>>>>>> 8438a436b212b5c7e5eb2c6523afd67f261d82be
 typedef enum{
-    TICKET_AVL=0,     //����
+    TICKET_AVL=0,     //����
     TICKET_SOLD=1,    //����
     TICKET_RESV=9     //Ԥ��
 }ticket_status_t;
@@ -31,20 +29,15 @@ typedef struct ticket_node{
     struct ticket_node *next,*prev;
 }ticket_node_t,*ticket_list_t;
 
-<<<<<<< HEAD
-
-//标识符：TTMS_SCU_Ticket_Srv_GenBatch
-//功能：生成演出票
-void Ticket_Srv_GenBatch(int schedule_id);
 
 
 //标识符：TTMS_SCU_Ticket_Sry_DeleteBatch
-//功能：根据演出计划ID删除演出票
+//功能：根据演出计划ID删除演出�?
 void Ticket_Srv_DeleteBatch(int schedule_id);
 
 
 //标识符：TTMS_SCU_Ticket_Srv_FetchByID
-//功能：根据ID获取演出票
+//功能：根据ID获取演出�?
 int Ticket_Srv_FetchByID(int id, ticket_t *buf);
 
 
@@ -54,10 +47,8 @@ int Schedule_Srv_FetchByID(int id,schedule_t *buf );
 
 
 
-//查询所有票信息
-=======
+//查询�?有票信息
 //��ѯ����Ʊ��Ϣ
->>>>>>> 8438a436b212b5c7e5eb2c6523afd67f261d82be
 int Ticket_Srv_FetchAll(ticket_list_t list);
 
 //��ʶ����TTMS_SCU_Ticket_Srv_GenBatch

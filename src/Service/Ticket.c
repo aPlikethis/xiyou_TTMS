@@ -26,7 +26,7 @@ int Ticket_Srv_GenBatch(int schedule_id)
     int count;
     seat_list_t seat_head;
     seat_head = (seat_list_t *)malloc(sizeof(seat_list_t));
-    list_Inin(seat_head,seat_node_t);
+    List_Init(seat_head,seat_node_t);
 
     schedule_t *need_schedule;
     need_schedule = (schedule_t *)malloc(sizeof(schedule_t));

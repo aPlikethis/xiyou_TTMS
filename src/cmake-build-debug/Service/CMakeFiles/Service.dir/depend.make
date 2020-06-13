@@ -8,7 +8,6 @@ Service/CMakeFiles/Service.dir/Account.c.obj: ../Service/Account.h
 
 Service/CMakeFiles/Service.dir/EntityKey.c.obj: ../Common/List.h
 Service/CMakeFiles/Service.dir/EntityKey.c.obj: ../Common/common.h
-Service/CMakeFiles/Service.dir/EntityKey.c.obj: ../Persistence/EntityKey_Persist.h
 Service/CMakeFiles/Service.dir/EntityKey.c.obj: ../Service/EntityKey.c
 Service/CMakeFiles/Service.dir/EntityKey.c.obj: ../Service/EntityKey.h
 
@@ -58,12 +57,14 @@ Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Common/common.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Persistence/Account_Persist.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Persistence/Sale_Persist.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Account.h
+Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Play.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Sale.h
+Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Schedule.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/StaSales.c
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/StaSales.h
+Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Studio.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Ticket.h
 
-Service/CMakeFiles/Service.dir/Studio.c.obj: ../Persistence/Studio_Persist.h
 Service/CMakeFiles/Service.dir/Studio.c.obj: ../Service/Studio.c
 Service/CMakeFiles/Service.dir/Studio.c.obj: ../Service/Studio.h
 

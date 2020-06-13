@@ -6,7 +6,6 @@
 * Version:  v.1 	 
 * Date: 	2015Äê4ÔÂ22ÈÕ		 
 */
-#include "../Common/List.h"
 
 #ifndef LIST_H_
 #define LIST_H_

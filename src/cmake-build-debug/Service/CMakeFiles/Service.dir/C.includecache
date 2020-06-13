@@ -17,6 +17,8 @@ F:/TTMS/TTMS(C+Lang)/src/Common/common.h
 F:/TTMS/TTMS(C+Lang)/src/Persistence/Account_Persist.h
 ../Persistence/Account_Persist.h
 F:/TTMS/TTMS(C+Lang)/src/Persistence/Account_Persist.h
+../Service/Account.h
+F:/TTMS/TTMS(C+Lang)/src/Service/Account.h
 
 F:/TTMS/TTMS(C+Lang)/src/Persistence/Play_Persist.h
 ../Common/common.h
@@ -141,6 +143,8 @@ F:/TTMS/TTMS(C+Lang)/src/Persistence/Sale_Persist.h
 F:/TTMS/TTMS(C+Lang)/src/Persistence/Account_Persist.h
 
 F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
+../Service/Studio.h
+F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
 
 F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.c
 ../Common/List.h
@@ -163,4 +167,6 @@ F:/TTMS/TTMS(C+Lang)/src/Persistence/Schedule_Persist.h
 F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
 ../Service/Ticket.h
 F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
+../Service/Schedule.h
+F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
 

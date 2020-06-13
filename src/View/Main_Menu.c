@@ -59,7 +59,7 @@ void Main_Menu(void) {
 		case 'A':
 		case 'a':
 			Account_UI_MgtEntry();
-			break;*/
+			break;
 		}
 	} while ('E' != choice && 'e' != choice);
 }

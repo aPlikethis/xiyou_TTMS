@@ -15,6 +15,8 @@ assert.h
 F:/TTMS/TTMS(C+Lang)/src/Common/common.h
 
 F:/TTMS/TTMS(C+Lang)/src/Persistence/EntityKey_Persist.h
+../Persistence/EntityKey_Persist.h
+F:/TTMS/TTMS(C+Lang)/src/Persistence/EntityKey_Persist.h
 
 F:/TTMS/TTMS(C+Lang)/src/Persistence/Play_Persist.h
 ../Common/common.h
@@ -149,8 +151,12 @@ F:/TTMS/TTMS(C+Lang)/src/Common/common.h
 F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h
 
 F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
+../Service/Studio.h
+F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
 
 F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
 ../Service/Ticket.h
 F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
+../Service/Schedule.h
+F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
 

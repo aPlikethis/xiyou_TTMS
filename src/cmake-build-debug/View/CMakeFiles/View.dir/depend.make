@@ -72,13 +72,14 @@ View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../Service/Account.h
 View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../Service/Play.h
 View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../Service/Sale.h
 View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../Service/SalesAnalysis.h
+View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../Service/Schedule.h
+View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../Service/Studio.h
 View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../Service/Ticket.h
 View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../View/StaSales_UI.c
 View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../View/StaSales_UI.h
 
 View/CMakeFiles/View.dir/Studio_UI.c.obj: ../Common/List.h
 View/CMakeFiles/View.dir/Studio_UI.c.obj: ../Service/Seat.h
-View/CMakeFiles/View.dir/Studio_UI.c.obj: ../Service/Studio.h
 View/CMakeFiles/View.dir/Studio_UI.c.obj: ../View/Studio_UI.c
 View/CMakeFiles/View.dir/Studio_UI.c.obj: ../View/Studio_UI.h
 
