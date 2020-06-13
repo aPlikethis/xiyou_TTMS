@@ -12,14 +12,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_UI_MgtEnt
-//åŠŸèƒ½ï¼šæ˜¾ç¤ºä¸å‚æ•°å¯¹åº”çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+//±êÊ¶·û£ºTTMS_SCU_Ticket_UI_MgtEnt
+//¹¦ÄÜ£ºÏÔÊ¾Óë²ÎÊı¶ÔÓ¦µÄÑİ³ö¼Æ»®ĞÅÏ¢
 void Ticket_UI_MgtEntry(int schedule_id)
 {
     char choice;
 
-    //æ ¹æ®æ¼”å‡ºè®¡åˆ’IDè·å–æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
-    //ä»è·å–çš„ä¿¡æ¯ä¸­ï¼Œä½¿ç”¨å‰§ç›®IDè·å–è¯¥å‰§ç›®ä¿¡æ¯
+    //¸ù¾İÑİ³ö¼Æ»®ID»ñÈ¡Ñİ³ö¼Æ»®ĞÅÏ¢
+    //´Ó»ñÈ¡µÄĞÅÏ¢ÖĞ£¬Ê¹ÓÃ¾çÄ¿ID»ñÈ¡¸Ã¾çÄ¿ĞÅÏ¢
     schedule_t *need_schedule;
     play_t *need_play;
 
@@ -36,8 +36,8 @@ void Ticket_UI_MgtEntry(int schedule_id)
         printf(
                 "\n==================================================================================================\n");
         printf(
-                "*********************************************ç¥¨ ä¿¡ æ¯*********************************************\n");
-	printf("             å‰§ç›®åç§°             æ¼”å‡ºå…ç¼–å·             æ¼”å‡ºæ—¥æœŸ             æ¼”å‡ºæ—¶é—´             \n\n");
+                "*********************************************Æ± ĞÅ Ï¢*********************************************\n");
+	printf("             ¾çÄ¿Ãû³Æ             Ñİ³öÌü±àºÅ             Ñİ³öÈÕÆÚ             Ñİ³öÊ±¼ä             \n\n");
 		
 
 	printf("           %-6s                 %.2d                %d/%.2d/%.2d            %.2d:%.2d:%.2d\n\n\n",
@@ -47,9 +47,9 @@ void Ticket_UI_MgtEntry(int schedule_id)
 
 
 	printf("**************************************************************************************************\n");
-	printf("          |    [A]     ç”Ÿæˆè¯¥æ¼”å‡ºç¥¨    |    [D]    é‡æ–°ç”Ÿæˆæ¼”å‡ºç¥¨    |     [R]     è¿”å›ä¸Šå±‚       |\n");
+	printf("          |    [A]     Éú³É¸ÃÑİ³öÆ±    |    [D]    ÖØĞÂÉú³ÉÑİ³öÆ±    |     [R]     ·µ»ØÉÏ²ã       |\n");
 	printf("\n==================================================================================================\n");
-	printf("è¯·è¾“å…¥æ‚¨çš„é€‰æ‹©ï¼š");
+	printf("ÇëÊäÈëÄúµÄÑ¡Ôñ£º");
 	fflush(stdin);
 	scanf("%c",&choice);
 	getchar();
@@ -60,29 +60,31 @@ void Ticket_UI_MgtEntry(int schedule_id)
 		        case 'a':
 	        	case 'A':
 		         	if (Ticke_Srv_GenBatch(schedule_id))
-			        	printf("ç”ŸæˆæˆåŠŸ!\n");
+			        	printf("Éú³É³É¹¦!\n");
 			     else
-				        printf("ç”Ÿæˆå¤±è´¥!\n");
+				        printf("Éú³ÉÊ§°Ü!\n");
 			        break;
 		        case 'd':
 		        case 'D':
 			        if(Ticket_Sry_DeleteBatch(schedule_id) && Ticker_Srv_GenBatch(schedule_id))
-				        printf("é‡æ–°ç”ŸæˆæˆåŠŸ");
+				        printf("ÖØĞÂÉú³É³É¹¦");
 			        else
-				        printf("é‡æ–°ç”Ÿæˆå¤±è´¥");
+				        printf("ÖØĞÂÉú³ÉÊ§°Ü");
 			        break;
             }   
         }
         else
         {
-           printf("æœªçŸ¥æ“ä½œï¼Œè¯·é‡æ–°è¾“å…¥"); 
+           printf("Î´Öª²Ù×÷£¬ÇëÖØĞÂÊäÈë"); 
         }
 	}while (choice != 'r' && choice != 'R');
 	system("cls");
 
 }
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_UI_Qry
-//åŠŸèƒ½ï¼šæŸ¥è¯¢æ¼”å‡ºç¥¨ç•Œé¢
+//±êÊ¶·û£ºTTMS_SCU_Ticket_UI_Qry
+//¹¦ÄÜ£º²éÑ¯Ñİ³öÆ±½çÃæ
+//±êÊ¶·û£ºTTMS_SCU_Ticket_UI_Qry
+//¹¦ÄÜ£º²éÑ¯Ñİ³öÆ±½çÃæ
 void Ticket_UI_Query(void)
 {
         ticket_list_t ticket_head;
@@ -98,8 +100,8 @@ void Ticket_UI_Query(void)
 }
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_UI_ShowTicket
-//åŠŸèƒ½ï¼šæ˜¾ç¤ºæ¼”å‡ºç¥¨ç•Œé¢
+//±êÊ¶·û£ºTTMS_SCU_Ticket_UI_ShowTicket
+//¹¦ÄÜ£ºÏÔÊ¾Ñİ³öÆ±½çÃæ
 int Ticket_UI_ShowTicket(int ticket_id)
 {
         int rtn=0;
@@ -107,12 +109,12 @@ int Ticket_UI_ShowTicket(int ticket_id)
         rtn=Ticket_Srv_FetchByID(ticket_id, buf);
         if (rtn)
         {
-                printf("æœªæ‰¾åˆ°");
+                printf("Î´ÕÒµ½");
                 return 0;
         }
         else    
         {
-                printf("ç¥¨ID%d\næ¼”å‡ºè®¡åˆ’ID%d\nåº§ä½ID%d\nç¥¨ä»·%d\nç¥¨çŠ¶æ€%d\n",buf->id,buf->schedule_id,buf->seat_id,buf->price,buf->status);
+                printf("Æ±ID%d\nÑİ³ö¼Æ»®ID%d\n×ùÎ»ID%d\nÆ±¼Û%d\nÆ±×´Ì¬%d\n",buf->id,buf->schedule_id,buf->seat_id,buf->price,buf->status);
                 rtn=1;
         }
         return 1;

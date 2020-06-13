@@ -1,10 +1,10 @@
 /*
 * Copyright(C), 2007-2008, XUPT Univ.	 
 * File name: EntityKey_Persit.h			  
-* Description :  ä¸»é”®æœåŠ¡å¤´æ–‡ä»¶
+* Description :  Ö÷¼ü·şÎñÍ·ÎÄ¼ş
 * Author:   XUPT  		 
 * Version:  v.1 	 
-* Date: 	2015å¹´4æœˆ22æ—¥	
+* Date: 	2015Äê4ÔÂ22ÈÕ	
 */
 
 #ifndef ENTITYKEY_PERSIST_H_
@@ -13,9 +13,9 @@
 #include "../Persistence/EntityKey_Persist.h"
 
 /*
-æ ‡è¯†ç¬¦ï¼šTTMS_SCU_EntKey_Perst_GetNewKeys
-åŠŸèƒ½ï¼šæ ¹æ®ä¼ å…¥çš„å®ä½“åentNameåŠå®ä½“ä¸ªæ•°countï¼Œä¸ºè¿™ä¸ªcountä¸ªæ–°å®ä½“åˆ†é…ä¸€ä¸ªé•¿åº¦ä¸ºcountçš„ä¸»é”®å€¼åŒºé—´ï¼Œ
-     ä½¿å¾—æ¯ä¸ªæ–°å®ä½“åœ¨è¯¥åŒºé—´å†…éƒ½å¯ä»¥åˆ†é…åˆ° å”¯ä¸€çš„ ä¸»é”®ã€‚è¿”å›å€¼ä¸ºè¯¥ä¸»é”®åŒºé—´çš„æœ€å°å€¼
+±êÊ¶·û£ºTTMS_SCU_EntKey_Perst_GetNewKeys
+¹¦ÄÜ£º¸ù¾İ´«ÈëµÄÊµÌåÃûentName¼°ÊµÌå¸öÊıcount£¬ÎªÕâ¸öcount¸öĞÂÊµÌå·ÖÅäÒ»¸ö³¤¶ÈÎªcountµÄÖ÷¼üÖµÇø¼ä£¬
+     Ê¹µÃÃ¿¸öĞÂÊµÌåÔÚ¸ÃÇø¼äÄÚ¶¼¿ÉÒÔ·ÖÅäµ½ Î¨Ò»µÄ Ö÷¼ü¡£·µ»ØÖµÎª¸ÃÖ÷¼üÇø¼äµÄ×îĞ¡Öµ
 */
 long EntKey_Perst_GetNewKeys(const char entName[], int count);
 

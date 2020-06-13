@@ -11,16 +11,16 @@
 
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Schedule_Srv_FetchByID
-//åŠŸèƒ½: æ ¹æ®IDè·å–æ¼”å‡ºè®¡åˆ’
+//±êÊ¶·û£ºTTMS_SCU_Schedule_Srv_FetchByID
+//¹¦ÄÜ: ¸ù¾İID»ñÈ¡Ñİ³ö¼Æ»®
 int Schedule_Srv_FetchByID(int id,schedule_t*buf )
 {
     return Schedule_Perst_SelectByID(id, buf);
 }
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_Srv_GenBatch
-//åŠŸèƒ½ï¼šç”Ÿæˆæ¼”å‡ºç¥¨
+//±êÊ¶·û£ºTTMS_SCU_Ticket_Srv_GenBatch
+//¹¦ÄÜ£ºÉú³ÉÑİ³öÆ±
 int Ticket_Srv_GenBatch(int schedule_id)
 {
     int count;
@@ -37,7 +37,7 @@ int Ticket_Srv_GenBatch(int schedule_id)
     
     if(count==0)
     {
-        printf("åº§ä½ä¿¡æ¯è·å–å¤±è´¥ã€‚æ— æ³•ç”Ÿæˆç¥¨");
+        printf("×ùÎ»ĞÅÏ¢»ñÈ¡Ê§°Ü¡£ÎŞ·¨Éú³ÉÆ±");
         return 0;
     }
     else
@@ -49,22 +49,22 @@ int Ticket_Srv_GenBatch(int schedule_id)
 }
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_Sry_DeleteBatch
-//åŠŸèƒ½ï¼šæ ¹æ®æ¼”å‡ºè®¡åˆ’IDåˆ é™¤æ¼”å‡ºç¥¨
+//±êÊ¶·û£ºTTMS_SCU_Ticket_Sry_DeleteBatch
+//¹¦ÄÜ£º¸ù¾İÑİ³ö¼Æ»®IDÉ¾³ıÑİ³öÆ±
 void Ticket_Srv_DeleteBatch(int schedule_id)
 {
     return Ticket_Perst_Rem(schedule_id);
 }
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_Srv_FetchByID
-//åŠŸèƒ½ï¼šæ ¹æ®IDè·å–æ¼”å‡ºç¥¨
+//±êÊ¶·û£ºTTMS_SCU_Ticket_Srv_FetchByID
+//¹¦ÄÜ£º¸ù¾İID»ñÈ¡Ñİ³öÆ±
 int Ticket_Srv_FetchByID(int id, ticket_t *buf)
 {
     return Ticket_Perst_SelBYID(id,buf);
 }
 
-//æŸ¥è¯¢æ‰€æœ‰ç¥¨ä¿¡æ¯
+//²éÑ¯ËùÓĞÆ±ĞÅÏ¢
 int Ticket_Srv_FetchAll( ticket_list_t list)
 {
     return Ticket_Perst_FetchAll(list);

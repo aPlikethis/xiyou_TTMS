@@ -12,6 +12,10 @@
 #include "../Common/List.h"
 #include "Seat.h"
 
+static const char TICKET_DATA_FILE[] = "Ticket.dat";
+static const char TICKET_DATE_TEMP_FILE[] = "TicketTmp.dat";
+static const char TICKET_KEY_NAME[] = "Ticket";
+
 /*
 函数功能：用于添加一个新座位数据。
 参数说明：data为seat_t类型指针，表示需要添加的座位数据结点。

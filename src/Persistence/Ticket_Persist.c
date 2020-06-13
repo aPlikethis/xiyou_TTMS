@@ -1,16 +1,21 @@
 #include "Ticket_Persist.h"
 #include "EntityKey_Persist.h"
 #include "Play_Persist.h"
+
 #include "../Service/Ticket.h"
 #include "../Service/Seat.h"
 #include "../Service/Schedule.h"
+
 #include <stdio.h>
 #include <assert.h>
 
+static const char TICKET_DATA_FILE[] = "Ticket.dat";
+static const char TICKET_DATE_TEMP_FILE[] = "TicketTmp.dat";
+static const char TICKET_KEY_NAME[] = "Ticket";
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_Perst_Insert
-//åŠŸèƒ½ï¼šå­˜å‚¨æ¼”å‡ºç¥¨
+//±êÊ¶·û£ºTTMS_SCU_Ticket_Perst_Insert
+//¹¦ÄÜ£º´æ´¢Ñİ³öÆ±
 int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 {
     FILE *fp = fopen("Ticket.dat","wb+");
@@ -53,8 +58,8 @@ int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 }
 
 
-//æ ‡è¯†ç¬¦:TTMS_SCU_Ticket_Perst_Rem
-//åŠŸèƒ½ï¼šæ ¹æ®æ¼”å‡ºè®¡åˆ’IDå»é™¤æ¼”å‡ºç¥¨
+//±êÊ¶·û:TTMS_SCU_Ticket_Perst_Rem
+//¹¦ÄÜ£º¸ù¾İÑİ³ö¼Æ»®IDÈ¥³ıÑİ³öÆ±
 int Ticket_Perst_Rem(int schedule_id)
 {
     int found = -1;
@@ -62,7 +67,7 @@ int Ticket_Perst_Rem(int schedule_id)
     ticket_t buf;
     if (rename("Ticket.dat","TicketTmp.dat") < 0)
     {
-        printf("æ”¹åå¤±è´¥ï¼");
+        printf("¸ÄÃûÊ§°Ü£¡");
         return found;
     }
     else
@@ -71,7 +76,7 @@ int Ticket_Perst_Rem(int schedule_id)
         ftp = fopen("Ticket.dat","wb+");
         if ( fp == NULL && ftp == NULL)
         {
-            printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥");
+            printf("ÎÄ¼ş´ò¿ªÊ§°Ü");
             return found;
         }
         else
@@ -97,9 +102,9 @@ int Ticket_Perst_Rem(int schedule_id)
 }
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_Perst_SelByID
-//åŠŸèƒ½ï¼šæ ¹æ®IDè½½å…¥æ¼”å‡ºç¥¨
-int Sale_Perst_SelByID(int id, ticket_t *buf)
+//±êÊ¶·û£ºTTMS_SCU_Ticket_Perst_SelByID
+//¹¦ÄÜ£º¸ù¾İIDÔØÈëÑİ³öÆ±
+int Ticket_Perst_SelByID(int id, ticket_t *buf)
 {
     int found = 0;
     FILE *fp; 
@@ -128,7 +133,7 @@ int Sale_Perst_SelByID(int id, ticket_t *buf)
 
 }
 
-//æŸ¥è¯¢æ‰€æœ‰ç¥¨ä¿¡æ¯
+//²éÑ¯ËùÓĞÆ±ĞÅÏ¢
 int Ticket_Perst_FetchAll(ticket_list_t list)
  {
     int recCount = 0;
@@ -136,7 +141,7 @@ int Ticket_Perst_FetchAll(ticket_list_t list)
     ticket_list_t end = list;
     Ticket = fopen("../Ticket.dat", "rb");
     if(Ticket == NULL) {
-        printf("ERROR!æ–‡ä»¶ä¸å­˜åœ¨");
+        printf("ERROR!ÎÄ¼ş²»´æÔÚ");
         return recCount;
     }
     ticket_t *data = (ticket_t *)malloc(sizeof(ticket_t));

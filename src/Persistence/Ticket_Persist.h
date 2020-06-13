@@ -1,25 +1,25 @@
 #ifndef TICKET_UI_H_
 #define TICKET_UI_H_
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_Perst_Insert
-//åŠŸèƒ½ï¼šå­˜å‚¨æ¼”å‡ºç¥¨
-void Ticket_Perst_Insert(int schedule_id,seat_list_t list);
+//±êÊ¶·û£ºTTMS_SCU_Ticket_Perst_Insert
+//¹¦ÄÜ£º´æ´¢Ñİ³öÆ±
+int Ticket_Perst_Insert(int schedule_id,seat_list_t list);
 
 
-//æ ‡è¯†ç¬¦:TTMS_SCU_Ticket_Perst_Rem
-//åŠŸèƒ½ï¼šæ ¹æ®æ¼”å‡ºè®¡åˆ’IDå»é™¤æ¼”å‡ºç¥¨
-void Ticket_Perst_Rem(int schedule_id);
+//±êÊ¶·û:TTMS_SCU_Ticket_Perst_Rem
+//¹¦ÄÜ£º¸ù¾İÑİ³ö¼Æ»®IDÈ¥³ıÑİ³öÆ±
+int Ticket_Perst_Rem(int schedule_id);
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Ticket_Perst_SelByID
-//åŠŸèƒ½ï¼šæ ¹æ®IDè½½å…¥å…¥æ¼”å‡ºç¥¨
+//±êÊ¶·û£ºTTMS_SCU_Ticket_Perst_SelByID
+//¹¦ÄÜ£º¸ù¾İIDÔØÈëÈëÑİ³öÆ±
 int Ticket_Perst_SelBYID(int id, ticket_t *buf);
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Schedule_Perst_SelectByID
-//åŠŸèƒ½ï¼šæ ¹æ®IDè½½å…¥æ¼”å‡ºè®¡åˆ’
+//±êÊ¶·û£ºTTMS_SCU_Schedule_Perst_SelectByID
+//¹¦ÄÜ£º¸ù¾İIDÔØÈëÑİ³ö¼Æ»®
 int Schedule_Perst_SelectByID(int id,schedule_t*buf);
 
-//æŸ¥è¯¢æ‰€æœ‰ç¥¨ä¿¡æ¯
+//²éÑ¯ËùÓĞÆ±ĞÅÏ¢
 int Ticket_Perst_FetchAll(ticket_list_t list);
 #endif
