@@ -1,37 +1,27 @@
-#ifndef SALE_H_
-#define SALE_H_
-#include "../Common/common.h"
-#include "Account.h"
-#include "Ticket.h"
+#ifndef 	SALETICKET_UI_H_
+#define 	SALETICKET_UI_H_
 
-typedef enum{
-	SALE_SELL=1,	//买票
-	SALE_RETURN=-1	//退票
-}sale_type_t;
-//售票信息
-typedef struct {
-    long id;                   //票流水ID
-    int user_id;		//售票员ID
-	int ticket_id;		//票ID
-    int value;			//票价
-    user_date_t date ;	//处理日期
-	user_time_t time;	//处理时间
-    sale_type_t type; //交易类型
-}sale_t;
+#include "../Service/play.h"
+#include "../Service/schedule.h"
+#include "../Service/seat.h"
+#include "../Service/account.h"
+#include "../Service/Ticket.h"
 
-typedef struct sale_node {
-	sale_t data;
-	struct sale_node *next, *prev;
-} sale_node_t, *sale_list_t;
 
-//根据票的信息插入到订单的信息
-int Sale_Srv_Add(const sale_t *data);
+//售票主菜单
+void Sale_UI_MgtEntry();
 
-//删除订单的信息
-int Sale_Srv_DeleteByID(int saleID);
+//根据剧目ID显示演出计划
+void Sale_UI_ShowScheduler(int playID);
 
-int Sale_Srv_selectByTime(char querytime[][30], sale_list_t head);
 
-int Sale_Srv_SelectByUid(char *queryuid, sale_list_t head);
+//根据演出计划ID，显示演出票
+void Sale_UI_ShowTicket(int schID);
+
+//售票
+int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList, int studioID);
+
+//退票
+void Sale_UI_ReturnTicket();
 
 #endif
