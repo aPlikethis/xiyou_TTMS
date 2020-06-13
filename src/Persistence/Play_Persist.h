@@ -12,7 +12,7 @@ int Play_Perst_SelectByID(int id, play_t *buf);
 /* 更新剧目 */
 int Play_Perst_Update(const play_t *data);
 /* 删除剧目 */
-int Play_Perst_Delete(int id, play_list_t list);
+int Play_Perst_DeleteByID(int id);
 
 
 #endif

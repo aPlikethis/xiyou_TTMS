@@ -73,7 +73,6 @@ int Schedule_Perst_Del(int id) {
 
 int Schedule_Perst_Update(const schedule_t *buf) {
     int found = 0;
-    schedule_t *buf;
     FILE *sch = fopen("../Schedule.dat", "rb+");
     if(sch == NULL) {
         printf("Play.dat文件打开失败\n");

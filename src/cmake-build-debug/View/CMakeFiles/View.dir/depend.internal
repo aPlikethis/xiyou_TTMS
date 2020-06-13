@@ -13,8 +13,22 @@ View/CMakeFiles/View.dir/MaiAccount_UI.c.obj
  F:/TTMS/TTMS(C+Lang)/src/View/MaiAccount_UI.c
  F:/TTMS/TTMS(C+Lang)/src/View/MaiAccount_UI.h
 View/CMakeFiles/View.dir/Main_Menu.c.obj
+ F:/TTMS/TTMS(C+Lang)/src/Common/List.h
+ F:/TTMS/TTMS(C+Lang)/src/Common/common.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Account.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Play.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Sale.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/SalesAnalysis.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
+ F:/TTMS/TTMS(C+Lang)/src/View/Account_UI.h
  F:/TTMS/TTMS(C+Lang)/src/View/Main_Menu.c
  F:/TTMS/TTMS(C+Lang)/src/View/Main_Menu.h
+ F:/TTMS/TTMS(C+Lang)/src/View/Play_UI.h
+ F:/TTMS/TTMS(C+Lang)/src/View/Sale_UI.h
+ F:/TTMS/TTMS(C+Lang)/src/View/SalesAnalysis_UI.h
  F:/TTMS/TTMS(C+Lang)/src/View/Studio_UI.h
 View/CMakeFiles/View.dir/Play_UI.c.obj
  F:/TTMS/TTMS(C+Lang)/src/Common/List.h
@@ -23,20 +37,17 @@ View/CMakeFiles/View.dir/Play_UI.c.obj
  F:/TTMS/TTMS(C+Lang)/src/View/Play_UI.c
  F:/TTMS/TTMS(C+Lang)/src/View/Play_UI.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj
+ F:/TTMS/TTMS(C+Lang)/src/Common/List.h
  F:/TTMS/TTMS(C+Lang)/src/Common/common.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Account.h
- F:/TTMS/TTMS(C+Lang)/src/Service/EntityKey.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Play.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Sale.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
- F:/TTMS/TTMS(C+Lang)/src/View/Main_Menu.h
- F:/TTMS/TTMS(C+Lang)/src/View/Play_UI.h
  F:/TTMS/TTMS(C+Lang)/src/View/Sale_UI.c
  F:/TTMS/TTMS(C+Lang)/src/View/Sale_UI.h
- F:/TTMS/TTMS(C+Lang)/src/View/Schedule_UI.h
  F:/TTMS/TTMS(C+Lang)/src/View/Ticket_UI.h
 View/CMakeFiles/View.dir/SalesAnalysis_UI.c.obj
  F:/TTMS/TTMS(C+Lang)/src/Common/List.h
@@ -81,6 +92,7 @@ View/CMakeFiles/View.dir/StaSales_UI.c.obj
 View/CMakeFiles/View.dir/Studio_UI.c.obj
  F:/TTMS/TTMS(C+Lang)/src/Common/List.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
  F:/TTMS/TTMS(C+Lang)/src/View/Studio_UI.c
  F:/TTMS/TTMS(C+Lang)/src/View/Studio_UI.h
 View/CMakeFiles/View.dir/Ticket_UI.c.obj

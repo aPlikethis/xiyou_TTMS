@@ -105,12 +105,22 @@ F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
 F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h
 ../Service/Schedule.h
 F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
+../Common/List.h
+F:/TTMS/TTMS(C+Lang)/src/Common/List.h
 stdio.h
 -
 assert.h
 -
+stdlib.h
+-
 
 F:/TTMS/TTMS(C+Lang)/src/Persistence/Ticket_Persist.h
+../Service/Seat.h
+F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h
+../Service/Ticket.h
+F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
+../Service/Schedule.h
+F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
 
 F:/TTMS/TTMS(C+Lang)/src/Service/Account.h
 ../Service/Account.h
@@ -154,8 +164,6 @@ F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
 ../Service/Studio.h
 F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
 
-F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
-../Service/Ticket.h
 F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
 ../Service/Schedule.h
 F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h

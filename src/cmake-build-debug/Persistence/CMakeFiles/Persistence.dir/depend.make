@@ -69,6 +69,7 @@ Persistence/CMakeFiles/Persistence.dir/Studio_Persist.c.obj: ../Persistence/Stud
 Persistence/CMakeFiles/Persistence.dir/Studio_Persist.c.obj: ../Persistence/Studio_Persist.h
 Persistence/CMakeFiles/Persistence.dir/Studio_Persist.c.obj: ../Service/Studio.h
 
+Persistence/CMakeFiles/Persistence.dir/Ticket_Persist.c.obj: ../Common/List.h
 Persistence/CMakeFiles/Persistence.dir/Ticket_Persist.c.obj: ../Common/common.h
 Persistence/CMakeFiles/Persistence.dir/Ticket_Persist.c.obj: ../Persistence/EntityKey_Persist.h
 Persistence/CMakeFiles/Persistence.dir/Ticket_Persist.c.obj: ../Persistence/Play_Persist.h

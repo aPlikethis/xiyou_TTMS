@@ -5,7 +5,7 @@
 #include "../Service/Ticket.h"
 #include "../View/Ticket_UI.h"
 
-/* ç®¡ç†æ¼”å‡ºè®¡åˆ’ç•Œé¢ */
+/* ¹ÜÀíÑİ³ö¼Æ»®½çÃæ */
 void Schedule_UI_MgtEntry(int play_id) {
     Pagination_t paging;
     schedule_list_t list;
@@ -13,23 +13,24 @@ void Schedule_UI_MgtEntry(int play_id) {
     int i;
     char choice;
     List_Init(list, schedule_node_t);
+    paging.offset = 0;
     paging.pageSize = 5;
     paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
     do {
         system("clear");
-        printf("============æ¼”å‡ºè®¡åˆ’===========\n");
+        printf("============Ñİ³ö¼Æ»®===========\n");
         Paging_ViewPage_ForEach(list, paging, schedule_node_t, p, i) {
             
             printf("==========================\n");
             /*  */
             
         }
-        printf("==============æ“ä½œèœå•===========\n");
+        printf("==============²Ù×÷²Ëµ¥===========\n");
         printf("                                   \n");
-        printf("[a]æ·»åŠ æ–°æ¼”å‡ºè®¡åˆ’\n");
-        printf("[m]ä¿®æ”¹æ¼”å‡ºè®¡åˆ’\n");
-        printf("[d]åˆ é™¤æ¼”å‡ºè®¡åˆ’\n");
-        printf("[r]é€€å‡º");
+        printf("[a]Ìí¼ÓĞÂÑİ³ö¼Æ»®\n");
+        printf("[m]ĞŞ¸ÄÑİ³ö¼Æ»®\n");
+        printf("[d]É¾³ıÑİ³ö¼Æ»®\n");
+        printf("[r]ÍË³ö");
         scanf("%d", &choice);
 
     }while(choice != 'r' && choice != 'R');
@@ -38,16 +39,16 @@ void Schedule_UI_MgtEntry(int play_id) {
 int Schedule_UI_Add(void) {
     schedule_t data;
     int rtn = 0;
-    printf("è¯·è¾“å…¥å‰§ç›®idï¼š");
+    printf("ÇëÊäÈë¾çÄ¿id£º");
     scanf("%d", &data.play_id);
     /*  */
     do {
-        printf("è¯·è¾“å…¥æ¼”å‡ºå…ID:");
+        printf("ÇëÊäÈëÑİ³öÌüID:");
         scanf("%d", &data.id);
         /*  */
     }while(data.id != -1);
     if(data.id != -1) {
-        printf("=============è¯·è¾“å…¥æ¼”å‡ºè®¡åˆ’æ•°æ®=================\n");
+        printf("=============ÇëÊäÈëÑİ³ö¼Æ»®Êı¾İ=================\n");
         printf("\n");
         /*  */
         data.id = EntKey_Perst_GetNewKeys(&data, 1);
@@ -56,16 +57,16 @@ int Schedule_UI_Add(void) {
     Ticket_UI_MgtEntry(data.id);
 }
 
-/* åˆ é™¤ */
+/* É¾³ı */
 int Schedule_UI_Del(int id) {
     int rtn = 0;
     if(Schedule_Srv_Delete(id)) {
-        printf("åˆ é™¤æˆåŠŸï¼\n");
+        printf("É¾³ı³É¹¦£¡\n");
         rtn = 1;
         return rtn;
     }
     else {
-        printf("åˆ é™¤å¤±è´¥ï¼\n");
+        printf("É¾³ıÊ§°Ü£¡\n");
         return rtn;
     }
 }
@@ -74,17 +75,17 @@ int Schedule_UI_Mod(int id) {
     int rtn = 0;
     schedule_t data;
     if(Schedule_Srv_SelectByID(id, &data)) {
-        printf("=========æ¼”å‡ºè®¡åˆ’ä¿¡æ¯=========\n");
+        printf("=========Ñİ³ö¼Æ»®ĞÅÏ¢=========\n");
         printf("                             \n");
-        printf("æ¼”å‡ºè®¡åˆ’IDï¼š                %d\n",data.id);
-        printf("å‰§ç›®IDï¼š                    %d\n",data.play_id);
-        printf("æ¼”å‡ºå…IDï¼š                  %d\n",data.studio_id);
-        printf("æ”¾æ˜ æ—¥æœŸï¼š            %d-%d-%d\n",data.date.year, data.date.month, data.date.day);
-        printf("æ”¾æ˜ æ—¶é—´ï¼š            %d-%d-%d\n",data.time.hour, data.time.minute, data.time.second);
-        printf("åº§ä½æ•°ï¼š                    %d\n",data.seat_count);
+        printf("Ñİ³ö¼Æ»®ID£º                %d\n",data.id);
+        printf("¾çÄ¿ID£º                    %d\n",data.play_id);
+        printf("Ñİ³öÌüID£º                  %d\n",data.studio_id);
+        printf("·ÅÓ³ÈÕÆÚ£º            %d-%d-%d\n",data.date.year, data.date.month, data.date.day);
+        printf("·ÅÓ³Ê±¼ä£º            %d-%d-%d\n",data.time.hour, data.time.minute, data.time.second);
+        printf("×ùÎ»Êı£º                    %d\n",data.seat_count);
         printf("==============================\n");
-        printf("è¯·è¾“å…¥è¦ä¿®æ”¹çš„ä¿¡æ¯ï¼š\n");
-        printf("è¯·è¾“å…¥å‰§ç›®ID:");
+        printf("ÇëÊäÈëÒªĞŞ¸ÄµÄĞÅÏ¢£º\n");
+        printf("ÇëÊäÈë¾çÄ¿ID:");
         scanf("%d", &data.play_id);
         /*  */
         printf("");
@@ -93,17 +94,17 @@ int Schedule_UI_Mod(int id) {
         scanf("%d-%d-%d", &data.date.year, &data.date.month, &data.date.day);
 
         if(Schedule_Srv_Mod(&data)) {
-            printf("ä¿®æ”¹æˆåŠŸ\n");
+            printf("ĞŞ¸Ä³É¹¦\n");
             rtn = 1;
             return rtn;
         }
         else {
-            printf("ä¿®æ”¹å¤±è´¥\n");
+            printf("ĞŞ¸ÄÊ§°Ü\n");
             return rtn;
         }
     }
     else {
-        printf("æ²¡æœ‰æ‰¾åˆ°\n");
+        printf("Ã»ÓĞÕÒµ½\n");
         return rtn;
     }
 }
