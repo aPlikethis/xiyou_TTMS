@@ -88,7 +88,7 @@ void Ticket_UI_Query(void)
         ticket_list_t ticket_head;
         list_Init(ticket_head,ticket_node_t);
         Ticket_Sry_FetchAll(ticket_head);
-        ticket_list_t pos;
+        ticket_node_t *pos;
         pos=ticket_head->next;
         whiel(pos!=ticket_head)
         {

@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+F:/TTMS/TTMS(C+Lang)/src/Common/List.h
+stdlib.h
+-
+assert.h
+-
+
+F:/TTMS/TTMS(C+Lang)/src/Common/common.c
+Common.h
+F:/TTMS/TTMS(C+Lang)/src/Common/common.h
+stdio.h
+-
+fcntl.h
+-
+time.h
+-
+
+F:/TTMS/TTMS(C+Lang)/src/Common/common.h
+
+F:/TTMS/TTMS(C+Lang)/src/Common/listTestDrv.c
+listTestDrv.h
+F:/TTMS/TTMS(C+Lang)/src/Common/listTestDrv.h
+stdlib.h
+-
+stdio.h
+-
+../Common/list.h
+F:/TTMS/TTMS(C+Lang)/src/Common/List.h
+
+F:/TTMS/TTMS(C+Lang)/src/Common/listTestDrv.h
+

@@ -7,7 +7,7 @@
 #include <assert.h>
 #include "MaiAccount_UI.h"
 
-//ç³»ç»Ÿç”¨æˆ·ç™»å½•ç•Œé¢
+//ÏµÍ³ÓÃ»§µÇÂ¼½çÃæ
 int SysLogin()
 {
 	system("cls");
@@ -76,7 +76,7 @@ int SysLogin()
 	return 0;
 }
 
-char Account_UI_Status2Char(account_type_t status)//èº«ä»½åˆ¤åˆ«
+char Account_UI_Status2Char(account_type_t status)//Éí·ÝÅÐ±ð
 {
 	if (status == 0)
 		return 'N';
@@ -87,7 +87,7 @@ char Account_UI_Status2Char(account_type_t status)//èº«ä»½åˆ¤åˆ«
 	else if (status == 2)
 		return 'M';
 }
-//ç³»ç»Ÿç”¨æˆ·ç®¡ç†ç•Œé¢
+//ÏµÍ³ÓÃ»§¹ÜÀí½çÃæ
 void Account_UI_MgtEntry(void)
 {
 	if(gl_CurUser.type!=USR_ADMIN){
@@ -110,11 +110,12 @@ void Account_UI_MgtEntry(void)
 	Paging_Locate_FirstPage(head,paging);
 	
 	do{
-		printf("\n[N]åŒ¿åç”¨æˆ·    |    [X]å”®ç¥¨å‘˜     |     [M]ç»ç†     |     [A]ç³»ç»Ÿç®¡ç†å‘˜");
+		printf("\n[N]ÄäÃûÓÃ»§    |    [X]ÊÛÆ±Ô±     |     [M]¾­Àí     |     [A]ÏµÍ³¹ÜÀíÔ±");
 		printf("\n==============================================================================\n");
 		printf("*************************Account Management Systerm****************************");
 		printf("	%3s %18s %23s %16s\n","ID","username","password","type");	
 		printf("-------------------------------------------------------------------------------");
+		
 		Paging_ViewPage_ForEach(head,paging,account_node_t,p,x){
 			printf("%3d %18s ",p->data.id,p->data.username);
 			printf(p->data.password);
@@ -132,66 +133,72 @@ void Account_UI_MgtEntry(void)
 		switch(ch){
 			case 'a':
 			case 'A':system("cls");
-					 if(ACCOUNT_UI_Add(head)){
-					 	paging.totalRecords = Account_Srv_FetchAll(head);
-					 }
-					 else{
-					 	printf("This user is exist!\n");
-					 }
-					 break;
+					if(ACCOUNT_UI_Add(head)){
+						paging.totalRecords = Account_Srv_FetchAll(head);
+					}
+					else{
+						printf("This user is exist!\n");
+					}
+					break;
 			case 'd':
 			case 'D':system("cls");
-					 printf("Input the username:");
-					 setbuf(stdin,NULL);
-					 scanf("%s",usrName);
-					 getchar();
-					 if(Account_UI_Delete(head,usrName)){
-					 	printf("delete accept\n");
-					 	paging.totalRecords = Account_Srv_FetchAll(head);
-					 	List_Paging(head,paging,account_node_t);
-					 }
-					 else{
-					 	printf("delete error!\n");
-					 }
-					 break;
+					printf("Input the username:");
+					setbuf(stdin,NULL);
+					scanf("%s",usrName);
+					getchar();
+					if(Account_UI_Delete(head,usrName)){
+						printf("delete accept\n");
+						paging.totalRecords = Account_Srv_FetchAll(head);
+						List_Paging(head,paging,account_node_t);
+					}
+					else{
+						printf("Delete Error!\n");
+					}
+					break;
 			case 'q':
-			case 'Q': system("cls");
-					  printf("Input the username:");
-					  setbuf(stdin,NULL);
-					  scanf("%s",usrName);
-					  getchar();
-					  if(Account_UI_QueryByUsrname(head,usrName)){
-					  	paging.totalRecords = Account_Srv_FetchAll(head);
+			case 'Q':system("cls");
+					printf("Input the username:");
+					setbuf(stdin,NULL);
+					scanf("%s",usrName);
+					getchar();
+					if(Account_UI_Query(head,usrName)){
+						paging.totalRecords = Account_Srv_FetchAll(head);
 						List_Paging(head, paging, account_node_t);
-					  }
-					  else{
-					  	printf("query error\n");
-					  }
-					  break;
+					}
+					else{
+						printf("Query Error\n");
+					}
+					break;
 			case 'm':
 			case 'M':system("cls");
-					 printf("Input the username:");
-					 setbuf(stdin,NULL);
-					 scanf("%s",usrName);
-					 getchar();
-					 if(Account_UI_Modify(head,usrName)){
-					 	printf("mod accept\n");
-					 	paging.totalRecords = Account_Srv_FetchAll(head);
+					printf("Input the username:");
+					setbuf(stdin,NULL);
+					scanf("%s",usrName);
+					getchar();
+					if(Account_UI_Modify(head,usrName)){
+						printf("Mod accept\n");
+						paging.totalRecords = Account_Srv_FetchAll(head);
 						List_Paging(head, paging, account_node_t);
-					 }
-					 break;
+					}
+					break;
 			case 'p':
 			case 'P':system("cls");
-					 if(!Pageing_IsLastPage(paging)){
-					 	Paging_Locate_OffsetPage(head,paging,1,account_node_t); 
-					 }
-					 break;
+					if(!Pageing_IsLastPage(paging)){
+						Paging_Locate_OffsetPage(head,paging,1,account_node_t); 
+					}
+					break;
+			case 'n':
+			case 'N':system("cls");
+					if(!Pageing_IsLastPage(paging)){
+						Paging_Locate_OffsetPage(head,paging,1,account_node_t);
+					}
+					break;
 		}
 	}while(ch!='r'&&ch!='R');
 	List_Destroy(head,account_node_t); 
 }
 
-//åˆ›å»ºç³»ç»Ÿæ–°ç”¨æˆ·ç•Œé¢
+//´´½¨ÏµÍ³ÐÂÓÃ»§½çÃæ
 int Account_UI_Add(account_list_t list)
 {
 	account_t data;
@@ -236,7 +243,7 @@ int Account_UI_Add(account_list_t list)
 		}
 		printf("Please input the type:\n");
 		printf("==============================================================================\n");
-		printf("[0]åŒ¿åç”¨æˆ· | [1]å”®ç¥¨å‘˜ | [2]ç»ç† | [9]ç³»ç»Ÿç®¡ç†å‘˜:");
+		printf("[0]ÄäÃûÓÃ»§ | [1]ÊÛÆ±Ô± | [2]¾­Àí | [9]ÏµÍ³¹ÜÀíÔ±:");
 		setbuf(stdin,NULL);
 		scanf("%d",&data.type);
 		getchar();
@@ -263,7 +270,7 @@ int Account_UI_Add(account_list_t list)
 	return newCount;
 }
 
-//ä¿®æ”¹ç³»ç»Ÿç”¨æˆ·ç•Œé¢
+//ÐÞ¸ÄÏµÍ³ÓÃ»§½çÃæ
 int Account_UI_Modify(account_list_t list,char usrName[])
 {
 	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);
@@ -293,7 +300,7 @@ int Account_UI_Modify(account_list_t list,char usrName[])
 				x = 0;
 			}
 			if(x){
-				printf("Mod error!The sama password!nplease choice:\n");
+				printf("Mod error!The same password!please choice:\n");
 				printf(" [0]exit  |  [1]try again\n");
 				scanf("%d",&m);
 				setbuf(stdin,NULL);
@@ -316,8 +323,8 @@ int Account_UI_Modify(account_list_t list,char usrName[])
 		return 0;
 	}
 }
-//åˆ é™¤ç³»ç»Ÿç”¨æˆ·ä¿¡æ¯ç•Œé¢
-int Account_UI_Del()
+//É¾³ýÏµÍ³ÓÃ»§ÐÅÏ¢½çÃæ
+int Account_UI_Delete(account_list_t list,char usrName[])
 {
 	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);
 	if(temp!=NULL){
@@ -327,14 +334,13 @@ int Account_UI_Del()
 	}
 	return 0;
 }
-//æŸ¥è¯¢ç³»ç»Ÿç”¨æˆ·ç•Œé¢
-int Account_UI_Find()
+//²éÑ¯ÏµÍ³ÓÃ»§½çÃæ
+int Account_UI_Query(account_list_t list, char usrName[])
 {
 	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);
 	if(temp!=NULL){
 		printf("user ID:%d\n",temp->data.id);
-		printf("user passwore:\n");
-		printf(temp->data.password);
+		printf("user passwore:%s\n",temp->data.password);
 		putchar('\n');
 		printf("user name:%s\n",temp->data.username);
 		printf("user type:%c\n",Account_UI_Status2Char(temp->data.type));

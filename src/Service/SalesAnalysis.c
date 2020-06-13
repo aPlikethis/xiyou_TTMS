@@ -6,7 +6,7 @@
 #include "../Persistence/SalesAnalysis_Persist.h"
 #include "Sale.h"
 #include "Ticket.h"
-#include "../Service/Play.h"
+#include "Play.h"
 #include "Schedule.h"
 #include "../Common/list.h"
 
@@ -16,14 +16,15 @@ int SalesAnalysis_Srv_StaticSale(salesanalysis_list_t list)
     assert(list != NULL);
 	play_list_t playList;
 	play_node_t *pos;
-	salesanalysis_node_t * newNode;
+	salesanalysis_node_t *newNode;
 	int sold = 0;
 	
 	List_Free(list,salesanalysis_node_t);
 	List_Init(playList,play_node_t);
 	Play_Srv_FetchAll(playList);
 
-	List_ForEach(playList,pos){
+	List_ForEach(playList,pos)
+	{
 		sold++;
 		newNode = (salesanalysis_node_t *)malloc(sizeof(salesanalysis_node_t));
 		newNode->data.end_date = pos->data.end_date;

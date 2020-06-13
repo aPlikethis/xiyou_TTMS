@@ -1,12 +1,13 @@
-#include "Account.h"
-#include "../Common/list.h"
+#include "../Service/Account.h"
 #include "../Persistence/Account_Persist.h"
+#include "../Common/list.h"
+//#include "../Persistence/Account_Persist.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 
-//创建管理员Admin匿名系统用户
+//��������ԱAdmin����ϵͳ�û�
 void Account_Srv_InitSyS()
 {
 	if(Account_Perst_CheckAccFile()==1){
@@ -14,17 +15,17 @@ void Account_Srv_InitSyS()
 	}
 
 	system("cls");
-	char pwd[20],pwd1[20],name[20];
+	char pwd[20],pwd1[20];
     char ch;
     int i;
     account_t data_admin;
-    printf("It is no Account.dat,please init admin!!please input[E]nter");
+    printf("It is no Account.dat,please init admin!!please input [E]nter");
 	setbuf(stdin,NULL);
     getchar();
 	printf("Please input you want init name :\n			");
 	setbuf(stdin,NULL);
 	getchar();
-	scanf("%s",name);
+	gets(data_admin.username);
     
 	while(1){
     	i=0;
@@ -81,25 +82,24 @@ void Account_Srv_InitSyS()
 	scanf("%d",&data_admin.type);
 	getchar();
 
-	printf("please input your phone number:(only you know):\n			");
+	printf("please input your phone number(only you know!!!):\n			");
 	scanf("%s",data_admin.phone);
 	getchar();
 
 	setbuf(stdin,NULL);
 	Account_Srv_Add(&data_admin);
 }
-//验证登录账号是否已存在，存在，保存登录用户信息到全局变量gl_CurUser，return 1；否则return 0
+//��֤��¼�˺��Ƿ��Ѵ��ڣ����ڣ������¼�û���Ϣ��ȫ�ֱ���gl_CurUser��return 1������return 0
 int Account_Srv_Verify(char usrName[],unsigned char pwd[])
 {
 	account_t usr;
     
     if(Account_Perst_SelByName(usrName,&usr)){
     	int a = 1;
-    	for(int i = 0;i<20;i++){
-    		if(pwd[i]!=usr.password[i]){
-    			a = 0;
-			}
+    	if(strcmp(pwd,usr.password)){
+			a = 0;
 		}
+	
 		if(a){
 			gl_CurUser = usr;
 			return 1;
@@ -123,7 +123,7 @@ int Account_Srv_Verifyno(char usrName[])
 	return 0;
 }
 
-//根据用户名获取系统用户指针
+//�����û�����ȡϵͳ�û�ָ��
 account_node_t * Account_Srv_FindByUsrName(account_list_t list,char usrName[])
 {
 	account_list_t temp = list;
@@ -136,33 +136,33 @@ account_node_t * Account_Srv_FindByUsrName(account_list_t list,char usrName[])
 	return NULL;
 }
 
-//通过ID查询用户信息
+//ͨ��ID��ѯ�û���Ϣ
 int Account_Srv_FetchByID(int usrID, account_t *buf)
 {
 	return Account_Perst_SelectByID(usrID, buf);	
 }
-//通过用户名查询用户信息
+//ͨ���û�����ѯ�û���Ϣ
 int Account_Srv_FetchByName(char usrName[], account_t *buf)
 {
 	return Account_Perst_SelByName(usrName, buf);
 }
-//通过插入函数Insert创建新用户账号
+//ͨ�����뺯��Insert�������û��˺�
 int Account_Srv_Add(const account_t *data)
 {
     return Account_Perst_Insert(data);
 }
-//通过更新函数Update修改系统用户
+//ͨ�����º���Update�޸�ϵͳ�û�
 int Account_Srv_Modify(const account_t *data)
 {
 	return Account_Perst_Update(data);
 }
-//根据ID删除用户信息
+//����IDɾ���û���Ϣ
 int Account_Srv_DeleteByID(int usrID)
 {
 	return Account_Perst_DeleteByID(usrID);
 }
 
-//获取所有系统用户
+//��ȡ����ϵͳ�û�
 int Account_Srv_FetchAll(account_list_t list)
 {
     return Account_Perst_SelectAll(list);

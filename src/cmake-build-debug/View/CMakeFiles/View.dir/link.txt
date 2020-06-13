@@ -1,0 +1,2 @@
+C:\MinGW\bin\ar.exe qc libView.a  CMakeFiles/View.dir/Account_UI.c.obj CMakeFiles/View.dir/MaiAccount_UI.c.obj CMakeFiles/View.dir/Main_Menu.c.obj CMakeFiles/View.dir/Play_UI.c.obj CMakeFiles/View.dir/Sale_UI.c.obj CMakeFiles/View.dir/SalesAnalysis_UI.c.obj CMakeFiles/View.dir/Schedule_UI.c.obj CMakeFiles/View.dir/Seat_UI.c.obj CMakeFiles/View.dir/StaSales_UI.c.obj CMakeFiles/View.dir/Studio_UI.c.obj CMakeFiles/View.dir/Ticket_UI.c.obj
+C:\MinGW\bin\ranlib.exe libView.a

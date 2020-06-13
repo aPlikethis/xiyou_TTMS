@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="play"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Common\;CMake Files\Persistence\;CMake Files\View\;CMake Files\Service\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ttms">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/ttms.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 ttms"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ttms/fast">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/ttms.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 ttms/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Common">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/libCommon.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/Makefile&quot;  VERBOSE=1 Common"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Common/fast">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/libCommon.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/Makefile&quot;  VERBOSE=1 Common/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Common/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Persistence">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/libPersistence.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/Makefile&quot;  VERBOSE=1 Persistence"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Persistence/fast">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/libPersistence.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/Makefile&quot;  VERBOSE=1 Persistence/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Persistence/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="View">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/libView.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/Makefile&quot;  VERBOSE=1 View"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="View/fast">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/libView.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/Makefile&quot;  VERBOSE=1 View/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/View/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Service">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/libService.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/Makefile&quot;  VERBOSE=1 Service"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Service/fast">
+				<Option output="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/libService.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/Makefile&quot;  VERBOSE=1 Service/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;F:/TTMS/TTMS(C+Lang)/src/cmake-build-debug/Service/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Common/List.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Common/common.c">
+			<Option target="ttms"/>
+			<Option target="Common"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Common/common.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Common/listTestDrv.c">
+			<Option target="Common"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Common/listTestDrv.h">
+			<Option target="Common"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Account_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Account_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/EntityKey_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/EntityKey_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Play_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Play_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Query_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Query_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Sale_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Sale_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/SalesAnalysis_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/SalesAnalysis_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Schedule_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Schedule_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Seat_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Seat_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Studio_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Studio_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Ticket_Persist.c">
+			<Option target="ttms"/>
+			<Option target="Persistence"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/Ticket_Persist.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Account.c">
+			<Option target="ttms"/>
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Account.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/EntityKey.c">
+			<Option target="ttms"/>
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/EntityKey.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Play.c">
+			<Option target="ttms"/>
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Play.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Sale.c">
+			<Option target="ttms"/>
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Sale.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/SalesAnalysis.c">
+			<Option target="ttms"/>
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/SalesAnalysis.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.c">
+			<Option target="ttms"/>
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Seat.c">
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h">
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/StaSales.c">
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/StaSales.h">
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Studio.c">
+			<Option target="ttms"/>
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.c">
+			<Option target="ttms"/>
+			<Option target="Service"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/TTMS.c">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Account_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Account_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/MaiAccount_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/MaiAccount_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Main_Menu.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Main_Menu.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Play_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Play_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Sale_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Sale_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/SalesAnalysis_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/SalesAnalysis_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Schedule_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Schedule_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Seat_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Seat_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/StaSales_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/StaSales_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Studio_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Studio_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Ticket_UI.c">
+			<Option target="ttms"/>
+			<Option target="View"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/Ticket_UI.h">
+			<Option target="ttms"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Common/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Common\"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Persistence/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Persistence\"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/View/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\View\"/>
+		</Unit>
+		<Unit filename="F:/TTMS/TTMS(C+Lang)/src/Service/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Service\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
