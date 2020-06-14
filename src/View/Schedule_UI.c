@@ -100,7 +100,7 @@ int Schedule_UI_Add(void) {
         } */
 //    }while(1);
     
-//    do {
+//    do {                    
         printf("Please enter the studio ID:");
         scanf("%d", &data.studio_id);
         /* if(Studio_Srv_FechByID(data.studio_id, &data)) {
@@ -137,6 +137,8 @@ int Schedule_UI_Del(void) {
         return rtn;
     }
 }
+
+
 /* mod */
 int Schedule_UI_Mod(void) {
     int id, rtn = 0;
@@ -144,7 +146,7 @@ int Schedule_UI_Mod(void) {
     scanf("%d", &id);
     schedule_t data;
     if(Schedule_Srv_SelectByID(id, &data)) {
-       printf("=======================================\n");
+        printf("=======================================\n");
         printf("======Performance plan information=====\n");
         printf("                                       \n");
         printf("Performance plan ID:          %d       \n", data.id);
@@ -183,7 +185,7 @@ int Schedule_UI_Mod(void) {
     scanf("%d %d %d", &data.time.hour, &data.time.minute, &data.time.second);
     getchar();
 
-        if(Schedule_Srv_Mod(id, &data)) {
+        if(Schedule_Srv_Mod(&data)) {
             rtn = 1;
             return rtn;
         }
@@ -198,7 +200,7 @@ int Schedule_UI_Mod(void) {
 }
 
 /* int Schedule_UI_Query(void) {
-    char name[40];
+    char name[31];
     printf("please input play name:");
     scanf("%s", name);
     Schedule_Srv_SelectByName(name);

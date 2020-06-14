@@ -2,12 +2,12 @@
 #define SCHEDULEPERSIST_H_
 #include "../Service/Schedule.h"
 
-/* 查询所有演出计划 */
-int Schedule_Perst_FechAll(int id, schedule_list_t list);
+/* 根据剧目id查询所有演出计划 */
+int Schedule_Perst_SelectByPlayID(int id, schedule_list_t list);
 /* 添加演出计划 */
 int Schedule_Perst_Add(schedule_t *data);
 /* 修改演出计划 */
-int Schedule_Perst_Update(int id, const schedule_t *buf);
+int Schedule_Perst_Update(schedule_t *data);
 /* 删除演出计划 */
 int Schedule_Perst_DeleteByID(int id);
 
