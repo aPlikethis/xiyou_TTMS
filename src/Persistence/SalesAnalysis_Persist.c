@@ -65,45 +65,5 @@ int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list)
     }
     fclose(fp);
     return recCount;
-}
+} 
 
-
-//遍历读Sale.dat文件建立list 链表，返回链表list长度
-int Sale_Perst_SelectAll(sale_list_t list)
-{
-    sale_node_t *newNode;
-    sale_t data;
-    int recCount = 0;
-
-    if(access(SALE_DATA_FILE, 0))
-	{
-		printf("无法打开文件 %s!\n", SALE_DATA_FILE);
-		return 0;
-	}
-
-    List_Free(list,sale_node_t);
-
-    FILE *fp = fopen(SALE_DATA_FILE, "rb");
-    if (NULL == fp)
-	{
-		printf("无法打开文件 %s!\n", SALE_DATA_FILE);
-		return 0;
-	}
-    while (!feof(fp))
-    {
-        if (fread(&data, sizeof(sale_t), 1, fp))
-		{
-			newNode = (sale_node_t*)malloc(sizeof(sale_node_t));
-			if(!newNode)
-			{
-				printf("警告，内存溢出!!!\n不能将更多的数据加载到内存中!!!\n");
-				break;
-			}
-            newNode->data = data;
-			List_AddTail(list, newNode);
-			recCount++;
-		}
-	}
-	fclose(fp);
-	return recCount;
-}

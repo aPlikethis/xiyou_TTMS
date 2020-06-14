@@ -85,11 +85,56 @@ void Ticket_UI_MgtEntry(int schedule_id)
 }
 //标识符：TTMS_SCU_Ticket_UI_Qry
 //功能：查询演出票界面
-void Ticket_UI_Query(void)
-{
+void Ticket_UI_Query(void) {
 	int id;
-	printf("\n\t\t\t\t\t请输入演出计划的ID:");
+	printf("\n\t\t\t\t\t票的ID:");
 	scanf("%d",&id);
-	Sale_UI_ShowTicket(id);
+	Ticket_UI_ShowTicket(id);
 }
 
+
+//标识符：TTMS_SCU_Ticket_UI_ShowTickeet
+//功能：查询演出票界面
+int Ticket_UI_ShowTicket(int ticket_id) {
+	ticket_t buf, data;
+	sale_t sale;
+	system("cls");
+	gettime();
+	printf("\n\n\n\n\n") ;
+	if (Ticket_Srv_FetchByID(ticket_id, &buf))
+	{
+		if (buf.status == 1)
+		{
+			data.id = buf.id;
+			data.schedule_id = buf.schedule_id;
+			data.seat_id = buf.seat_id;
+			data.status = 1;
+
+			Ticket_Info(&data);
+			printf("\t\t\t\t    状态:已售\n");
+			printf("\n\t\t\t\t    任意键返回");
+			getch();
+
+		}
+		else
+		{
+			data.id = buf.id;
+			data.schedule_id = buf.schedule_id;
+			data.seat_id = buf.seat_id;
+			data.status = 1;
+
+			Ticket_Info(&data);
+			printf("\t\t\t\t    状态:未售\n");
+			printf("\n\t\t\t\t    任意键返回");
+			getch();
+
+
+		}
+	}
+	else
+	{
+		printf("\t\t\t\t        无此票,任意键返回");
+		getch();
+	}
+    return 0;
+}
