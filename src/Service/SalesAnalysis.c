@@ -4,6 +4,7 @@
 #include "SalesAnalysis.h"
 #include "../Persistence/Sale_Persist.h"
 #include "../Persistence/SalesAnalysis_Persist.h"
+#include "../Persistence/Ticket_Persist.h"
 #include "Sale.h"
 #include "Ticket.h"
 #include "Play.h"
@@ -52,7 +53,7 @@ int Schedule_Srv_StatRevByPlay(int play_id, int *soldCount)
 	schedule_node_t *p;
 	int *soldCount = 0;
 	List_Init(list,schedule_node_t);
-	Schedule_Perst_SelectByPlay(list,play_id);
+	Schedule_Srv_SelectByPlayID(list,play_id);
 	List_ForEach(list,p){
 		value += Ticket_Srv_StatRevBySchID(p->data.id,&sold);
 		*soldCount += sold;
@@ -86,9 +87,12 @@ int Ticket_Srv_FetchBySchID(ticket_list_t list, int schedule_id)
 {
     int Count = 0;//存放list链表的结点数
 	List_Free(list,ticket_node_t);
-	Count = Ticket_Perst_SelBySchID(schedule_id,list);
+	ticket_list_t tickList;
+	List_Init(tickList,ticket_node_t);
+	Count = Ticket_Perst_SelectBySchID(tickList,schedule_id);
 	if(Count<=0)
 	{
+		List_Destroy(tickList,ticket_node_t);
 		return 0;
 	}
 	else

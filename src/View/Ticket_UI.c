@@ -96,45 +96,27 @@ void Ticket_UI_Query(void) {
 //标识符：TTMS_SCU_Ticket_UI_ShowTickeet
 //功能：查询演出票界面
 int Ticket_UI_ShowTicket(int ticket_id) {
-	ticket_t buf, data;
-	sale_t sale;
+	ticket_t *buf;
 	system("cls");
 	gettime();
 	printf("\n\n\n\n\n") ;
-	if (Ticket_Srv_FetchByID(ticket_id, &buf))
+	if (Ticket_Srv_FetchByID(ticket_id, buf))
 	{
-		if (buf.status == 1)
-		{
+
 			data.id = buf.id;
 			data.schedule_id = buf.schedule_id;
 			data.seat_id = buf.seat_id;
 			data.status = 1;
-
-			Ticket_Info(&data);
-			printf("\t\t\t\t    状态:已售\n");
-			printf("\n\t\t\t\t    任意键返回");
-			getch();
-
-		}
-		else
-		{
-			data.id = buf.id;
-			data.schedule_id = buf.schedule_id;
-			data.seat_id = buf.seat_id;
-			data.status = 1;
-
-			Ticket_Info(&data);
-			printf("\t\t\t\t    状态:未售\n");
-			printf("\n\t\t\t\t    任意键返回");
-			getch();
-
-
-		}
-	}
+				 printf(
+                "\n==================================================================================================\n");
+        printf(
+                "*********************************************票 信 息*********************************************\n");
+	printf("             票ID              演出计划ID                   座位ID                 票价                  \n\n");
+	printf("               %d                    %d                          %d                     %d\n\n\n",buf->id,buf->schedule_id,buf->seat_id,buf->price);
+	printf("**************************************************************************************************\n");
 	else
 	{
-		printf("\t\t\t\t        无此票,任意键返回");
-		getch();
+		printf("未找到该票，请检查后重新查找。");
 	}
     return 0;
 }

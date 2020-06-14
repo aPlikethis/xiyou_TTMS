@@ -51,7 +51,7 @@ int Ticket_Srv_GenBatch(int schedule_id)
 
 //标识符：TTMS_SCU_Ticket_Sry_DeleteBatch
 //功能：根据演出计划ID删除演出票
-void Ticket_Srv_DeleteBatch(int schedule_id)
+int Ticket_Srv_DeleteBatch(int schedule_id)
 {
     return Ticket_Perst_Rem(schedule_id);
 }
