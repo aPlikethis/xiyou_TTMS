@@ -89,7 +89,7 @@ int Ticket_Srv_FetchBySchID(ticket_list_t list, int schedule_id)
 	List_Free(list,ticket_node_t);
 	ticket_list_t tickList;
 	List_Init(tickList,ticket_node_t);
-	Count = Ticket_Perst_SelectBySchIDtickList,schedule_id);
+	Count = Ticket_Perst_SelectBySchID(tickList,schedule_id);
 	if(Count<=0)
 	{
 		List_Destroy(tickList,ticket_node_t);
