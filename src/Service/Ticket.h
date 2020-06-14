@@ -30,27 +30,6 @@ typedef struct ticket_node{
 }ticket_node_t,*ticket_list_t;
 
 
-
-//鏍囪瘑绗︼細TTMS_SCU_Ticket_Sry_DeleteBatch
-//鍔熻兘锛氭牴鎹紨鍑鸿鍒扞D鍒犻櫎婕斿嚭绁?
-void Ticket_Srv_DeleteBatch(int schedule_id);
-
-
-//鏍囪瘑绗︼細TTMS_SCU_Ticket_Srv_FetchByID
-//鍔熻兘锛氭牴鎹甀D鑾峰彇婕斿嚭绁?
-int Ticket_Srv_FetchByID(int id, ticket_t *buf);
-
-
-//鏍囪瘑绗︼細TTMS_SCU_Schedule_Srv_FetchByID
-//鍔熻兘: 鏍规嵁ID鑾峰彇婕斿嚭璁″垝
-int Schedule_Srv_FetchByID(int id,schedule_t *buf );
-
-
-
-//鏌ヨ鎵?鏈夌エ淇℃伅
-//查询所有票信息
-int Ticket_Srv_FetchAll(ticket_list_t list);
-
 //标识符：TTMS_SCU_Ticket_Srv_GenBatch
 //功能：生成演出票
 int Ticket_Srv_GenBatch(int schedule_id);
@@ -58,7 +37,7 @@ int Ticket_Srv_GenBatch(int schedule_id);
 
 //标识符：TTMS_SCU_Ticket_Sry_DeleteBatch
 //功能：根据演出计划ID删除演出票
-void Ticket_Srv_DeleteBatch(int schedule_id);
+int Ticket_Srv_DeleteBatch(int schedule_id);
 
 
 //标识符：TTMS_SCU_Ticket_Srv_FetchByID
