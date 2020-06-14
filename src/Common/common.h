@@ -9,13 +9,12 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 
-<<<<<<< HEAD
 #include "../Common/common.h"
 
 //ÈÕÆÚ½á¹¹Ìå 
-=======
+
 //æ—¥æœŸç»“æž„ä½“ 
->>>>>>> 7d5d6bf11de70444525ee62db4928b9194e175c1
+
 typedef struct {
 	int year;
 	int month;

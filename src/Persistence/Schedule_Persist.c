@@ -1,27 +1,33 @@
 #include <stdio.h>
 #include "../Service/Schedule.h"
 #include "../Common/List.h"
+#include "../Persistence/EntityKey_Persist.h"
 
-/* 查询所有演出厅 */
+static const char SCHEDULE_DATA_FILE[] = "Schedule.dat"; 
+static const char SCHEDULE_DATA_TEMP_FILE[] = "Scheduletem.dat"; 
+static const char SCHEDULE_KEY_NAME[] = "Schedule"; 
+/* 查询所有演出 */
 int Schedule_Perst_FechAll(int id, schedule_list_t list) {
-    FILE *schedule = fopen("../Schedule.dat","rb");
+    FILE *schedule = fopen("Schedule.dat","rb");
     int recount = 0;
     if(schedule == NULL) {
-        printf("文件打开失败\n");
+        printf("can not open file\n");
         return recount;
     }
-    schedule_list_t node, end = list;
-    schedule_t *data;
+    schedule_list_t end = list;
+    schedule_t data;
     
 
-    while(!feof(schedule)) {
-        fread(data, sizeof(schedule_t), 1, schedule);
-        if(data->play_id == id) {
-            node->data = *data;
-            List_InsertAfter(end, node);
+    while(fread(&data, sizeof(schedule_t), 1, schedule)) {
+//        if(data->play_id == id) {
+            schedule_list_t node = (schedule_list_t)malloc(sizeof(schedule_node_t));
+            node->data = data;
+            end->next = node;
+            node->prev = end;
+            node->next = NULL;
             end = end->next;
             recount++;
-        }
+//        }
     }
     fclose(schedule);
     return recount;
@@ -29,10 +35,16 @@ int Schedule_Perst_FechAll(int id, schedule_list_t list) {
 
 
 int Schedule_Perst_Add(schedule_t *data) {
+    assert(NULL!=data);
+
+	long key = EntKey_Perst_GetNewKeys(SCHEDULE_KEY_NAME, 1);
+	if(key<=0)			//主键分配失败，直接返回
+		return 0;
+	data->id = key;		//赋给新对象带回到UI层
     int rtn = 0;
-    FILE *schedule = fopen("../Schedule.dat", "wb"); 
+    FILE *schedule = fopen("Schedule.dat", "ab"); 
     if(schedule == NULL) {
-        printf("文件打开失败\n");
+        printf("can not open file\n");
         return rtn;
     }
     fwrite(data, sizeof(schedule_t), 1, schedule);
@@ -41,46 +53,64 @@ int Schedule_Perst_Add(schedule_t *data) {
     return rtn;
 }
 
-int Schedule_Perst_Del(int id) {
-    int rtn = 0;
-    schedule_list_t list;
-    List_Init(list, schedule_node_t);
-    schedule_node_t *end = list;
-    schedule_node_t *node;
-    schedule_t data;
-    FILE *schedule = fopen("../Schedule.dat", "rb+");
-    if(schedule == NULL) {
-        printf("文件打开失败了\n");
-        return rtn;
-    }
-    while(!feof(schedule)) {
-        fread(&data, sizeof(schedule_t), 1, schedule);
-        if(data.id != id) {
-            node->data = data;
-            List_InsertAfter(end, node);
-            end = end->next;
-        }   
-    }
-    list = list->next;
-    while(list != NULL) {
-        fwrite(&(list->data), sizeof(schedule_t), 1, schedule);
-        list = list->next;
-    }
-    rtn = 1;
-    fclose(schedule);
-    return rtn;
+int Schedule_Perst_DeleteByID(int id) {
+
+	//将原始文件重命名，然后读取数据重新写入到数据文件中，并将要删除的实体过滤掉。
+
+	//对原始数据文件重命名
+	if(rename(SCHEDULE_DATA_FILE, SCHEDULE_DATA_TEMP_FILE)<0){
+		printf("Cannot open file %s!\n", SCHEDULE_DATA_FILE);
+		return 0;
+	}
+
+	FILE *fpSour, *fpTarg;
+	fpSour = fopen(SCHEDULE_DATA_TEMP_FILE, "rb");
+	if (NULL == fpSour ){
+		printf("Cannot open file %s!\n", SCHEDULE_DATA_FILE);
+		return 0;
+	}
+
+	fpTarg = fopen(SCHEDULE_DATA_FILE, "wb");
+	if ( NULL == fpTarg ) {
+		printf("Cannot open file %s!\n", SCHEDULE_DATA_TEMP_FILE);
+		return 0;
+	}
+
+
+	schedule_t buf;
+
+	int found = 0;
+	while (!feof(fpSour)) {
+		if (fread(&buf, sizeof(schedule_t), 1, fpSour)) {
+			if (id == buf.id) {
+				found = 1;
+				continue;
+			}
+			fwrite(&buf, sizeof(schedule_t), 1, fpTarg);
+		}
+	}
+
+	fclose(fpTarg);
+	fclose(fpSour);
+
+	//删除临时文件
+	remove(SCHEDULE_DATA_TEMP_FILE);
+	return found;
 }
 
-int Schedule_Perst_Update(const schedule_t *buf) {
+
+
+
+int Schedule_Perst_Update(int id, const schedule_t *buf) {
     int found = 0;
-    FILE *sch = fopen("../Schedule.dat", "rb+");
+    FILE *sch = fopen("Schedule.dat", "rb+");
     if(sch == NULL) {
-        printf("Play.dat文件打开失败\n");
+        printf("can not open file Schedule.dat\n");
         return found;
     }
     while(!feof(sch)) {
         if (fread(&buf, sizeof(schedule_t), 1, sch)) {
-			if (buf->id == buf->id) {
+			if (buf->id == id) {
 				fseek(sch, -((int)sizeof(schedule_t)), SEEK_CUR);
 				fwrite(buf, sizeof(schedule_t), 1, sch);
 				found = 1;
@@ -95,9 +125,9 @@ int Schedule_Perst_Update(const schedule_t *buf) {
 
 int Schedule_Perst_SelectByID(int id, schedule_t *data) {
     int rtn = 0;
-    FILE *sch = fopen("../Schedule.dat", "rb");
+    FILE *sch = fopen("Schedule.dat", "rb");
     if(sch == NULL) {
-        printf("文件打开失败了\n");
+        printf("can not open file Schedule.dat\n");
         return rtn;
     }
     while(!feof(sch)) {
@@ -110,11 +140,11 @@ int Schedule_Perst_SelectByID(int id, schedule_t *data) {
     return rtn;
 }
 
-int Schedule_Perst_SelectByName(char name[]) {
+/* int Schedule_Perst_SelectByName(char name[]) {
     int found = 0;
     FILE *play, *sch;
 
 
     
     return found;
-}
+} */
