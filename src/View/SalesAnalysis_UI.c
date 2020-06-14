@@ -27,6 +27,7 @@ void SalesAanalysis_UI_MgtEntry()
 	paging.pageSize = SALESANALYSIS_PAGE_SIZE;
 
 	paging.totalRecords = SalesAnalysis_Srv_StaticSale(head);
+	
 	SalesAnalysis_Srv_SortBySale(head);   //根据票房排序
 
 	Paging_Locate_FirstPage(head, paging);

@@ -11,7 +11,9 @@ int StaSales_Srv_CompSaleVal(int usrID, ttms_date_t stDate, ttms_date_t endDate)
 	sale_list_t saleList;
 	sale_node_t *pSale;
 	List_Init(saleList,sale_node_t);
-	Sale_Perst_SelByID(saleList,usrID);
+
+	Sale_Perst_SelectByID(saleList,usrID);
+	
 	List_ForEach(saleList,pSale)
 	{
 		if(pSale->data.date.day<=endDate.day&&pSale->data.date.day>=stDate.day&&pSale->data.date.year<=endDate.year&&pSale->data.date.year>=stDate.year&&pSale->data.date.month<=endDate.month&&pSale->data.date.month>=stDate.month)
