@@ -6,7 +6,7 @@
 static const char SCHEDULE_DATA_FILE[] = "Schedule.dat"; 
 static const char SCHEDULE_DATA_TEMP_FILE[] = "Scheduletem.dat"; 
 static const char SCHEDULE_KEY_NAME[] = "Schedule"; 
-/* 查询所有演出厅 */
+/* 查询所有演出 */
 int Schedule_Perst_FechAll(int id, schedule_list_t list) {
     FILE *schedule = fopen("Schedule.dat","rb");
     int recount = 0;
