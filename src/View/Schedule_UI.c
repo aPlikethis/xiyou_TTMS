@@ -1,117 +1,205 @@
-#include<stdio.h>
+#include <stdio.h>
 #include "../Common/List.h"
 #include "../Service/Schedule.h"
+#include "Schedule_UI.h"
+#include "../Persistence/Schedule_Persist.h"
 #include "../Persistence/EntityKey_Persist.h"
-#include "../Service/Ticket.h"
-#include "../View/Ticket_UI.h"
+/* #include "../Service/Ticket.h"
+#include "../View/Ticket_UI.h" */
 
 /* 管理演出计划界面 */
 void Schedule_UI_MgtEntry(int play_id) {
-    Pagination_t paging;
-    schedule_list_t list;
-    schedule_node_t *p;
-    int i;
     char choice;
-    List_Init(list, schedule_node_t);
-    paging.offset = 0;
-    paging.pageSize = 5;
-    paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
     do {
-        system("clear");
-        printf("============演出计划===========\n");
+        Pagination_t paging;
+        schedule_list_t list, f;
+        schedule_node_t *p;
+        int i;
+
+        List_Init(list, schedule_node_t);
+        list->next = NULL;
+        paging.offset = 0;
+        paging.pageSize = 5;
+        paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
+        Paging_Locate_FirstPage(list, paging);
+
+        printf("============Performance plan===========\n");
         Paging_ViewPage_ForEach(list, paging, schedule_node_t, p, i) {
+            if(p == NULL) {
+                break;
+            }
             
-            printf("==========================\n");
-            /*  */
-            
+            printf("=======================================\n");
+            printf("======Performance plan information=====\n");
+            printf("                                       \n");
+            printf("Performance plan ID:          %d       \n", p->data.id);
+            printf("Play ID:                      %d       \n", p->data.play_id);
+            printf("Studio ID:                    %d       \n", p->data.studio_id);
+            printf("Screprintening date:          %d-%d-%d \n", p->data.date.year, p->data.date.month, p->data.date.day);
+            printf("Screening time:               %d-%d-%d \n", p->data.time.hour, p->data.time.minute, p->data.time.second);
+            printf("Seat count:                   %d       \n", p->data.seat_count);
+            printf("=======================================\n");
         }
-        printf("==============操作菜单===========\n");
+        while(list != NULL) {
+            f = list;
+            list = list->next;
+            free(f);
+        }
+
+        printf("                                       \n");
+        printf("==============Operation menu===========\n");
         printf("                                   \n");
-        printf("[a]添加新演出计划\n");
-        printf("[m]修改演出计划\n");
-        printf("[d]删除演出计划\n");
-        printf("[r]退出");
-        scanf("%d", &choice);
+        printf("[a]Add a new show plan\n");
+        printf("[u]Modify performance plan\n");
+        printf("[d]Delete show plan\n");
+        printf("[r]drop out\n");
+        scanf("%c", &choice);
+        getchar();
+        if(choice == 'a') {
+            if(Schedule_UI_Add()) {
+                printf("Added successfully\n");
+            }
+            else {
+                printf("add failed\n");
+            }
+        }
+        if(choice == 'u') {
+            if(Schedule_UI_Mod()) {
+                printf("Successfully modified\n");
+            }
+            else {
+                printf("fail to edit\n");
+            }
+        }
+        if(choice == 'd') {
+            if(Schedule_UI_Del()) {
+                printf("successfully deleted\n");
+            }
+            else {
+                printf("failed to delete\n");
+            }
+        }
 
     }while(choice != 'r' && choice != 'R');
 }
 /* add */
 int Schedule_UI_Add(void) {
     schedule_t data;
+//    play_t play_data;
     int rtn = 0;
-    printf("请输入剧目id：");
-    scanf("%d", &data.play_id);
-    /*  */
-    do {
-        printf("请输入演出厅ID:");
-        scanf("%d", &data.id);
-        /*  */
-    }while(data.id != -1);
-    if(data.id != -1) {
-        printf("=============请输入演出计划数据=================\n");
-        printf("\n");
-        /*  */
-        data.id = EntKey_Perst_GetNewKeys(&data, 1);
+    printf("=============Please enter performance plan data=================\n");
+    printf("\n");
+//    do {
+        printf("Please enter the play id:");
+        scanf("%d", &data.play_id);
+        /* if(Play_Srv_FechByID(data.play_id, &data)) {
+            break;
+        }
+        else {
+            printf("Please enter again\n");
+        } */
+//    }while(1);
+    
+//    do {
+        printf("Please enter the studio ID:");
+        scanf("%d", &data.studio_id);
+        /* if(Studio_Srv_FechByID(data.studio_id, &data)) {
+            break;
+        }
+        else {
+            printf("Please enter again\n");
+        } */
+//    }while(1);
+    printf("Please enter the performance date:");
+    scanf("%d %d %d", &data.date.year, &data.date.month, &data.date.day);
+    printf("Please enter the show time: ");
+    scanf("%d %d %d", &data.time.hour, &data.time.minute, &data.time.second);
+    getchar();
+    if(Schedule_Srv_Add(&data)) {
+        rtn = 1;
     }
-    Schedule_Srv_Add(&data);
-    Ticket_UI_MgtEntry(data.id);
+//    Ticket_UI_MgtEntry(data.id);
+    return rtn;
 }
 
 /* 删除 */
-int Schedule_UI_Del(int id) {
-    int rtn = 0;
+int Schedule_UI_Del(void) {
+    int id, rtn = 0;
+    printf("Please enter the show plan ID:");
+    scanf("%d", &id);
+    getchar();
+    
     if(Schedule_Srv_Delete(id)) {
-        printf("删除成功！\n");
         rtn = 1;
         return rtn;
     }
     else {
-        printf("删除失败！\n");
         return rtn;
     }
 }
 /* mod */
-int Schedule_UI_Mod(int id) {
-    int rtn = 0;
+int Schedule_UI_Mod(void) {
+    int id, rtn = 0;
+    printf("Please enter the show plan ID:");
+    scanf("%d", &id);
     schedule_t data;
     if(Schedule_Srv_SelectByID(id, &data)) {
-        printf("=========演出计划信息=========\n");
-        printf("                             \n");
-        printf("演出计划ID：                %d\n",data.id);
-        printf("剧目ID：                    %d\n",data.play_id);
-        printf("演出厅ID：                  %d\n",data.studio_id);
-        printf("放映日期：            %d-%d-%d\n",data.date.year, data.date.month, data.date.day);
-        printf("放映时间：            %d-%d-%d\n",data.time.hour, data.time.minute, data.time.second);
-        printf("座位数：                    %d\n",data.seat_count);
-        printf("==============================\n");
-        printf("请输入要修改的信息：\n");
-        printf("请输入剧目ID:");
+       printf("=======================================\n");
+        printf("======Performance plan information=====\n");
+        printf("                                       \n");
+        printf("Performance plan ID:          %d       \n", data.id);
+        printf("Play ID:                      %d       \n", data.play_id);
+        printf("Studio ID:                    %d       \n", data.studio_id);
+        printf("Screening date:               %d-%d-%d \n", data.date.year, data.date.month, data.date.day);
+        printf("Screening time:               %d-%d-%d \n", data.time.hour, data.time.minute, data.time.second);
+        printf("Seat count:                   %d       \n", data.seat_count);
+        printf("=======================================\n");
+        printf("==Please enter performance plan data===\n");
+        printf("\n");
+//        do {
+        printf("Please enter the play id:");
         scanf("%d", &data.play_id);
-        /*  */
-        printf("");
+        /* if(Play_Srv_FechByID(data.play_id, &data)) {
+            break;
+        }
+        else {
+            printf("Please enter again\n");
+        } */
+//        }while(1);
+    
+//        do {
+        printf("Please enter the hall ID:");
         scanf("%d", &data.studio_id);
-        printf("");
-        scanf("%d-%d-%d", &data.date.year, &data.date.month, &data.date.day);
+        /* if(Studio_Srv_FechByID(data.studio_id, &data)) {
+            break;
+        }
+        else {
+            printf("Please enter again\n");
+        } */
+//        }while(1);
+    printf("Please enter the performance date:");
+    scanf("%d %d %d", &data.date.year, &data.date.month, &data.date.day);
+    printf("Please enter the show time: ");
+    scanf("%d %d %d", &data.time.hour, &data.time.minute, &data.time.second);
+    getchar();
 
-        if(Schedule_Srv_Mod(&data)) {
-            printf("修改成功\n");
+        if(Schedule_Srv_Mod(id, &data)) {
             rtn = 1;
             return rtn;
         }
         else {
-            printf("修改失败\n");
             return rtn;
         }
     }
     else {
-        printf("没有找到\n");
+        printf("could not find it\n");
         return rtn;
     }
 }
 
-int Schedule_UI_Query(void) {
+/* int Schedule_UI_Query(void) {
     char name[40];
     printf("please input play name:");
     scanf("%s", name);
     Schedule_Srv_SelectByName(name);
-}
+} */
