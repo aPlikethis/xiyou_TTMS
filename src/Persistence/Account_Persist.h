@@ -9,7 +9,7 @@ int Account_Perst_CheckAccFile();
 //通过用户名查找系统用户
 int Account_Perst_SelByName(char usrName[], account_t *buf);
 //通过ID查找系统用户
-int Account_Perst_SelectByID(int id, account_t *buf);
+int Account_Perst_SelByID(int id, account_t *buf);
 
 
 //标识符：TTMS_SCU_Account_Perst_Insert

@@ -32,6 +32,7 @@ int SysLogin()
 	getchar();
 	
 	Account_Srv_InitSys();
+
 	int x = 3,i;
 	char ch;
 	while(x>0){

@@ -9,9 +9,9 @@
 //创建管理员Admin匿名系统用户
 void Account_Srv_InitSys()
 {
-	if(Account_Perst_CheckAccFile()==0){
+	/*if(Account_Perst_CheckAccFile()==1){
 		return ;
-	}
+	}*/
 
 	system("cls");
 	char pwd[20],pwd1[20];
@@ -138,7 +138,7 @@ account_node_t * Account_Srv_FindByUsrName(account_list_t list,char usrName[])
 //提取usrID对应的用户账号信息，通过调用Account_Perst_SelectByID(usrID, buf)函数实现
 int Account_Srv_FetchByID(int usrID, account_t *buf)
 {
-	return Account_Perst_SelectByID(usrID, buf);	
+	return Account_Perst_SelByID(usrID, buf);	
 }
 //提取usrName对应的用户账号信息，通过调用Account_Perst_SelByName(usrName, buf)函数实现
 int Account_Srv_FetchByName(char usrName[], account_t *buf)
