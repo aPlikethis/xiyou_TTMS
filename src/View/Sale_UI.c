@@ -2,6 +2,8 @@
 #include "Schedule_UI.h"
 #include "Sale_UI.h"
 #include "Ticket_UI.h"
+#include "Account_UI.h"
+#include "MaiAccount_UI.h"
 #include "../Service/Ticket.h"
 #include "../Service/Seat.h"
 #include "../Service/Studio.h"
@@ -10,8 +12,10 @@
 #include "../Common/Common.h"
 #include "Main_Menu.h"
 #include "Studio_UI.h"
+#include "StaSales_UI.h"
 #include "../Service/Schedule.h"
-#include "../Service/Schedule_UI.h"
+#include "../Service/Account.h"
+#include "../Service/Play.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
