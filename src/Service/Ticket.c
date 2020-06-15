@@ -3,11 +3,12 @@
 
 #include "../Service/Ticket.h"
 #include "../Service/Seat.h"
-#include "../Service/Sale.h"
+// #include "../Service/Sale.h"
 
 #include "../Persistence/Ticket_Persist.h"
 #include "../Persistence/Play_Persist.h"
 #include "../Persistence/Schedule_Persist.h"
+#include <stdio.h>
 
 
 
@@ -61,6 +62,6 @@ int Ticket_Srv_DeleteBatch(int schedule_id)
 //功能：根据ID获取演出票
 int Ticket_Srv_FetchByID(int id, ticket_t *buf)
 {
-    return Ticket_Perst_SelBYID(id,buf);
+    return Ticket_Perst_SelByID(id,buf);
 }
 

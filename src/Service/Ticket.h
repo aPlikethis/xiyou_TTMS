@@ -1,7 +1,6 @@
-#ifndef TICKET_UI_H_
-#define TICKET_UI_H_
+#ifndef TICKET_H_
+#define TICKET_H_
 
-#include "../Service/Ticket.h"
 #include "../Service/Schedule.h"
 
 //票状态类型定�?
