@@ -19,7 +19,7 @@ typedef struct {
 	int year;
 	int month;
 	int day;
-}ttms_date_t;
+}user_date_t;
 
 //ʱ��ṹ�� 
 typedef struct {

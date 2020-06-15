@@ -67,7 +67,7 @@ while((feof(fd))!=0){
     fclose(fd);
 fscanf(fd,"%d",data);
 count+=(int)data;
-if(data->schedule_h==id){
+if(data->id){
 struct node *newNode;
 newNode=(struct node *)malloc(sizeof(list));  
 scanf("%d",data);  
