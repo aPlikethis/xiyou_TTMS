@@ -82,14 +82,14 @@ void Account_Srv_InitSys()
 	getchar();
 
 	printf("please input your phone number(only you know!!!):\n			");
-	scanf("%s",admin.phone);
+	scanf("%d",&admin.phone);
 	getchar();
 
 	setbuf(stdin,NULL);
 	Account_Srv_Add(&admin);
 }
 //验证登录账号是否已存在，存在，保存登录用户信息到全局变量gl_CurUser，return 1；否则return 0
-int Account_Srv_Verify(char usrName[],unsigned char pwd[])
+int Account_Srv_Verify(char usrName[],char pwd[])
 {
 	account_t usr;
     
@@ -146,14 +146,14 @@ int Account_Srv_FetchByName(char usrName[], account_t *buf)
 	return Account_Perst_SelByName(usrName, buf);
 }
 //添加一个用户账号，通过调用Account_Perst_Insert(data)函数实现
-int Account_Srv_Add(account_t *data)
+int Account_Srv_Add(account_t * data)
 {
-    return Account_Perst_Insert(&data);
+    return Account_Perst_Insert(data);
 }
 //修改一个用户账号，通过调用Account_Perst_Update(data)函数实现
-int Account_Srv_Modify(account_t *data)
+int Account_Srv_Modify(account_t * data)
 {
-	return Account_Perst_Update(&data);
+	return Account_Perst_Update(data);
 }
 //删除一个用户账号，通过调用Account_Perst_DeleteByID(usrID)函数实现
 int Account_Srv_DeleteByID(int usrID)

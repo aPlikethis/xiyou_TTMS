@@ -31,7 +31,7 @@ int Account_Perst_CheckAccFile()
 int Account_Perst_SelByName(char usrName[], account_t *buf)
 
 {
-    assert(NULL!=buf);
+    //assert(NULL!=buf);
     
     FILE *fp;
     fp = fopen(ACCOUNT_DATA_FILE,"rb");
@@ -45,7 +45,7 @@ int Account_Perst_SelByName(char usrName[], account_t *buf)
 	while(!feof(fp)){
 		if(fread(&data,sizeof(account_t),1,fp)){
 			if(!strcmp(usrName,data.username)){
-				*buf = data;
+				buf = &data;
 				found = 1;
 				break;
 			}
