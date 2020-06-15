@@ -1,11 +1,11 @@
-#include "../View/Account_UI.h"
-#include <stdio.h>
-#include <string.h>
 #include "../Common/list.h"
-//#include "../Service/Account.h"
+#include "../Service/Account.h"
+#include "Account_UI.h"
 #include <unistd.h>
 #include <assert.h>
-#include "MaiAccount_UI.h"
+#include <stdio.h>
+#include <string.h>
+
 
 //系统用户登录界面
 int SysLogin()
@@ -53,7 +53,7 @@ int SysLogin()
 			}
 			Pwd[i]='\0';
 		}
-		if(Account_Srv_Verify(usrName,*Pwd)){
+		if(Account_Srv_Verify(usrName,Pwd)){
 			printf("\nWelcome distinguished users,please input [Enter]!\n");
 			getchar();
 			return 1;
@@ -93,7 +93,7 @@ void Account_UI_MgtEntry(void)
 	if(gl_CurUser.type!=USR_ADMIN){
 		printf("you isn't admin!please input [Enter]");
 		getchar();
-		return 0;
+		return ;
 	}
 	
 	int x,id;
@@ -119,7 +119,7 @@ void Account_UI_MgtEntry(void)
 		Paging_ViewPage_ForEach(head,paging,account_node_t,p,x){
 			printf("%3d %18s ",p->data.id,p->data.username);
 			printf(p->data.password);
-			printf(" %6c\n",Account_UI_Status2char(p->data.type));
+			printf(" %6c\n",Account_UI_Status2Char(p->data.type));
 		}
 		printf("-------Total Records:%2d-------------------Page%2d/%2d----\n",
 				paging.totalRecords, Pageing_CurPage(paging),Pageing_TotalPages(paging));
@@ -133,7 +133,7 @@ void Account_UI_MgtEntry(void)
 		switch(ch){
 			case 'a':
 			case 'A':system("cls");
-					if(ACCOUNT_UI_Add(head)){
+					if(Account_UI_Add(head)){
 						paging.totalRecords = Account_Srv_FetchAll(head);
 					}
 					else{
@@ -306,10 +306,11 @@ int Account_UI_Modify(account_list_t list,char usrName[])
 				setbuf(stdin,NULL);
 			}
 			else{
-				for(int i = 0;i<20;i++){
+				int i; 
+				for(i = 0;i<20;i++){
 					temp->data.password[i] = pwd[i];
 				}
-				int a=Account_Srv_Modify(temp);
+				int a = Account_Srv_Modify(temp);
 				if(a==0){
 					return 0;
 				}

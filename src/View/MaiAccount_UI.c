@@ -1,8 +1,8 @@
 #include "MaiAccount_UI.h"
-#include <string.h>
-#include <stdio.h>
 #include "../Common/list.h"
 #include "../Service/Account.h"
+#include <string.h>
+#include <stdio.h>
 
 
 //维护个人资料管理入口界面
@@ -99,7 +99,7 @@ void MaiAccount_UI_MgtEntry ()
         					data.password[i] = pwd[i];
 						}
 						Account_Srv_Modify(&data);
-						return 1;
+						return ;
 					}
 					else{
 						system("cls");
@@ -107,10 +107,10 @@ void MaiAccount_UI_MgtEntry ()
 					 }
                 }
             }
-            return 0;
+            return ;
         }
     }
-    return 0;
+    return ;
 }
 void MaiAccount_UI_Mgt ()
 {
@@ -202,7 +202,7 @@ void MaiAccount_UI_Mgt ()
 		}
 	}
 	
-	for(int i = 0;i < 20;i++){
+	for(i = 0;i < 20;i++){
         data.password[i] = pwd[i];
     }
     Account_Srv_Modify(&data);

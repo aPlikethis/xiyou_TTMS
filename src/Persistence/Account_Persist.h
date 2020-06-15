@@ -1,32 +1,31 @@
 #ifndef ACCOUNT_PERSIST_H_
 #define ACCOUNT_PERSIST_H_
 
-#include "../Persistence/Account_Persist.h"
 #include "../Service/Account.h"
 
-//æ£€æŸ¥æ–‡ä»¶æ˜¯å¦èƒ½æ‰“å¼€
+//¼ì²éÎÄ¼şÊÇ·ñÄÜ´ò¿ª
 int Account_Perst_CheckAccFile();
 
-//é€šè¿‡ç”¨æˆ·åæŸ¥æ‰¾ç³»ç»Ÿç”¨æˆ·
+//Í¨¹ıÓÃ»§Ãû²éÕÒÏµÍ³ÓÃ»§
 int Account_Perst_SelByName(char usrName[], account_t *buf);
-//é€šè¿‡IDæŸ¥æ‰¾ç³»ç»Ÿç”¨æˆ·
+//Í¨¹ıID²éÕÒÏµÍ³ÓÃ»§
 int Account_Perst_SelectByID(int id, account_t *buf);
 
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Perst_Insert
-//å­˜å‚¨æ–°ç³»ç»Ÿç”¨æˆ·
+//±êÊ¶·û£ºTTMS_SCU_Account_Perst_Insert
+//´æ´¢ĞÂÏµÍ³ÓÃ»§
 int Account_Perst_Insert(account_t *data);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Perst_Update
-//æ›´æ–°ç³»ç»Ÿç”¨æˆ·
-int Account_Perst_Update(const account_t *data);
+//±êÊ¶·û£ºTTMS_SCU_Account_Perst_Update
+//¸üĞÂÏµÍ³ÓÃ»§
+int Account_Perst_Update(account_t *data);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Perst_DeleteByID
-//é€šè¿‡IDåˆ é™¤ç³»ç»Ÿç”¨æˆ·
-int Account_Perst_DeleteByID(int id);
+//±êÊ¶·û£ºTTMS_SCU_Account_Perst_RemByID
+//Í¨¹ıIDÉ¾³ıÏµÍ³ÓÃ»§
+int Account_Perst_RemByID(int id);
 
-//æ ‡è¯†ç¬¦ï¼šTTMS_SCU_Account_Perst_SelAll
-//è½½å…¥æ‰€æœ‰ç”¨æˆ·ä¿¡æ¯
+//±êÊ¶·û£ºTTMS_SCU_Account_Perst_SelAll
+//ÔØÈëËùÓĞÓÃ»§ĞÅÏ¢
 int Account_Perst_SelectAll(account_list_t list);
 
 #endif /* ACCOUNTPERSIST_H_ */

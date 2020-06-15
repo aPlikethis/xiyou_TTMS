@@ -1,7 +1,6 @@
 #ifndef ACCOUNT_H_
 #define ACCOUNT_H_
 
-#include "../Service/Account.h"
 #include <stdio.h>
 
 //定义枚举类型account_type_t，描述用户的角色
@@ -29,7 +28,7 @@ typedef struct account_node {
 
 account_t gl_CurUser;
 
-//标识符：TTMS_SCU_Account_Srv_Verify
+//标识符：TTMS_SCU_Account_Srv_InitSys
 //创建管理员Admin匿名系统用户
 void Account_Srv_InitSys();
 
@@ -38,30 +37,30 @@ void Account_Srv_InitSys();
 int Account_Srv_Verify(char usrName[],unsigned char pwd[]);
 int Account_Srv_Verifyno(char usrName[]);
 
-//标识符：TTMS_SCU_Account_Srv_Verify
+//标识符：TTMS_SCU_Account_Srv_Add
 //功能：添加新系统用户
-int Account_Srv_Add(const account_t *data);
+int Account_Srv_Add(account_t *data);
 
-//标识符：TTMS_SCU_Account_Srv_Verify
+//标识符：TTMS_SCU_Account_Srv_Mod
 //功能：修改系统用户
-int Account_Srv_Modify(const account_t *data);
+int Account_Srv_Modify(account_t *data);
 
-//标识符：TTMS_SCU_Account_Srv_Verify
+//标识符：TTMS_SCU_Account_Srv_Del
 //功能：根据ID删除系统用户
 int Account_Srv_DeleteByID(int usrID);
 
-//标识符：TTMS_SCU_Account_Srv_Verify
+//标识符：TTMS_SCU_Account_Srv_FetchByID
 //功能：根据ID获取系统用户
 int Account_Srv_FetchByID(int usrID, account_t *buf);
-//标识符：TTMS_SCU_Account_Srv_Verify
+//标识符：TTMS_SCU_Account_Srv_FetchByName
 //功能：根据用户名获取系统用户
 int Account_Srv_FetchByName(char usrName[], account_t *buf);
 
-//标识符：TTMS_SCU_Account_Srv_Verify
+//标识符：TTMS_SCU_Account_Srv_FetchAll
 //获取所有系统用户
 int Account_Srv_FetchAll(account_list_t list);
 
-//标识符：TTMS_SCU_Account_Srv_Verify
+//标识符：TTMS_SCU_Account_Srv_FindByUsrName
 //根据用户名获取系统用户指针
 account_node_t *Account_Srv_FindByUsrName(account_list_t list,char usrName[]);
 

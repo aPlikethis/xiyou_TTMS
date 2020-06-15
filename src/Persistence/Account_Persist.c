@@ -1,8 +1,7 @@
 
-
-#include "Account_Persist.h"
 #include "../Service/Account.h"
 #include "../Common/list.h"
+#include "Account_Persist.h"
 #include "EntityKey_Persist.h"	
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,9 +13,9 @@ static const char ACCOUNT_DATA_FILE[] = "Account.dat";
 static const char ACCOUNT_DATA_TEMP_FILE[] = "AccountTmp.dat";
 static const char ACCOUNT_KEY_NAME[] = "Account";
 
-int Account_Perst_CheckAccfile()
+int Account_Perst_CheckAccFile()
 {
-    if(access(ACCOUNT_DATA_FILE,0)==0)  //access(æ–‡ä»¶åï¼Œ0)åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
+    if(access(ACCOUNT_DATA_FILE,0)==0)  //access(ÎÄ¼şÃû£¬0)ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
     {
         return 1;
     }
@@ -79,7 +78,7 @@ int Account_Perst_SelectByID(int id, account_t *buf)
 	return found;
 }
 
-int Account_Perst_Update(const account_t *data)
+int Account_Perst_Update(account_t *data)
 {
     assert(data!=NULL);
     FILE *fp = fopen(ACCOUNT_DATA_FILE,"rb+");
@@ -112,8 +111,8 @@ int Account_Perst_Update(const account_t *data)
 int Account_Perst_Insert(account_t *data) {
     assert(NULL!=data);
 
-	long key = EntKey_Perst_GetNewKeys(ACCOUNT_KEY_NAME, 1); //ä¸ºæ–°æ¼”å‡ºå…åˆ†é…è·å–
-	if(key<=0)			//ä¸»é”®åˆ†é…å¤±è´¥ï¼Œç›´æ¥è¿”å›
+	long key = EntKey_Perst_GetNewKeys(ACCOUNT_KEY_NAME, 1); //ÎªĞÂÑİ³öÌü·ÖÅä»ñÈ¡
+	if(key<=0)			//Ö÷¼ü·ÖÅäÊ§°Ü£¬Ö±½Ó·µ»Ø
 		return 0;
 	data->id = key;
 
@@ -129,9 +128,9 @@ int Account_Perst_Insert(account_t *data) {
 	return ret;
 }
 
-int Account_Perst_DeleteByID(int id)
+int Account_Perst_RemByID(int id)
 {
-	//å¯¹åŸå§‹æ•°æ®æ–‡ä»¶é‡å‘½å
+	//¶ÔÔ­Ê¼Êı¾İÎÄ¼şÖØÃüÃû
 	if(rename(ACCOUNT_DATA_FILE, ACCOUNT_DATA_TEMP_FILE)<0){
 		printf("Cannot open file %s!\n", ACCOUNT_DATA_FILE);
 		return 0;
@@ -164,7 +163,7 @@ int Account_Perst_DeleteByID(int id)
     fclose(fp2);
     fclose(fp1);
 	
-	//åˆ é™¤ä¸´æ—¶æ–‡ä»¶
+	//É¾³ıÁÙÊ±ÎÄ¼ş
 	remove(ACCOUNT_DATA_TEMP_FILE);
 
     return found;
