@@ -55,12 +55,13 @@ void Play_UI_MgtEntry(void) {
         if(choice == 's' || choice == 'S') {
             printf("please input ID:");
             scanf("%d", &id);
-            if(Plat_UI_Query()) {
+            getchar();
+            if(Plat_UI_Query(id)) {
                 printf("do you want to move to the Schedule UI?(y or n):");
                 scanf("%c", &choice);
                 getchar();
                 if(choice == 'y') {
-                    /* Schedule_UI_MgtEn(); */
+                    Schedule_UI_MgtEntry(id);
                 }
             }
             else {
@@ -128,10 +129,9 @@ int Play_UI_Add(void) {
 }
 
 /* ²éÑ¯¾çÄ¿ */
-int Plat_UI_Query(void) {
-    int id, rtn = 0;
+int Plat_UI_Query(int id) {
+    int rtn = 0;
     play_t data;
-    scanf("%d", &id);
     if(Play_Srv_FetchByID(id, &data)) {
         printf("Search succeeded!\n");
         printf("=============================\n");
