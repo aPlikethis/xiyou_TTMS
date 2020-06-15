@@ -128,7 +128,7 @@ int Account_Perst_Insert(account_t *data) {
     	printf("Cannot open file %s!\n", ACCOUNT_DATA_FILE);
     	return 0;
 	}
-	ret = fwrite(data,sizeof(account_t),1,fp);
+	ret = fwrite(&data,sizeof(account_t),1,fp);
 	
 	fclose(fp);
 	return ret;
