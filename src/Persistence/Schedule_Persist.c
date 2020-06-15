@@ -63,7 +63,7 @@ int Schedule_Perst_DeleteByID(int id) {
 	//将原始文件重命名，然后读取数据重新写入到数据文件中，并将要删除的实体过滤掉。
 
 	//对原始数据文件重命名
-	if(rename(SCHEDULE_DATA_FILE, SCHEDULE_DATA_TEMP_FILE)<0){
+	if(rename("Schedule.dat", SCHEDULE_DATA_TEMP_FILE)<0){
 		printf("error1:Cannot open file %s!\n", SCHEDULE_DATA_FILE);
 		return 0;
 	}

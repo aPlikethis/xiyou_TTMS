@@ -56,7 +56,7 @@ int Play_Srv_FetchAll(play_list_t list);
 /* ÐÞ¸Ä¾çÄ¿ */
 int Play_Srv_Modify(const play_t *data);
 /* É¾³ý¾çÄ¿ */
-int Play_Srv_Delete(int id, play_list_t list);
+int Play_Srv_DeleteByID(int id);
 
 
 #endif

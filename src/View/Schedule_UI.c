@@ -6,11 +6,10 @@
 #include "../Persistence/EntityKey_Persist.h"
 #include "../Service/Studio.h"
 #include "../Service/Play.h"
-/* #include "../Service/Ticket.h"
-#include "../View/Ticket_UI.h" */
+#include "../Service/Ticket.h"
+#include "../View/Ticket_UI.h"
 
-/* ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½ */
-
+/* ¹ÜÀíÑÝ³ö¼Æ»®½çÃæ */
 void Schedule_UI_MgtEntry(int play_id) {
     char choice;
     do {
@@ -55,10 +54,12 @@ void Schedule_UI_MgtEntry(int play_id) {
         printf("[a]Add a new show plan\n");
         printf("[u]Modify performance plan\n");
         printf("[d]Delete show plan\n");
+        printf("[n]Next page\n");
+        printf("[l]Last page\n");
         printf("[r]drop out\n");
         scanf("%c", &choice);
         getchar();
-        if(choice == 'a') {
+        if(choice == 'a' || choice == 'A') {
             if(Schedule_UI_Add()) {
                 printf("Added successfully\n");
             }
@@ -66,22 +67,33 @@ void Schedule_UI_MgtEntry(int play_id) {
                 printf("add failed\n");
             }
         }
-        if(choice == 'u') {
+        if(choice == 'u' || choice == 'U') {
             if(Schedule_UI_Mod()) {
                 printf("Successfully modified\n");
             }
             else {
-                printf("fail to edit\n");
+                printf("failed not to modify\n");
             }
         }
-        if(choice == 'd') {
+        if(choice == 'd' || choice == 'D') {
             if(Schedule_UI_Del()) {
                 printf("successfully deleted\n");
             }
             else {
-                printf("failed to delete\n");
+                printf("can not to delete\n");
             }
         }
+        if(choice == 'l' || choice == 'L') {
+            if (!Pageing_IsFirstPage(paging)) {
+                Paging_Locate_OffsetPage(list, paging, -1, schedule_node_t);
+            }
+        }
+        if(choice == 'n' || choice == 'N') {
+            if (!Pageing_IsLastPage(paging)) {
+                Paging_Locate_OffsetPage(list, paging, 1, schedule_node_t);
+            }
+        }
+
 
     }while(choice != 'r' && choice != 'R');
 }
@@ -108,11 +120,13 @@ int Schedule_UI_Add(void) {
         printf("Please enter the studio ID:");
         scanf("%d", &data.studio_id);
          if(Studio_Srv_FetchByID(data.studio_id, &studio_data)) {
-            break;
-        }
-        else {
-            printf("Please enter again\n");
-        } 
+             data.seat_count = studio_data.rowsCount * studio_data.colsCount;
+             break;
+         }
+         else {
+             printf("Please enter again\n");
+         }
+
     }while(1);
     printf("Please enter the performance date:");
     scanf("%d %d %d", &data.date.year, &data.date.month, &data.date.day);
@@ -122,11 +136,11 @@ int Schedule_UI_Add(void) {
     if(Schedule_Srv_Add(&data)) {
         rtn = 1;
     }
-//    Ticket_UI_MgtEntry(data.id);
+    Ticket_UI_MgtEntry(data.id);
     return rtn;
 }
 
-/* É¾ï¿½ï¿½ */
+/* É¾³ý */
 int Schedule_UI_Del(void) {
     int id, rtn = 0;
     printf("Please enter the show plan ID:");
@@ -167,7 +181,7 @@ int Schedule_UI_Mod(void) {
         do {
             printf("Please enter the play id:");
             scanf("%d", &data.play_id);
-            if(Play_Srv_FechByID(data.play_id, &play_data)) {
+            if(Play_Srv_FetchByID(data.play_id, &play_data)) {
                 break;
             }
             else {
@@ -178,7 +192,7 @@ int Schedule_UI_Mod(void) {
         do {
         printf("Please enter the hall ID:");
         scanf("%d", &data.studio_id);
-            if(Studio_Srv_FechByID(data.studio_id, &studio_data)) {
+            if(Studio_Srv_FetchByID(data.studio_id, &studio_data)) {
                 break;
             }
             else {

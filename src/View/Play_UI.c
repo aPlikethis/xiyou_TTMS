@@ -48,8 +48,8 @@ void Play_UI_MgtEntry(void) {
         
         printf("====================================================================================\n");
         printf("                                                                                    \n");
-        printf("[s]Query the play    [a]Add a play    [u]Modify the play           [d]Delete a play \n");
-        printf("[p]last page                                                       [n]next page     \n");
+        printf("[s]Query the play    [a]Add a play       [u]Modify the play        [d]Delete a play \n");
+        printf("[p]last page                      [r]return                        [n]next page     \n");
         printf("====================================================================================\n");
         printf("Please input your choice:");
         scanf("%c", &choice);
@@ -86,10 +86,17 @@ void Play_UI_MgtEntry(void) {
 
         }
         else if(choice == 'p' || choice == 'P') {
-            Paging_Locate_OffsetPage(list, paging, 1, play_node_t);
+            if (!Pageing_IsFirstPage(paging)) {
+                Paging_Locate_OffsetPage(list, paging, -1, play_node_t);
+            }
         }
         else if(choice == 'n' || choice == 'N') {
-            Paging_Locate_OffsetPage(list, paging, -1, play_node_t);
+            if (!Pageing_IsLastPage(paging)) {
+                Paging_Locate_OffsetPage(list, paging, 1, play_node_t);
+            }
+        }
+        else if(choice == 'r' || choice == 'R') {
+            break;
         }
         
     }
@@ -174,7 +181,7 @@ int Play_UI_Modify(int id) {
         printf("=============================\n");
     }
     else {
-        printf("query error\n");
+        printf("can not query!\n");
         return rtn;
     }
     printf("Please enter the play name:");
@@ -196,11 +203,11 @@ int Play_UI_Modify(int id) {
     getchar();
     if(Play_Srv_Modify(&data)) {
         rtn = 1;
-        printf("sus\n");
+        printf("succses\n");
         return rtn;
     }
     else {
-        printf("detail\n");
+        printf("can not modify\n");
         return rtn;
     }
 
@@ -216,8 +223,7 @@ int Play_UI_DeleteByID(int id) {
         return rtn;
     }
     else {
-        printf("defail\n");
+        printf("can not delete\n");
         return rtn;
     }
-
 }
