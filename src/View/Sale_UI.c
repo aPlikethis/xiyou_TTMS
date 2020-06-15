@@ -388,15 +388,74 @@ void Sale_UI_MgtEntry() {
 //退票
 void Sale_UI_ReturnTicket(){
 	char choice;
-	//int id,t=0;
-     //while(1){
-		system("cls");
-       	//printf("\n\n\n\n");
-       	printf("\n\t\t\t==================================================================\n");
-       	printf("\t\t\t      \t\t\t退   票\n");
-       	printf("\n\t\t\t==================================================================\n");
-       	printf("\t\t\t\t\t本影院的票一但售出，拒不退回");
-       	printf("\t\t\t\t按[R]返回");
-       	getchar();
-       	getchar();
-       	Main_Menu();
+	int id,t=0;
+
+		while(1){
+				if(scanf("%d",&id)==1){ cl_stdin(); break;}
+				else{ cl_stdin(); printf("\t\t\t您的输入有误！请重新输入:"); }
+		}
+		
+		
+		ticket_t buf;
+		schedule_t scd;
+			
+	   	Schedule_Srv_FetchByID(buf.schedule_id, &scd);
+		if( Ticket_Srv_FetchByID(id,&buf) ){
+			if(buf.status==TICKET_SOLD){
+       				Ticket_UI_Print(id);
+       				user_time_t nowtime=TimeNow();
+       				if(DateCmp(DateNow(), scd.date)==-1 || (DateCmp(DateNow(), scd.date)==0 && scd.time.hour<nowtime.hour && scd.time.minute<nowtime.minute ) ){
+       				t=1;
+       				Ticket_UI_Print(id);
+       				}else{
+       					printf("\n\t\t\t该票已过有效期，无法退票");
+       					printf("\n\n\t\t\t按任意键继续！。。。\n");
+					getchar();
+					break;
+					
+       				}
+       			}else{
+       			
+       				printf("\n\t\t\t该票不存在或未售出，无法退票");
+       				printf("\n\n\t\t\t按任意键继续！。。。\n");
+       				
+				getchar();
+				break;
+       			}
+       		}
+		
+		
+		if(t){
+			printf("\t\t\t请输入 Q 确认退票  输入 R 返回：");
+			choice=l_getc();
+			if('r'==choice || 'R'==choice) break;	
+			if('q'==choice || 'Q'==choice) {
+			
+				
+	       			buf.status=TICKET_AVL;
+	       			sale_t data;
+	       					
+	       			data.id=EntKey_Srv_CompNewKey("sale");
+	       			data.user_id=gl_CurUser.id;
+	       			data.ticket_id=id;
+	       			data.date=DateNow();
+	       			data.time=TimeNow();
+	       			data.value=buf.price;
+	       			data.type=SALE_RETURN;
+	       					
+	       			Sale_Srv_Add(&data);
+	       					
+	       			Ticket_Srv_Modify(&buf);
+       					
+       				printf("\n\t\t\t退票成功！");
+       				printf("\n\n\t\t\t按任意键继续！。。。\n");
+				cl_stdin();
+				getchar();
+											
+				break;
+       			}
+       					
+       		}
+	}
+}
+

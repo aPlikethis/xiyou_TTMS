@@ -1,138 +1,108 @@
+
 #include "Sale_Persist.h"
-#include "../Common/List.h"
+#include "../Common/list.h"
+#include "../Service/Sale.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../Service/Ticket.h"
-int Sale_Perst_Insert(const sale_t *data){
-    FILE *fp;
-    int rtn;
-    fp = fopen("Sale.dat", "ab");
-    if (fp == NULL) {
-        printf("can't open Sale.dat");
-    } else {
-        rtn = fwrite(&data, sizeof(sale_t), 1, fp);
-    }
-    fclose(fp);
-    return rtn;
+#include <string.h>
+
+
+static const char SALE_DATA_FILE[] = "Sale.dat";
+static const char SALE_DATA_TEMP_FILE[] = "SaleTmp.dat";
+/*将订单信息插入到文件中*/
+int Sale_Perst_Insert(const sale_t *data) {
+	assert(NULL!=data);
+	FILE *fp=fopen(SALE_DATA_FILE,"ab");
+	int rtn=0;
+	if (NULL==fp)
+	{
+		printf("无法打开文件 %s!\n", SALE_DATA_FILE);
+		return 0;
+	}
+	rtn=fwrite(data,sizeof(sale_t),1,fp);
+	fclose(fp);
+	return rtn;
 }
 
-int Sale_Perst_DeleteByID(int saleID);
+/*将订单信息删除*/
+int Sale_Perst_DeleteByID(int saleID) {
+	char cmd[100];
+	sprintf(cmd, "重命名  %s %s", SALE_DATA_FILE, SALE_DATA_TEMP_FILE);
+	system(cmd);
 
-int Ticket_Perst_Update(const ticket_t *data){
-	assert(NULL!=data);
-
-	FILE *fp = fopen("Ticket.dat", "rb+");
-	if (NULL == fp)
+	if(rename(SALE_DATA_FILE, SALE_DATA_TEMP_FILE)<0)
 	{
-		printf("无法打开文件 %s!\n", "Ticket.dat");
+		printf("无法打开文件 %s!\n", SALE_DATA_FILE);
+		return 0;
+	}
+	FILE *fpSour, *fpTarg;
+	fpSour = fopen(SALE_DATA_TEMP_FILE, "rb");
+	if (NULL == fpSour )
+	{
+		printf("无法打开文件 %s!\n", SALE_DATA_FILE);
+		return 0;
+	}
+	fpTarg = fopen(SALE_DATA_FILE, "wb");
+	if ( NULL == fpTarg )
+	{
+		printf("无法打开文件 %s!\n", SALE_DATA_TEMP_FILE);
 		return 0;
 	}
 
-	ticket_t buf;
+	sale_t buf;
 	int found = 0;
-
-	while (!feof(fp)) {
-		if (fread(&buf, sizeof(ticket_t), 1, fp))
+	while (!feof(fpSour))
+	{
+		if (fread(&buf,sizeof(sale_t),1,fpSour))
 		{
-			if (buf.id == data->id)
+			if (saleID==buf.id)
 			{
-				fseek(fp, -sizeof(ticket_t), SEEK_CUR);
-				fwrite(data, sizeof(ticket_t), 1, fp);
-				found = 1;
-				break;
+				found=1;
+				continue;
 			}
-
+			fwrite(&buf,sizeof(sale_t),1,fpTarg);
 		}
 	}
-	fclose(fp);
+	fclose(fpTarg);
+	fclose(fpSour);
+
+	//删除临时文件
+	remove(SALE_DATA_TEMP_FILE);
 
 	return found;
 }
-//根据用户ID载入给定时间区间内的销售记录
-int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID,
-		user_date_t stDate, user_date_t endDate);
 
 //根据用户ID载入给定时间区间内的销售记录
-int Sale_Perst_SelectByDate(sale_list_t list,
-		user_date_t stDate, user_date_t endDate);
-
-int Ticket_Srv_SelBySchID(int id, ticket_t *buf) {
-      //  List_Init(list, ticket_node_t);
-        FILE *fp;
-        ticket_t data;
-        fp = fopen("Ticket.dat", "rb");
-        if (fp == NULL) {
-            printf("Ticket.dat can not be open !");
-        } else {
-            while (!feof(fp)) {
-                fread(&data, sizeof(ticket_t), 1, fp);
-                if (data.id == id) {
-                    *buf = data;
-                    return 1;
-                }
-            }
-        }
-        fclose(fp);
-        return 0;
-}
-
-int Ticket_Perst_SelectAll(ticket_list_t list,int schID)
-{
-    ticket_node_t *newNode;
-	ticket_t data;
-	int recCount = 0;
-
-	assert(NULL!=list);
-
-	List_Free(list, ticket_node_t);
-
-	FILE *fp = fopen("Ticket.dat", "rb+");
-	if (NULL == fp) { //文件不存在
-		return 0;
-	}
-
-	while (!feof(fp)) {
-		if (fread(&data, sizeof(ticket_t), 1, fp)) {
-            if(data.schedule_id == schID)
-            {
-                newNode = (ticket_node_t*) malloc(sizeof(ticket_node_t));
-                if (!newNode) {
-                    printf("Warning, Memory OverFlow!!!\n Cannot Load more Data into memory!!!\n");
-                    break;
-                }
-                newNode->data = data;
-                List_AddTail(list, newNode);
-                recCount++;
-            }
-
+int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID, user_date_t stDate,
+		user_date_t endDate) {
+	sale_node_t *p=list->next;
+	int found = 0;
+	while (p != NULL)
+	{
+		if(p->data.user_id==usrID && stDate.year<=p->data.date.year && stDate.month<=p->data.date.month && stDate.day<=p->data.date.day && endDate.year>=p->data.date.year && endDate.month>=p->data.date.month && endDate.day>=p->data.date.day )
+		{
+			found=1;
+			break;
 		}
+		p=p->next;
 	}
-	fclose(fp);
-	return recCount;
-
+	return found;
 }
 
-int Sale_Perst_SelByTicketID (int ticket_id, sale_t *sale) {
-    assert(NULL != sale);
-    FILE *fp = fopen("Sale.dat", "rb");
-    if (NULL == fp) {
-        return 0;
-    }
-    sale_t data;
-    int found = 0;
-    while (!feof(fp))
-    {
-        if (fread(&data, sizeof(sale_t), 1, fp))
-        {
-            if (ticket_id == data.ticket_id)
-            {
-                *sale =  data;
-                found = 1;
-                break;
-            };
-        }
-    }
-    fclose(fp);
-    return found;
-}
 
+//根据给定时间区间内的销售记录
+int Sale_Perst_SelectByDate(sale_list_t list, user_date_t stDate,
+		user_date_t endDate) {
+	sale_node_t *p=list->next;
+	int found = 0;
+	while (p != NULL)
+	{
+		if(stDate.year<=p->data.date.year && stDate.month<=p->data.date.month && stDate.day<=p->data.date.day && endDate.year>=p->data.date.year && endDate.month>=p->data.date.month && endDate.day>=p->data.date.day )
+		{
+			found=1;
+			break;
+		}
+		p=p->next;
+	}
+	return found;
+}

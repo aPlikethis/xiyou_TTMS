@@ -237,4 +237,5 @@ seat_node_t * Seat_Srv_FindByID(seat_list_t list, int rowID)
 			return p;
 
 	return NULL ;
+
 }

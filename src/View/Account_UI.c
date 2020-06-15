@@ -1,11 +1,11 @@
-#include "../Common/list.h"
-#include "../Service/Account.h"
-#include "Account_UI.h"
+
 #include <unistd.h>
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-
+#include "../Common/list.h"
+#include "MaiAccount_UI.h" 
+#include "Account_UI.h"
 
 //系统用户登录界面
 int SysLogin()
@@ -28,21 +28,24 @@ int SysLogin()
 		"          ## ##   ## ##   ##      ##      ##       ##   ##  ##       ## ##      \n"
 		"           ###     ###    ####### #######  ######    ###    ##       ## ####### \n"
 		"================================================================================\n");
+	printf("please input [Enter] to continue!");
+	getchar();
+	
 	Account_Srv_InitSys();
 	int x = 3,i;
 	char ch;
 	while(x>0){
+		i = 0;
 		printf("You have %d login opportunities\n",x);
-		char usrName[20],Pwd[20];
+		char usrName[20],pwd[20];
 		printf("Please input your name:");
 		setbuf(stdin,NULL);
-		gets(usrName);
-		
-		printf("Please input your password:");
+		scanf("%s",usrName);		
+		printf("\nPlease input your passsword:");
 		setbuf(stdin,NULL);
 		while((ch=getch())!='\r'){
 			if(i<20){
-				Pwd[i++]=ch;
+				pwd[i++]=ch;
 				putchar('*');
 			}
 			else if(i>0&&ch=='\b'){
@@ -51,15 +54,16 @@ int SysLogin()
 				putchar(' ');
 				putchar('\b');
 			}
-			Pwd[i]='\0';
+			pwd[i]='\0';
 		}
-		if(Account_Srv_Verify(usrName,Pwd)){
+
+		if(Account_Srv_Verify(usrName,pwd)){
 			printf("\nWelcome distinguished users,please input [Enter]!\n");
 			getchar();
 			return 1;
 		}
 		else{
-			printf("login in error\n");
+			printf("\nlogin in error\n");
 			x--;
 		}
 	}
@@ -312,7 +316,7 @@ int Account_UI_Modify(account_list_t list,char usrName[])
 				for(i = 0;i<20;i++){
 					temp->data.password[i] = pwd[i];
 				}
-				int a = Account_Srv_Modify(temp);
+				int a = Account_Srv_Modify(&temp);
 				if(a==0){
 					return 0;
 				}
