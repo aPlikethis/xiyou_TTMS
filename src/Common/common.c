@@ -1,10 +1,10 @@
 /*
 * Copyright(C), 2007-2008, XUPT Univ.	 
 * File name: common.c			 
-* Description : Í¨ÓÃº¯Êý¶¨Òå	 
+* Description : Í¨ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	 
 * Author:   XUPT  		 
 * Version:  v.1 	 
-* Date: 	2015Äê4ÔÂ22ÈÕ		 
+* Date: 	2015ï¿½ï¿½4ï¿½ï¿½22ï¿½ï¿½		 
 */
 
 #include "../Common/common.h"
@@ -13,7 +13,7 @@
 #include<fcntl.h>
 #include <time.h>
 
-//½«×Ö·û´®str¾ÍµØ×ª»»Îª´óÐ´×Ö·û´®£¬²¢·µ»Ø×Ö·û´®Í·Ö¸Õë
+//ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½strï¿½Íµï¿½×ªï¿½ï¿½Îªï¿½ï¿½Ð´ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Í·Ö¸ï¿½ï¿½
 char *Str2Upper(char *str) {
 	if (NULL == str)
 		return NULL;
@@ -28,7 +28,7 @@ char *Str2Upper(char *str) {
 	}
 }
 
-//½«×Ö·û´®str¾ÍµØ×ª»»ÎªÐ¡Ð´×Ö·û´®£¬²¢·µ»Ø×Ö·û´®Í·Ö¸Õë
+//ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½strï¿½Íµï¿½×ªï¿½ï¿½ÎªÐ¡Ð´ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Í·Ö¸ï¿½ï¿½
 char *Str2Lower(char *str) {
 	if (NULL == str)
 		return NULL;
@@ -43,8 +43,8 @@ char *Str2Lower(char *str) {
 	}
 }
 
-//±È½ÏÈÕÆÚdt1, dt2µÄ´óÐ¡¡£ÏàµÈ·µ»Ø0£¬dt1<dt2·µ»Ø-1£¬·ñÔò1
-int DateCmp(user_date_t dt1, user_date_t dt2) {
+//ï¿½È½ï¿½ï¿½ï¿½ï¿½ï¿½dt1, dt2ï¿½Ä´ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½0ï¿½ï¿½dt1<dt2ï¿½ï¿½ï¿½ï¿½-1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1
+int DateCmp(ttms_date_t dt1, ttms_date_t dt2) {
 	if (dt1.year < dt2.year)
 		return -1;
 	else if (dt1.year == dt2.year && dt1.month < dt2.month)
@@ -58,11 +58,11 @@ int DateCmp(user_date_t dt1, user_date_t dt2) {
 		return 1;
 }
 
-//»ñÈ¡ÏµÍ³µ±Ç°ÈÕÆÚ
-user_date_t DateNow() {
-	user_date_t curDate;
-	time_t now;         //ÊµÀý»¯time_t½á¹¹
-	struct tm *timeNow;         //ÊµÀý»¯tm½á¹¹Ö¸Õë
+//ï¿½ï¿½È¡ÏµÍ³ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+ttms_date_t DateNow() {
+	ttms_date_t curDate;
+	time_t now;         //Êµï¿½ï¿½ï¿½ï¿½time_tï¿½á¹¹
+	struct tm *timeNow;         //Êµï¿½ï¿½ï¿½ï¿½tmï¿½á¹¹Ö¸ï¿½ï¿½
 	time(&now);
 	timeNow = localtime(&now);
 	curDate.year=timeNow->tm_year+1900;
@@ -72,11 +72,11 @@ user_date_t DateNow() {
 	return curDate;
 }
 
-//»ñÈ¡ÏµÍ³µ±Ç°Ê±¼ä
+//ï¿½ï¿½È¡ÏµÍ³ï¿½ï¿½Ç°Ê±ï¿½ï¿½
 user_time_t TimeNow(){
 	user_time_t curTime;
-	time_t now;         //ÊµÀý»¯time_t½á¹¹
-	struct tm *timeNow;         //ÊµÀý»¯tm½á¹¹Ö¸Õë
+	time_t now;         //Êµï¿½ï¿½ï¿½ï¿½time_tï¿½á¹¹
+	struct tm *timeNow;         //Êµï¿½ï¿½ï¿½ï¿½tmï¿½á¹¹Ö¸ï¿½ï¿½
 	time(&now);
 	timeNow = localtime(&now);
 	curTime.hour=timeNow->tm_hour;
@@ -85,7 +85,7 @@ user_time_t TimeNow(){
 	return curTime;
 }
 
-//±È½ÏÁ½×Ö·û´®ÊÇ·ñÏàÍ¬
+//ï¿½È½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Í¬
 int StrCmp(char *a, char *b) {
 	while(*a != '\0' && *b != '\0') {
 		if(*a != *b) {

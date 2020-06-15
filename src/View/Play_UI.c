@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "Play_UI.h"
+#include "Schedule_UI.h"
 #include "../Service/Play.h"
 #include "../Common/common.h"
 #include "../Common/List.h"
