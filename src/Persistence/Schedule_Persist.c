@@ -3,9 +3,10 @@
 #include "../Service/Schedule.h"
 #include "../Common/List.h"
 #include "../Persistence/EntityKey_Persist.h"
-/* #include "../Service/Play.h" */
+#include "../Service/Play.h"
 #include "Schedule_Persist.h"
 #include "../Common/common.h"
+#include "../View/Schedule_UI.h"
 
 static const char SCHEDULE_DATA_FILE[] = "Schedule.dat"; 
 static const char SCHEDULE_DATA_TEMP_FILE[] = "Scheduletem.dat"; 
@@ -23,7 +24,7 @@ int Schedule_Perst_SelectByPlayID(int id, schedule_list_t list) {
     
 
     while(fread(&data, sizeof(schedule_t), 1, schedule)) {
-//        if(data->play_id == id) {
+		if(data.play_id == id) {
             schedule_list_t node = (schedule_list_t)malloc(sizeof(schedule_node_t));
             node->data = data;
             end->next = node;
@@ -31,7 +32,7 @@ int Schedule_Perst_SelectByPlayID(int id, schedule_list_t list) {
             node->next = NULL;
             end = end->next;
             recount++;
-//        }
+        }
     }
     fclose(schedule);
     return recount;
@@ -150,16 +151,26 @@ int Schedule_Perst_SelectByID(int id, schedule_t *data) {
     return rtn;
 }
 
-/* int Schedule_Perst_SelectByName(char name[]) {
+int Schedule_Perst_SelectByName(char name[]) {
     int found = 0;
+	int flag;
     FILE *play, *sch;
     play_t play_data;
     fopen("play.dat","rb");
     do {
         fread(&play_data, sizeof(play_t), 1, play);
+		flag = StrCmp(name, play_data.name);
     }
-    while(!str_com(name, play_data.name) && !feof(play))
+    while(!flag && !feof(play));
+	if(flag = 0) {
+		return found;
+	}
+	else {
+		Schedule_UI_MgtEntry(play_data.id);
+		found = 1;
+		return found;
+	}
 
     
     return found;
-} */
+}

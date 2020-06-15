@@ -84,6 +84,18 @@ user_time_t TimeNow(){
 	curTime.second=timeNow->tm_sec;
 	return curTime;
 }
+
+//比较两字符串是否相同
+int StrCmp(char *a, char *b) {
+	while(*a != '\0' && *b != '\0') {
+		if(*a != *b) {
+			return 0;
+		}
+		a++;
+		b++;
+	}
+	return 1;
+}
 /*
  *
  *

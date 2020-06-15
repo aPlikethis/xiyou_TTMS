@@ -4,6 +4,8 @@
 #include "Schedule_UI.h"
 #include "../Persistence/Schedule_Persist.h"
 #include "../Persistence/EntityKey_Persist.h"
+#include "../Service/Studio.h"
+#include "../Service/Play.h"
 /* #include "../Service/Ticket.h"
 #include "../View/Ticket_UI.h" */
 
@@ -85,31 +87,32 @@ void Schedule_UI_MgtEntry(int play_id) {
 /* add */
 int Schedule_UI_Add(void) {
     schedule_t data;
-//    play_t play_data;
+    play_t play_data;
+    studio_t studio_data;
     int rtn = 0;
     printf("=============Please enter performance plan data=================\n");
     printf("\n");
-//    do {
+    do {
         printf("Please enter the play id:");
         scanf("%d", &data.play_id);
-        /* if(Play_Srv_FechByID(data.play_id, &data)) {
+        if(Play_Srv_FechByID(data.play_id, &play_data)) {
             break;
         }
         else {
             printf("Please enter again\n");
-        } */
-//    }while(1);
+        }
+    }while(1);
     
-//    do {                    
+    do {                    
         printf("Please enter the studio ID:");
         scanf("%d", &data.studio_id);
-        /* if(Studio_Srv_FechByID(data.studio_id, &data)) {
+         if(Studio_Srv_FechByID(data.studio_id, &studio_data)) {
             break;
         }
         else {
             printf("Please enter again\n");
-        } */
-//    }while(1);
+        } 
+    }while(1);
     printf("Please enter the performance date:");
     scanf("%d %d %d", &data.date.year, &data.date.month, &data.date.day);
     printf("Please enter the show time: ");
@@ -145,6 +148,8 @@ int Schedule_UI_Mod(void) {
     printf("Please enter the show plan ID:");
     scanf("%d", &id);
     schedule_t data;
+    play_t play_data;
+    studio_t studio_data;
     if(Schedule_Srv_SelectByID(id, &data)) {
         printf("=======================================\n");
         printf("======Performance plan information=====\n");
@@ -158,27 +163,27 @@ int Schedule_UI_Mod(void) {
         printf("=======================================\n");
         printf("==Please enter performance plan data===\n");
         printf("\n");
-//        do {
-        printf("Please enter the play id:");
-        scanf("%d", &data.play_id);
-        /* if(Play_Srv_FechByID(data.play_id, &data)) {
-            break;
-        }
-        else {
-            printf("Please enter again\n");
-        } */
-//        }while(1);
+        do {
+            printf("Please enter the play id:");
+            scanf("%d", &data.play_id);
+            if(Play_Srv_FechByID(data.play_id, &play_data)) {
+                break;
+            }
+            else {
+                printf("can not found Play! Please enter again\n");
+            }
+        }while(1);
     
-//        do {
+        do {
         printf("Please enter the hall ID:");
         scanf("%d", &data.studio_id);
-        /* if(Studio_Srv_FechByID(data.studio_id, &data)) {
-            break;
-        }
-        else {
-            printf("Please enter again\n");
-        } */
-//        }while(1);
+            if(Studio_Srv_FechByID(data.studio_id, &studio_data)) {
+                break;
+            }
+            else {
+                printf("can not found Studio! Please enter again\n");
+            }
+        }while(1);
     printf("Please enter the performance date:");
     scanf("%d %d %d", &data.date.year, &data.date.month, &data.date.day);
     printf("Please enter the show time: ");
@@ -199,9 +204,21 @@ int Schedule_UI_Mod(void) {
     }
 }
 
-/* int Schedule_UI_Query(void) {
+int Schedule_UI_Query(void) {
     char name[31];
-    printf("please input play name:");
-    scanf("%s", name);
-    Schedule_Srv_SelectByName(name);
-} */
+    char flag;
+    do {
+        printf("please input play name:");
+        scanf("%s", name);
+        if(!Schedule_Srv_SelectByName(name)) {
+            printf("can not found\n");
+        }
+        printf("dou you want to query again?(input c to exit, others are yes):");
+        scanf("%c", &flag);
+        getchar();
+        if(flag == 'c') {
+            break;
+        }
+    }while(1);
+    return 1;
+}

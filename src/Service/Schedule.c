@@ -20,6 +20,6 @@ int Schedule_Srv_SelectByID(int id, schedule_t *data) {
     return Schedule_Perst_SelectByID(id, data);
 }
 
-/* int Schedule_Srv_SelectByName(char name[]) {
+int Schedule_Srv_SelectByName(char name[]) {
     return Schedule_Perst_SelectByName(name);
-} */
+}

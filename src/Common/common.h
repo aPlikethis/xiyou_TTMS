@@ -3,7 +3,7 @@
 * File name: common.h			 
 * Author:   XUPT  		 
 * Version:  v.1 	 
-* Date: 	2015å¹´4æœˆ22æ—¥		 
+* Date: 	2015Äê4ÔÂ22ÈÕ		 
 */
 
 #ifndef COMMON_H_
@@ -11,9 +11,9 @@
 
 #include "../Common/common.h"
 
-//ÈÕÆÚ½á¹¹Ìå 
+//??????? 
 
-//æ—¥æœŸç»“æ„ä½“ 
+//ÈÕÆÚ½á¹¹Ìå 
 
 typedef struct {
 	int year;
@@ -21,29 +21,33 @@ typedef struct {
 	int day;
 }user_date_t;
 
-//æ—¶é—´ç»“æ„ä½“ 
+//Ê±¼ä½á¹¹Ìå 
 typedef struct {
 	int hour;
 	int minute;
 	int second;
 }user_time_t;
 
-//ç›´æ¥è¯»å–é”®ç›˜è¾“å…¥å€¼
+//Ö±½Ó¶ÁÈ¡¼üÅÌÊäÈëÖµ
 //int ScanKeyboard();
 
-//å°†å­—ç¬¦ä¸²strå°±åœ°è½¬æ¢ä¸ºå¤§å†™å­—ç¬¦ä¸²ï¼Œå¹¶è¿”å›å­—ç¬¦ä¸²å¤´æŒ‡é’ˆ
+//½«×Ö·û´®str¾ÍµØ×ª»»Îª´óĞ´×Ö·û´®£¬²¢·µ»Ø×Ö·û´®Í·Ö¸Õë
 char *Str2Upper(char *str);
 
-//å°†å­—ç¬¦ä¸²strå°±åœ°è½¬æ¢ä¸ºå°å†™å­—ç¬¦ä¸²ï¼Œå¹¶è¿”å›å­—ç¬¦ä¸²å¤´æŒ‡é’ˆ
+//½«×Ö·û´®str¾ÍµØ×ª»»ÎªĞ¡Ğ´×Ö·û´®£¬²¢·µ»Ø×Ö·û´®Í·Ö¸Õë
 char *Str2Lower(char *str);
 
-//æ¯”è¾ƒæ—¥æœŸdt1, dt2çš„å¤§å°ã€‚ç›¸ç­‰è¿”å›0ï¼Œdt1<dt2è¿”å›-1ï¼Œå¦åˆ™1
+//±È½ÏÈÕÆÚdt1, dt2µÄ´óĞ¡¡£ÏàµÈ·µ»Ø0£¬dt1<dt2·µ»Ø-1£¬·ñÔò1
 int DateCmp(user_date_t dt1, user_date_t dt2);
 
-//è·å–ç³»ç»Ÿå½“å‰æ—¥æœŸ
+//»ñÈ¡ÏµÍ³µ±Ç°ÈÕÆÚ
 user_date_t DateNow();
 
-//è·å–ç³»ç»Ÿå½“å‰æ—¶é—´
+//»ñÈ¡ÏµÍ³µ±Ç°Ê±¼ä
 user_time_t TimeNow();
+
+/* ±È½Ï×Ö·û´®ÊÇ·ñÏàÍ¬ */
+int StrCmp(char *a, char *b);
+
 
 #endif /* COMMON_H_ */
