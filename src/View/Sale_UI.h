@@ -6,7 +6,9 @@
 #include "../Service/seat.h"
 #include "../Service/account.h"
 #include "../Service/Ticket.h"
-
+static const int TICKET_PAGE_SIZE = 5;
+static const int SCHEDULE_PAGE_SIZE = 5;
+static const int PLAY_PAGE_SIZE = 5;
 void 	DisplayTicketMenu(account_t *acco_p);
 void 	GetRowAndColBy_SeatId (int seat_id , int * row , int *col) ;
 void 	DisplayStudioSeatInfoBy_Schedule (int 	**seat_info , int row , int col) ;
@@ -19,7 +21,7 @@ void Sale_UI_ShowScheduler(int playID);
 //根据计划ID，显示演出票
 void Sale_UI_ShowTicket(int schID);
 
-inline int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList);
+int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList);
 
 
 void Sale_UI_MgtEntry();

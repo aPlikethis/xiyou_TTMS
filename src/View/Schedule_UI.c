@@ -9,7 +9,8 @@
 /* #include "../Service/Ticket.h"
 #include "../View/Ticket_UI.h" */
 
-/* ¹ÜÀíÑÝ³ö¼Æ»®½çÃæ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½ */
+
 void Schedule_UI_MgtEntry(int play_id) {
     char choice;
     do {
@@ -95,7 +96,7 @@ int Schedule_UI_Add(void) {
     do {
         printf("Please enter the play id:");
         scanf("%d", &data.play_id);
-        if(Play_Srv_FechByID(data.play_id, &play_data)) {
+        if(Play_Srv_FetchByID(data.play_id, &play_data)) {
             break;
         }
         else {
@@ -106,7 +107,7 @@ int Schedule_UI_Add(void) {
     do {                    
         printf("Please enter the studio ID:");
         scanf("%d", &data.studio_id);
-         if(Studio_Srv_FechByID(data.studio_id, &studio_data)) {
+         if(Studio_Srv_FetchByID(data.studio_id, &studio_data)) {
             break;
         }
         else {
@@ -125,7 +126,7 @@ int Schedule_UI_Add(void) {
     return rtn;
 }
 
-/* É¾³ý */
+/* É¾ï¿½ï¿½ */
 int Schedule_UI_Del(void) {
     int id, rtn = 0;
     printf("Please enter the show plan ID:");

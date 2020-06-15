@@ -18,7 +18,7 @@ int Play_Perst_FetchAll(play_list_t list) {
     play_list_t end = list;
     Play = fopen("Play.dat", "rb");
     if(Play == NULL) {
-        printf("ERROR!dirctry failed\n");
+        printf("Play.dat file not found, have not play.\n");
         return recCount;
     }
     play_t data;
