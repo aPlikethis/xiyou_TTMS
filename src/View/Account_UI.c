@@ -76,7 +76,8 @@ int SysLogin()
 	return 0;
 }
 
-char Account_UI_Status2Char(account_type_t status)//身份判别
+//身份判别
+char Account_UI_Status2Char(account_type_t status)
 {
 	if (status == 0)
 		return 'N';
@@ -87,6 +88,7 @@ char Account_UI_Status2Char(account_type_t status)//身份判别
 	else if (status == 2)
 		return 'M';
 }
+
 //系统用户管理界面
 void Account_UI_MgtEntry(void)
 {
@@ -324,6 +326,7 @@ int Account_UI_Modify(account_list_t list,char usrName[])
 		return 0;
 	}
 }
+
 //删除系统用户信息界面
 int Account_UI_Delete(account_list_t list,char usrName[])
 {
@@ -335,6 +338,7 @@ int Account_UI_Delete(account_list_t list,char usrName[])
 	}
 	return 0;
 }
+
 //查询系统用户界面
 int Account_UI_Query(account_list_t list, char usrName[])
 {

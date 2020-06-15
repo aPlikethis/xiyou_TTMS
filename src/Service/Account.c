@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 
-//创建系统初始化账号admin
+//创建管理员Admin匿名系统用户
 void Account_Srv_InitSys()
 {
 	if(Account_Perst_CheckAccFile()==1){

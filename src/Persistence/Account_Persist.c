@@ -176,7 +176,7 @@ int Account_Perst_RemByID(int id)
     return found;
 }
 
-//查询所有系统用户
+//获取所有系统用户
 int Account_Perst_SelectAll(account_list_t list)
 {
     account_node_t *pNew;
