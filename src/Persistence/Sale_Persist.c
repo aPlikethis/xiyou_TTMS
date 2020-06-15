@@ -91,7 +91,7 @@ int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID, user_date_t stDate,
 
 
 //根据给定时间区间内的销售记录
-int Sale_Perst_SelectByDate(sale_list_t list, ttms_date_t stDate,
+int Sale_Perst_SelectByDate(sale_list_t list, user_date_t stDate,
 		user_date_t endDate) {
 	sale_node_t *p=list->next;
 	int found = 0;
