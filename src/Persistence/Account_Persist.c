@@ -13,6 +13,7 @@ static const char ACCOUNT_DATA_FILE[] = "Account.dat";
 static const char ACCOUNT_DATA_TEMP_FILE[] = "AccountTmp.dat";
 static const char ACCOUNT_KEY_NAME[] = "Account";
 
+//判断文件是否存在
 int Account_Perst_CheckAccFile()
 {
     if(access(ACCOUNT_DATA_FILE,0)==0)  //access(文件名，0)判断文件是否存在
@@ -26,6 +27,7 @@ int Account_Perst_CheckAccFile()
     
 }
 
+//通过用户名查找系统用户
 int Account_Perst_SelByName(char usrName[], account_t *buf)
 
 {
@@ -53,6 +55,8 @@ int Account_Perst_SelByName(char usrName[], account_t *buf)
 	
 	return found;
 }
+
+//通过用户ID查找系统用户
 int Account_Perst_SelectByID(int id, account_t *buf)
 {
     assert(buf!=NULL);
@@ -78,6 +82,7 @@ int Account_Perst_SelectByID(int id, account_t *buf)
 	return found;
 }
 
+//更新系统用户
 int Account_Perst_Update(account_t *data)
 {
     assert(data!=NULL);
@@ -108,6 +113,7 @@ int Account_Perst_Update(account_t *data)
     return found;
 }
 
+//插入系统用户
 int Account_Perst_Insert(account_t *data) {
     assert(NULL!=data);
 
@@ -128,6 +134,7 @@ int Account_Perst_Insert(account_t *data) {
 	return ret;
 }
 
+//删除系统用户
 int Account_Perst_RemByID(int id)
 {
 	//对原始数据文件重命名
@@ -169,6 +176,7 @@ int Account_Perst_RemByID(int id)
     return found;
 }
 
+//查询所有系统用户
 int Account_Perst_SelectAll(account_list_t list)
 {
     account_node_t *pNew;
