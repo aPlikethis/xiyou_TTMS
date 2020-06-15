@@ -386,7 +386,7 @@ void Sale_UI_MgtEntry() {
 }
 
 //退票
-void Sale_UI_ReturnTicket(){
+void Sale_UI_RetfundTicket(){
 	char choice;
 	//int id,t=0;
      //while(1){
