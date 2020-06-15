@@ -32,18 +32,19 @@ Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj
  F:/TTMS/TTMS(C+Lang)/src/Common/common.h
  F:/TTMS/TTMS(C+Lang)/src/Persistence/Sale_Persist.h
  F:/TTMS/TTMS(C+Lang)/src/Persistence/SalesAnalysis_Persist.h
+ F:/TTMS/TTMS(C+Lang)/src/Persistence/Ticket_Persist.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Account.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Play.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Sale.h
  F:/TTMS/TTMS(C+Lang)/src/Service/SalesAnalysis.c
  F:/TTMS/TTMS(C+Lang)/src/Service/SalesAnalysis.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
+ F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Ticket.h
 Service/CMakeFiles/Service.dir/Schedule.c.obj
  F:/TTMS/TTMS(C+Lang)/src/Common/common.h
  F:/TTMS/TTMS(C+Lang)/src/Persistence/Schedule_Persist.h
- F:/TTMS/TTMS(C+Lang)/src/Service/Play.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.c
  F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h
@@ -58,7 +59,6 @@ Service/CMakeFiles/Service.dir/StaSales.c.obj
  F:/TTMS/TTMS(C+Lang)/src/Persistence/Account_Persist.h
  F:/TTMS/TTMS(C+Lang)/src/Persistence/Sale_Persist.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Account.h
- F:/TTMS/TTMS(C+Lang)/src/Service/Play.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Sale.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
  F:/TTMS/TTMS(C+Lang)/src/Service/StaSales.c
@@ -74,9 +74,7 @@ Service/CMakeFiles/Service.dir/Ticket.c.obj
  F:/TTMS/TTMS(C+Lang)/src/Persistence/Play_Persist.h
  F:/TTMS/TTMS(C+Lang)/src/Persistence/Schedule_Persist.h
  F:/TTMS/TTMS(C+Lang)/src/Persistence/Ticket_Persist.h
- F:/TTMS/TTMS(C+Lang)/src/Service/Account.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Play.h
- F:/TTMS/TTMS(C+Lang)/src/Service/Sale.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Schedule.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Seat.h
  F:/TTMS/TTMS(C+Lang)/src/Service/Studio.h

@@ -31,18 +31,19 @@ Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Common/List.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Common/common.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Persistence/Sale_Persist.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Persistence/SalesAnalysis_Persist.h
+Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Persistence/Ticket_Persist.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Service/Account.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Service/Play.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Service/Sale.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Service/SalesAnalysis.c
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Service/SalesAnalysis.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Service/Schedule.h
+Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Service/Seat.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Service/Studio.h
 Service/CMakeFiles/Service.dir/SalesAnalysis.c.obj: ../Service/Ticket.h
 
 Service/CMakeFiles/Service.dir/Schedule.c.obj: ../Common/common.h
 Service/CMakeFiles/Service.dir/Schedule.c.obj: ../Persistence/Schedule_Persist.h
-Service/CMakeFiles/Service.dir/Schedule.c.obj: ../Service/Play.h
 Service/CMakeFiles/Service.dir/Schedule.c.obj: ../Service/Schedule.c
 Service/CMakeFiles/Service.dir/Schedule.c.obj: ../Service/Schedule.h
 Service/CMakeFiles/Service.dir/Schedule.c.obj: ../Service/Studio.h
@@ -57,7 +58,6 @@ Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Common/common.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Persistence/Account_Persist.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Persistence/Sale_Persist.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Account.h
-Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Play.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Sale.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/Schedule.h
 Service/CMakeFiles/Service.dir/StaSales.c.obj: ../Service/StaSales.c
@@ -73,9 +73,7 @@ Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Common/common.h
 Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Persistence/Play_Persist.h
 Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Persistence/Schedule_Persist.h
 Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Persistence/Ticket_Persist.h
-Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Service/Account.h
 Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Service/Play.h
-Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Service/Sale.h
 Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Service/Schedule.h
 Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Service/Seat.h
 Service/CMakeFiles/Service.dir/Ticket.c.obj: ../Service/Studio.h
