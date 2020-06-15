@@ -1,5 +1,4 @@
 #include "../View/Ticket_UI.h"
-// #include "../View/Sale_UI.h"
 
 #include "../Common/List.h"
 #include "../Common/common.h"
@@ -98,14 +97,8 @@ void Ticket_UI_Query(void) {
 int Ticket_UI_ShowTicket(int ticket_id) {
 	ticket_t *buf;
 	system("cls");
-//	gettime();
 	printf("\n\n\n\n\n") ;
 	if (Ticket_Srv_FetchByID(ticket_id, buf)) {
-
-//			data.id = buf.id;
-//			data.schedule_id = buf.schedule_id;
-//			data.seat_id = buf.seat_id;
-//			data.status = 1;
         printf(
                 "\n==================================================================================================\n");
         printf(

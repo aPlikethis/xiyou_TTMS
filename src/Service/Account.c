@@ -1,4 +1,5 @@
 #include "../Common/List.h"
+#include "../Persistence/Account_Persist.h"
 #include "Account.h"
 #include <string.h>
 #include <stdlib.h>
@@ -8,7 +9,7 @@
 //创建管理员Admin匿名系统用户
 void Account_Srv_InitSys()
 {
-	if(Account_Perst_CheckAccFile()==1){
+	if(Account_Perst_CheckAccFile()==0){
 		return ;
 	}
 
@@ -16,14 +17,14 @@ void Account_Srv_InitSys()
 	char pwd[20],pwd1[20];
     char ch;
     int i;
-    account_t data_admin;
+    account_t admin;
     printf("It is no Account.dat,please init admin!!please input [E]nter");
 	setbuf(stdin,NULL);
     getchar();
 	printf("Please input you want init name :\n			");
 	setbuf(stdin,NULL);
 	getchar();
-	gets(data_admin.username);
+	scanf("%s",admin.username);
     
 	while(1){
     	i=0;
@@ -66,29 +67,29 @@ void Account_Srv_InitSys()
 			break;
 		}
 	}
+	for(i=0;i<20;i++){
+		admin.password[i] = pwd[i];
+	}
 	
 	system("cls");	
-	for(i=0;i<20;i++)
-	{
-		data_admin.password[i] = pwd[i];
-	}
+	
 
 	setbuf(stdin,NULL);
 	printf("\n[0]anonymous   |   [1]Conductor   |   [2]manager   |   [9]admin\n");
-	printf("	please input you want type\n(if you are admin)plseae input [9]:");
+	printf("	please input you want type\n(if you are admin)plseae input[9]: ");
 	setbuf(stdin,NULL);
-	scanf("%d",&data_admin.type);
+	scanf("%d",&admin.type);
 	getchar();
 
 	printf("please input your phone number(only you know!!!):\n			");
-	scanf("%s",data_admin.phone);
+	scanf("%d",&admin.phone);
 	getchar();
 
 	setbuf(stdin,NULL);
-	Account_Srv_Add(&data_admin);
+	Account_Srv_Add(&admin);
 }
 //验证登录账号是否已存在，存在，保存登录用户信息到全局变量gl_CurUser，return 1；否则return 0
-int Account_Srv_Verify(char usrName[],unsigned char pwd[])
+int Account_Srv_Verify(char usrName[],char pwd[])
 {
 	account_t usr;
     
@@ -145,14 +146,14 @@ int Account_Srv_FetchByName(char usrName[], account_t *buf)
 	return Account_Perst_SelByName(usrName, buf);
 }
 //添加一个用户账号，通过调用Account_Perst_Insert(data)函数实现
-int Account_Srv_Add(account_t *data)
+int Account_Srv_Add(account_t * data)
 {
     return Account_Perst_Insert(data);
 }
 //修改一个用户账号，通过调用Account_Perst_Update(data)函数实现
-int Account_Srv_Modify(account_t *data)
+int Account_Srv_Modify(account_t * data)
 {
-	return Account_Perst_Update(&data);
+	return Account_Perst_Update(data);
 }
 //删除一个用户账号，通过调用Account_Perst_DeleteByID(usrID)函数实现
 int Account_Srv_DeleteByID(int usrID)

@@ -12,22 +12,8 @@ View/CMakeFiles/View.dir/MaiAccount_UI.c.obj: ../Service/Account.h
 View/CMakeFiles/View.dir/MaiAccount_UI.c.obj: ../View/MaiAccount_UI.c
 View/CMakeFiles/View.dir/MaiAccount_UI.c.obj: ../View/MaiAccount_UI.h
 
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Common/List.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Common/common.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Service/Account.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Service/Play.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Service/Sale.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Service/SalesAnalysis.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Service/Schedule.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Service/Seat.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Service/Studio.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../Service/Ticket.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../View/Account_UI.h
 View/CMakeFiles/View.dir/Main_Menu.c.obj: ../View/Main_Menu.c
 View/CMakeFiles/View.dir/Main_Menu.c.obj: ../View/Main_Menu.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../View/Play_UI.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../View/Sale_UI.h
-View/CMakeFiles/View.dir/Main_Menu.c.obj: ../View/SalesAnalysis_UI.h
 View/CMakeFiles/View.dir/Main_Menu.c.obj: ../View/Studio_UI.h
 
 View/CMakeFiles/View.dir/Play_UI.c.obj: ../Common/List.h
@@ -36,17 +22,20 @@ View/CMakeFiles/View.dir/Play_UI.c.obj: ../Service/Play.h
 View/CMakeFiles/View.dir/Play_UI.c.obj: ../View/Play_UI.c
 View/CMakeFiles/View.dir/Play_UI.c.obj: ../View/Play_UI.h
 
-View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Common/List.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Common/common.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Service/Account.h
+View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Service/EntityKey.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Service/Play.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Service/Sale.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Service/Schedule.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Service/Seat.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Service/Studio.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../Service/Ticket.h
+View/CMakeFiles/View.dir/Sale_UI.c.obj: ../View/Main_Menu.h
+View/CMakeFiles/View.dir/Sale_UI.c.obj: ../View/Play_UI.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../View/Sale_UI.c
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../View/Sale_UI.h
+View/CMakeFiles/View.dir/Sale_UI.c.obj: ../View/Schedule_UI.h
 View/CMakeFiles/View.dir/Sale_UI.c.obj: ../View/Ticket_UI.h
 
 View/CMakeFiles/View.dir/SalesAnalysis_UI.c.obj: ../Common/List.h
@@ -64,11 +53,12 @@ View/CMakeFiles/View.dir/SalesAnalysis_UI.c.obj: ../View/SalesAnalysis_UI.h
 View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../Common/List.h
 View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../Common/common.h
 View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../Persistence/EntityKey_Persist.h
+View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../Persistence/Schedule_Persist.h
 View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../Service/Play.h
 View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../Service/Schedule.h
 View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../Service/Studio.h
-View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../Service/Ticket.h
 View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../View/Schedule_UI.c
+View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../View/Schedule_UI.h
 View/CMakeFiles/View.dir/Schedule_UI.c.obj: ../View/Ticket_UI.h
 
 View/CMakeFiles/View.dir/Seat_UI.c.obj: ../Common/List.h
@@ -91,7 +81,6 @@ View/CMakeFiles/View.dir/StaSales_UI.c.obj: ../View/StaSales_UI.h
 
 View/CMakeFiles/View.dir/Studio_UI.c.obj: ../Common/List.h
 View/CMakeFiles/View.dir/Studio_UI.c.obj: ../Service/Seat.h
-View/CMakeFiles/View.dir/Studio_UI.c.obj: ../Service/Studio.h
 View/CMakeFiles/View.dir/Studio_UI.c.obj: ../View/Studio_UI.c
 View/CMakeFiles/View.dir/Studio_UI.c.obj: ../View/Studio_UI.h
 

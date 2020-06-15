@@ -49,9 +49,9 @@ int Ticket_Srv_FetchBySchID(int ID,ticket_list_t list){
 }
 int Ticket_Srv_SelBySchID(int id, ticket_list_t list,const sale_t *data){
 int count;
-typedef struct list {
+typedef struct list{
 	int value;
-	struct list* next;
+	struct list *next;
 }list;
 FILE *fd;
 
