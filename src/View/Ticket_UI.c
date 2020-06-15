@@ -1,14 +1,14 @@
 #include "../View/Ticket_UI.h"
-#include "../View/Sale_UI.h"
+// #include "../View/Sale_UI.h"
 
 #include "../Common/List.h"
 #include "../Common/common.h"
 
 #include "../Service/Ticket.h"
 #include "../Service/Play.h"
-#include "../Service/studio.h"
+#include "../Service/Studio.h"
 #include "../Service/Schedule.h"
-#include "../Service/seat.h"
+#include "../Service/Seat.h"
 
 
 #include <stdio.h>
@@ -28,7 +28,7 @@ void Ticket_UI_MgtEntry(int schedule_id)
     need_schedule = (schedule_t *)malloc(sizeof(schedule_t));
     need_play = (play_t *)malloc(sizeof(play_t));
     
-    Schedule_Srv_FetchByID(schedule_id, need_schedule);
+    Schedule_Srv_SelectByID(schedule_id, need_schedule);
     Play_Srv_FetchByID( need_schedule->play_id, need_play);
     
     
@@ -61,14 +61,14 @@ void Ticket_UI_MgtEntry(int schedule_id)
             {
 		        case 'a':
 	        	case 'A':
-		         	if (Ticke_Srv_GenBatch(schedule_id))
+		         	if (Ticket_Srv_GenBatch(schedule_id))
 			        	printf("生成成功!\n");
 			     else
 				        printf("生成失败!\n");
 			        break;
 		        case 'd':
 		        case 'D':
-			        if(Ticket_Sry_DeleteBatch(schedule_id) && Ticker_Srv_GenBatch(schedule_id))
+			        if(Ticket_Srv_DeleteBatch(schedule_id) && Ticket_Srv_GenBatch(schedule_id))
 				        printf("重新生成成功");
 			        else
 				        printf("重新生成失败");
@@ -98,22 +98,23 @@ void Ticket_UI_Query(void) {
 int Ticket_UI_ShowTicket(int ticket_id) {
 	ticket_t *buf;
 	system("cls");
-	gettime();
+//	gettime();
 	printf("\n\n\n\n\n") ;
-	if (Ticket_Srv_FetchByID(ticket_id, buf))
-	{
+	if (Ticket_Srv_FetchByID(ticket_id, buf)) {
 
-			data.id = buf.id;
-			data.schedule_id = buf.schedule_id;
-			data.seat_id = buf.seat_id;
-			data.status = 1;
-				 printf(
+//			data.id = buf.id;
+//			data.schedule_id = buf.schedule_id;
+//			data.seat_id = buf.seat_id;
+//			data.status = 1;
+        printf(
                 "\n==================================================================================================\n");
         printf(
                 "*********************************************票 信 息*********************************************\n");
-	printf("             票ID              演出计划ID                   座位ID                 票价                  \n\n");
-	printf("               %d                    %d                          %d                     %d\n\n\n",buf->id,buf->schedule_id,buf->seat_id,buf->price);
-	printf("**************************************************************************************************\n");
+        printf("             票ID              演出计划ID                   座位ID                 票价                  \n\n");
+        printf("               %d                    %d                          %d                     %d\n\n\n",
+               buf->id, buf->schedule_id, buf->seat_id, buf->price);
+        printf("**************************************************************************************************\n");
+    }
 	else
 	{
 		printf("未找到该票，请检查后重新查找。");

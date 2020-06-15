@@ -34,7 +34,7 @@ int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 		return 0;
 	}
 	play_t buf;
-	Schedule_Perst_SelectByID_ticket(schedule_id,&sch);
+	Schedule_Perst_SelectByID(schedule_id,&sch);
 
 	Play_Perst_SelectByID(sch.play_id,&buf);
 	
@@ -54,7 +54,7 @@ int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 	}
 
 	fclose(fp);
-	return rtn
+	return rtn;
 }
 
 
@@ -106,6 +106,7 @@ int Ticket_Perst_Rem(int schedule_id)
 //功能：根据ID载入演出票
 int Ticket_Perst_SelByID(int id, ticket_t *buf)
 {
+    ticket_t data;
     int found = 0;
     FILE *fp; 
     fp = fopen("Ticket.dat","rb");
@@ -118,7 +119,7 @@ int Ticket_Perst_SelByID(int id, ticket_t *buf)
     {
         while(!feof(fp))
         {
-            fread(&date, sizeof(ticket_t),1,fp);
+            fread(&data, sizeof(ticket_t),1,fp);
             if(data.id == id)
             {
                 * buf = data;
@@ -129,8 +130,6 @@ int Ticket_Perst_SelByID(int id, ticket_t *buf)
     }
     fclose(fp);
     return found;
-    }
-
 }
 
 
