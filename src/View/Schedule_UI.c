@@ -95,7 +95,7 @@ int Schedule_UI_Add(void) {
     do {
         printf("Please enter the play id:");
         scanf("%d", &data.play_id);
-        if(Play_Srv_FechByID(data.play_id, &play_data)) {
+        if(Play_Srv_FetchByID(data.play_id, &play_data)) {
             break;
         }
         else {
@@ -106,7 +106,7 @@ int Schedule_UI_Add(void) {
     do {                    
         printf("Please enter the studio ID:");
         scanf("%d", &data.studio_id);
-         if(Studio_Srv_FechByID(data.studio_id, &studio_data)) {
+         if(Studio_Srv_FetchByID(data.studio_id, &studio_data)) {
             break;
         }
         else {
