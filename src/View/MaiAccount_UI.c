@@ -119,9 +119,9 @@ void MaiAccount_UI_Mgt ()
 	char name[20],phone[15];
 	int i = 0;
 	char ch;
-	printf("please input your name:");
 	
 	while(1){
+		printf("please input your name:");
 		scanf("%s",name);
 		getchar();
 		if(Account_Srv_Verifyno(name)){

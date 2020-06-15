@@ -28,23 +28,24 @@ int SysLogin()
 		"          ## ##   ## ##   ##      ##      ##       ##   ##  ##       ## ##      \n"
 		"           ###     ###    ####### #######  ######    ###    ##       ## ####### \n"
 		"================================================================================\n");
-	getchar();
 	printf("please input [Enter] to continue!");
+	getchar();
+	
 	Account_Srv_InitSys();
 	int x = 3,i;
 	char ch;
 	while(x>0){
+		i = 0;
 		printf("You have %d login opportunities\n",x);
-		char usrName[20],Pwd[20];
+		char usrName[20],pwd[20];
 		printf("Please input your name:");
 		setbuf(stdin,NULL);
-		gets(usrName);
-		
-		printf("Please input your password:");
+		scanf("%s",usrName);		
+		printf("\nPlease input your passsword:");
 		setbuf(stdin,NULL);
 		while((ch=getch())!='\r'){
 			if(i<20){
-				Pwd[i++]=ch;
+				pwd[i++]=ch;
 				putchar('*');
 			}
 			else if(i>0&&ch=='\b'){
@@ -53,15 +54,16 @@ int SysLogin()
 				putchar(' ');
 				putchar('\b');
 			}
-			Pwd[i]='\0';
+			pwd[i]='\0';
 		}
-		if(Account_Srv_Verify(usrName,Pwd)){
+
+		if(Account_Srv_Verify(usrName,pwd)){
 			printf("\nWelcome distinguished users,please input [Enter]!\n");
 			getchar();
 			return 1;
 		}
 		else{
-			printf("login in error\n");
+			printf("\nlogin in error\n");
 			x--;
 		}
 	}
@@ -92,7 +94,7 @@ char Account_UI_Status2Char(account_type_t status)
 }
 
 //系统用户管理界面
-/*void Account_UI_MgtEntry(void)
+void Account_UI_MgtEntry(void)
 {
 	if(gl_CurUser.type!=USR_ADMIN){
 		printf("you isn't admin!please input [Enter]");
@@ -200,7 +202,7 @@ char Account_UI_Status2Char(account_type_t status)
 		}
 	}while(ch!='r'&&ch!='R');
 	List_Destroy(head,account_node_t); 
-}*/
+}
 
 //创建系统新用户界面
 int Account_UI_Add(account_list_t list)
