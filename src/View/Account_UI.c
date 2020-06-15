@@ -1,11 +1,11 @@
-#include "../Common/list.h"
-#include "../Service/Account.h"
-#include "Account_UI.h"
+
 #include <unistd.h>
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-
+#include "../Common/list.h"
+#include "MaiAccount_UI.h" 
+#include "Account_UI.h"
 
 //系统用户登录界面
 int SysLogin()
@@ -28,6 +28,8 @@ int SysLogin()
 		"          ## ##   ## ##   ##      ##      ##       ##   ##  ##       ## ##      \n"
 		"           ###     ###    ####### #######  ######    ###    ##       ## ####### \n"
 		"================================================================================\n");
+	getchar();
+	printf("please input [Enter] to continue!");
 	Account_Srv_InitSys();
 	int x = 3,i;
 	char ch;
@@ -90,7 +92,7 @@ char Account_UI_Status2Char(account_type_t status)
 }
 
 //系统用户管理界面
-void Account_UI_MgtEntry(void)
+/*void Account_UI_MgtEntry(void)
 {
 	if(gl_CurUser.type!=USR_ADMIN){
 		printf("you isn't admin!please input [Enter]");
@@ -198,7 +200,7 @@ void Account_UI_MgtEntry(void)
 		}
 	}while(ch!='r'&&ch!='R');
 	List_Destroy(head,account_node_t); 
-}
+}*/
 
 //创建系统新用户界面
 int Account_UI_Add(account_list_t list)
@@ -312,7 +314,7 @@ int Account_UI_Modify(account_list_t list,char usrName[])
 				for(i = 0;i<20;i++){
 					temp->data.password[i] = pwd[i];
 				}
-				int a = Account_Srv_Modify(temp);
+				int a = Account_Srv_Modify(&temp);
 				if(a==0){
 					return 0;
 				}
