@@ -7,7 +7,6 @@
 #include "../Service/Studio.h"
 #include "../Service/EntityKey.h"
 #include "../Service/Sale.h"
-#include "../Common/ComFunction.h"
 #include "../Common/Common.h"
 #include "Main_Menu.h"
 
@@ -21,8 +20,9 @@ extern account_t gl_CurUser;
 //根据计划ID，显示演出票
 int Sale_UI_ShowTicket(int schID)
 {
+	int schedule_id;
 	seat_list_t list;
-	List_Init(list,seat_node_t);
+	List_lnit();
 	int studio_ID;
 	
 	printf( "please input the studio ID :");
@@ -35,7 +35,7 @@ int Sale_UI_ShowTicket(int schID)
 	ticket_node_t *pos;
 	Pagination_t paging;
 
-//	List_Init(list,seat_node_t);
+List_Init(list,seat_node_t);
 	paging.offset = 0;
 	paging.pageSize = TICKET_PAGE_SIZE;
 	ticket_list_t list_ti;
@@ -48,9 +48,8 @@ int Sale_UI_ShowTicket(int schID)
 	do
 	{
 		system("clear");
-	//	paging.totalRecords = Ticket_Srv_FetchBySchID(schedule_id,list_ti);
-	//
-	//
+		paging.totalRecords = Ticket_Srv_FetchBySchID(schedule_id,list_ti);
+ 
 		printf( "====================================================================================\n");
 		printf( "*****************************************Ticket*************************************\n");
 		printf( "------------------------------------------------------------------------------------\n");
@@ -135,7 +134,7 @@ if (!Pageing_IsFirstPage(paging))
 			case'S':
 			case's':
 				Sale_UI_SellTicket(list_ti,list);
-				//paging.totalRecords = Ticket_Srv_FetchBySchID(schedule_id,list_ti);
+				paging.totalRecords = Ticket_Srv_FetchBySchID(schedule_id,list_ti);
 				break;
 
 		}
@@ -410,9 +409,7 @@ void Sale_UI_ReturnTicket(){
        				}else{
        					printf("\n\t\t\t该票已过有效期，无法退票");
        					printf("\n\n\t\t\t按任意键继续！。。。\n");
-					getchar();
-					break;
-					
+					getchar();	
        				}
        			}else{
        			
@@ -420,7 +417,6 @@ void Sale_UI_ReturnTicket(){
        				printf("\n\n\t\t\t按任意键继续！。。。\n");
        				
 				getchar();
-				break;
        			}
        		}
 		
@@ -428,7 +424,7 @@ void Sale_UI_ReturnTicket(){
 		if(t){
 			printf("\t\t\t请输入 Q 确认退票  输入 R 返回：");
 			choice=l_getc();
-			if('r'==choice || 'R'==choice) break;	
+			if('r'==choice || 'R'==choice) {
 			if('q'==choice || 'Q'==choice) {
 			
 				
@@ -451,11 +447,8 @@ void Sale_UI_ReturnTicket(){
        				printf("\n\n\t\t\t按任意键继续！。。。\n");
 				cl_stdin();
 				getchar();
-											
-				break;
-       			}
-       					
+       			}	
+			}		
        		}
-	}
 }
 
