@@ -36,9 +36,9 @@ void SalesAanalysis_UI_MgtEntry()
         system("cls");
         printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 		printf("\t\t\t=========================================================================\n");
-		printf("\t\t\t%28s""票房图表\n");
+		printf("\t\t\t%28s""Box office chart\n");
 		printf("\t\t\t-------------------------------------------------------------------------\n");
-		printf("\t\t\t剧目名\t\t区域\t\t售票数\t票房\t上映时间\t\t下映时间\n");
+		printf("\t\t\tPlay name\t\tarea\t\tNumber of tickets sold\tbox office\tRelease time\t\tDown time\n");
 		Paging_ViewPage_ForEach(head, paging, salesanalysis_node_t, pos, i){
 			printf("\t\t\t%-10s\t%-10s\t%-5ld\t%-5ld\t%d-%d-%d\t%d-%d-%d\t\n",
 					pos->data.name, pos->data.area, pos->data.totaltickets,pos->data.sales,
@@ -46,9 +46,9 @@ void SalesAanalysis_UI_MgtEntry()
 					pos->data.end_date.year,pos->data.end_date.month,pos->data.end_date.day);
 		}
 
-		printf("\t\t\t---------- 共 %2d 项 --------------------------- 第 %2d/%2d 页 --------\n",paging.totalRecords, Pageing_CurPage(paging),Pageing_TotalPages(paging));
+		printf("\t\t\t---------- %2d totalRecords --------------------------- %2d/%2d page --------\n",paging.totalRecords, Pageing_CurPage(paging),Pageing_TotalPages(paging));
 		printf("\t\t\t*************************************************************************\n");
-		printf("\t\t\t[P]上一页	|	[N]下一页	|	[R]返回\n");
+		printf("\t\t\t[P]last page	|	[N]next page	|	[R]eturn\n");
 		printf("\n\t\t\t=========================================================================\n");
 		fflush(stdin);
 		printf("\t\t\tYour Choice:");

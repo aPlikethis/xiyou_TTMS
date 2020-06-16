@@ -96,7 +96,6 @@ void Ticket_UI_Query(void) {
 int Ticket_UI_ShowTicket(int ticket_id) {
 	ticket_t *buf;
 	system("cls");
-        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 	printf("\n\n\n\n\n") ;
 	if (Ticket_Srv_FetchByID(ticket_id, buf)) {
         printf(

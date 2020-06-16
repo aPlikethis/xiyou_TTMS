@@ -270,7 +270,7 @@ int Account_UI_Add(account_list_t list)
 		}
 		printf("Please input the type:\n");
 		printf("==============================================================================\n");
-		printf("[0]匿名用户 | [1]售票员 | [2]经理 | [9]系统管理员:");
+		printf("[0]Anonymous user | [1]conductor | [2]manager | [9]system administrator:");
 		setbuf(stdin,NULL);
 		scanf("%d",&data.type);
 		getchar();

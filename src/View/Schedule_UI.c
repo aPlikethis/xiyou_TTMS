@@ -57,9 +57,9 @@ void Schedule_UI_MgtEntry(int play_id) {
         printf("==============Operation menu===========\n");
         printf("                                   \n");
         printf("[a]Add a new show plan\n");
-        printf("[s]set ticket for any schedule");
         printf("[u]Modify performance plan\n");
         printf("[d]Delete show plan\n");
+        printf("[s]set tiket for any schedule");
         printf("[n]Next page\n");
         printf("[l]Last page\n");
         printf("[r]drop out\n");

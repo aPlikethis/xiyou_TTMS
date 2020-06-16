@@ -80,7 +80,7 @@ void Seat_UI_MgtEntry(int roomID)
 
     if (!Studio_Srv_FetchByID(roomID, &studioRec))//studioRec中会存放找到的演播厅信息
     {
-		printf("\n没有该演播厅！\n已为您返回上级界面\n");
+		printf("\nNo studio!\nReturned to the superior interface for you\n");
 		return;
 	}
 	seat_list_t list;//演出厅座位链表的头指针
@@ -97,25 +97,25 @@ void Seat_UI_MgtEntry(int roomID)
 
         seatCount = Seat_Srv_FetchByRoomID(list,roomID);
     }
-    printf("错误处");
+    printf("Mistakes");
     char choice;
     do
     {
         system("cls");
         printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
         printf("\n==================================================================================================\n");
-        printf("**************************************  演 出 厅 座 位 信 息  ************************************\n");
+        printf("************************************** Information of seats in the concert hall ************************************\n");
         printf("--------------------------------------------------------------------------------------------------\n\n\n");
         seat_node_t *seatdata;
         int i,j;
         printf("               ");
         for(j = 1; j <= studioRec.colsCount; j++ )
-            printf("%2d ",j);
+            printf("%2d Row ",j);
         printf("\n");
         for (i = 1; i <= studioRec.rowsCount; i++)
         {
             j=1;
-            printf("  \t%2d排: ", i);
+            printf("  \t%2d Row: ", i);
             List_ForEach(list,seatdata)
             {
                 if (seatdata->data.row == i)
@@ -132,11 +132,11 @@ void Seat_UI_MgtEntry(int roomID)
         }
         printf("---------------------------------------------------------------------------------------------------\n");
         printf(
-            "      [A]    添加新座位    |    [U]    修改座位    |    [D]    删除座位    |    [R]    返回上层");
+            "      [A]    Add new seat   |    [U]    Change seats    |    [D]    Delete seat    |    [R]    Back to the top");
         printf(
             "\n==================================================================================================\n");
 
-        printf("请输入您要选择的操作:");
+        printf("Please enter the action you want to select:");
         fflush(stdin);
         scanf("%c", &choice);
         fflush(stdin);
@@ -203,14 +203,14 @@ int Seat_UI_Add(seat_list_t list, int roomID, int row, int column)
 	    system("cls");
         printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 		printf("\n==================================================================================================\n");
-		printf("*************************************** 添 加 新 的 座 位 ****************************************\n");
+		printf("*************************************** Add a new seat ****************************************\n");
 		printf("--------------------------------------------------------------------------------------------------\n\n\n");
         do
         {
-            printf("待添加座位行号: ");
+            printf("Seat line number to be added:");
             fflush(stdin);
             scanf("%d", &(seatRec.row));
-            printf("待添加座位列号: ");
+            printf("Row number of seat to be added: ");
             scanf("%d", &(seatRec.column));
             printf("\n\n\n");
             printf("==================================================================================================\n");
@@ -219,7 +219,7 @@ int Seat_UI_Add(seat_list_t list, int roomID, int row, int column)
         seatdata = Seat_Srv_FindByRowCol(list,seatRec.row,seatRec.column);
 		if (seatdata != NULL)
         {
-			printf("该座位已存在\n");
+			printf("The seat already exists\n");
             continue;
 		}
 		seatRec.roomID = roomID;
@@ -228,17 +228,17 @@ int Seat_UI_Add(seat_list_t list, int roomID, int row, int column)
 		if(Seat_Srv_Add(&seatRec))
         {
             newRecCount++;
-            printf("新座位添加成功\n");
+            printf("New seat added successfully\n");
             seatdata = (seat_node_t*) malloc(sizeof(seat_node_t));
 			seatdata->data = seatRec;
 			Seat_Srv_AddToSoftedList(list,seatdata);
         }
         else
         {
-             printf("新的座位添加失败!\n");
+             printf("Failed to add new seat!\n");
         }
 		printf("---------------------------------------------------------------------------------------------------\n");
-		printf("[A] 继续添加, [R] 返回:");
+		printf("[A]Continue to add , [R] return:");
 		fflush(stdin);
 		scanf("%c", &choice);
 	}while ('a' == choice || 'A' == choice);
@@ -264,14 +264,14 @@ int Seat_UI_Modify(seat_list_t list, int row, int column)
         system("cls");
         printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 		printf("\n==================================================================================================\n");
-		printf("******************************************  修 改 座 位 ******************************************\n");
+		printf("******************************************  Change seats ******************************************\n");
 		printf("--------------------------------------------------------------------------------------------------\n\n\n");
         do
 		{
-            printf("待修改座位行号:");
+            printf("Seat line number to be modified:");
             fflush(stdin);
             scanf("%d", &(seatrec.row));
-            printf("待修改座位列号:");
+            printf("Row no. of seats to be modified:");
             scanf("%d", &(seatrec.column));
             printf("\n\n\n");
             printf("==================================================================================================\n");
@@ -286,7 +286,7 @@ int Seat_UI_Modify(seat_list_t list, int row, int column)
 
 		seatrec.roomID = seatnode->data.roomID;
 		seatrec.id = seatnode->data.id;
-		printf("当前状态[%c]\n要修改为的状态 [X]损坏的座位 [#]完好的座位 [|]过道 : ",Seat_UI_Status2Char(seatnode->data.status));
+		printf("current state[%c]\nStatus to modify to [X]Damaged seat [#]Good seats [|]aisle : ",Seat_UI_Status2Char(seatnode->data.status));
 		getchar();
 		seatnode->data.status = seatrec.status = Seat_UI_Char2Status(getchar());
 		if(Seat_Srv_Modify(&seatrec))
@@ -295,15 +295,15 @@ int Seat_UI_Modify(seat_list_t list, int row, int column)
                 newRecCount++;
             else
                 newRecCount--;
-            printf("座位修改成功\n");
+            printf("Seat modified successfully\n");
         }
         else
         {
-             printf("座位修改失败!\n");
+             printf("Seat modification failed!\n");
         }
         printf("\n\n\n");
 		printf("--------------------------------------------------------------------------------------------------\n");
-		printf("A 继续修改, R 返回:");
+		printf("A Continue to modify, R return:");
 		fflush(stdin);
 		scanf("%c", &choice);
 	}while ('a' == choice || 'A' == choice);
@@ -324,32 +324,32 @@ int Seat_UI_Delete(seat_list_t list, int row, int column)
 	char choice;
 	do {
 		printf("\n==================================================================================================\n");
-		printf("******************************************  删 除 座 位 ******************************************\n");
+		printf("******************************************  Delete seat ******************************************\n");
 		printf("--------------------------------------------------------------------------------------------------\n\n\n");
 		do
 		{
 			fflush(stdin);
-			printf("待删除座位行号:");
+			printf("Seat line number to be deleted:");
 			scanf("%d", &(newrow));
-			printf("待删除座位列号:");
+			printf("Row number of seat to be deleted:");
 			scanf("%d", &(newcolumn));
 			fflush(stdin);
 		} while (newrow > row || newcolumn > column);
         seatnode = Seat_Srv_FindByRowCol(list, newrow, newcolumn);
         if(NULL == seatnode)
         {
-            printf("该座位不存在！请输入存在的座位！\n");
+            printf("The seat does not exist! Please enter the existing seats!\n");
             continue;
         }
 		if (Seat_Srv_DeleteByID(seatnode->data.id)) {
-				printf("座位删除成功\n");
+				printf("Seat deleted successfully\n");
 				delSeatCount++;
 				List_FreeNode(seatnode);	//释放结点座位结点p
 
 		}
         printf("\n\n\n");
 		printf("--------------------------------------------------------------------------------------------------\n");
-		printf("[A]继续删除, [R]返回");
+		printf("[A]Continue to delete, [R]return");
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);

@@ -21,19 +21,20 @@ void MaiAccount_UI_MgtEntry ()
     	i=0;
 		printf("\nPlease input your old passsword :\n			");
 		setbuf(stdin,NULL);
-		while((ch=getch())!='\r'){
-			if(i<20){
-				pwd[i++]=ch;
-				putchar('*');
-			}
-			else if(i>0&&ch=='\b'){
-				--i;
-				putchar('\b');
-				putchar(' ');
-				putchar('\b');
-			}
-			pwd[i]='\0';
-		}
+//		while((ch=getch())!='\r'){
+//			if(i<20){
+//				pwd[i++]=ch;
+//				putchar('*');
+//			}
+//			else if(i>0&&ch=='\b'){
+//				--i;
+//				putchar('\b');
+//				putchar(' ');
+//				putchar('\b');
+//			}
+//			pwd[i]='\0';
+//		}
+        scanf("%s", pwd);
 		int x = 1;
 		if(strcmp(pwd,data.password)!=0)
             x = 0;
@@ -50,19 +51,20 @@ void MaiAccount_UI_MgtEntry ()
         		printf("\nPlease input your new passsword :\n			");
 				setbuf(stdin,NULL);
 				i=0;
-				while((ch=getch())!='\r'){
-					if(i<20){
-						pwd[i++]=ch;
-						putchar('*');
-					}
-					else if(i>0&&ch=='\b'){
-						--i;
-						putchar('\b');
-						putchar(' ');
-						putchar('\b');
-					}
-					pwd[i]='\0';
-				}
+//				while((ch=getch())!='\r'){
+//					if(i<20){
+//						pwd[i++]=ch;
+//						putchar('*');
+//					}
+//					else if(i>0&&ch=='\b'){
+//						--i;
+//						putchar('\b');
+//						putchar(' ');
+//						putchar('\b');
+//					}
+//					pwd[i]='\0';
+//				}
+                scanf("%s", pwd);
 				int x1 = 1;
         		if(strcmp(pwd,data.password)!=0){
         			x1=0;
@@ -77,19 +79,20 @@ void MaiAccount_UI_MgtEntry ()
 					printf("\nplease input the new password again:\n			");
 					setbuf(stdin,NULL);
 					i=0;
-					while((ch=getch())!='\r'){
-						if(i<20){
-							pwd1[i++]=ch;
-							putchar('*');
-						}
-						else if(i>0&&ch=='\b'){
-							--i;
-							putchar('\b');
-							putchar(' ');
-							putchar('\b');
-						}
-						pwd1[i]='\0';
-					}
+//					while((ch=getch())!='\r'){
+//						if(i<20){
+//							pwd1[i++]=ch;
+//							putchar('*');
+//						}
+//						else if(i>0&&ch=='\b'){
+//							--i;
+//							putchar('\b');
+//							putchar(' ');
+//							putchar('\b');
+//						}
+//						pwd1[i]='\0';
+//					}
+                    scanf("%s", pwd);
 					int x2 = 1;
         			if(strcmp(pwd,pwd1)!=0){
         				x2=0;
