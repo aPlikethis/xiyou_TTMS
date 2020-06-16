@@ -2,6 +2,8 @@
 #include "Schedule_UI.h"
 #include "Sale_UI.h"
 #include "Ticket_UI.h"
+#include "Account_UI.h"
+#include "MaiAccount_UI.h"
 #include "../Service/Ticket.h"
 #include "../Service/Seat.h"
 #include "../Service/Studio.h"
@@ -9,144 +11,17 @@
 #include "../Service/Sale.h"
 #include "../Common/Common.h"
 #include "Main_Menu.h"
-
+#include "Studio_UI.h"
+#include "StaSales_UI.h"
+#include "../Service/Schedule.h"
+#include "../Service/Account.h"
+#include "../Service/Play.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-//引用登陆用户的全局数据结构
-extern account_t gl_CurUser;
 
-//根据计划ID，显示演出票
-int Sale_UI_ShowTicket(int schID)
-{
-	int schedule_id;
-	seat_list_t list;
-	List_lnit();
-	int studio_ID;
-	
-	printf( "please input the studio ID :");
-	scanf( "%d",&studio_ID);
-	getchar( );
-	int seat = Seat_Srv_FetchValidByRoomID(list,studio_ID);
-	
-	int i;
-	char choice;
-	ticket_node_t *pos;
-	Pagination_t paging;
-
-List_Init(list,seat_node_t);
-	paging.offset = 0;
-	paging.pageSize = TICKET_PAGE_SIZE;
-	ticket_list_t list_ti;
-	
-	List_Init(list_ti,ticket_node_t);
-
-	paging.totalRecords = Ticket_Srv_FetchBySchID_ticket(list_ti,schedule_id);
-	Paging_Locate_FirstPage(list_ti,paging);
-	studio_t buf;
-	do
-	{
-		system("clear");
-		paging.totalRecords = Ticket_Srv_FetchBySchID(schedule_id,list_ti);
- 
-		printf( "====================================================================================\n");
-		printf( "*****************************************Ticket*************************************\n");
-		printf( "------------------------------------------------------------------------------------\n");
-        printf( "Ticket ID          Scheuid ID         Seat ID       Price             Ticket Status\n");
-		Paging_ViewPage_ForEach(list_ti,paging,ticket_t,pos,i)
-		{
-			printf("  %5d               %5d            %5d      %5d                     %5d\n",pos->data.id,pos->data.schedule_id,pos->data.seat_id,pos->data.price,pos->data.status);
-		}
-
-		printf( "------Total Records  : %2d ------------------------Page %2d / %2d----------------------\n",paging.totalRecords,Pageing_CurPage(paging),Pageing_TotalPages(paging));
-		Studio_Srv_FetchByID(studio_ID,&buf);
-
-		int xx = 0,yy = 1;		
-			for(int i=0; i <= buf.rowsCount;i++)
-        	{
-	            for(int j=0;j<=buf.colsCount;j++)
-        	    {
-                	if(i==0)
-			{
-        	            printf("%3d",xx++);
-                	}
-	                else if(j==0)
-			{
-                	    printf("%3d",yy++);
-	                }
-        	        else
-			{
-				int flag;
-				flag=0;
-				    List_ForEach(list_ti,pos)
-		            {
-					//	printf("status =%d \n",pos->data.status);
-                //printf("seatid = %d\n",pos->data.seat_id);
-						seat_node_t *buf1;
-						buf1  =  Seat_Srv_FindByID(list, pos->data.seat_id);
-						//Seat_Srv_FetchByID(pos->data.seat_id, buf1);
-						//printf("row = %d  col =  %d pos-sss = %d \n",buf1->data.row,buf1->data.column,pos->data.status);
-					    if(buf1->data.row ==i && buf1->data.column == j)
-					    {
-							if(pos->data.status==0){
-									printf( "%3c",'#');
-									flag = 1;
-							}
-							else{
-								flag = 1;
-								printf("   ");
-							}
-							//printf("status   =%d  \n",pos->data.status);
-				 	   }
-					}if(!flag) printf("   ");
-				} 
-		 	}
-		    putchar('\n');
-		}
-
-		printf( "[N]ext    [P]rev    [S]ale Ticket      [R]eturn    \n");
-
-
-		printf( "Your choice:");
-		choice = getchar();
-		//scanf( "%c",&choice);
-		getchar( );
-		
-		switch(choice)
-		{
-
-			case'n':
-			case'N':
-				if (!Pageing_IsLastPage(paging)) 
-				{
-					Paging_Locate_OffsetPage(list_ti, paging, 1, ticket_node_t);
-				}
-
-				break;
-			case'p':
-			case'P':
-if (!Pageing_IsFirstPage(paging)) 
-				{
-					Paging_Locate_OffsetPage(list_ti, paging, -1,ticket_node_t);
-				}
-				break;
-			case'S':
-			case's':
-				Sale_UI_SellTicket(list_ti,list);
-				paging.totalRecords = Ticket_Srv_FetchBySchID(schedule_id,list_ti);
-				break;
-
-		}
-
-	}while(choice != 'R'  && choice != 'r');
-}
-
-    
-
-
-
-inline int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList){
+int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList){
 	
 	int id;
 	ticket_list_t head;
