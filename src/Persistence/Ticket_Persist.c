@@ -67,7 +67,7 @@ int Ticket_Perst_Rem(int schedule_id)
     ticket_t buf;
     if (rename("Ticket.dat","TicketTmp.dat") < 0)
     {
-        printf("改名失败！");
+        printf("Rename failed！");
         return found;
     }
     else
@@ -76,7 +76,7 @@ int Ticket_Perst_Rem(int schedule_id)
         ftp = fopen("Ticket.dat","wb+");
         if ( fp == NULL && ftp == NULL)
         {
-            printf("文件打开失败");
+            printf("File failed to open");
             return found;
         }
         else

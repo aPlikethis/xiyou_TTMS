@@ -34,23 +34,19 @@ void Ticket_UI_MgtEntry(int schedule_id)
     
     
     do{
-        printf(
-                "\n==================================================================================================\n");
-        printf(
-                "*********************************************票 信 息*********************************************\n");
-	printf("             剧目名称             演出厅编号             演出日期             演出时间             \n\n");
-		
-
-	printf("           %-6s                 %.2d                %d/%.2d/%.2d            %.2d:%.2d:%.2d\n\n\n",
+        	printf("\n==================================================================================================\n");
+    printf("********************************************THE TICKET********************************************\n");
+	printf("   Repertoire name          Performance ID              Performance date            Show time             \n\n");
+	printf("      %-6s                    %.2d                       %d/%.2d/%.2d               %.2d:%.2d:%.2d\n\n\n",
                 need_play->name,need_schedule->studio_id,
                 need_schedule->date.year,need_schedule->date.month,need_schedule->date.day,
                 need_schedule->time.hour,need_schedule->time.minute,need_schedule->time.second);
 
 
 	printf("**************************************************************************************************\n");
-	printf("          |    [A]     生成该演出票    |    [D]    重新生成演出票    |     [R]     返回上层       |\n");
+	printf("  |    [A]dd show ticket   |    [D]elete and generate show tickets    |       [R]eturn         |\n");
 	printf("\n==================================================================================================\n");
-	printf("请输入您的选择：");
+	printf("Please enter your choice:");
 	fflush(stdin);
 	scanf("%c",&choice);
 	getchar();
@@ -61,22 +57,22 @@ void Ticket_UI_MgtEntry(int schedule_id)
 		        case 'a':
 	        	case 'A':
 		         	if (Ticket_Srv_GenBatch(schedule_id))
-			        	printf("生成成功!\n");
+			        	printf("Generated successfully!\n");
 			     else
-				        printf("生成失败!\n");
+				        printf("Generation failed!\n");
 			        break;
 		        case 'd':
 		        case 'D':
 			        if(Ticket_Srv_DeleteBatch(schedule_id) && Ticket_Srv_GenBatch(schedule_id))
-				        printf("重新生成成功");
+				        printf("Rebuilt successfully");
 			        else
-				        printf("重新生成失败");
+				        printf("Rebuild failed");
 			        break;
             }   
         }
         else
         {
-           printf("未知操作，请重新输入"); 
+           printf("Unknown operation, please re-enter"); 
         }
 	}while (choice != 'r' && choice != 'R');
 	system("cls");
@@ -86,7 +82,7 @@ void Ticket_UI_MgtEntry(int schedule_id)
 //功能：查询演出票界面
 void Ticket_UI_Query(void) {
 	int id;
-	printf("\n\t\t\t\t\t票的ID:");
+	printf("\n\t\t\t\t\tTicket_ID:");
 	scanf("%d",&id);
 	Ticket_UI_ShowTicket(id);
 }
@@ -102,15 +98,15 @@ int Ticket_UI_ShowTicket(int ticket_id) {
         printf(
                 "\n==================================================================================================\n");
         printf(
-                "*********************************************票 信 息*********************************************\n");
-        printf("             票ID              演出计划ID                   座位ID                 票价                  \n\n");
-        printf("               %d                    %d                          %d                     %d\n\n\n",
+                "*********************************************THE TICKET********************************************\n");
+        printf("           Ticket_ID          	 schedule_ID               Seat_ID                 Price                  \n\n");
+        printf("               %d                    %d                         %d                      %d\n\n\n",
                buf->id, buf->schedule_id, buf->seat_id, buf->price);
         printf("**************************************************************************************************\n");
     }
 	else
 	{
-		printf("未找到该票，请检查后重新查找。");
+		printf("Not Found，。");
 	}
     return 0;
 }

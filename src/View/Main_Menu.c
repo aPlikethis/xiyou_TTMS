@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 #include "../View/Studio_UI.h"
+#include "../View/Play_UI.h"
 
 //系统主菜单 
 void Main_Menu(void) {
@@ -38,27 +39,27 @@ void Main_Menu(void) {
 			break;
 		case 'P':
 		case 'p':
-			Play_UI_MgtEntry(0);
+			Play_UI_MgtEntry();
 			break;
 		case 'Q':
 		case 'q':
-			Queries_Menu();
+//			Queries_Menu();
 			break;
 		case 'T':
 		case 't':
-			Sale_UI_MgtEntry();
+//			Sale_UI_MgtEntry();
 			break;
 		case 'R':
 		case 'r':
-			Sale_UI_ReturnTicket();
+//			Sale_UI_ReturnTicket();
 			break;
 		case 'N':
 		case 'n':
-			SalesAanalysis_UI_MgtEntry();
+//			SalesAanalysis_UI_MgtEntry();
 			break;
 		case 'A':
 		case 'a':
-			Account_UI_MgtEntry();
+//			Account_UI_MgtEntry();
 			break;
 		}
 	} while ('E' != choice && 'e' != choice);
