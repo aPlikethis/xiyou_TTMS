@@ -237,7 +237,6 @@ int Seat_UI_Add(seat_list_t list, int roomID, int row, int column)
 	return newRecCount;
 }
 
-}
 
 /*
 标识符：TTMS_SCU_Seat_UI_Mod 

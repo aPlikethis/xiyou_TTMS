@@ -1,7 +1,7 @@
 #ifndef PLAY_H_
 #define PLAY_H_
 #include "../Common/common.h"
-#include "../Service/Play.h"
+
 
 //8号修改开始
 /* 剧目类型定义 */
@@ -19,11 +19,11 @@ typedef enum {
 }play_rating_t;
 
 /* 日期类型的定义如下 */
-typedef struct {
-    int year;
-    int month;
-    int day;
-}ttms_date_t;
+//typedef struct {
+//    int year;
+//    int month;
+//    int day;
+//}ttms_date_t;
 /* 剧目实体数据类型定义 */
 typedef struct {
     int id;                 //剧目id
