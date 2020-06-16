@@ -73,8 +73,8 @@ int Sale_Perst_DeleteByID(int saleID) {
 }
 
 //根据计划ID载入
-int Sale_Perst_SelBySchID(sale_list_t list, int PlayID, user_date_t stDate,
-		user_date_t endDate) {
+int Sale_Perst_SelBySchID(sale_list_t list, int PlayID, ttms_date_t stDate,
+		ttms_date_t endDate) {
 	sale_node_t *p=list->next;
 	int found = 0;
 	while (p != NULL)
