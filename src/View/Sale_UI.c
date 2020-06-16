@@ -232,15 +232,6 @@ void Sale_UI_MgtEntry() {
 				Sale_UI_ShowScheduler(id);
 			
 				break;
-		/*
-		case 'u':
-		case 'U':
-			
-			
-			break;
-			
-		
-		*/
 		case 'p':
 		case 'P':
 			if (!Pageing_IsFirstPage(paging)) {
