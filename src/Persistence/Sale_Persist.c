@@ -79,7 +79,7 @@ int Sale_Perst_SelBySchID(sale_list_t list, int PlayID, user_date_t stDate,
 	int found = 0;
 	while (p != NULL)
 	{
-		if(p->data.user_id==usrID && stDate.year<=p->data.date.year && stDate.month<=p->data.date.month && stDate.day<=p->data.date.day && endDate.year>=p->data.date.year && endDate.month>=p->data.date.month && endDate.day>=p->data.date.day )
+		if(p->data.user_id==PlayID && stDate.year<=p->data.date.year && stDate.month<=p->data.date.month && stDate.day<=p->data.date.day && endDate.year>=p->data.date.year && endDate.month>=p->data.date.month && endDate.day>=p->data.date.day )
 		{
 			found=1;
 			break;
