@@ -34,7 +34,7 @@ void Main_Menu(void) {
 		printf("[Q]ueries\n");
 		printf("Ra[n]king and Statistics.\n");
 		printf("[A]ccount Management.\n");
-		printf("[R]move file\n");
+		printf("[L]Reload");
 		printf("[E]xist.\n");
 		printf("\n==================================================================\n");
 		printf("Please input your choice:");
@@ -70,7 +70,9 @@ void Main_Menu(void) {
             case 'a':
                 Account_UI_MgtEntry();
                 break;
-
+            case 'L':
+		    case 'l':
+		        SysLogin();
             }
 	} while ('E' != choice && 'e' != choice);
 }
