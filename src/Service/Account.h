@@ -17,7 +17,7 @@ typedef struct {
 	account_type_t type;//用户类型
 	char username[20];//用户名
 	char password[20];//用户密码
-	int  phone[11];//手机号
+	int  phone;//手机号
 } account_t;
 
 //定义系统用户账号双向链表

@@ -8,62 +8,30 @@
 #include "../Service/Play.h"
 #include "../Persistence/EntityKey_Persist.h"
 
-static const char SALESANALYSIS_DATA_FILE[] = "salesanalysis.dat";
-static const char SALE_DATA_FILE[] = "sale.dat";
+static const char SALE_DATA_FILE[] = "Sale.dat";
 
-//将一条salesanalysis记录写入salesanalysis.dat文件;成功返回1，失败返回0
-int Salesanalysis_Perst_Insert(const salesanalysis_t *data)
-{
-    assert(NULL!=data);
-    FILE *fp=fopen(SALESANALYSIS_DATA_FILE,"ab");
-    int rtn=0;
-    if(fp=NULL)
-    {
-        printf("无法打开文件 %s!\n", SALESANALYSIS_DATA_FILE);
+int Sale_Perst_SelByTicketID (int ticket_id, sale_t *sale){
+	assert(NULL!=sale);
+
+	FILE *fp = fopen(SALE_DATA_FILE, "rb");
+	if (NULL == fp) {
 		return 0;
-    }
-    rtn=fwrite(data,sizeof(salesanalysis_t),1,fp);//fwrite返回成功写入项的数量
-	fclose(fp);
-	return rtn;
-}
+	}
 
-//遍历读salesanalysis.dat文件建立salesanalysis链表
-int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list)
-{
-    salesanalysis_node_t *newNode;
-    salesanalysis_t data;
-    int recCount=0;
+	sale_t data;
+	int found = 0;
 
-    assert(list!=NULL);
-
-    if(access(SALESANALYSIS_DATA_FILE,0))
-    {
-        printf("无法打开文件 %s!\n",SALESANALYSIS_DATA_FILE);
-        return 0;
-    }
-    List_Free(list,salesanalysis_node_t);
-
-    FILE *fp=fopen(SALESANALYSIS_DATA_FILE,"ab");
-    if(fp==NULL)
-    {
-        printf("无法打开文件 %s!\n", SALESANALYSIS_DATA_FILE);
-    }
-    while(!feof(fp))
-    {
-        if(fread(&data,sizeof(salesanalysis_t),1,fp))
-        {
-            newNode=(salesanalysis_node_t*)malloc(sizeof(salesanalysis_node_t));
-            if(!newNode)
-			{
-				printf("警告，内存溢出!!!\n不能将更多的数据加载到内存中!!!\n");
+	while (!feof(fp)) {
+		if (fread(&data, sizeof(sale_t), 1, fp)) {
+			if (ticket_id == data.ticket_id) {
+				*sale = data;
+				found = 1;
 				break;
-			}
-            newNode->data=data;
-            List_AddTail(list,newNode);
-            recCount++;
-        }
-    }
-    fclose(fp);
-    return recCount;
-} 
+			};
 
+		}
+	}
+	fclose(fp);
+
+	return found;
+}

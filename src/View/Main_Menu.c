@@ -10,6 +10,7 @@
 #include "../View/Main_Menu.h"
 
 #include <stdio.h>
+#include "Account_UI.h"
 
 #include "../View/Studio_UI.h"
 #include "../View/Play_UI.h"

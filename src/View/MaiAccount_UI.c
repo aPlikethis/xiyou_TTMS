@@ -1,6 +1,7 @@
 #include "MaiAccount_UI.h"
 #include "../Common/list.h"
 #include "../Service/Account.h"
+#include "Account_UI.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -116,8 +117,8 @@ void MaiAccount_UI_Mgt ()
 {
     system("cls");
 	account_t data;
-	char name[20],phone[15];
-	int i = 0;
+	char name[20];
+	int i = 0,phone;
 	char ch;
 	
 	while(1){
@@ -144,12 +145,13 @@ void MaiAccount_UI_Mgt ()
 	
 	printf("Please input your phone number.\n");
 	int t = 3;
-	while(t--){
+	while(t!=0){
 		printf("you have %d times\n",t);
-		scanf("%s",phone);
+		scanf("%d",&phone);
 		getchar();
-		if(strcmp(phone,data.phone)!=0){
+		if(phone!=data.phone){
 			printf("phone number Error!\n");
+			t--;
 		}
 		else{
 			break;
@@ -164,48 +166,53 @@ void MaiAccount_UI_Mgt ()
     	i=0;
 		printf("\nPlease input your new passsword :\n			");
 		setbuf(stdin,NULL);
-		while((ch=getch())!='\r'){
-			if(i<20){
-				pwd[i++]=ch;
-				putchar('*');
-			}
-			else if(i>0&&ch=='\b'){
-				--i;
-				putchar('\b');
-				putchar(' ');
-				putchar('\b');
-			}
-			pwd[i]='\0';
-		}
-		i=0;
-		printf("\nPlease input your passsword again:\n			");
-		setbuf(stdin,NULL);
-		while((ch=getch())!='\r'){
-			if(i<20){
-				pwd1[i++]=ch;
-				putchar('*');
-			}
-			else if(i>0&&ch=='\b'){
-				--i;
-				putchar('\b');
-				putchar(' ');
-				putchar('\b');
-			}
-			pwd1[i]='\0';
-		}
-		if(strcmp(pwd,pwd1)){
-			system("cls");
-			printf("\nThe passward you input is different!");
-		}
-		else{
-			break;
-		}
-	}
-	
+		scanf("%s", pwd);
+//		while(1){
+//		    getc(ch);
+//		    system('CLS');
+//			if(i<20){
+//				pwd[i++]=ch;
+//				putchar('*');
+//			}
+//			else if(i>0&&ch=='\b'){
+//				--i;
+//				putchar('\b');
+//				putchar(' ');
+//				putchar('\b');
+//			}
+//			pwd[i]='\0';
+//		}
+        i=0;
+        printf("\nPlease input your passsword again:\n			");
+        setbuf(stdin,NULL);
+        scanf("%s", pwd1);
+//		while((ch=getch())!='\r'){
+//			if(i<20){
+//				pwd1[i++]=ch;
+//				putchar('*');
+//			}
+//			else if(i>0&&ch=='\b'){
+//				--i;
+//				putchar('\b');
+//				putchar(' ');
+//				putchar('\b');
+//			}
+//			pwd1[i]='\0';
+//		}
+        if(strcmp(pwd,pwd1)){
+            system("cls");
+            printf("\nThe passward you input is different!");
+        }
+        else{
+            break;
+        }
+    }
+
 	for(i = 0;i < 20;i++){
         data.password[i] = pwd[i];
     }
     Account_Srv_Modify(&data);
     printf("modify accept,please input [E]nter\n");
     getchar();
+    SysLogin();
 }

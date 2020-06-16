@@ -8,18 +8,25 @@
 
 /* 剧目管理主界面 */
 void Play_UI_MgtEntry(void) {
+    Pagination_t paging;
+    paging.offset = 0;
+    paging.pageSize = 5;
+    int id, i;
+    char choice;
+    play_list_t list, f;
+
+    play_node_t *p;
+    List_Init(list, play_node_t);
+    list->next = NULL;
+    paging.totalRecords = Play_Srv_FetchAll(list);
+    Paging_Locate_FirstPage(list, paging);
     while(1) {
-        int id, i;
-        char choice;
-        play_list_t list, f;
-        play_node_t *p;
-        List_Init(list, play_node_t);
-        list->next = NULL;
-        Pagination_t paging;
-        paging.pageSize = 5;
-        paging.offset = 0;
-        paging.totalRecords = Play_Srv_FetchAll(list);
-        Paging_Locate_FirstPage(list, paging);
+
+
+
+
+
+
         play_t buf; 
         /* 输出剧目信息及菜单项 （暂空）*/
         printf("\n====================================\n");
@@ -40,16 +47,17 @@ void Play_UI_MgtEntry(void) {
             printf("Suggested fare:          %d         \n", p->data.price);
             printf("====================================\n");
         }
-        while(list != NULL) {
-            f = list;
-            list = list->next;
-            free(f);
-        }
-        
+//        while(list->next != NULL) {
+//            f = list;
+//            list = list->next;
+//            free(f);
+//        }
+        printf("-------Total Records:%2d------------------------------Page%2d/%2d-------------------\n",
+               paging.totalRecords, Pageing_CurPage(paging),Pageing_TotalPages(paging));
         printf("====================================================================================\n");
         printf("                                                                                    \n");
-        printf("[s]Query the play    [a]Add a play    [u]Modify the play           [d]Delete a play \n");
-        printf("[p]last page                                                       [n]next page     \n");
+        printf("[s]Query the play    [a]Add a play       [u]Modify the play        [d]Delete a play \n");
+        printf("[p]last page                      [r]return                        [n]next page     \n");
         printf("====================================================================================\n");
         printf("Please input your choice:");
         scanf("%c", &choice);
@@ -68,14 +76,17 @@ void Play_UI_MgtEntry(void) {
             else {
                 printf("Play does not exist\n");
             }
+            paging.totalRecords = Play_Srv_FetchAll(list);
         }
         else if(choice == 'a' || choice == 'A') {
             Play_UI_Add();
+            paging.totalRecords = Play_Srv_FetchAll(list);
         }
         else if(choice == 'u' || choice == 'U') {
             printf("please input ID:");
             scanf("%d", &id);
             Play_UI_Modify(id);
+            paging.totalRecords = Play_Srv_FetchAll(list);
             
         }
         else if(choice == 'd' || choice == 'D') {
@@ -83,13 +94,23 @@ void Play_UI_MgtEntry(void) {
             scanf("%d", &id);
             getchar();
             Play_UI_DeleteByID(id);
+            paging.totalRecords = Play_Srv_FetchAll(list);
 
         }
         else if(choice == 'p' || choice == 'P') {
-            Paging_Locate_OffsetPage(list, paging, 1, play_node_t);
+            if (!Pageing_IsFirstPage(paging)) {
+                Paging_Locate_OffsetPage(list, paging, -1, play_node_t);
+                paging.totalRecords = Play_Srv_FetchAll(list);
+            }
         }
         else if(choice == 'n' || choice == 'N') {
-            Paging_Locate_OffsetPage(list, paging, -1, play_node_t);
+            if (!Pageing_IsLastPage(paging)) {
+                Paging_Locate_OffsetPage(list, paging, 1, play_node_t);
+                paging.totalRecords = Play_Srv_FetchAll(list);
+            }
+        }
+        else if(choice == 'r' || choice == 'R') {
+            break;
         }
         
     }
@@ -174,7 +195,7 @@ int Play_UI_Modify(int id) {
         printf("=============================\n");
     }
     else {
-        printf("query error\n");
+        printf("can not query!\n");
         return rtn;
     }
     printf("Please enter the play name:");
@@ -196,11 +217,11 @@ int Play_UI_Modify(int id) {
     getchar();
     if(Play_Srv_Modify(&data)) {
         rtn = 1;
-        printf("sus\n");
+        printf("succses\n");
         return rtn;
     }
     else {
-        printf("detail\n");
+        printf("can not modify\n");
         return rtn;
     }
 
@@ -216,8 +237,7 @@ int Play_UI_DeleteByID(int id) {
         return rtn;
     }
     else {
-        printf("defail\n");
+        printf("can not delete\n");
         return rtn;
     }
-
 }

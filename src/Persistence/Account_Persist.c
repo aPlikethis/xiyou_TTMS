@@ -31,7 +31,7 @@ int Account_Perst_CheckAccFile()
 int Account_Perst_SelByName(char usrName[], account_t *buf)
 
 {
-    //assert(NULL!=buf);
+    assert(NULL!=buf);
     
     FILE *fp;
     fp = fopen(ACCOUNT_DATA_FILE,"rb");
@@ -45,7 +45,7 @@ int Account_Perst_SelByName(char usrName[], account_t *buf)
 	while(!feof(fp)){
 		if(fread(&data,sizeof(account_t),1,fp)){
 			if(!strcmp(usrName,data.username)){
-				buf = &data;
+				*buf = data;
 				found = 1;
 				break;
 			}
@@ -57,7 +57,7 @@ int Account_Perst_SelByName(char usrName[], account_t *buf)
 }
 
 //通过用户ID查找系统用户
-int Account_Perst_SelectByID(int id, account_t *buf)
+int Account_Perst_SelByID(int id, account_t *buf)
 {
     assert(buf!=NULL);
     
@@ -117,7 +117,7 @@ int Account_Perst_Update(account_t *data)
 int Account_Perst_Insert(account_t *data) {
     assert(NULL!=data);
 
-	long key = EntKey_Perst_GetNewKeys(ACCOUNT_KEY_NAME, 1); //为新演出厅分配获取
+	long key = EntKey_Perst_GetNewKeys(ACCOUNT_KEY_NAME, 1); //为新用户分配获取
 	if(key<=0)			//主键分配失败，直接返回
 		return 0;
 	data->id = key;

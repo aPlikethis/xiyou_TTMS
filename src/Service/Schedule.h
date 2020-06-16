@@ -9,7 +9,7 @@ typedef struct {
     int id;                             //演出计划ID
     int play_id;                        //上映剧目ID
     int studio_id;                      //演出厅ID
-    user_date_t date;                  //放映日期
+    ttms_date_t date;                  //放映日期
     user_time_t time;                  //放映时间
     int seat_count;                     //座位数
 } schedule_t;

@@ -2,152 +2,26 @@
 #include "Schedule_UI.h"
 #include "Sale_UI.h"
 #include "Ticket_UI.h"
+#include "Account_UI.h"
+#include "MaiAccount_UI.h"
 #include "../Service/Ticket.h"
 #include "../Service/Seat.h"
 #include "../Service/Studio.h"
 #include "../Service/EntityKey.h"
 #include "../Service/Sale.h"
-#include "../Common/ComFunction.h"
 #include "../Common/Common.h"
 #include "Main_Menu.h"
-
+#include "Studio_UI.h"
+#include "StaSales_UI.h"
+#include "../Service/Schedule.h"
+#include "../Service/Account.h"
+#include "../Service/Play.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-//引用登陆用户的全局数据结构
-extern account_t gl_CurUser;
 
-//根据计划ID，显示演出票
-int Sale_UI_ShowTicket(int schID)
-{
-	seat_list_t list;
-	List_Init(list,seat_node_t);
-	int studio_ID;
-	
-	printf( "please input the studio ID :");
-	scanf( "%d",&studio_ID);
-	getchar( );
-	int seat = Seat_Srv_FetchValidByRoomID(list,studio_ID);
-	
-	int i;
-	char choice;
-	ticket_node_t *pos;
-	Pagination_t paging;
-
-//	List_Init(list,seat_node_t);
-	paging.offset = 0;
-	paging.pageSize = TICKET_PAGE_SIZE;
-	ticket_list_t list_ti;
-	
-	List_Init(list_ti,ticket_node_t);
-
-	paging.totalRecords = Ticket_Srv_FetchBySchID_ticket(list_ti,schedule_id);
-	Paging_Locate_FirstPage(list_ti,paging);
-	studio_t buf;
-	do
-	{
-		system("clear");
-	//	paging.totalRecords = Ticket_Srv_FetchBySchID(schedule_id,list_ti);
-	//
-	//
-		printf( "====================================================================================\n");
-		printf( "*****************************************Ticket*************************************\n");
-		printf( "------------------------------------------------------------------------------------\n");
-        printf( "Ticket ID          Scheuid ID         Seat ID       Price             Ticket Status\n");
-		Paging_ViewPage_ForEach(list_ti,paging,ticket_t,pos,i)
-		{
-			printf("  %5d               %5d            %5d      %5d                     %5d\n",pos->data.id,pos->data.schedule_id,pos->data.seat_id,pos->data.price,pos->data.status);
-		}
-
-		printf( "------Total Records  : %2d ------------------------Page %2d / %2d----------------------\n",paging.totalRecords,Pageing_CurPage(paging),Pageing_TotalPages(paging));
-		Studio_Srv_FetchByID(studio_ID,&buf);
-
-		int xx = 0,yy = 1;		
-			for(int i=0; i <= buf.rowsCount;i++)
-        	{
-	            for(int j=0;j<=buf.colsCount;j++)
-        	    {
-                	if(i==0)
-			{
-        	            printf("%3d",xx++);
-                	}
-	                else if(j==0)
-			{
-                	    printf("%3d",yy++);
-	                }
-        	        else
-			{
-				int flag;
-				flag=0;
-				    List_ForEach(list_ti,pos)
-		            {
-					//	printf("status =%d \n",pos->data.status);
-                //printf("seatid = %d\n",pos->data.seat_id);
-						seat_node_t *buf1;
-						buf1  =  Seat_Srv_FindByID(list, pos->data.seat_id);
-						//Seat_Srv_FetchByID(pos->data.seat_id, buf1);
-						//printf("row = %d  col =  %d pos-sss = %d \n",buf1->data.row,buf1->data.column,pos->data.status);
-					    if(buf1->data.row ==i && buf1->data.column == j)
-					    {
-							if(pos->data.status==0){
-									printf( "%3c",'#');
-									flag = 1;
-							}
-							else{
-								flag = 1;
-								printf("   ");
-							}
-							//printf("status   =%d  \n",pos->data.status);
-				 	   }
-					}if(!flag) printf("   ");
-				} 
-		 	}
-		    putchar('\n');
-		}
-
-		printf( "[N]ext    [P]rev    [S]ale Ticket      [R]eturn    \n");
-
-
-		printf( "Your choice:");
-		choice = getchar();
-		//scanf( "%c",&choice);
-		getchar( );
-		
-		switch(choice)
-		{
-
-			case'n':
-			case'N':
-				if (!Pageing_IsLastPage(paging)) 
-				{
-					Paging_Locate_OffsetPage(list_ti, paging, 1, ticket_node_t);
-				}
-
-				break;
-			case'p':
-			case'P':
-if (!Pageing_IsFirstPage(paging)) 
-				{
-					Paging_Locate_OffsetPage(list_ti, paging, -1,ticket_node_t);
-				}
-				break;
-			case'S':
-			case's':
-				Sale_UI_SellTicket(list_ti,list);
-				//paging.totalRecords = Ticket_Srv_FetchBySchID(schedule_id,list_ti);
-				break;
-
-		}
-
-	}while(choice != 'R'  && choice != 'r');
-}
-
-    
-
-
-
-inline int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList){
+int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList){
 	
 	int id;
 	ticket_list_t head;
@@ -299,90 +173,102 @@ void Sale_UI_ShowScheduler(int playID) {
 }
 
 
-void Sale_UI_MgtEntry() {
-	int i, id;
-	char choice;
+void Sale_UI_MgtEntry(void)
+{
+	if(gl_CurUser.type==USR_ANOMY||gl_CurUser.type==USR_ADMIN){
+        printf("you can't join in there!please input the [Enter]");
+        getchar();
+		return 0;
+	}
+	system("clear");
+	char choice; 
+	char name[20];
+	int i;
+	int play_id;
+	play_node_t *pos;
 
-	play_list_t head;
-	play_node_t *p;
+
+	play_list_t list;
+	play_list_t list_fetch;
+	List_Init(list,play_node_t);
+	List_Init(list_fetch,play_node_t);
+
 	Pagination_t paging;
-
-	List_Init(head, play_node_t);
-	
 	paging.offset = 0;
-	paging.pageSize = PLAY_PAGE_SIZE;
+	paging.pageSize = SALE_PAGE_SIZE;
+	Play_Srv_FetchAll(list_fetch);
+	paging.totalRecords = Play_Srv_FetchAll(list);     //获取全部 剧目 信息
+	Paging_Locate_FirstPage(list,paging);
 
-	//载入数据
-	paging.totalRecords = Play_Srv_FetchAll(head);
-	
-	Paging_Locate_FirstPage(head, paging);
+	do
+	{	printf(
+				"\n======================================================================================\n");
+		printf(
+				"***************************** Projection Play List ***********************************\n");
 
-	do {
-		system("cls");
-		printf("\n\t\t\t==================================================================\n");
-		printf("\t\t\t      \t\t\t剧目 列表\n");
-		printf("\t\t\t%2s  %-10s\t%-8s  %-5s %-10s \t %-10s \t %-5s \n", "ID", "名称", "地区",
-				"时长", "上映日期","下线日期","票价");
-		printf("\t\t\t------------------------------------------------------------------\n");
-		
-		
-		//显示数据
-		Paging_ViewPage_ForEach(head, paging, play_node_t, p, i){
-			printf("\t\t\t%2d  %-10s %-10s %-5d ", p->data.id, p->data.name,p->data.area, p->data.duration);
-			printf("%4d-%02d-%02d ", p->data.start_date.year, p->data.start_date.month, p->data.start_date.day);
-			printf("\t%4d-%02d-%02d ",p->data.end_date.year, p->data.end_date.month, p->data.end_date.day);
-			printf("\t%-5d\n", p->data.price);
+		printf( "%5s %15s %5s %10s %3s %3s %10s %10s     %3s\n","ID","NAME","TYPE","AREA","RATING","DURATION","STARTDATA","ENDDATA","PRICE");
+		printf( "--------------------------------------------------------------------------------------\n");
+
+		Paging_ViewPage_ForEach(list,paging,play_node_t,pos,i)
+		{
+			printf( "%5d %15s %5d %10s %6d %6d %7d%3d%3d %4d%3d%3d     %4d\n",pos->data.id,pos->data.name,pos->data.type,pos->data.area,pos->data.rating,pos->data.duration,pos->data.start_date.year,pos->data.start_date.month,pos->data.start_date.day,pos->data.end_date.year,pos->data.end_date.month,pos->data.end_date.day,pos->data.price);	
 		}
-
-		printf("\n\t\t\t----------- 共 %2d 项 ------------------- %2d/%2d 页  ----------------\n",
-				paging.totalRecords, Pageing_CurPage(paging),
-				Pageing_TotalPages(paging));
-		printf("\t\t\t ******************************************************************\n");
-		printf("\t\t\t        [P]上页        |            [N]下页\n\n");
-		printf("\n\t\t\t[A]根据剧目ID列出演出计划                                 [R]返回\n");
-		printf("\n\t\t\t==================================================================\n");
-		printf("\t\t\t请选择:");
-		
-		choice=l_getc();
 	
 
-		switch (choice) {
-		case 'a':
-		case 'A':
-				
-				printf("\t\t\t请输入要浏览演出计划的 剧目ID:");
-				while(1){
-					if(scanf("%d",&id)==1){ cl_stdin(); break;}
-					else{ cl_stdin(); printf("\t\t您的输入有误！请重新输入:"); }
-				}
-				Sale_UI_ShowScheduler(id);
-			
+		printf( "----------------Total Recoeds: %2d---------------------------Page %2d   %2d   -----------\n",paging.totalRecords,Pageing_CurPage(paging),Pageing_TotalPages(paging));
+	
+		printf("**************************************************************************************\n");
+
+
+		printf( "[C]show Schedule      [S]find play name    [f]      [P]rev       [N]ext         [R]eturn          \n");
+		printf( "======================================================================================\n");
+		printf("please input your choice : ");
+		setbuf(stdin,NULL);
+		scanf( "%c",&choice);
+		getchar( );
+		switch(choice)
+		{
+			case'c':
+			case'C':
+				printf( "please input play_id  :");
+				scanf( "%d",&play_id);
+				getchar( );
+				Sale_UI_ShowScheduler(play_id);
 				break;
-		/*
-		case 'u':
-		case 'U':
-			
-			
-			break;
-			
-		
-		*/
-		case 'p':
-		case 'P':
-			if (!Pageing_IsFirstPage(paging)) {
-				Paging_Locate_OffsetPage(head, paging, -1, play_node_t);
-			}
-			break;
-		case 'n':
-		case 'N':
-			if (!Pageing_IsLastPage(paging)) {
-				Paging_Locate_OffsetPage(head, paging, 1, play_node_t);
-			}
-			break;
+			case's':
+			case'S':
+				printf( "please input the Play_ name :");
+				setbuf(stdin,NULL);
+				gets(name);
+				system("clear");
+				Play_Srv_FetchByName(list_fetch,name);
+				Play_Srv_Print(list_fetch,name);
+				break;
+			case 'f':
+			case 'F':
+				printf( "please input the Play_ name :");
+				Play_Srv_FetchByName(list_fetch,name);
+				break;
+			case'n':
+			case'N':
+				if(!Pageing_IsLastPage(paging))
+				{
+					Paging_Locate_OffsetPage(list, paging, 1, play_node_t);
+				}
+				break;
+			case'P':
+			case'p':
+				if(!Pageing_IsFirstPage(paging))
+				{
+					Paging_Locate_OffsetPage(list, paging,-1, play_node_t);
+				}
+				break;
+
 		}
-	} while (choice != 'r' && choice != 'R');
-	//释放链表空间
-	List_Destroy(head, play_node_t);
+
+	}while(choice != 'r' && choice != 'R');
+
+
 }
 
 //退票
@@ -410,9 +296,7 @@ void Sale_UI_ReturnTicket(){
        				}else{
        					printf("\n\t\t\t该票已过有效期，无法退票");
        					printf("\n\n\t\t\t按任意键继续！。。。\n");
-					getchar();
-					break;
-					
+					getchar();	
        				}
        			}else{
        			
@@ -420,7 +304,6 @@ void Sale_UI_ReturnTicket(){
        				printf("\n\n\t\t\t按任意键继续！。。。\n");
        				
 				getchar();
-				break;
        			}
        		}
 		
@@ -428,7 +311,7 @@ void Sale_UI_ReturnTicket(){
 		if(t){
 			printf("\t\t\t请输入 Q 确认退票  输入 R 返回：");
 			choice=l_getc();
-			if('r'==choice || 'R'==choice) break;	
+			if('r'==choice || 'R'==choice) {
 			if('q'==choice || 'Q'==choice) {
 			
 				
@@ -451,11 +334,8 @@ void Sale_UI_ReturnTicket(){
        				printf("\n\n\t\t\t按任意键继续！。。。\n");
 				cl_stdin();
 				getchar();
-											
-				break;
-       			}
-       					
+       			}	
+			}		
        		}
-	}
 }
 
