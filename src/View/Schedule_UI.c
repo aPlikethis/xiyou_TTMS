@@ -17,7 +17,7 @@ void Schedule_UI_MgtEntry(int play_id) {
     Pagination_t paging;
     schedule_list_t list, f;
     schedule_node_t *p;
-    int i;
+    int i, sch_id;
 
     List_Init(list, schedule_node_t);
     list->next = NULL;
@@ -57,6 +57,7 @@ void Schedule_UI_MgtEntry(int play_id) {
         printf("==============Operation menu===========\n");
         printf("                                   \n");
         printf("[a]Add a new show plan\n");
+        printf("[s]set ticket for any schedule");
         printf("[u]Modify performance plan\n");
         printf("[d]Delete show plan\n");
         printf("[n]Next page\n");
@@ -91,6 +92,13 @@ void Schedule_UI_MgtEntry(int play_id) {
                 printf("can not to delete\n");
             }
             paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
+        }
+        if(choice == 's' || choice == 'S') {
+            printf('please input schedule id:');
+            scanf("%d", &sch_id);
+            getchar();
+            Ticket_UI_MgtEntry(sch_id);
+
         }
         if(choice == 'l' || choice == 'L') {
             if (!Pageing_IsFirstPage(paging)) {
