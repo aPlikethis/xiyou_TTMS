@@ -161,29 +161,33 @@ int Ticket_Perst_SelectBySchID(int id, ticket_list_t list){
     return count;
 }
 
-int Sale_Perst_selByUserId(int user_id, sale_t *buf) {
+int Sale_Perst_selByUserId(int user_id, sale_list_t list) {
+    int count = 0;
+    sale_node_t *end = list;
+    FILE *fd;
     sale_t data;
-    int found = 0;
-    FILE *fp;
-    fp = fopen("Sale.dat","rb");
-    if(fp == NULL)
+    fd = fopen("Sale.dat", "rb");
+    if(NULL == fd)
     {
-        printf("Sale.dat can not be open");
-        return found;
+        perror("open error.\n");
+
+        return 0;
     }
-    else
-    {
-        while(!feof(fp))
-        {
-            fread(&data, sizeof(sale_t),1,fp);
-            if(data.user_id == user_id)
-            {
-                *buf = data;
-                found = 1;
-                break;
+    sale_node_t *newNode;
+        while(!(feof(fd))){
+        if(fread(&data, sizeof(sale_t), 1, fd)) {
+            if(data.user_id == user_id){
+
+                newNode=(sale_list_t)malloc(sizeof(sale_node_t));
+                newNode->data = data;
+                end->next = newNode;
+                newNode->prev = end;
+                newNode->next = NULL;
+                end = end->next;
+                count++;
             }
         }
     }
-    fclose(fp);
-    return found;
+    fclose(fd);
+    return count;
 }

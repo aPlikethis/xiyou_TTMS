@@ -400,33 +400,39 @@ void Sale_UI_ReturnTicket(){
 	char choice;
 	int t=0;
 
-		sale_t sale_buf;
+		sale_node_t *sale_buf;
+		sale_list_t list;
 		ticket_t buf;
 		schedule_t scd;
-			
+		List_Init(list, sale_node_t);
 
-		if( Sale_Srv_FetchByUserID(gl_CurUser.id,&sale_buf) ) {
-            if (Ticket_Srv_FetchByID(sale_buf.ticket_id, &buf)) {
-                Schedule_Srv_FetchByID(buf.schedule_id, &scd);
-                if (buf.status == TICKET_SOLD) {
-                    Ticket_UI_Print(buf);
-                    user_time_t nowtime = TimeNow();
-                    if (DateCmp(DateNow(), scd.date) == -1 ||
-                        (DateCmp(DateNow(), scd.date) == 0 && scd.time.hour < nowtime.hour &&
-                         scd.time.minute < nowtime.minute)) {
-                        t = 1;
+		if( Sale_Srv_FetchByUserID(gl_CurUser.id, list) ) {
+		    List_ForEach(list, sale_buf) {
+		        if(sale_buf == NULL) {
+                    break;
+		        }
+                if (Ticket_Srv_FetchByID(sale_buf->data.ticket_id, &buf)) {
+                    Schedule_Srv_FetchByID(buf.schedule_id, &scd);
+                    if (buf.status == TICKET_SOLD) {
                         Ticket_UI_Print(buf);
+                        user_time_t nowtime = TimeNow();
+                        if (DateCmp(DateNow(), scd.date) == -1 ||
+                            (DateCmp(DateNow(), scd.date) == 0 && scd.time.hour < nowtime.hour &&
+                             scd.time.minute < nowtime.minute)) {
+                            t = 1;
+                            Ticket_UI_Print(buf);
+                        } else {
+                            printf("\n\t\t\tThe ticket has expired and cannot be refunded");
+                            printf("\n\n\t\t\tPress any key to continue!...\n");
+                            getchar();
+                        }
                     } else {
-                        printf("\n\t\t\tThe ticket has expired and cannot be refunded");
+
+                        printf("\n\t\t\tThe ticket does not exist or is not sold and cannot be refunded");
                         printf("\n\n\t\t\tPress any key to continue!...\n");
+
                         getchar();
                     }
-                } else {
-
-                    printf("\n\t\t\tThe ticket does not exist or is not sold and cannot be refunded");
-                    printf("\n\n\t\t\tPress any key to continue!...\n");
-
-                    getchar();
                 }
             }
         }

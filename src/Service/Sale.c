@@ -56,6 +56,6 @@ int Ticket_Srv_FetchBySchID(int ID,ticket_list_t list){
 //	return NULL ;
 //}
 
-int Sale_Srv_FetchByUserID(int user_id, sale_t *buf) {
-    return Sale_Perst_selByUserId(user_id, buf);
+int Sale_Srv_FetchByUserID(int user_id, sale_list_t list) {
+    return Sale_Perst_selByUserId(user_id, list);
 }

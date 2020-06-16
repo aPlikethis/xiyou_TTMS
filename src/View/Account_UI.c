@@ -74,8 +74,9 @@ int SysLogin()
             }
             gl_CurUser.type = data.type;
             gl_CurUser.phone = data.phone;
-			getchar();
+
             printf("\nWelcome distinguished users,please input [Enter]!\n");
+            getchar();
 			return 1;
 		}
 		else{
@@ -201,7 +202,7 @@ void Account_UI_MgtEntry(void)
 					setbuf(stdin,NULL);
 					scanf("%s",usrName);
 					getchar();
-					if(Account_UI_Modify(head,usrName)){
+					if(Account_UI_Modify(usrName)){
 						printf("Mod accept\n");
 						paging.totalRecords = Account_Srv_FetchAll(head);
 						List_Paging(head, paging, account_node_t);
@@ -232,6 +233,8 @@ int Account_UI_Add(account_list_t list)
 	char c;
 	do
 	{
+        system("cls");
+        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 		printf("\n==============================================================================\n");
 		printf("*****************************Account Add Systerm*******************************\n");	
 		printf("-------------------------------------------------------------------------------");
@@ -298,17 +301,23 @@ int Account_UI_Add(account_list_t list)
 }
 
 //修改系统用户界面
-int Account_UI_Modify(account_list_t list,char usrName[])
+int Account_UI_Modify(char usrName[])
 {
-	account_list_t temp = Account_Srv_FindByUsrName(list,usrName);
-	if(temp!=NULL){
+    account_t data;
+	int found = Account_Srv_FetchByID(gl_CurUser.id, &data);
+	if(found == 0) {
+        return found;
+	}
 		int m = 10;
 		do
 		{
-			char pwd[20],ch;
-			printf("please input the new password:");
-			setbuf(stdin,NULL);
+		    char pwd[20],ch;
+		    printf("please input the old password:");
             scanf("%s", pwd);
+		    if(Account_Srv_Verify(gl_CurUser.username, pwd)) {
+                printf("please input the new password:");
+                setbuf(stdin, NULL);
+                scanf("%s", pwd);
 //			while((ch=getch())!='\r'){
 //				int i;
 //				if(i<20){
@@ -323,34 +332,33 @@ int Account_UI_Modify(account_list_t list,char usrName[])
 //				}
 //				pwd[i]='\0';
 //			}
-			int x=1;
-			if(strcmp(pwd,temp->data.password)){
-				x = 0;
-			}
-			if(x){
-				printf("Mod error!The same password!please choice:\n");
-				printf(" [0]exit  |  [1]try again\n");
-				scanf("%d",&m);
-				setbuf(stdin,NULL);
-			}
-			else{
-				int i; 
-				for(i = 0;i<20;i++){
-					temp->data.password[i] = pwd[i];
-				}
-				int a = Account_Srv_Modify(&temp);
-				if(a==0){
-					return 0;
-				}
-				Account_Srv_FetchAll(list);
-				return 1; 
-			}
+                int x = 1;
+                if (strcmp(pwd, data.password)) {
+                    x = 0;
+                }
+                if (x) {
+                    printf("Mod error!The same password!please choice:\n");
+                    printf(" [0]exit  |  [1]try again\n");
+                    scanf("%d", &m);
+                    setbuf(stdin, NULL);
+                } else {
+                    int i;
+                    for (i = 0; i < 20; i++) {
+                        data.password[i] = pwd[i];
+                    }
+                    int a = Account_Srv_Modify(&data);
+                    if (a == 0) {
+                        return 0;
+                    }
+//				Account_Srv_FetchAll(list);
+                    return 1;
+                }
+            }
+		    else {
+		        printf("password error, please re-enter:");
+		    }
 		}while(m!=0);
-	} 
-	else{
-		printf("The user error!\n");
-		return 0;
-	}
+
 }
 
 //删除系统用户信息界面

@@ -38,6 +38,6 @@ int Sale_Srv_FetchBySchID(char querytime[][30], sale_list_t head);
 
 int Sale_Srv_SelectByUid(char *queryuid, sale_list_t head);
 
-int Sale_Srv_FetchByUserID(int user_id, sale_t *buf);
+int Sale_Srv_FetchByUserID(int user_id, sale_list_t list);
 #endif //SALE_H_
 

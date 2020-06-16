@@ -19,7 +19,7 @@ int Account_UI_Add(account_list_t list);
 
 //标识符：TTMS_SCU_Account_UI_Mod
 //修改系统用户界面
-int Account_UI_Modify(account_list_t list,char usrName[]);
+int Account_UI_Modify(char usrName[]);
 
 //标识符：TTMS_SCU_Account_UI_Del
 //删除系统用户界面 
