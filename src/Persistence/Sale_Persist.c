@@ -175,7 +175,7 @@ int Sale_Perst_selByUserId(int user_id, sale_t *buf) {
     {
         while(!feof(fp))
         {
-            fread(&data, sizeof(ticket_t),1,fp);
+            fread(&data, sizeof(sale_t),1,fp);
             if(data.user_id == user_id)
             {
                 *buf = data;
