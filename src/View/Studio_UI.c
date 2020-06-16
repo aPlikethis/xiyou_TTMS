@@ -42,6 +42,7 @@ void Studio_UI_MgtEntry(void) {
 	Paging_Locate_FirstPage(head, paging);
 
 	do {
+        system("cls");
 		printf(
 				"\n==================================================================\n");
 		printf(

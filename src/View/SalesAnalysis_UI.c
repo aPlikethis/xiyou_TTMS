@@ -33,6 +33,7 @@ void SalesAanalysis_UI_MgtEntry()
 	Paging_Locate_FirstPage(head, paging);
 
 	do{
+        system("cls");
 		printf("\t\t\t=========================================================================\n");
 		printf("\t\t\t%28s""票房图表\n");
 		printf("\t\t\t-------------------------------------------------------------------------\n");

@@ -5,6 +5,7 @@
 #include "../Service/Sale.h"
 #include "../Service/Account.h"
 #include "../Service/SalesAnalysis.h"
+#include "../Service/StaSales.h"
 
 //外部变量gl_CurUser 用于存储登录用户信息
 extern account_t gl_CurUser;
@@ -63,11 +64,11 @@ void StaSales_UI_Self()
     switch(choice){
         case 'd':
         case 'D'://当日
-        printf("Your sales this day are %d\n",SalesAnalysis_Srv_CompSaleVal(id,curdate,curdate));
+        printf("Your sales this day are %d\n",StaSales_Srv_CompSaleVal(id,curdate,curdate));
         break;
         case 'm':
         case 'M'://当月
-        printf("Your sales this month are %d\n",SalesAnalysis_Srv_CompSaleVal(id,startdate,enddate));
+        printf("Your sales this month are %d\n",StaSales_Srv_CompSaleVal(id,startdate,enddate));
         break;
     }
 }
@@ -95,11 +96,10 @@ void StaSales_UI_Clerk()
         printf("please input enddate(year month day):");
         scanf("%d%d%d",&enddate.year,&enddate.month,&enddate.day);
         getchar();
-        printf("The salesman's sales during this period are %d\n",SalesAnalysis_Srv_CompSaleVal(id,startdate,enddate));
+        printf("The salesman's sales during this period are %d\n",StaSales_Srv_CompSaleVal(id,startdate,enddate));
     }
     else{
         printf("the user is not in this company!!");
         getchar();
-        return 0;
     }
 }

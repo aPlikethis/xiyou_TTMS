@@ -25,4 +25,9 @@ int Schedule_Perst_SelectByID(int id,schedule_t*buf);
 
 //查询所有票信息
 //int Ticket_Perst_FetchAll(ticket_list_t list);
+
+
+int Ticket_Perst_Update(ticket_t *buf);
+
+int Ticket_Perst_SelBySeatID(int seat_id, ticket_t *buf);
 #endif

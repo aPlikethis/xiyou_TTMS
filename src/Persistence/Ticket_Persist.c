@@ -18,7 +18,7 @@ static const char TICKET_KEY_NAME[] = "Ticket";
 //功能：存储演出票
 int Ticket_Perst_Insert(int schedule_id,seat_list_t list)
 {
-    FILE *fp = fopen("Ticket.dat","wb+");
+    FILE *fp = fopen("Ticket.dat","ab");
 	
 	int rtn = 0;
 	seat_list_t temp;
@@ -67,7 +67,7 @@ int Ticket_Perst_Rem(int schedule_id)
     ticket_t buf;
     if (rename("Ticket.dat","TicketTmp.dat") < 0)
     {
-        printf("Rename failed！");
+        printf("改名失败！");
         return found;
     }
     else
@@ -76,7 +76,7 @@ int Ticket_Perst_Rem(int schedule_id)
         ftp = fopen("Ticket.dat","wb+");
         if ( fp == NULL && ftp == NULL)
         {
-            printf("File failed to open");
+            printf("文件打开失败");
             return found;
         }
         else
@@ -132,4 +132,57 @@ int Ticket_Perst_SelByID(int id, ticket_t *buf)
     return found;
 }
 
+int Ticket_Perst_Update(ticket_t *buf) {
+    assert(NULL!=buf);
 
+    FILE *fp = fopen(TICKET_DATA_FILE, "rb+");
+    if (NULL == fp) {
+        printf("Cannot open file %s!\n", TICKET_DATA_FILE);
+        return 0;
+    }
+
+    play_t data;
+    int found = 0;
+
+    while (!feof(fp)) {
+        if (fread(&data, sizeof(ticket_t), 1, fp)) {
+            if (data.id == buf->id) {
+                fseek(fp, -((int)sizeof(ticket_t)), SEEK_CUR);
+                fwrite(buf, sizeof(ticket_t), 1, fp);
+                found = 1;
+                break;
+            }
+
+        }
+    }
+    fclose(fp);
+
+    return found;
+}
+
+int Ticket_Perst_SelBySeatID(int seat_id, ticket_t *buf) {
+    ticket_t data;
+    int found = 0;
+    FILE *fp;
+    fp = fopen("Ticket.dat","rb");
+    if(fp == NULL)
+    {
+        printf("Ticket.dat can not be open");
+        return found;
+    }
+    else
+    {
+        while(!feof(fp))
+        {
+            fread(&data, sizeof(ticket_t),1,fp);
+            if(data.seat_id == seat_id)
+            {
+                * buf = data;
+                found = 1;
+                break;
+            }
+        }
+    }
+    fclose(fp);
+    return found;
+}

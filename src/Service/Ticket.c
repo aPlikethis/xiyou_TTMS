@@ -38,7 +38,7 @@ int Ticket_Srv_GenBatch(int schedule_id)
     
     if(count==0)
     {
-        printf("Seat information acquisition failed, unable to generate ticket");
+        printf("座位信息获取失败，无法生成票");
         return 0;
     }
     else
@@ -65,3 +65,11 @@ int Ticket_Srv_FetchByID(int id, ticket_t *buf)
     return Ticket_Perst_SelByID(id,buf);
 }
 
+
+int Ticket_Srv_Modify(ticket_t *buf) {
+    return Ticket_Perst_Update(buf);
+}
+
+int Ticket_Srv_FetchBySeatID(int seat_id, ticket_t *buf) {
+    return Ticket_Perst_SelBySeatID(seat_id, buf);
+}

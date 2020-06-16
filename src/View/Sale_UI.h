@@ -19,4 +19,5 @@ void Sale_UI_MgtEntry();
 //退票
 void Sale_UI_ReturnTicket();
 
+
 #endif

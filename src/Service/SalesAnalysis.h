@@ -26,7 +26,7 @@ typedef struct salesanalysis_node {
 } salesanalysis_node_t, *salesanalysis_list_t;
 
 //计算员工usrID在给定时间区间的销售额
-int SalesAnalysis_Srv_CompSaleVal(int usrID, ttms_date_t stDate, ttms_date_t endDate);
+//int SalesAnalysis_Srv_CompSaleVal(int usrID, ttms_date_t stDate, ttms_date_t endDate);
 
 //根据票房排序
 void SalesAnalysis_Srv_SortBySale(salesanalysis_list_t list);

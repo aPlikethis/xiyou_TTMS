@@ -34,19 +34,20 @@ void Ticket_UI_MgtEntry(int schedule_id)
     
     
     do{
-        	printf("\n==================================================================================================\n");
-    printf("********************************************THE TICKET********************************************\n");
-	printf("   Repertoire name          Performance ID              Performance date            Show time             \n\n");
-	printf("      %-6s                    %.2d                       %d/%.2d/%.2d               %.2d:%.2d:%.2d\n\n\n",
-                need_play->name,need_schedule->studio_id,
-                need_schedule->date.year,need_schedule->date.month,need_schedule->date.day,
-                need_schedule->time.hour,need_schedule->time.minute,need_schedule->time.second);
+        system("cls");
+        printf("\n==================================================================================================\n");
+        printf("********************************************THE TICKET********************************************\n");
+        printf("   Repertoire name          Performance ID              Performance date            Show time             \n\n");
+        printf("      %-6s                    %.2d                       %d/%.2d/%.2d               %.2d:%.2d:%.2d\n\n\n",
+               need_play->name,need_schedule->studio_id,
+               need_schedule->date.year,need_schedule->date.month,need_schedule->date.day,
+               need_schedule->time.hour,need_schedule->time.minute,need_schedule->time.second);
 
 
-	printf("**************************************************************************************************\n");
-	printf("  |    [A]dd show ticket   |    [D]elete and generate show tickets    |       [R]eturn         |\n");
-	printf("\n==================================================================================================\n");
-	printf("Please enter your choice:");
+        printf("**************************************************************************************************\n");
+        printf("  |    [A]dd show ticket   |    [D]elete and generate show tickets    |       [R]eturn         |\n");
+        printf("\n==================================================================================================\n");
+        printf("Please enter your choice:");
 	fflush(stdin);
 	scanf("%c",&choice);
 	getchar();
@@ -64,15 +65,15 @@ void Ticket_UI_MgtEntry(int schedule_id)
 		        case 'd':
 		        case 'D':
 			        if(Ticket_Srv_DeleteBatch(schedule_id) && Ticket_Srv_GenBatch(schedule_id))
-				        printf("Rebuilt successfully");
+				        printf("Rebuilt successfully\n");
 			        else
-				        printf("Rebuild failed");
+				        printf("Rebuild failed\n");
 			        break;
             }   
         }
         else
         {
-           printf("Unknown operation, please re-enter"); 
+           printf("Unknown operation, please re-enter\n");
         }
 	}while (choice != 'r' && choice != 'R');
 	system("cls");
@@ -102,11 +103,11 @@ int Ticket_UI_ShowTicket(int ticket_id) {
         printf("           Ticket_ID          	 schedule_ID               Seat_ID                 Price                  \n\n");
         printf("               %d                    %d                         %d                      %d\n\n\n",
                buf->id, buf->schedule_id, buf->seat_id, buf->price);
-        printf("**************************************************************************************************\n");
+        printf("**************************************************************************************************\n");;
     }
 	else
 	{
-		printf("Not Found£¬¡£");
+		printf("Not Found£¬¡£\n");
 	}
     return 0;
 }

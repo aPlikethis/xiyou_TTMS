@@ -43,9 +43,14 @@ int Ticket_Srv_DeleteBatch(int schedule_id);
 //功能：根据ID获取演出票
 int Ticket_Srv_FetchByID(int id, ticket_t *buf);
 
+int Ticket_Srv_FetchBySeatID(int seat_id, ticket_t *buf);
+
 
 //标识符：TTMS_SCU_Schedule_Srv_FetchByID
 //功能: 根据ID获取演出计划
 int Schedule_Srv_FetchByID(int id,schedule_t *buf );
+
+
+int Ticket_Srv_Modify(ticket_t *buf);
 
 #endif

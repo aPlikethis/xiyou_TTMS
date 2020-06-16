@@ -12,6 +12,7 @@
 #include "../Common/List.h"
 #include "Seat.h"
 #include "../Persistence/EntityKey_Persist.h"
+#include "../Persistence/Seat_Persist.h"
 
 static const char SEAT_DATA_FILE[] = "Seat.dat"; //文件名常量 
 static const char SEAT_DATA_TEMP_FILE[] = "SeatTmp.dat"; //临时文件名常量 
@@ -214,11 +215,14 @@ seat_node_t * Seat_Srv_FindByRowCol(seat_list_t list, int row, int column)
 {
     assert(NULL!=list);
 	seat_node_t *p;
-	List_ForEach(list,p);
-	if (p->data.row == row && p->data.column == column)
-	{
-		return p;
+	List_ForEach(list,p) {
+        if (p->data.row == row && p->data.column == column)
+        {
+            return p;
+        }
 	}
+
+
     return NULL;
 }
 

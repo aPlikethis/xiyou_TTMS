@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include<unistd.h>
 #include <assert.h>
+#include "EntityKey_Persist.h"
 
 static const char SEAT_DATA_FILE[] = "Seat.dat";
 static const char SEAT_DATA_TEMP_FILE[] = "SeatTmp.dat";

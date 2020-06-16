@@ -9,6 +9,47 @@
 
 static const char SALE_DATA_FILE[] = "Sale.dat";
 static const char SALE_DATA_TEMP_FILE[] = "SaleTmp.dat";
+
+int Sale_Perst_SelByID(sale_list_t list,int usrID){
+    sale_list_t newNode;
+    sale_t data;
+
+    int rtn = 0;
+
+    assert(NULL != list);
+
+    List_Free(list,sale_node_t);
+
+    FILE *fp = fopen(SALE_DATA_FILE,"rb");
+    if(NULL == fp)   return 0;
+
+    while(!feof(fp))
+    {
+        if(fread(&data,sizeof(sale_t),1,fp))
+        {
+            newNode = (sale_list_t)malloc(sizeof(sale_node_t));
+            newNode->data = data;
+
+            if(!newNode)
+            {
+                printf( "Waring,Memory OverFlow!!!\nCannot Load more Data into memory!!!\n");
+                break;
+            }
+            if(usrID == data.user_id)
+            {
+                List_AddTail(list,newNode);
+                rtn++;
+            }
+
+        }
+    }
+
+    fclose(fp);
+
+    return rtn;
+}
+
+
 /*将订单信息插入到文件中*/
 int Sale_Perst_Insert(const sale_t *data) {
 	assert(NULL!=data);
@@ -87,4 +128,35 @@ int Sale_Perst_SelBySchID(sale_list_t list, int PlayID, ttms_date_t stDate,
 		p=p->next;
 	}
 	return found;
+}
+
+int Ticket_Perst_SelectBySchID(int id, ticket_list_t list){
+    int count = 0;
+    ticket_list_t end = list;
+    FILE *fd;
+    ticket_t data;
+    fd = fopen("ticket.dat", "rb");
+    if(NULL == fd)
+    {
+        perror("open error.\n");
+
+        return 0;
+    }
+    ticket_node_t *newNode;
+    while(!(feof(fd))){
+        if(fread(&data, sizeof(ticket_t), 1, fd)) {
+            if(data.schedule_id == id){
+
+                newNode=(ticket_list_t)malloc(sizeof(ticket_node_t));
+                newNode->data = data;
+                end->next = newNode;
+                newNode->prev = end;
+                newNode->next = NULL;
+                end = end->next;
+                count++;
+            }
+        }
+    }
+    fclose(fd);
+    return count;
 }

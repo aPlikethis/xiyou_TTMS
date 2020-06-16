@@ -20,11 +20,9 @@ void Play_UI_MgtEntry(void) {
     list->next = NULL;
     paging.totalRecords = Play_Srv_FetchAll(list);
     Paging_Locate_FirstPage(list, paging);
-    while(1) {
 
 
-
-
+    system("cls");
 
 
         play_t buf; 
@@ -109,11 +107,11 @@ void Play_UI_MgtEntry(void) {
                 paging.totalRecords = Play_Srv_FetchAll(list);
             }
         }
-        else if(choice == 'r' || choice == 'R') {
-            break;
+        if(choice != 'r' && choice!='R') {
+            Play_UI_MgtEntry();
         }
         
-    }
+
 }
 
 /* Ìí¼Ó¾çÄ¿ */

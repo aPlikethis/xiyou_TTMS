@@ -12,7 +12,7 @@ int StaSales_Srv_CompSaleVal(int usrID, ttms_date_t stDate, ttms_date_t endDate)
 	sale_node_t *pSale;
 	List_Init(saleList,sale_node_t);
 
-	Sale_Perst_SelectByID(saleList,usrID);
+	Sale_Perst_SelByID(saleList,usrID);
 	
 	List_ForEach(saleList,pSale)
 	{

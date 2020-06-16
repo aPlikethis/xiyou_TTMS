@@ -16,7 +16,7 @@ typedef struct {
 	long id;      		//销售记录ID
 	int user_id;		//售票员ID
 	int ticket_id;		//票ID
-	user_date_t date ;	//处理日期
+	ttms_date_t date ;	//处理日期
 	user_time_t time;	//处理时间
 	int value;			//票价
 	sale_type_t type; //交易类型
