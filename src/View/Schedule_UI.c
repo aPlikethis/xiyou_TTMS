@@ -94,7 +94,7 @@ void Schedule_UI_MgtEntry(int play_id) {
             paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
         }
         if(choice == 's' || choice == 'S') {
-            printf('please input schedule id:');
+            printf("please input schedule id:");
             scanf("%d", &sch_id);
             getchar();
             Ticket_UI_MgtEntry(sch_id);
