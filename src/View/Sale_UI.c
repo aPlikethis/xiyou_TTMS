@@ -173,81 +173,102 @@ void Sale_UI_ShowScheduler(int playID) {
 }
 
 
-void Sale_UI_MgtEntry() {
-	int i, id;
-	char choice;
+void Sale_UI_MgtEntry(void)
+{
+	if(gl_CurUser.type==USR_ANOMY||gl_CurUser.type==USR_ADMIN){
+        printf("you can't join in there!please input the [Enter]");
+        getchar();
+		return 0;
+	}
+	system("clear");
+	char choice; 
+	char name[20];
+	int i;
+	int play_id;
+	play_node_t *pos;
 
-	play_list_t head;
-	play_node_t *p;
+
+	play_list_t list;
+	play_list_t list_fetch;
+	List_Init(list,play_node_t);
+	List_Init(list_fetch,play_node_t);
+
 	Pagination_t paging;
-
-	List_Init(head, play_node_t);
-	
 	paging.offset = 0;
-	paging.pageSize = PLAY_PAGE_SIZE;
+	paging.pageSize = SALE_PAGE_SIZE;
+	Play_Srv_FetchAll(list_fetch);
+	paging.totalRecords = Play_Srv_FetchAll(list);     //获取全部 剧目 信息
+	Paging_Locate_FirstPage(list,paging);
 
-	//载入数据
-	paging.totalRecords = Play_Srv_FetchAll(head);
-	
-	Paging_Locate_FirstPage(head, paging);
+	do
+	{	printf(
+				"\n======================================================================================\n");
+		printf(
+				"***************************** Projection Play List ***********************************\n");
 
-	do {
-		system("cls");
-		printf("\n\t\t\t==================================================================\n");
-		printf("\t\t\t      \t\t\t剧目 列表\n");
-		printf("\t\t\t%2s  %-10s\t%-8s  %-5s %-10s \t %-10s \t %-5s \n", "ID", "名称", "地区",
-				"时长", "上映日期","下线日期","票价");
-		printf("\t\t\t------------------------------------------------------------------\n");
-		
-		
-		//显示数据
-		Paging_ViewPage_ForEach(head, paging, play_node_t, p, i){
-			printf("\t\t\t%2d  %-10s %-10s %-5d ", p->data.id, p->data.name,p->data.area, p->data.duration);
-			printf("%4d-%02d-%02d ", p->data.start_date.year, p->data.start_date.month, p->data.start_date.day);
-			printf("\t%4d-%02d-%02d ",p->data.end_date.year, p->data.end_date.month, p->data.end_date.day);
-			printf("\t%-5d\n", p->data.price);
+		printf( "%5s %15s %5s %10s %3s %3s %10s %10s     %3s\n","ID","NAME","TYPE","AREA","RATING","DURATION","STARTDATA","ENDDATA","PRICE");
+		printf( "--------------------------------------------------------------------------------------\n");
+
+		Paging_ViewPage_ForEach(list,paging,play_node_t,pos,i)
+		{
+			printf( "%5d %15s %5d %10s %6d %6d %7d%3d%3d %4d%3d%3d     %4d\n",pos->data.id,pos->data.name,pos->data.type,pos->data.area,pos->data.rating,pos->data.duration,pos->data.start_date.year,pos->data.start_date.month,pos->data.start_date.day,pos->data.end_date.year,pos->data.end_date.month,pos->data.end_date.day,pos->data.price);	
 		}
-
-		printf("\n\t\t\t----------- 共 %2d 项 ------------------- %2d/%2d 页  ----------------\n",
-				paging.totalRecords, Pageing_CurPage(paging),
-				Pageing_TotalPages(paging));
-		printf("\t\t\t ******************************************************************\n");
-		printf("\t\t\t        [P]上页        |            [N]下页\n\n");
-		printf("\n\t\t\t[A]根据剧目ID列出演出计划                                 [R]返回\n");
-		printf("\n\t\t\t==================================================================\n");
-		printf("\t\t\t请选择:");
-		
-		choice=l_getc();
 	
 
-		switch (choice) {
-		case 'a':
-		case 'A':
-				
-				printf("\t\t\t请输入要浏览演出计划的 剧目ID:");
-				while(1){
-					if(scanf("%d",&id)==1){ cl_stdin(); break;}
-					else{ cl_stdin(); printf("\t\t您的输入有误！请重新输入:"); }
-				}
-				Sale_UI_ShowScheduler(id);
-			
+		printf( "----------------Total Recoeds: %2d---------------------------Page %2d   %2d   -----------\n",paging.totalRecords,Pageing_CurPage(paging),Pageing_TotalPages(paging));
+	
+		printf("**************************************************************************************\n");
+
+
+		printf( "[C]show Schedule      [S]find play name    [f]      [P]rev       [N]ext         [R]eturn          \n");
+		printf( "======================================================================================\n");
+		printf("please input your choice : ");
+		setbuf(stdin,NULL);
+		scanf( "%c",&choice);
+		getchar( );
+		switch(choice)
+		{
+			case'c':
+			case'C':
+				printf( "please input play_id  :");
+				scanf( "%d",&play_id);
+				getchar( );
+				Sale_UI_ShowScheduler(play_id);
 				break;
-		case 'p':
-		case 'P':
-			if (!Pageing_IsFirstPage(paging)) {
-				Paging_Locate_OffsetPage(head, paging, -1, play_node_t);
-			}
-			break;
-		case 'n':
-		case 'N':
-			if (!Pageing_IsLastPage(paging)) {
-				Paging_Locate_OffsetPage(head, paging, 1, play_node_t);
-			}
-			break;
+			case's':
+			case'S':
+				printf( "please input the Play_ name :");
+				setbuf(stdin,NULL);
+				gets(name);
+				system("clear");
+				Play_Srv_FetchByName(list_fetch,name);
+				Play_Srv_Print(list_fetch,name);
+				break;
+			case 'f':
+			case 'F':
+				printf( "please input the Play_ name :");
+				Play_Srv_FetchByName(list_fetch,name);
+				break;
+			case'n':
+			case'N':
+				if(!Pageing_IsLastPage(paging))
+				{
+					Paging_Locate_OffsetPage(list, paging, 1, play_node_t);
+				}
+				break;
+			case'P':
+			case'p':
+				if(!Pageing_IsFirstPage(paging))
+				{
+					Paging_Locate_OffsetPage(list, paging,-1, play_node_t);
+				}
+				break;
+
 		}
-	} while (choice != 'r' && choice != 'R');
-	//释放链表空间
-	List_Destroy(head, play_node_t);
+
+	}while(choice != 'r' && choice != 'R');
+
+
 }
 
 //退票

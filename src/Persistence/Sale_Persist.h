@@ -5,7 +5,7 @@
 #include "../Common/common.h"
 
 int Sale_Perst_Insert(const sale_t *data);
-int Sale_Perst_Update(int saleID);
+int Ticket_Perst_Update(int saleID);
 
 
 #endif

@@ -1,6 +1,7 @@
 #include "../Persistence/Sale_Persist.h"
 #include "../Persistence/Query_Persist.h"
 #include "../Service/Sale.h"
+#include "Ticket.h"
 
 //根据票的信息插入到订单的信息
 int Sale_Srv_Add(const sale_t *data) {
@@ -47,7 +48,25 @@ int Ticket_Srv_FetchBySchID(int ID,ticket_list_t list){
     return sum;
 
 }
-int Ticket_Srv_SelBySchID(int id, ticket_list_t list,const sale_t *data){
+int Ticket_Srv_FetchBySchID(ticket_list_t list, int schedule_id)
+{
+    int count = 0;
+	List_Free(list,ticket_node_t);
+	ticket_list_t tickList;
+	List_Init(tickList,ticket_node_t);
+	count = Ticket_Perst_SelectBySchID(tickList,schedule_id);
+	if(count<=0)
+	{
+		List_Destroy(tickList,ticket_node_t);
+		return 0;
+	}
+		else
+		{
+			return count;
+		}
+}
+
+int Ticket_Srv_selBySchID(int id, ticket_list_t list,const sale_t *data){
 int count;
 typedef struct list{
 	int value;
