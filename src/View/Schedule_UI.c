@@ -9,21 +9,22 @@
 #include "../Service/Ticket.h"
 #include "../View/Ticket_UI.h"
 
-/* ¹ÜÀíÑÝ³ö¼Æ»®½çÃæ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½ */
 void Schedule_UI_MgtEntry(int play_id) {
     char choice;
-    do {
-        Pagination_t paging;
-        schedule_list_t list, f;
-        schedule_node_t *p;
-        int i;
+    Pagination_t paging;
+    schedule_list_t list, f;
+    schedule_node_t *p;
+    int i;
 
-        List_Init(list, schedule_node_t);
-        list->next = NULL;
-        paging.offset = 0;
-        paging.pageSize = 5;
-        paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
-        Paging_Locate_FirstPage(list, paging);
+    List_Init(list, schedule_node_t);
+    list->next = NULL;
+    paging.offset = 0;
+    paging.pageSize = 5;
+    paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
+    Paging_Locate_FirstPage(list, paging);
+  //  while (1) {
+
 
         printf("============Performance plan===========\n");
         Paging_ViewPage_ForEach(list, paging, schedule_node_t, p, i) {
@@ -42,12 +43,13 @@ void Schedule_UI_MgtEntry(int play_id) {
             printf("Seat count:                   %d       \n", p->data.seat_count);
             printf("=======================================\n");
         }
-        while(list != NULL) {
-            f = list;
-            list = list->next;
-            free(f);
-        }
-
+//        while(list != NULL) {
+//            f = list;
+//            list = list->next;
+//            free(f);
+//        }
+        printf("---Total Records:%2d-----Page%2d/%2d---\n",
+               paging.totalRecords, Pageing_CurPage(paging),Pageing_TotalPages(paging));
         printf("                                       \n");
         printf("==============Operation menu===========\n");
         printf("                                   \n");
@@ -61,11 +63,13 @@ void Schedule_UI_MgtEntry(int play_id) {
         getchar();
         if(choice == 'a' || choice == 'A') {
             if(Schedule_UI_Add()) {
+                paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
                 printf("Added successfully\n");
             }
             else {
                 printf("add failed\n");
             }
+
         }
         if(choice == 'u' || choice == 'U') {
             if(Schedule_UI_Mod()) {
@@ -74,6 +78,7 @@ void Schedule_UI_MgtEntry(int play_id) {
             else {
                 printf("failed not to modify\n");
             }
+            paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
         }
         if(choice == 'd' || choice == 'D') {
             if(Schedule_UI_Del()) {
@@ -82,20 +87,26 @@ void Schedule_UI_MgtEntry(int play_id) {
             else {
                 printf("can not to delete\n");
             }
+            paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
         }
         if(choice == 'l' || choice == 'L') {
             if (!Pageing_IsFirstPage(paging)) {
                 Paging_Locate_OffsetPage(list, paging, -1, schedule_node_t);
+                paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
             }
         }
         if(choice == 'n' || choice == 'N') {
             if (!Pageing_IsLastPage(paging)) {
                 Paging_Locate_OffsetPage(list, paging, 1, schedule_node_t);
+                paging.totalRecords = Schedule_Srv_SelectByPlayID(play_id, list);
             }
+        }
+        if(choice != 'r' && choice != 'R') {
+            Schedule_UI_MgtEntry(play_id);
         }
 
 
-    }while(choice != 'r' && choice != 'R');
+    //}
 }
 /* add */
 int Schedule_UI_Add(void) {
@@ -111,8 +122,11 @@ int Schedule_UI_Add(void) {
         if(Play_Srv_FetchByID(data.play_id, &play_data)) {
             break;
         }
+        else if(data.play_id == 0) {
+            return 0;
+        }
         else {
-            printf("Please enter again\n");
+            printf("Please enter again('0' to return)\n");
         }
     }while(1);
     
@@ -123,8 +137,11 @@ int Schedule_UI_Add(void) {
              data.seat_count = studio_data.rowsCount * studio_data.colsCount;
              break;
          }
+         else if(data.studio_id == 0) {
+             return 0;
+         }
          else {
-             printf("Please enter again\n");
+             printf("Please enter again('0' to return)\n");
          }
 
     }while(1);
@@ -136,11 +153,14 @@ int Schedule_UI_Add(void) {
     if(Schedule_Srv_Add(&data)) {
         rtn = 1;
     }
+    else {
+        return 0;
+    }
     Ticket_UI_MgtEntry(data.id);
     return rtn;
 }
 
-/* É¾³ý */
+/* É¾ï¿½ï¿½ */
 int Schedule_UI_Del(void) {
     int id, rtn = 0;
     printf("Please enter the show plan ID:");

@@ -6,6 +6,7 @@
 #include "../Common/list.h"
 #include "MaiAccount_UI.h" 
 #include "Account_UI.h"
+#include "../Persistence/Account_Persist.h"
 
 //系统用户登录界面
 int SysLogin()
@@ -30,8 +31,8 @@ int SysLogin()
 		"================================================================================\n");
 	printf("please input [Enter] to continue!");
 	getchar();
-	
-	Account_Srv_InitSys();
+    if(Account_Perst_CheckAccFile()==0)
+	    Account_Srv_InitSys();
 
 	int x = 3,i;
 	char ch;
@@ -44,23 +45,25 @@ int SysLogin()
 		scanf("%s",usrName);		
 		printf("\nPlease input your passsword:");
 		setbuf(stdin,NULL);
-		while((ch=getch())!='\r'){
-			if(i<20){
-				pwd[i++]=ch;
-				putchar('*');
-			}
-			else if(i>0&&ch=='\b'){
-				--i;
-				putchar('\b');
-				putchar(' ');
-				putchar('\b');
-			}
-			pwd[i]='\0';
-		}
+		scanf("%s", pwd);
+//		while((ch=getch())!='\r'){
+//			if(i<20){
+//				pwd[i++]=ch;
+//				putchar('*');
+//			}
+//			else if(i>0&&ch=='\b'){
+//				--i;
+//				putchar('\b');
+//				putchar(' ');
+//				putchar('\b');
+//			}
+//			pwd[i]='\0';
+//		}
 
 		if(Account_Srv_Verify(usrName,pwd)){
 			printf("\nWelcome distinguished users,please input [Enter]!\n");
 			getchar();
+
 			return 1;
 		}
 		else{
@@ -72,8 +75,8 @@ int SysLogin()
 	if(x==0){
 		char c;
 		printf("Do you forget your password and want to reset it?\n[Y]ES	or	[N]o: ");
-		scanf("%c",&c);
 		getchar();
+		scanf("%c",&c);
 		if(c=='Y'||c=='y'){
 			MaiAccount_UI_Mgt();
 		}
@@ -97,6 +100,7 @@ char Account_UI_Status2Char(account_type_t status)
 //系统用户管理界面
 void Account_UI_MgtEntry(void)
 {
+    printf("%d", gl_CurUser.type);
 	if(gl_CurUser.type!=USR_ADMIN){
 		printf("you isn't admin!please input [Enter]");
 		getchar();
@@ -119,11 +123,11 @@ void Account_UI_MgtEntry(void)
 	do{
 		printf("\n[N]匿名用户    |    [X]售票员     |     [M]经理     |     [A]系统管理员");
 		printf("\n==============================================================================\n");
-		printf("*************************Account Management Systerm****************************");
+		printf("*************************Account Management Systerm****************************\n");
 		printf("	%3s %18s %23s %16s\n","ID","username","password","type");	
-		printf("-------------------------------------------------------------------------------");
+		printf("-------------------------------------------------------------------------------\n");
 		
-		Paging_ViewPage_ForEach(head,paging,account_node_t,p,x){
+		Paging_ViewPage_ForEach(head,paging,account_node_t,p,x) {
 			printf("%3d %18s ",p->data.id,p->data.username);
 			printf(p->data.password);
 			printf(" %6c\n",Account_UI_Status2Char(p->data.type));
@@ -132,7 +136,7 @@ void Account_UI_MgtEntry(void)
 				paging.totalRecords, Pageing_CurPage(paging),Pageing_TotalPages(paging));
 		printf("*******************************************************************************\n");
 		printf("[p]revPage | [N]extPage | [A]dd | [D]elete | [Q]uery | [M]od | [R]etuen");
-		printf("\n==============================================================================");
+		printf("\n==============================================================================\n");
 		printf("Please input your Choice: ");
 		setbuf(stdin,NULL);
 		scanf("%c",&ch);
@@ -190,8 +194,8 @@ void Account_UI_MgtEntry(void)
 					break;
 			case 'p':
 			case 'P':system("cls");
-					if(!Pageing_IsLastPage(paging)){
-						Paging_Locate_OffsetPage(head,paging,1,account_node_t); 
+					if(Pageing_IsLastPage(paging)){
+						Paging_Locate_OffsetPage(head,paging,-1,account_node_t);
 					}
 					break;
 			case 'n':
@@ -232,21 +236,22 @@ int Account_UI_Add(account_list_t list)
 		else{
 			printf("please input the password:");
 			setbuf(stdin,NULL);
-			char pwd[20],ch;
-			while((ch=getch())!='\r'){
-				int i;
-				if(i<20){
-					pwd[i++]=ch;
-					putchar('*');
-				}
-				else if(i>0&&ch=='\b'){
-					--i;
-					putchar('\b');
-					putchar(' ');
-					putchar('\b');
-				}
-				pwd[i]='\0';
-			}
+			char pwd[20];
+			scanf("%s", data.password);
+//			while((ch=getch())!='\r'){
+//				int i;
+//				if(i<20){
+//					pwd[i++]=ch;
+//					putchar('*');
+//				}
+//				else if(i>0&&ch=='\b'){
+//					--i;
+//					putchar('\b');
+//					putchar(' ');
+//					putchar('\b');
+//				}
+//				pwd[i]='\0';
+//			}
 		}
 		printf("Please input the type:\n");
 		printf("==============================================================================\n");
@@ -255,7 +260,7 @@ int Account_UI_Add(account_list_t list)
 		scanf("%d",&data.type);
 		getchar();
 		printf("Please input your phone number(only you know!!!):\n");
-		scanf("%s",data.phone);
+		scanf("%d",&data.phone);
 		getchar();
 		
 		if(Account_Srv_Add(&data)){
@@ -288,20 +293,21 @@ int Account_UI_Modify(account_list_t list,char usrName[])
 			char pwd[20],ch;
 			printf("please input the new password:");
 			setbuf(stdin,NULL);
-			while((ch=getch())!='\r'){
-				int i;
-				if(i<20){
-					pwd[i++]=ch;
-					putchar('*');
-				}
-				else if(i>0&&ch=='\b'){
-					--i;
-					putchar('\b');
-					putchar(' ');
-					putchar('\b');
-				}
-				pwd[i]='\0';
-			}
+            scanf("%s", pwd);
+//			while((ch=getch())!='\r'){
+//				int i;
+//				if(i<20){
+//					pwd[i++]=ch;
+//					putchar('*');
+//				}
+//				else if(i>0&&ch=='\b'){
+//					--i;
+//					putchar('\b');
+//					putchar(' ');
+//					putchar('\b');
+//				}
+//				pwd[i]='\0';
+//			}
 			int x=1;
 			if(strcmp(pwd,temp->data.password)){
 				x = 0;

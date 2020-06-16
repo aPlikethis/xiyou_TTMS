@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <conio.h>
 
 
 //创建管理员Admin匿名系统用户
@@ -23,42 +24,46 @@ void Account_Srv_InitSys()
     getchar();
 	printf("Please input you want init name :\n			");
 	setbuf(stdin,NULL);
-	getchar();
 	scanf("%s",admin.username);
     
 	while(1){
+
     	i=0;
 		printf("\nPlease input you want passsword :\n			");
 		setbuf(stdin,NULL);
-		while((ch=getch())!='\r'){
-			if(i<20){
-				pwd[i++]=ch;
-				putchar('*');
-			}
-			else if(i>0&&ch=='\b'){
-				--i;
-				putchar('\b');
-				putchar(' ');
-				putchar('\b');
-			}
-			pwd[i]='\0';
-		}
+		scanf("%s", pwd);
+//		while(1){
+//		    getc(ch);
+//		    system('CLS');
+//			if(i<20){
+//				pwd[i++]=ch;
+//				putchar('*');
+//			}
+//			else if(i>0&&ch=='\b'){
+//				--i;
+//				putchar('\b');
+//				putchar(' ');
+//				putchar('\b');
+//			}
+//			pwd[i]='\0';
+//		}
 		i=0;
 		printf("\nPlease input your passsword again:\n			");
 		setbuf(stdin,NULL);
-		while((ch=getch())!='\r'){
-			if(i<20){
-				pwd1[i++]=ch;
-				putchar('*');
-			}
-			else if(i>0&&ch=='\b'){
-				--i;
-				putchar('\b');
-				putchar(' ');
-				putchar('\b');
-			}
-			pwd1[i]='\0';
-		}
+		scanf("%s", pwd1);
+//		while((ch=getch())!='\r'){
+//			if(i<20){
+//				pwd1[i++]=ch;
+//				putchar('*');
+//			}
+//			else if(i>0&&ch=='\b'){
+//				--i;
+//				putchar('\b');
+//				putchar(' ');
+//				putchar('\b');
+//			}
+//			pwd1[i]='\0';
+//		}
 		if(strcmp(pwd,pwd1)){
 			system("cls");
 			printf("\nThe passward you input is different!");
