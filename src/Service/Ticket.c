@@ -73,3 +73,4 @@ int Ticket_Srv_Modify(ticket_t *buf) {
 int Ticket_Srv_FetchBySeatID(int seat_id, ticket_t *buf) {
     return Ticket_Perst_SelBySeatID(seat_id, buf);
 }
+

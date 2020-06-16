@@ -24,6 +24,7 @@
 #include "../Service/SalesAnalysis.h"
 #include "../Common/List.h"
 #include <time.h>
+#include "../Service/Account.h"
 
 
 int List_Foreach(ticket_list_t list,int id);
@@ -111,19 +112,7 @@ int Sale_UI_SellTicket(ticket_list_t list_t,seat_list_t list_s)
 //        List_Foreach(list_t,buf.id);
         buf.status = 1;
         Ticket_Srv_Modify(&buf);
-        while(1)
-        {
-            printf( "please input the saler ID:");
-            scanf( "%d",&data_t.user_id);
-            if(!Account_Srv_FetchByID(data_t.user_id,&buf_a))
-            {
-                continue;
-            }
-            else
-            {
-                break;
-            }
-        }
+        data_t.user_id = gl_CurUser.id;
         data_t.type = 1;
         data_t.value = buf.price;
         struct tm *p;
@@ -205,11 +194,12 @@ void Sale_UI_ShowScheduler(int playID) {
 
 	do {
         system("cls");
+        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 		printf("\n\t\t\t==================================================================\n");
-		printf("\t\t\t      \t\t\t剧目：%10s 的演出计划 列表\n",pdata.name);
+		printf("\t\t\t      \t\t\tPlay：%10s Schedules\n",pdata.name);
 
-		printf("\t\t\t%5s \t %-5s\t%-8s \t %-10s \t %-10s \t %-10s \n", "计划", "剧目", "演出厅",
-				 "放映日期","放映时间","座位数");
+		printf("\t\t\t%5s \t %-5s\t%-8s \t %-10s \t %-10s \t %-10s \n", "id", "playname", "schedule",
+				 "play date","play time","seat count");
 		printf("\t\t\t------------------------------------------------------------------\n");
 		
 		if(!List_IsEmpty(head)){
@@ -229,32 +219,32 @@ void Sale_UI_ShowScheduler(int playID) {
 			printf("\t\t\t暂无数据！\n");
 		}
 
-		printf("\n\t\t\t------------ 共 %2d 项-------------------- %2d/%2d 页---------------\n",
+		printf("\n\t\t\t------------ %2d totalrecords-------------------- %2d/%2d page---------------\n",
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
 		printf("\t\t\t******************************************************************\n");
-		printf("\t\t\t[P]上页             |    [N]下页             |     [R]返回\n");
-		printf("\t\t\t[S]进入售票系统\n");
+		printf("\t\t\t[P]last page             |    [N]ext page             |     [R]eturn\n");
+		printf("\t\t\t[S]enter sale system\n");
 		printf("\n\t\t\t==================================================================\n");
-		printf("\t\t\t选择功能:");
+		printf("\t\t\tinput your choice:");
 		
 		choice=l_getc();
 	
 
 		switch (choice) {
 		
-		case 'u':
-		case 'U':
-			
-				printf("\t\t\t请输入要修改演出计划的ID:");
-			
-				while(1){
-					if(scanf("%d",&id)==1){ cl_stdin(); break;}
-					else{ cl_stdin(); printf("\t\t\t您的输入有误！请重新输入:"); }
-				}
-			
-				
-			break;
+//		case 'u':
+//		case 'U':
+//
+//				printf("\t\t\t请输入要修改演出计划的ID:");
+//
+//				while(1){
+//					if(scanf("%d",&id)==1){ cl_stdin(); break;}
+//					else{ cl_stdin(); printf("\t\t\t您的输入有误！请重新输入:"); }
+//				}
+//
+//
+//			break;
 			
 		case 's':
 		case 'S':
@@ -328,7 +318,10 @@ void Sale_UI_MgtEntry(void)
     Paging_Locate_FirstPage(list,paging);
 
     do
-    {	printf(
+    {
+        system("cls");
+        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
+        printf(
                 "\n======================================================================================\n");
         printf(
                 "***************************** Projection Play List ***********************************\n");
@@ -405,42 +398,45 @@ void Sale_UI_MgtEntry(void)
 //退票
 void Sale_UI_ReturnTicket(){
 	char choice;
-	int id,t=0;
+	int t=0;
 
-		while(1){
-				if(scanf("%d",&id)==1){ cl_stdin(); break;}
-				else{ cl_stdin(); printf("\t\t\t您的输入有误！请重新输入:"); }
-		}
-		
-		
+		sale_t sale_buf;
 		ticket_t buf;
 		schedule_t scd;
 			
-	   	Schedule_Srv_FetchByID(buf.schedule_id, &scd);
-		if( Ticket_Srv_FetchByID(id,&buf) ){
-			if(buf.status==TICKET_SOLD){
-//       				Ticket_UI_Print(id);
-       				user_time_t nowtime=TimeNow();
-       				if(DateCmp(DateNow(), scd.date)==-1 || (DateCmp(DateNow(), scd.date)==0 && scd.time.hour<nowtime.hour && scd.time.minute<nowtime.minute ) ){
-       				t=1;
-  //     				Ticket_UI_Print(id);
-       				}else{
-       					printf("\n\t\t\t该票已过有效期，无法退票");
-       					printf("\n\n\t\t\t按任意键继续！。。。\n");
-					getchar();	
-       				}
-       			}else{
-       			
-       				printf("\n\t\t\t该票不存在或未售出，无法退票");
-       				printf("\n\n\t\t\t按任意键继续！。。。\n");
-       				
-				getchar();
-       			}
-       		}
+
+		if( Sale_Srv_FetchByUserID(gl_CurUser.id,&sale_buf) ) {
+            if (Ticket_Srv_FetchByID(sale_buf.ticket_id, &buf)) {
+                Schedule_Srv_FetchByID(buf.schedule_id, &scd);
+                if (buf.status == TICKET_SOLD) {
+                    Ticket_UI_Print(buf);
+                    user_time_t nowtime = TimeNow();
+                    if (DateCmp(DateNow(), scd.date) == -1 ||
+                        (DateCmp(DateNow(), scd.date) == 0 && scd.time.hour < nowtime.hour &&
+                         scd.time.minute < nowtime.minute)) {
+                        t = 1;
+                        Ticket_UI_Print(buf);
+                    } else {
+                        printf("\n\t\t\tThe ticket has expired and cannot be refunded");
+                        printf("\n\n\t\t\tPress any key to continue!...\n");
+                        getchar();
+                    }
+                } else {
+
+                    printf("\n\t\t\tThe ticket does not exist or is not sold and cannot be refunded");
+                    printf("\n\n\t\t\tPress any key to continue!...\n");
+
+                    getchar();
+                }
+            }
+        }
+		else {
+		    printf("you don't have ticket\n");
+		}
 		
 		
 		if(t){
-			printf("\t\t\t请输入 Q 确认退票  输入 R 返回：");
+			printf("\t\t\t\n Please input Q to confirm the refund input r to return:");
 			choice=l_getc();
 			if('r'==choice || 'R'==choice) {
 			if('q'==choice || 'Q'==choice) {
@@ -451,7 +447,7 @@ void Sale_UI_ReturnTicket(){
 	       					
 	       			data.id=EntKey_Srv_CompNewKey("sale");
 	       			data.user_id=gl_CurUser.id;
-	       			data.ticket_id=id;
+	       			data.ticket_id=buf.id;
 	       			data.date=DateNow();
 	       			data.time=TimeNow();
 	       			data.value=buf.price;
@@ -461,8 +457,8 @@ void Sale_UI_ReturnTicket(){
 	       					
 //	       			Ticket_Srv_Modify(&buf);
        					
-       				printf("\n\t\t\t退票成功！");
-       				printf("\n\n\t\t\t按任意键继续！。。。\n");
+       				printf("\n\t\t\tRefund succeeded!");
+       				printf("\n\n\t\t\tPress any key to continue!...\n");
 				cl_stdin();
 				getchar();
        			}	

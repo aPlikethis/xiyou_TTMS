@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../Service/Account.h"
 
 //标识符：TTMS_SCU_Ticket_UI_MgtEnt
 //功能：显示与参数对应的演出计划信息
@@ -35,6 +36,7 @@ void Ticket_UI_MgtEntry(int schedule_id)
     
     do{
         system("cls");
+        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
         printf("\n==================================================================================================\n");
         printf("********************************************THE TICKET********************************************\n");
         printf("   Repertoire name          Performance ID              Performance date            Show time             \n\n");
@@ -94,6 +96,7 @@ void Ticket_UI_Query(void) {
 int Ticket_UI_ShowTicket(int ticket_id) {
 	ticket_t *buf;
 	system("cls");
+        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 	printf("\n\n\n\n\n") ;
 	if (Ticket_Srv_FetchByID(ticket_id, buf)) {
         printf(

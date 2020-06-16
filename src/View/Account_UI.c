@@ -46,6 +46,7 @@ int SysLogin()
 		printf("\nPlease input your passsword:");
 		setbuf(stdin,NULL);
 		scanf("%s", pwd);
+		getchar();
 //		while((ch=getch())!='\r'){
 //			if(i<20){
 //				pwd[i++]=ch;
@@ -61,9 +62,20 @@ int SysLogin()
 //		}
 
 		if(Account_Srv_Verify(usrName,pwd)){
-			printf("\nWelcome distinguished users,please input [Enter]!\n");
-			getchar();
 
+			account_t data;
+			int i = 0;
+            Account_Srv_FetchByName(usrName, &data);
+            gl_CurUser.id = data.id;
+            while (usrName[i] != '\0') {
+                gl_CurUser.username[i] = usrName[i];
+                gl_CurUser.password[i] = pwd[i];
+                i++;
+            }
+            gl_CurUser.type = data.type;
+            gl_CurUser.phone = data.phone;
+			getchar();
+            printf("\nWelcome distinguished users,please input [Enter]!\n");
 			return 1;
 		}
 		else{
@@ -121,6 +133,9 @@ void Account_UI_MgtEntry(void)
 	Paging_Locate_FirstPage(head,paging);
 	
 	do{
+
+	    system("cls");
+        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 		printf("\n[N]匿名用户    |    [X]售票员     |     [M]经理     |     [A]系统管理员");
 		printf("\n==============================================================================\n");
 		printf("*************************Account Management Systerm****************************\n");

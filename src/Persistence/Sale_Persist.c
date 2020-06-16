@@ -160,3 +160,30 @@ int Ticket_Perst_SelectBySchID(int id, ticket_list_t list){
     fclose(fd);
     return count;
 }
+
+int Sale_Perst_selByUserId(int user_id, sale_t *buf) {
+    sale_t data;
+    int found = 0;
+    FILE *fp;
+    fp = fopen("Sale.dat","rb");
+    if(fp == NULL)
+    {
+        printf("Sale.dat can not be open");
+        return found;
+    }
+    else
+    {
+        while(!feof(fp))
+        {
+            fread(&data, sizeof(ticket_t),1,fp);
+            if(data.user_id == user_id)
+            {
+                *buf = data;
+                found = 1;
+                break;
+            }
+        }
+    }
+    fclose(fp);
+    return found;
+}

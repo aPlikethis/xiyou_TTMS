@@ -30,4 +30,6 @@ int Schedule_Perst_SelectByID(int id,schedule_t*buf);
 int Ticket_Perst_Update(ticket_t *buf);
 
 int Ticket_Perst_SelBySeatID(int seat_id, ticket_t *buf);
+
+
 #endif

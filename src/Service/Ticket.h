@@ -2,6 +2,7 @@
 #define TICKET_H_
 
 #include "../Service/Schedule.h"
+#include "../Service/Account.h"
 
 //票状态类型定�?
 
@@ -52,5 +53,7 @@ int Schedule_Srv_FetchByID(int id,schedule_t *buf );
 
 
 int Ticket_Srv_Modify(ticket_t *buf);
+
+
 
 #endif

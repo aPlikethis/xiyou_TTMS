@@ -9,6 +9,7 @@
 #include "../Service/Ticket.h"
 #include "../View/Ticket_UI.h"
 #include "../View/Sale_UI.h"
+#include "../Service/Account.h"
 
 /* �����ݳ��ƻ����� */
 void Schedule_UI_MgtEntry(int play_id) {
@@ -27,6 +28,7 @@ void Schedule_UI_MgtEntry(int play_id) {
   //  while (1) {
 
     system("cls");
+    printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
         printf("============Performance plan===========\n");
         Paging_ViewPage_ForEach(list, paging, schedule_node_t, p, i) {
             if(p == NULL) {

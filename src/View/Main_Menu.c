@@ -18,12 +18,13 @@
 #include "../View/StaSales_UI.h"
 #include "../View/SalesAnalysis_UI.h"
 #include "../View/Query_Menu.h"
-
+#include "../Service/Account.h"
 //系统主菜单 
 void Main_Menu(void) {
 	char choice;
 	do {
         system("cls");
+        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 		printf("\n==================================================================\n");
 		printf("**************** Theater Ticket Management System ****************\n");
 		printf("[S]tudio Management.\n");

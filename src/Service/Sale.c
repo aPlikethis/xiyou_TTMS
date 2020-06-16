@@ -55,3 +55,7 @@ int Ticket_Srv_FetchBySchID(int ID,ticket_list_t list){
 //    else
 //	return NULL ;
 //}
+
+int Sale_Srv_FetchByUserID(int user_id, sale_t *buf) {
+    return Sale_Perst_selByUserId(user_id, buf);
+}

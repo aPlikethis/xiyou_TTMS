@@ -34,6 +34,7 @@ void SalesAanalysis_UI_MgtEntry()
 
 	do{
         system("cls");
+        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 		printf("\t\t\t=========================================================================\n");
 		printf("\t\t\t%28s""票房图表\n");
 		printf("\t\t\t-------------------------------------------------------------------------\n");

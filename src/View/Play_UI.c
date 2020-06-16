@@ -5,6 +5,7 @@
 #include "../Service/Play.h"
 #include "../Common/common.h"
 #include "../Common/List.h"
+#include "../Service/Account.h"
 
 /* 剧目管理主界面 */
 void Play_UI_MgtEntry(void) {
@@ -24,7 +25,7 @@ void Play_UI_MgtEntry(void) {
 
     system("cls");
 
-
+    printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
         play_t buf; 
         /* 输出剧目信息及菜单项 （暂空）*/
         printf("\n====================================\n");

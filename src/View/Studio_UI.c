@@ -13,6 +13,7 @@
 #include "../Common/List.h"
 #include "../Service/Studio.h"
 #include "../Service/Seat.h"
+#include "../Service/Account.h"
 
 
 static const int STUDIO_PAGE_SIZE = 5;
@@ -43,6 +44,7 @@ void Studio_UI_MgtEntry(void) {
 
 	do {
         system("cls");
+        printf("user: %s | id: %d \n", gl_CurUser.username, gl_CurUser.id);
 		printf(
 				"\n==================================================================\n");
 		printf(
