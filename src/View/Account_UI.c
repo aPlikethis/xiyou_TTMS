@@ -198,11 +198,8 @@ void Account_UI_MgtEntry(void)
 					break;
 			case 'm':
 			case 'M':system("cls");
-					printf("Input the username:");
-					setbuf(stdin,NULL);
-					scanf("%s",usrName);
-					getchar();
-					if(Account_UI_Modify(usrName)){
+					
+					if(Account_UI_Modify(gl_CurUser.username)){
 						printf("Mod accept\n");
 						paging.totalRecords = Account_Srv_FetchAll(head);
 						List_Paging(head, paging, account_node_t);
