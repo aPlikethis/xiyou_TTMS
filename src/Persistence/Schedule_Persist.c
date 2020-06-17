@@ -165,7 +165,7 @@ int Schedule_Perst_SelectByName(char name[]) {
 		flag = StrCmp(name, play_data.name);
     }
     while(!flag && !feof(play));
-	if(flag = 0) {
+	if(flag == 0) {
 		return found;
 	}
 	else {
